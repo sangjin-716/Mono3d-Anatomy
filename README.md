@@ -15,8 +15,9 @@ Main results (KITTI val, Car, Moderate, IoU 0.7):
 - The official AP_R40 snaps oracle AP ceilings onto a 2.5 AP grid. The same MonoIA pool gives an
   oracle gain of +8.9 under AP_R11 and +13.0 under AP_R40. We use all-point AP, which does not
   have this problem.
-- The post-hoc rescoring we tested looks helpful with image-level folds, but on unseen drives it
-  loses 2.6 to 13.6 AP.
+- The post-hoc depth correction we tested moves each box along its viewing ray to a fitted depth
+  and keeps the detector's own score. It looks helpful with image-level folds, but on unseen
+  drives it loses 2.6 to 13.6 AP.
 - Higher-AP checkpoints localize better in the near field. Beyond 45 m there is no reliable trend.
   Counting within each detector's fixed set of boxes, most of the missing AP comes from objects
   that no output box covers at IoU 0.7.
@@ -159,6 +160,13 @@ Code is under Apache-2.0 (`LICENSE`). Reports and figure data are under CC BY 4.
 on KITTI images and are shared under CC BY-NC-SA 4.0. The vendored KITTI evaluation code and the
 MonoDGP calibration reader keep their MIT licenses (`evaluator/kitti_eval/LICENSE`,
 `evaluator/LICENSE-MonoDGP`).
+
+The Waymo check in this repository was made using the Waymo Open Dataset, provided by Waymo LLC
+under the Waymo Dataset License Agreement for Non-Commercial Use, available at
+[waymo.com/open/terms](https://waymo.com/open/terms), and your access and use of such work are
+governed by the terms and conditions therein. The check is the Waymo part of `tools/crossbench/`
+and the Waymo rows of `reports/extensions/crossbench_audit.md`. The release has no Waymo or
+nuScenes data or predictions, only KITTI outputs (see [`data/DUMPS.md`](data/DUMPS.md)).
 
 We thank the authors of the twelve detectors for releasing their code and checkpoints, and the
 KITTI, Waymo Open Dataset and nuScenes teams.

@@ -168,6 +168,11 @@ is not part of this release.
 The files are model outputs on KITTI images. KITTI is under CC BY-NC-SA 3.0, so all four assets
 are released under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
+No Waymo or nuScenes predictions are redistributed. The four assets hold only the KITTI val files
+listed above, and the repository itself has no Waymo or nuScenes data. The Waymo and nuScenes check
+in `tools/crossbench/` needs local copies of those datasets and takes its predictions from the
+detectors' own releases or runs (see [`tools/crossbench/README.md`](../tools/crossbench/README.md)).
+
 The complete pools and twelve of the fourteen dumps contain predictions only. Two kinds of files
 also carry values derived from the KITTI labels. In `dgp_val.csv` and `official_monocop_val.csv`
 these are the nine ground-truth columns above. In the matched tables they are the depth, occlusion

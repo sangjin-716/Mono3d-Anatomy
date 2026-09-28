@@ -1,4 +1,5 @@
 <!-- public copy of reports/detector_adapters_gates.md, sha256 e09cc08cb28c0c6e756e8fb8c28c5e1ad24ba240e148624a4ca70960d4cf9ce9, scrubbed: an absolute checkpoint path shortened to ./ckpts (item 6) -->
+> Note: this record was written while the panel was being built. The MonoGround row ("dump in flight", "pending") and the parity caveat of note 2 refer to the modern-environment builds. The paper uses MonoFlex\* and MonoGround\* dumped in the authors' original torch-1.4 environment (see `adapters/README.md`), and the final panel numbers are in Table 1 of the paper and in `reports_orig/` (`emh_orig.txt`, `a5_regate_orig.txt`).
 # Detector Adapter Gates — Panel Expansion 7→12 (2026-06-10/11)
 
 Purpose: provenance for the 5 added detectors. Gate order per adapter: (1) native repo
