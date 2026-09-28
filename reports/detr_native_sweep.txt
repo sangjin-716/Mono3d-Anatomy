@@ -1,0 +1,121 @@
+# detr_native_sweep 2026-06-12T02:34:09
+# prereg rev3; native order K_flat->thr->V->K_final; validated preflatten dumps only
+# cells: allpoint(R40); native cell = K_flat50, thr0.2
+
+== MonoDETR (Car-hypothesis rows=188450)
+  C thr=0.00 | base= 21.51 (20.50)
+  C thr=0.05 | base= 21.26 (20.71)
+  C thr=0.10 | base= 21.22 (20.82)
+  C thr=0.20 | base= 21.18 (20.91)   <-NATIVE
+  C thr=0.30 | base= 21.13 (20.30)
+  C thr=0.40 | base= 21.10 (20.34)
+  Dflat K_flat= 25 | base= 21.18 (20.91)
+  Dflat K_flat= 50 | base= 21.18 (20.91)
+  Dflat K_flat=100 | base= 21.18 (20.91)
+  Dflat K_flat=150 | base= 21.18 (20.91)
+  Dfin K_final= 10 | base= 21.18 (20.92)
+  Dfin K_final= 20 | base= 21.18 (20.91)
+  Dfin K_final= 30 | base= 21.18 (20.91)
+  Dfin K_final= 50 | base= 21.18 (20.91)
+  F NATIVE K_flat= 50 thr=0.2 | base= 21.18 ceil= 32.60 gap=+11.42 (R40 +13.94)
+  F        K_flat=150 thr=0.0 | base= 21.51 ceil= 30.97 gap= +9.46 (R40 +11.51)
+  F        K_flat= 50 thr=0.3 | base= 21.13 ceil= 32.47 gap=+11.34 (R40 +12.15)
+  F        K_flat=150 thr=0.2 | base= 21.18 ceil= 32.60 gap=+11.42 (R40 +13.94)
+  IoU0.5 native    | base= 48.85 ceil= 56.52 gap= +7.66
+  S cls-consistent | AP= 12.63 (12.86)  [diagnostic-only]
+  S V-consistent   | AP= 21.21 (20.90)  [diagnostic-only; count-matched]
+
+== MonoDGP (Car-hypothesis rows=188450)
+  C thr=0.00 | base= 23.65 (22.49)
+  C thr=0.05 | base= 23.08 (22.24)
+  C thr=0.10 | base= 22.91 (21.91)
+  C thr=0.20 | base= 22.82 (22.02)   <-NATIVE
+  C thr=0.30 | base= 22.79 (22.11)
+  C thr=0.40 | base= 22.71 (22.18)
+  Dflat K_flat= 25 | base= 22.82 (22.02)
+  Dflat K_flat= 50 | base= 22.82 (22.02)
+  Dflat K_flat=100 | base= 22.82 (22.02)
+  Dflat K_flat=150 | base= 22.82 (22.02)
+  Dfin K_final= 10 | base= 22.82 (22.05)
+  Dfin K_final= 20 | base= 22.82 (22.02)
+  Dfin K_final= 30 | base= 22.82 (22.02)
+  Dfin K_final= 50 | base= 22.82 (22.02)
+  F NATIVE K_flat= 50 thr=0.2 | base= 22.82 ceil= 31.23 gap= +8.41 (R40 +9.54)
+  F        K_flat=150 thr=0.0 | base= 23.65 ceil= 24.93 gap= +1.29 (R40 +1.93)
+  F        K_flat= 50 thr=0.3 | base= 22.79 ceil= 32.45 gap= +9.66 (R40 +10.93)
+  F        K_flat=150 thr=0.2 | base= 22.82 ceil= 31.23 gap= +8.41 (R40 +9.54)
+  IoU0.5 native    | base= 49.26 ceil= 52.56 gap= +3.30
+  S cls-consistent | AP= 13.51 (13.27)  [diagnostic-only]
+  S V-consistent   | AP= 22.86 (22.02)  [diagnostic-only; count-matched]
+
+== MonoCoP (Car-hypothesis rows=188450)
+  C thr=0.00 | base= 25.29 (24.20)
+  C thr=0.05 | base= 24.51 (23.55)
+  C thr=0.10 | base= 24.36 (23.69)
+  C thr=0.20 | base= 24.34 (23.84)   <-NATIVE
+  C thr=0.30 | base= 24.33 (23.87)
+  C thr=0.40 | base= 24.30 (23.92)
+  Dflat K_flat= 25 | base= 24.34 (23.84)
+  Dflat K_flat= 50 | base= 24.34 (23.84)
+  Dflat K_flat=100 | base= 24.34 (23.84)
+  Dflat K_flat=150 | base= 24.34 (23.84)
+  Dfin K_final= 10 | base= 24.34 (23.85)
+  Dfin K_final= 20 | base= 24.34 (23.84)
+  Dfin K_final= 30 | base= 24.34 (23.84)
+  Dfin K_final= 50 | base= 24.34 (23.84)
+  F NATIVE K_flat= 50 thr=0.2 | base= 24.34 ceil= 35.93 gap=+11.58 (R40 +13.50)
+  F        K_flat=150 thr=0.0 | base= 25.29 ceil= 31.42 gap= +6.13 (R40 +7.63)
+  F        K_flat= 50 thr=0.3 | base= 24.33 ceil= 35.92 gap=+11.60 (R40 +13.55)
+  F        K_flat=150 thr=0.2 | base= 24.34 ceil= 35.93 gap=+11.58 (R40 +13.50)
+  IoU0.5 native    | base= 53.33 ceil= 61.19 gap= +7.86
+  S cls-consistent | AP= 14.26 (14.34)  [diagnostic-only]
+  S V-consistent   | AP= 24.35 (23.81)  [diagnostic-only; count-matched]
+
+== MonoCLUE (Car-hypothesis rows=188450)
+  C thr=0.00 | base= 25.45 (24.29)
+  C thr=0.05 | base= 24.89 (24.04)
+  C thr=0.10 | base= 24.70 (23.87)
+  C thr=0.20 | base= 24.55 (24.03)   <-NATIVE
+  C thr=0.30 | base= 24.45 (24.09)
+  C thr=0.40 | base= 24.36 (24.15)
+  Dflat K_flat= 25 | base= 24.55 (24.03)
+  Dflat K_flat= 50 | base= 24.55 (24.03)
+  Dflat K_flat=100 | base= 24.55 (24.03)
+  Dflat K_flat=150 | base= 24.55 (24.03)
+  Dfin K_final= 10 | base= 24.55 (24.05)
+  Dfin K_final= 20 | base= 24.55 (24.03)
+  Dfin K_final= 30 | base= 24.55 (24.03)
+  Dfin K_final= 50 | base= 24.55 (24.03)
+  F NATIVE K_flat= 50 thr=0.2 | base= 24.55 ceil= 34.28 gap= +9.73 (R40 +11.55)
+  F        K_flat=150 thr=0.0 | base= 25.45 ceil= 29.51 gap= +4.06 (R40 +5.02)
+  F        K_flat= 50 thr=0.3 | base= 24.45 ceil= 34.93 gap=+10.48 (R40 +12.62)
+  F        K_flat=150 thr=0.2 | base= 24.55 ceil= 34.28 gap= +9.73 (R40 +11.55)
+  IoU0.5 native    | base= 52.67 ceil= 57.35 gap= +4.68
+  S cls-consistent | AP= 13.92 (14.05)  [diagnostic-only]
+  S V-consistent   | AP= 24.61 (24.00)  [diagnostic-only; count-matched]
+
+== MonoIA (Car-hypothesis rows=188450)
+  C thr=0.00 | base= 25.75 (24.62)
+  C thr=0.05 | base= 25.36 (24.50)
+  C thr=0.10 | base= 25.23 (24.25)
+  C thr=0.20 | base= 25.18 (24.41)   <-NATIVE
+  C thr=0.30 | base= 25.16 (24.46)
+  C thr=0.40 | base= 25.13 (24.52)
+  Dflat K_flat= 25 | base= 25.18 (24.41)
+  Dflat K_flat= 50 | base= 25.18 (24.41)
+  Dflat K_flat=100 | base= 25.18 (24.41)
+  Dflat K_flat=150 | base= 25.18 (24.41)
+  Dfin K_final= 10 | base= 25.18 (24.43)
+  Dfin K_final= 20 | base= 25.18 (24.41)
+  Dfin K_final= 30 | base= 25.18 (24.41)
+  Dfin K_final= 50 | base= 25.18 (24.41)
+  F NATIVE K_flat= 50 thr=0.2 | base= 25.18 ceil= 36.82 gap=+11.64 (R40 +12.90)
+  F        K_flat=150 thr=0.0 | base= 25.75 ceil= 33.27 gap= +7.52 (R40 +9.48)
+  F        K_flat= 50 thr=0.3 | base= 25.16 ceil= 36.83 gap=+11.67 (R40 +12.96)
+  F        K_flat=150 thr=0.2 | base= 25.18 ceil= 36.82 gap=+11.64 (R40 +12.90)
+  IoU0.5 native    | base= 55.48 ceil= 63.18 gap= +7.70
+  S cls-consistent | AP= 15.13 (14.82)  [diagnostic-only]
+  S V-consistent   | AP= 25.21 (24.38)  [diagnostic-only; count-matched]
+
+READ: grading per prereg rev3 + claim_decision_tree rubric happens at GATE-2 (combined
+with the 7 non-DETR results). Structural/counterfactual cells (K_flat=150) are diagnostics.

@@ -1,0 +1,69 @@
+# public copy of oracle-ladder workspace reports/oracle_ladder_o2.txt, sha256 781a21b46e07a47d58e3ad9b18ec5d90088e4b65c658c761392f3d17e17e51d0, scrubbed: READ note (source lines 65-68): interpretive clauses and their gate labels removed, the geometric reading kept; all numbers and table lines verbatim
+# Note: rows use the modern-environment MonoFlex/MonoGround rebuilds. The paper's twelve-model medians (x,z +53; y, h, w/l and yaw at most 2.5) use the starred rows of reports_orig/oracle_ladder_o2_orig.txt instead; see Part C of reports/extensions/starred_panel_summaries.txt.
+# O2 geometry_anatomy (single-factor levers) 2026-06-14T17:15:35
+# AP3D (all-point, Car moderate, metric=2). native V FIXED; snap ONE subset of matched-box
+# geometry to GT, rest native. levers: purez(z) xz(x,z) centre(x,y,z) y h wl(w,l) yaw.
+# BEV={xz,wl,yaw} vert={y,h}. BEV-share over SUM of single factors (sub-additive, disclosed).
+# JOINT/full GT replace EXCLUDED (degenerate: duplicate collapse, frozen 'all'=-11..-21).
+
+[done] M3D-RPN    (anchor    n=12473 matched=9888)
+    IoU0.7 base= 11.51 | purez=+18.87 xz=+40.70 centre=+47.08 | y=+1.88 h=-0.11 wl=+0.88 yaw=+1.57 | BEV=+43.15 vert=+1.88 BEVshare=95.8%
+    IoU0.5 base= 36.04 | purez=+25.69 xz=+36.66 centre=+37.39 | y=+1.52 h=-0.55 wl=+0.25 yaw=+3.29 | BEV=+40.20 vert=+1.52 BEVshare=96.3%
+[done] MonoDLE    (centernet n=13002 matched=10435)
+    IoU0.7 base= 15.09 | purez=+27.58 xz=+58.41 centre=+63.79 | y=+2.46 h=-0.88 wl=+1.09 yaw=+0.50 | BEV=+60.00 vert=+2.46 BEVshare=96.1%
+    IoU0.5 base= 43.62 | purez=+32.39 xz=+42.73 centre=+42.97 | y=+1.35 h=-1.14 wl=+0.11 yaw=+0.09 | BEV=+42.93 vert=+1.35 BEVshare=97.0%
+[done] MonoFlex   (centernet n=12283 matched=10452)
+    IoU0.7 base= 16.26 | purez=+23.02 xz=+49.75 centre=+62.09 | y=+4.11 h=-1.12 wl=+1.59 yaw=+0.40 | BEV=+51.74 vert=+4.11 BEVshare=92.6%
+    IoU0.5 base= 44.44 | purez=+31.00 xz=+41.05 centre=+41.30 | y=+2.80 h=-1.02 wl=+0.23 yaw=+0.27 | BEV=+41.55 vert=+2.80 BEVshare=93.7%
+[done] GUPNet     (centernet n=10004 matched=8999)
+    IoU0.7 base= 17.11 | purez=+24.21 xz=+50.73 centre=+56.95 | y=+2.03 h=-1.26 wl=+1.17 yaw=+0.58 | BEV=+52.47 vert=+2.03 BEVshare=96.3%
+    IoU0.5 base= 44.57 | purez=+29.93 xz=+38.81 centre=+38.87 | y=+1.79 h=-1.09 wl=+0.03 yaw=+0.22 | BEV=+39.06 vert=+1.79 BEVshare=95.6%
+[done] DEVIANT    (centernet n=10186 matched=9141)
+    IoU0.7 base= 17.48 | purez=+25.10 xz=+52.09 centre=+58.05 | y=+2.45 h=-0.79 wl=+1.69 yaw=+0.77 | BEV=+54.55 vert=+2.45 BEVshare=95.7%
+    IoU0.5 base= 45.55 | purez=+29.37 xz=+38.32 centre=+38.39 | y=+1.78 h=-1.05 wl=+0.06 yaw=+0.44 | BEV=+38.83 vert=+1.78 BEVshare=95.6%
+[done] MonoGround (centernet n=11169 matched=9742)
+    IoU0.7 base= 17.45 | purez=+23.08 xz=+47.98 centre=+58.08 | y=+4.06 h=-1.23 wl=+1.11 yaw=+0.58 | BEV=+49.67 vert=+4.06 BEVshare=92.4%
+    IoU0.5 base= 46.25 | purez=+28.80 xz=+36.95 centre=+37.20 | y=+2.96 h=-1.14 wl=+0.19 yaw=+0.26 | BEV=+37.41 vert=+2.96 BEVshare=92.7%
+[done] MonoCon    (centernet n=11793 matched=10142)
+    IoU0.7 base= 19.59 | purez=+25.17 xz=+52.77 centre=+57.40 | y=+2.32 h=-1.40 wl=+0.90 yaw=+0.19 | BEV=+53.86 vert=+2.32 BEVshare=95.9%
+    IoU0.5 base= 46.27 | purez=+28.87 xz=+37.52 centre=+37.59 | y=+1.88 h=-0.98 wl=+0.18 yaw=-0.01 | BEV=+37.70 vert=+1.88 BEVshare=95.2%
+[done] MonoDETR   (query     n=12090 matched=10028)
+    IoU0.7 base= 21.18 | purez=+24.11 xz=+48.72 centre=+53.75 | y=+2.93 h=-1.19 wl=+1.06 yaw=+0.65 | BEV=+50.44 vert=+2.93 BEVshare=94.5%
+    IoU0.5 base= 48.85 | purez=+26.69 xz=+35.72 centre=+35.90 | y=+1.53 h=-0.69 wl=-0.01 yaw=+0.54 | BEV=+36.26 vert=+1.53 BEVshare=96.0%
+[done] MonoDGP    (query     n=13921 matched=11381)
+    IoU0.7 base= 22.82 | purez=+29.10 xz=+52.89 centre=+57.15 | y=+2.66 h=-1.15 wl=+1.42 yaw=+1.16 | BEV=+55.47 vert=+2.66 BEVshare=95.4%
+    IoU0.5 base= 49.26 | purez=+28.60 xz=+36.75 centre=+36.80 | y=+1.66 h=-0.35 wl=+0.32 yaw=+0.73 | BEV=+37.80 vert=+1.66 BEVshare=95.8%
+[done] MonoCoP    (query     n=13371 matched=10730)
+    IoU0.7 base= 24.34 | purez=+29.02 xz=+54.26 centre=+58.93 | y=+2.63 h=-1.35 wl=+1.45 yaw=+0.73 | BEV=+56.45 vert=+2.63 BEVshare=95.6%
+    IoU0.5 base= 53.33 | purez=+29.24 xz=+37.51 centre=+37.61 | y=+1.79 h=-0.76 wl=+0.06 yaw=+0.26 | BEV=+37.83 vert=+1.79 BEVshare=95.5%
+[done] MonoCLUE   (query     n=13678 matched=11176)
+    IoU0.7 base= 24.55 | purez=+28.85 xz=+52.47 centre=+56.51 | y=+2.69 h=-1.96 wl=+1.30 yaw=+0.51 | BEV=+54.28 vert=+2.69 BEVshare=95.3%
+    IoU0.5 base= 52.67 | purez=+26.97 xz=+34.93 centre=+35.07 | y=+1.64 h=-0.50 wl=+0.48 yaw=+0.48 | BEV=+35.89 vert=+1.64 BEVshare=95.6%
+[done] MonoIA     (query     n=14894 matched=11138)
+    IoU0.7 base= 25.18 | purez=+28.38 xz=+53.93 centre=+58.18 | y=+2.89 h=-1.65 wl=+1.52 yaw=+0.68 | BEV=+56.14 vert=+2.89 BEVshare=95.1%
+    IoU0.5 base= 55.48 | purez=+26.47 xz=+35.49 centre=+35.54 | y=+1.80 h=-0.84 wl=+0.42 yaw=+0.33 | BEV=+36.23 vert=+1.80 BEVshare=95.3%
+
+========================================================================================================================
+O2 SUMMARY — ground-plane (BEV) vs vertical share of geometry headroom (AP3D, single-factor)
+========================================================================================================================
+detector   fam       |   base  purez     xz centre |     y     h    wl   yaw |   BEV  vert BEVshr  (IoU0.7)
+-----------------------------------------------------------------------------------------------------------
+M3D-RPN    anchor    |  11.51 +18.87 +40.70 +47.08 | +1.88 -0.11 +0.88 +1.57 | +43.15 +1.88  95.8%
+MonoDLE    centernet |  15.09 +27.58 +58.41 +63.79 | +2.46 -0.88 +1.09 +0.50 | +60.00 +2.46  96.1%
+MonoFlex   centernet |  16.26 +23.02 +49.75 +62.09 | +4.11 -1.12 +1.59 +0.40 | +51.74 +4.11  92.6%
+GUPNet     centernet |  17.11 +24.21 +50.73 +56.95 | +2.03 -1.26 +1.17 +0.58 | +52.47 +2.03  96.3%
+DEVIANT    centernet |  17.48 +25.10 +52.09 +58.05 | +2.45 -0.79 +1.69 +0.77 | +54.55 +2.45  95.7%
+MonoGround centernet |  17.45 +23.08 +47.98 +58.08 | +4.06 -1.23 +1.11 +0.58 | +49.67 +4.06  92.4%
+MonoCon    centernet |  19.59 +25.17 +52.77 +57.40 | +2.32 -1.40 +0.90 +0.19 | +53.86 +2.32  95.9%
+MonoDETR   query     |  21.18 +24.11 +48.72 +53.75 | +2.93 -1.19 +1.06 +0.65 | +50.44 +2.93  94.5%
+MonoDGP    query     |  22.82 +29.10 +52.89 +57.15 | +2.66 -1.15 +1.42 +1.16 | +55.47 +2.66  95.4%
+MonoCoP    query     |  24.34 +29.02 +54.26 +58.93 | +2.63 -1.35 +1.45 +0.73 | +56.45 +2.63  95.6%
+MonoCLUE   query     |  24.55 +28.85 +52.47 +56.51 | +2.69 -1.96 +1.30 +0.51 | +54.28 +2.69  95.3%
+MonoIA     query     |  25.18 +28.38 +53.93 +58.18 | +2.89 -1.65 +1.52 +0.68 | +56.14 +2.89  95.1%
+
+IoU0.7: BEV-share median 95.5% (range 92.4%..96.3%) | xz median +52.28 | purez median +25.14 | y median +2.64 | h median +-1.21
+IoU0.5: BEV-share median 95.6% (range 92.7%..97.0%) | xz median +37.23 | purez median +28.83 | y median +1.79 | h median +-0.91
+
+READ: BEV-share ~ 1 (xz dominant, y/h small) => geometry headroom is ground-plane POSITION.
+BEV-share low (y,h big) => headroom is vertical. xz vs purez: how much of the
+ground-plane gain is depth (purez) vs +lateral (xz-purez).

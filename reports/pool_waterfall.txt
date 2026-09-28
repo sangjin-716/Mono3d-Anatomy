@@ -1,0 +1,54 @@
+# pool_waterfall run 2026-06-12T13:05:50
+# GT-side per moderate Car GT; candidate gate |dz|<8m (safe for IoU>=0.5 existence);
+# A=existence in COMPLETE pool, B=eligibility survivors, C=final output; IoU3D thresholds 0.5/0.7
+
+[done] M3D-RPN    (anchor) GT=7874 | A@0.5=0.927 A@0.7=0.734 B@0.7=0.232 C@0.7=0.232 | suppressed-acc(face-ii share)=0.684
+        bins: [0-15] n=1930 A7=0.96 C7=0.50 [15-30] n=3163 A7=0.80 C7=0.20 [30-45] n=2416 A7=0.54 C7=0.09 [45-+] n=365 A7=0.21 C7=0.02
+        30m+ missed GTs=2552, of which NO pool candidate IoU>=0.5: 436 (0.17)
+
+[done] MonoDLE    (cnet) GT=7874 | A@0.5=0.559 A@0.7=0.294 B@0.7=0.292 C@0.7=0.292 | suppressed-acc(face-ii share)=0.006
+        bins: [0-15] n=1930 A7=0.54 C7=0.54 [15-30] n=3163 A7=0.29 C7=0.29 [30-45] n=2416 A7=0.14 C7=0.13 [45-+] n=365 A7=0.07 C7=0.06
+        30m+ missed GTs=2434, of which NO pool candidate IoU>=0.5: 1875 (0.77)
+
+[done] MonoFlex   (cnet) GT=7874 | A@0.5=0.548 A@0.7=0.271 B@0.7=0.269 C@0.7=0.269 | suppressed-acc(face-ii share)=0.005
+        bins: [0-15] n=1930 A7=0.57 C7=0.57 [15-30] n=3163 A7=0.26 C7=0.26 [30-45] n=2416 A7=0.08 C7=0.08 [45-+] n=365 A7=0.03 C7=0.03
+        30m+ missed GTs=2588, of which NO pool candidate IoU>=0.5: 2037 (0.79)
+
+[done] GUPNet     (cnet) GT=7874 | A@0.5=0.574 A@0.7=0.298 B@0.7=0.292 C@0.7=0.292 | suppressed-acc(face-ii share)=0.020
+        bins: [0-15] n=1930 A7=0.57 C7=0.56 [15-30] n=3163 A7=0.30 C7=0.30 [30-45] n=2416 A7=0.11 C7=0.10 [45-+] n=365 A7=0.07 C7=0.04
+        30m+ missed GTs=2514, of which NO pool candidate IoU>=0.5: 1834 (0.73)
+
+[done] DEVIANT    (cnet) GT=7874 | A@0.5=0.570 A@0.7=0.299 B@0.7=0.294 C@0.7=0.294 | suppressed-acc(face-ii share)=0.017
+        bins: [0-15] n=1930 A7=0.58 C7=0.58 [15-30] n=3163 A7=0.30 C7=0.30 [30-45] n=2416 A7=0.10 C7=0.10 [45-+] n=365 A7=0.04 C7=0.03
+        30m+ missed GTs=2539, of which NO pool candidate IoU>=0.5: 1914 (0.75)
+
+[done] MonoGround (cnet) GT=7874 | A@0.5=0.568 A@0.7=0.285 B@0.7=0.284 C@0.7=0.284 | suppressed-acc(face-ii share)=0.005
+        bins: [0-15] n=1930 A7=0.60 C7=0.60 [15-30] n=3163 A7=0.28 C7=0.28 [30-45] n=2416 A7=0.08 C7=0.08 [45-+] n=365 A7=0.02 C7=0.02
+        30m+ missed GTs=2585, of which NO pool candidate IoU>=0.5: 1969 (0.76)
+
+[done] MonoCon    (cnet) GT=7874 | A@0.5=0.568 A@0.7=0.316 B@0.7=0.311 C@0.7=0.311 | suppressed-acc(face-ii share)=0.016
+        bins: [0-15] n=1930 A7=0.64 C7=0.63 [15-30] n=3163 A7=0.31 C7=0.30 [30-45] n=2416 A7=0.11 C7=0.11 [45-+] n=365 A7=0.02 C7=0.01
+        30m+ missed GTs=2510, of which NO pool candidate IoU>=0.5: 1943 (0.77)
+
+[done] MonoDETR   (query) GT=7874 | A@0.5=0.638 A@0.7=0.360 B@0.7=0.329 C@0.7=0.329 | suppressed-acc(face-ii share)=0.087
+        bins: [0-15] n=1930 A7=0.67 C7=0.65 [15-30] n=3163 A7=0.34 C7=0.32 [30-45] n=2416 A7=0.16 C7=0.13 [45-+] n=365 A7=0.19 C7=0.09
+        30m+ missed GTs=2435, of which NO pool candidate IoU>=0.5: 1587 (0.65)
+
+[done] MonoDGP    (query) GT=7874 | A@0.5=0.692 A@0.7=0.423 B@0.7=0.344 C@0.7=0.344 | suppressed-acc(face-ii share)=0.186
+        bins: [0-15] n=1930 A7=0.77 C7=0.69 [15-30] n=3163 A7=0.41 C7=0.33 [30-45] n=2416 A7=0.22 C7=0.13 [45-+] n=365 A7=0.07 C7=0.02
+        30m+ missed GTs=2447, of which NO pool candidate IoU>=0.5: 1440 (0.59)
+
+[done] MonoCoP    (query) GT=7874 | A@0.5=0.736 A@0.7=0.457 B@0.7=0.361 C@0.7=0.361 | suppressed-acc(face-ii share)=0.210
+        bins: [0-15] n=1930 A7=0.79 C7=0.71 [15-30] n=3163 A7=0.45 C7=0.35 [30-45] n=2416 A7=0.25 C7=0.15 [45-+] n=365 A7=0.14 C7=0.06
+        30m+ missed GTs=2405, of which NO pool candidate IoU>=0.5: 1244 (0.52)
+
+[done] MonoCLUE   (query) GT=7874 | A@0.5=0.709 A@0.7=0.443 B@0.7=0.361 C@0.7=0.361 | suppressed-acc(face-ii share)=0.184
+        bins: [0-15] n=1930 A7=0.76 C7=0.71 [15-30] n=3163 A7=0.43 C7=0.35 [30-45] n=2416 A7=0.24 C7=0.13 [45-+] n=365 A7=0.21 C7=0.11
+        30m+ missed GTs=2417, of which NO pool candidate IoU>=0.5: 1369 (0.57)
+
+[done] MonoIA     (query) GT=7874 | A@0.5=0.723 A@0.7=0.431 B@0.7=0.370 C@0.7=0.370 | suppressed-acc(face-ii share)=0.142
+        bins: [0-15] n=1930 A7=0.76 C7=0.71 [15-30] n=3163 A7=0.42 C7=0.38 [30-45] n=2416 A7=0.19 C7=0.14 [45-+] n=365 A7=0.36 C7=0.09
+        30m+ missed GTs=2416, of which NO pool candidate IoU>=0.5: 1240 (0.51)
+
+READ: rubric (claim_decision_tree #5): S needs 30m+ missing-share >= 0.70 (panel median),
+non-replacement counted via face-ii construction, face-ii share >= 0.10 for >= 8/12.

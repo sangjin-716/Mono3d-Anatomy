@@ -1,0 +1,11 @@
+# a5_emh_orig run 2026-09-28T21:56:39 (release re-run; the original a5_emh_orig.py printed to stdout only and no frozen output file was kept)
+# script: tools/orig/a5_emh_orig.py (ported from mono3d_crossdataset/tools/a5_emh_orig.py, computation unchanged); the two [A5] lines below are its stdout, verbatim; the READ note at the end was added by hand
+# pool: released native cls>=0.1, no box-NMS, ranked by V; all-point AP3D, Car, IoU 0.7, KITTI val (Chen split), Easy / Moderate / Hard
+# inputs: monoflex_orig dump@db53a6b4, monoground_orig dump@033e0a8c (same dumps as reports_orig/gap_exact_orig.txt)
+# environment: numpy 2.0.2, pandas 2.3.3, numba 0.60.0 (numba.cuda official rotated-IoU kernel, NVIDIA Quadro RTX 6000)
+
+[A5 cls>=0.1] MonoFlex*   E/M/H = 25.08 / 18.11 / 15.52
+[A5 cls>=0.1] MonoGround* E/M/H = 26.18 / 19.42 / 16.22
+
+READ: these are the E / M / H cells of the starred rows of main Table 1 (MonoFlex* 25.08 / 18.11 / 15.52,
+MonoGround* 26.18 / 19.42 / 16.22). The Moderate cells equal the NATIVE(cls>=0.1) base of a5_regate_orig.txt.

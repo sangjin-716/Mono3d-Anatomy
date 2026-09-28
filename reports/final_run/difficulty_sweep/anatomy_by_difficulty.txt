@@ -1,0 +1,57 @@
+# diffsweep anatomy 2026-06-16T02:14:28
+# C=geometry anatomy (separate oracles, NOT additive): pure_z / ray-consistent-centre / full-centre
+# S5 pool (pool_mask thr0.2 + NMS0.5). all-point (R40). Mod(=1) reproduces oracle_anatomy.txt (gate).
+
+[M3D-RPN   ] gate(Mod)=ratio✓ centre✓  n=12527 matched=9543
+    Easy base= 15.14  pure_z=+22.17  ray=+45.22  centre=+55.05  | pure_z/centre=0.403  ray/centre=0.822
+    Mod  base= 11.49  pure_z=+18.62  ray=+36.92  centre=+46.29  | pure_z/centre=0.402  ray/centre=0.798
+    Hard base=  8.92  pure_z=+14.81  ray=+29.54  centre=+38.05  | pure_z/centre=0.389  ray/centre=0.776
+[MonoDLE   ] gate(Mod)=ratio✓ centre✓  n=12498 matched=10083
+    Easy base= 18.48  pure_z=+30.71  ray=+58.79  centre=+68.88  | pure_z/centre=0.446  ray/centre=0.853
+    Mod  base= 15.12  pure_z=+27.70  ray=+53.25  centre=+64.15  | pure_z/centre=0.432  ray/centre=0.83
+    Hard base= 13.07  pure_z=+25.77  ray=+47.77  centre=+58.71  | pure_z/centre=0.439  ray/centre=0.814
+[MonoFlex  ] gate(Mod)=ratio✓ centre✓  n=16107 matched=11577
+    Easy base= 23.16  pure_z=+27.51  ray=+51.54  centre=+66.27  | pure_z/centre=0.415  ray/centre=0.778
+    Mod  base= 16.28  pure_z=+23.18  ray=+44.06  centre=+62.90  | pure_z/centre=0.368  ray/centre=0.7
+    Hard base= 13.75  pure_z=+21.58  ray=+39.90  centre=+58.13  | pure_z/centre=0.371  ray/centre=0.686
+[GUPNet    ] gate(Mod)=ratio✓ centre✓  n=9836 matched=8866
+    Easy base= 23.95  pure_z=+27.96  ray=+53.31  centre=+61.28  | pure_z/centre=0.456  ray/centre=0.87
+    Mod  base= 17.12  pure_z=+24.24  ray=+46.47  centre=+57.10  | pure_z/centre=0.425  ray/centre=0.814
+    Hard base= 14.49  pure_z=+22.65  ray=+41.54  centre=+51.90  | pure_z/centre=0.436  ray/centre=0.8
+[DEVIANT   ] gate(Mod)=ratio✓ centre✓  n=9976 matched=8963
+    Easy base= 26.03  pure_z=+29.54  ray=+52.39  centre=+60.13  | pure_z/centre=0.491  ray/centre=0.871
+    Mod  base= 17.50  pure_z=+25.13  ray=+47.41  centre=+58.19  | pure_z/centre=0.432  ray/centre=0.815
+    Hard base= 14.87  pure_z=+23.04  ray=+41.86  centre=+52.67  | pure_z/centre=0.437  ray/centre=0.795
+[MonoGround] gate(Mod)=ratioCHECK(pz0.391/ray0.687) centre✓  n=15808 matched=11456
+    Easy base= 24.41  pure_z=+26.72  ray=+48.76  centre=+64.35  | pure_z/centre=0.415  ray/centre=0.758
+    Mod  base= 17.48  pure_z=+23.33  ray=+41.01  centre=+59.68  | pure_z/centre=0.391  ray/centre=0.687
+    Hard base= 14.52  pure_z=+21.73  ray=+37.20  centre=+55.09  | pure_z/centre=0.394  ray/centre=0.675
+[MonoCon   ] gate(Mod)=ratio✓ centre✓  n=11785 matched=9701
+    Easy base= 26.95  pure_z=+28.11  ray=+55.35  centre=+62.66  | pure_z/centre=0.449  ray/centre=0.883
+    Mod  base= 19.60  pure_z=+25.50  ray=+48.99  centre=+58.88  | pure_z/centre=0.433  ray/centre=0.832
+    Hard base= 16.45  pure_z=+24.62  ray=+44.36  centre=+55.09  | pure_z/centre=0.447  ray/centre=0.805
+[MonoDETR  ] gate(Mod)=ratio✓ centre✓  n=11399 matched=9624
+    Easy base= 29.12  pure_z=+29.04  ray=+50.82  centre=+58.14  | pure_z/centre=0.499  ray/centre=0.874
+    Mod  base= 21.19  pure_z=+24.16  ray=+43.67  centre=+53.82  | pure_z/centre=0.449  ray/centre=0.812
+    Hard base= 17.68  pure_z=+23.13  ray=+39.80  centre=+51.04  | pure_z/centre=0.453  ray/centre=0.78
+[MonoDGP   ] gate(Mod)=ratio✓  n=11821 matched=9851
+    Easy base= 30.72  pure_z=+32.37  ray=+53.02  centre=+59.67  | pure_z/centre=0.542  ray/centre=0.889
+    Mod  base= 22.91  pure_z=+29.86  ray=+49.91  centre=+59.15  | pure_z/centre=0.505  ray/centre=0.844
+    Hard base= 19.79  pure_z=+28.03  ray=+45.39  centre=+55.10  | pure_z/centre=0.509  ray/centre=0.824
+[MonoCoP   ] gate(Mod)=ratio✓  n=12483 matched=10257
+    Easy base= 32.76  pure_z=+31.29  ray=+52.36  centre=+58.77  | pure_z/centre=0.532  ray/centre=0.891
+    Mod  base= 24.35  pure_z=+29.06  ray=+50.07  centre=+59.01  | pure_z/centre=0.492  ray/centre=0.848
+    Hard base= 20.83  pure_z=+28.20  ray=+46.67  centre=+56.30  | pure_z/centre=0.501  ray/centre=0.829
+[MonoCLUE  ] gate(Mod)=ratio✓  n=11843 matched=9904
+    Easy base= 34.28  pure_z=+31.10  ray=+50.33  centre=+56.13  | pure_z/centre=0.554  ray/centre=0.897
+    Mod  base= 24.68  pure_z=+29.33  ray=+48.38  centre=+57.35  | pure_z/centre=0.511  ray/centre=0.843
+    Hard base= 20.93  pure_z=+27.89  ray=+44.27  centre=+53.99  | pure_z/centre=0.517  ray/centre=0.82
+[MonoIA    ] gate(Mod)=ratio✓  n=13338 matched=10458
+    Easy base= 34.91  pure_z=+30.12  ray=+50.22  centre=+56.95  | pure_z/centre=0.529  ray/centre=0.882
+    Mod  base= 25.20  pure_z=+28.25  ray=+48.36  centre=+58.22  | pure_z/centre=0.485  ray/centre=0.831
+    Hard base= 21.52  pure_z=+26.90  ray=+44.51  centre=+55.26  | pure_z/centre=0.487  ray/centre=0.805
+
+== panel summary per difficulty (median ratios; separate oracles, not additive) ==
+Easy: pure_z/centre median=0.474  ray/centre median=0.873  | full-centre gap min/med/max = +55.0/+59.9/+68.9
+Mod : pure_z/centre median=0.432  ray/centre median=0.823  | full-centre gap min/med/max = +46.3/+58.5/+64.1
+Hard: pure_z/centre median=0.443  ray/centre median=0.802  | full-centre gap min/med/max = +38.1/+55.1/+58.7

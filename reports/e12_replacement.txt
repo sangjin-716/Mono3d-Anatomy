@@ -1,0 +1,19 @@
+# e12_replacement run 2026-06-12T21:16:33
+# among A-pass GTs (accurate pool candidate exists): did the BEST candidate survive?
+
+[done] M3D-RPN    A-pass= 5776 | best-survived=0.008 REPLACED=0.308 LOST=0.684 (ref face-ii 0.684) -> GATE-PASS
+[done] MonoDLE    A-pass= 2315 | best-survived=0.994 REPLACED=0.000 LOST=0.006 (ref face-ii 0.006) -> GATE-PASS
+[done] MonoFlex   A-pass= 2132 | best-survived=0.995 REPLACED=0.000 LOST=0.005 (ref face-ii 0.005) -> GATE-PASS
+[done] GUPNet     A-pass= 2345 | best-survived=0.980 REPLACED=0.000 LOST=0.020 (ref face-ii 0.020) -> GATE-PASS
+[done] DEVIANT    A-pass= 2353 | best-survived=0.983 REPLACED=0.000 LOST=0.017 (ref face-ii 0.017) -> GATE-PASS
+[done] MonoGround A-pass= 2248 | best-survived=0.995 REPLACED=0.000 LOST=0.005 (ref face-ii 0.005) -> GATE-PASS
+[done] MonoCon    A-pass= 2485 | best-survived=0.976 REPLACED=0.008 LOST=0.016 (ref face-ii 0.016) -> GATE-PASS
+[done] MonoDETR   A-pass= 2837 | best-survived=0.861 REPLACED=0.053 LOST=0.087 (ref face-ii 0.087) -> GATE-PASS
+[done] MonoDGP    A-pass= 3331 | best-survived=0.580 REPLACED=0.234 LOST=0.186 (ref face-ii 0.186) -> GATE-PASS
+[done] MonoCoP    A-pass= 3602 | best-survived=0.608 REPLACED=0.182 LOST=0.210 (ref face-ii 0.210) -> GATE-PASS
+[done] MonoCLUE   A-pass= 3485 | best-survived=0.638 REPLACED=0.177 LOST=0.184 (ref face-ii 0.184) -> GATE-PASS
+[done] MonoIA     A-pass= 3397 | best-survived=0.740 REPLACED=0.118 LOST=0.142 (ref face-ii 0.142) -> GATE-PASS
+
+READ: REPLACED = suppression that is harmless at GT level (another accurate candidate
+of the same GT reaches the final output). LOST equals the face-ii numerator by
+construction; gate enforces 3-decimal equality with pool_waterfall.txt.

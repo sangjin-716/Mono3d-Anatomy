@@ -1,0 +1,12 @@
+# c2_iou05_separation run 2026-07-03T19:34:56
+# E4 decomposition re-evaluated at IoU3D 0.5 (TP labels @0.5, AP min_overlap=0.5);
+# question: does FP-demotion still reproduce the full oracle and TP-reorder ~0 at the looser bar?
+
+[done] MonoFlex*  base05= 45.49 FPdem=+ 9.60 TPreord=+-3.20 full=+ 9.05 | TPshare05=0.493
+[done] MonoGround* base05= 47.37 FPdem=+ 9.51 TPreord=+-1.94 full=+ 9.32 | TPshare05=0.537
+
+cnet   n=2 FPdem med +9.55  TPreord med +-2.57  full med +9.18
+
+READ: if FPdem still ~= full and TPreord ~0 at IoU0.5 -> separation finding is NOT an
+IoU0.7-cliff artifact (robust). If TPreord grows positive -> separation is partly
+threshold-specific; scope the claim to IoU0.7.

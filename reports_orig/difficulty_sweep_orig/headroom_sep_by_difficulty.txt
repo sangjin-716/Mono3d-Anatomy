@@ -1,0 +1,17 @@
+# diffsweep headroom+separation 2026-07-03T19:24:03
+# A=headroom(full-resort gap), B=separation(FPdem/TPreord) | allpoint (R40) | Easy/Mod/Hard
+# Mod(=1) reproduces e4_fp_tp_decomp.txt (gate); re-sort orderings difficulty-agnostic.
+
+[MonoFlex* ] gate(Mod)=NEW(orig-env; no frozen reference) TPshare=0.255
+    Easy base= 25.06(24.25)  full-gap=+16.84(R40 +17.76)  FPdem=+17.28  TPreord=-6.70  FPdem/full=1.026
+    Mod  base= 18.08(17.41)  full-gap=+11.33(R40 +12.39)  FPdem=+11.51  TPreord=-2.27  FPdem/full=1.015
+    Hard base= 15.46(15.23)  full-gap=+ 9.90(R40 +12.10)  FPdem=+10.03  TPreord=-1.00  FPdem/full=1.013
+[MonoGround*] gate(Mod)=NEW(orig-env; no frozen reference) TPshare=0.280
+    Easy base= 26.18(25.24)  full-gap=+18.26(R40 +19.67)  FPdem=+18.33  TPreord=-5.57  FPdem/full=1.004
+    Mod  base= 19.38(18.79)  full-gap=+12.00(R40 +13.67)  FPdem=+12.03  TPreord=-1.67  FPdem/full=1.002
+    Hard base= 16.16(15.70)  full-gap=+ 9.96(R40 +11.77)  FPdem=+ 9.98  TPreord=-0.71  FPdem/full=1.002
+
+== panel summary per difficulty (all-point) ==
+Easy: headroom min/med/max = +16.84/+17.55/+18.26 | 12/12 ≥+8? 2/12 | TPreord ≤0: 2/12 (range -6.70..-5.57)
+Mod : headroom min/med/max = +11.33/+11.67/+12.00 | 12/12 ≥+8? 2/12 | TPreord ≤0: 2/12 (range -2.27..-1.67)
+Hard: headroom min/med/max = +9.90/+9.93/+9.96 | 12/12 ≥+8? 2/12 | TPreord ≤0: 2/12 (range -1.00..-0.71)

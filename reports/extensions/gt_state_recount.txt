@@ -1,0 +1,22 @@
+# public copy of the camera-ready check trackC_gtstate_recount.txt, sha256 65aa41badb64de4bdc4f2a58ce412de0c89a23e64bbbc72d6cdaba31250ec80c, scrubbed: the absolute paths of the two input CSVs (source lines 3, 13) replaced by the paths where tools/orig/gt_state_matrix_vB.py and tools/decomp/gt_state_matrix.py write them; the closing adjudication note (source lines 21-51, internal review wording and manuscript line references) omitted; every number verbatim
+# Script: tools/extensions/gt_state_recount.py (renamed without the internal track label). The vB block is the panel of the paper (MonoFlex*, MonoGround*); the pre-vB block is the modern-environment panel of reports/gt_state_matrix.txt. 'hard-core' = no box at that IoU in the named pools (panel-unreached).
+==============================================================================
+vB  (orig-env MonoFlex*/MonoGround*) 2026-07-03
+  file : reports_rerun/gt_state_matrix_vB.csv
+  n_gt = 7874 ; pools(_a) = 12 ; anchor col = ['M3D-RPN_a']
+  IoU>=0.7  hard-core 12 pools =  1166 / 7874 = 0.14808 -> 14.8%
+  IoU>=0.7  hard-core 11 non-anchor =  1978 / 7874 = 0.25121 -> 25.1%
+  IoU>=0.5  hard-core 12 pools =   191 / 7874 = 0.02426 -> 2.4%
+  IoU>=0.5  hard-core 11 non-anchor =   523 / 7874 = 0.06642 -> 6.6%
+  IoU>=0.7  outside hard core, FINAL accurate nowhere = 1282 / 7874 = 0.16281 -> 16.3%
+  IoU>=0.7  CenterNet-family pool existence band = 0.294..0.317 -> 29--32%
+==============================================================================
+pre-vB (modern-env)                  2026-06-12
+  file : cache/decomp/gt_state_matrix.csv
+  n_gt = 7874 ; pools(_a) = 12 ; anchor col = ['M3D-RPN_a']
+  IoU>=0.7  hard-core 12 pools =  1176 / 7874 = 0.14935 -> 14.9%
+  IoU>=0.7  hard-core 11 non-anchor =  2002 / 7874 = 0.25425 -> 25.4%
+  IoU>=0.5  hard-core 12 pools =   194 / 7874 = 0.02464 -> 2.5%
+  IoU>=0.5  hard-core 11 non-anchor =   527 / 7874 = 0.06693 -> 6.7%
+  IoU>=0.7  outside hard core, FINAL accurate nowhere = 1316 / 7874 = 0.16713 -> 16.7%
+  IoU>=0.7  CenterNet-family pool existence band = 0.271..0.316 -> 27--32%

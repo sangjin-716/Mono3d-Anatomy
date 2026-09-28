@@ -1,0 +1,39 @@
+# operating_point_sweep run 2026-07-04T00:49:29
+# prereg: reports/prereg_2b_sweep.md (primary cell = thr0.2+NMS0.5; all else secondary)
+# AP columns: all-point interpolated AP (official R40 in parens)
+
+== MonoFlex* (dump rows=105945; floor note: min cls=0.004)
+  base thr=0.00 | NMS 0.4: 18.12(17.36)  NMS 0.5: 18.12(17.33)  NMS 0.6: 18.12(17.32)  NMSNone: 18.11(17.28)
+  base thr=0.05 | NMS 0.4: 18.12(17.36)  NMS 0.5: 18.12(17.33)  NMS 0.6: 18.12(17.32)  NMSNone: 18.11(17.28)
+  base thr=0.10 | NMS 0.4: 18.12(17.36)  NMS 0.5: 18.12(17.34)  NMS 0.6: 18.12(17.33)  NMSNone: 18.11(17.29)
+  base thr=0.20 | NMS 0.4: 18.11(17.40)  NMS 0.5: 18.10(17.38)  NMS 0.6: 18.10(17.37)  NMSNone: 18.10(17.35)
+  base thr=0.30 | NMS 0.4: 18.09(17.44)  NMS 0.5: 18.08(17.42)  NMS 0.6: 18.08(17.42)  NMSNone: 18.07(17.40)
+  base thr=0.40 | NMS 0.4: 18.05(17.47)  NMS 0.5: 18.04(17.46)  NMS 0.6: 18.04(17.45)  NMSNone: 18.04(17.44)
+  gap S5* thr=0.20 NMS= 0.5 | base= 18.10 ceil= 29.66 gap_allpt=+11.56 (R40 +12.62)
+  gap     thr=0.10 NMS= 0.5 | base= 18.12 ceil= 29.73 gap_allpt=+11.61 (R40 +12.66)
+  gap     thr=0.30 NMS= 0.5 | base= 18.08 ceil= 29.55 gap_allpt=+11.47 (R40 +12.57)
+  gap     thr=0.20 NMS=None | base= 18.10 ceil= 29.30 gap_allpt=+11.21 (R40 +12.23)
+  topK K=  20 | base= 18.10
+  topK K=  50 | base= 18.10  gap_allpt=+11.56
+  topK K= 100 | base= 18.10
+  topK K=None | base= 18.10  gap_allpt=+11.56
+
+== MonoGround* (dump rows=104552; floor note: min cls=0.003)
+  base thr=0.00 | NMS 0.4: 19.44(18.69)  NMS 0.5: 19.43(18.66)  NMS 0.6: 19.42(18.63)  NMSNone: 19.42(18.60)
+  base thr=0.05 | NMS 0.4: 19.44(18.69)  NMS 0.5: 19.43(18.66)  NMS 0.6: 19.42(18.64)  NMSNone: 19.42(18.61)
+  base thr=0.10 | NMS 0.4: 19.44(18.72)  NMS 0.5: 19.43(18.69)  NMS 0.6: 19.42(18.66)  NMSNone: 19.42(18.64)
+  base thr=0.20 | NMS 0.4: 19.43(18.75)  NMS 0.5: 19.43(18.73)  NMS 0.6: 19.41(18.71)  NMSNone: 19.42(18.68)
+  base thr=0.30 | NMS 0.4: 19.42(18.78)  NMS 0.5: 19.41(18.76)  NMS 0.6: 19.40(18.74)  NMSNone: 19.40(18.73)
+  base thr=0.40 | NMS 0.4: 19.41(18.83)  NMS 0.5: 19.40(18.81)  NMS 0.6: 19.39(18.79)  NMSNone: 19.39(18.78)
+  gap S5* thr=0.20 NMS= 0.5 | base= 19.43 ceil= 31.56 gap_allpt=+12.13 (R40 +13.77)
+  gap     thr=0.10 NMS= 0.5 | base= 19.43 ceil= 31.59 gap_allpt=+12.16 (R40 +13.81)
+  gap     thr=0.30 NMS= 0.5 | base= 19.41 ceil= 31.50 gap_allpt=+12.09 (R40 +13.74)
+  gap     thr=0.20 NMS=None | base= 19.42 ceil= 31.40 gap_allpt=+11.98 (R40 +13.59)
+  topK K=  20 | base= 19.43
+  topK K=  50 | base= 19.43  gap_allpt=+12.13
+  topK K= 100 | base= 19.43
+  topK K=None | base= 19.43  gap_allpt=+12.13
+
+READ: per prereg, the C1 ordering-headroom wording requires (e) gap>0 & median>=6 at every
+gap cell and (f) S5-vs-best-cell gap difference <3 AP for >=6/7. M3D-RPN thr<=0.05 cells are
+floor-limited until the floor-0 dump lands (flagged above by min cls).

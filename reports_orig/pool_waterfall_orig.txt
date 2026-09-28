@@ -1,0 +1,14 @@
+# pool_waterfall run 2026-07-03T19:13:56
+# GT-side per moderate Car GT; candidate gate |dz|<8m (safe for IoU>=0.5 existence);
+# A=existence in COMPLETE pool, B=eligibility survivors, C=final output; IoU3D thresholds 0.5/0.7
+
+[done] MonoFlex*  (cnet) GT=7874 | A@0.5=0.562 A@0.7=0.298 B@0.7=0.297 C@0.7=0.297 | suppressed-acc(face-ii share)=0.006
+        bins: [0-15] n=1930 A7=0.59 C7=0.58 [15-30] n=3163 A7=0.30 C7=0.30 [30-45] n=2416 A7=0.11 C7=0.10 [45-+] n=365 A7=0.05 C7=0.05
+        30m+ missed GTs=2512, of which NO pool candidate IoU>=0.5: 1956 (0.78)
+
+[done] MonoGround* (cnet) GT=7874 | A@0.5=0.584 A@0.7=0.317 B@0.7=0.314 C@0.7=0.314 | suppressed-acc(face-ii share)=0.007
+        bins: [0-15] n=1930 A7=0.61 C7=0.61 [15-30] n=3163 A7=0.32 C7=0.32 [30-45] n=2416 A7=0.12 C7=0.12 [45-+] n=365 A7=0.05 C7=0.04
+        30m+ missed GTs=2483, of which NO pool candidate IoU>=0.5: 1877 (0.76)
+
+READ: rubric (claim_decision_tree #5): S needs 30m+ missing-share >= 0.70 (panel median),
+non-replacement counted via face-ii construction, face-ii share >= 0.10 for >= 8/12.

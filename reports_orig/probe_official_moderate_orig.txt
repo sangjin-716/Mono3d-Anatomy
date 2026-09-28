@@ -1,0 +1,24 @@
+# E1' probe channels on the OFFICIAL moderate set (occ<=1, trunc<=0.3, h>25px)
+# matcher/pool identical to frozen probe; only the recall GT filter changes
+GATE GT-count: 7874 (expect 7874) -> PASS
+[done] MonoFlex*  rec_all=0.297 rec45=0.049 |dz|45=1.491
+[done] MonoGround* rec_all=0.316 rec45=0.047 |dz|45=1.496
+
+OFFICIAL-MODERATE RECALL@IoU0.7 BY BIN (n per bin: 0-15=1930 15-30=3163 30-45=2416 45+=365)
+MonoFlex*   17.38 |   0.583   0.298   0.106   0.049   0.297
+MonoGround*  18.73 |   0.605   0.319   0.122   0.047   0.316
+
+OFFICIAL-MODERATE |dz| ON MATCHED, BY MATCHED-GT BIN
+MonoFlex*   17.38 |   0.353   0.724   1.220   1.491
+MonoGround*  18.73 |   0.354   0.688   1.139   1.496
+
+SPEARMAN vs base AP (official set):
+  recall 0-15  : +1.000   0.583 0.605
+  recall 15-30 : +1.000   0.298 0.319
+  recall 30-45 : +1.000   0.106 0.122
+  recall 45+   : -1.000   0.049 0.047
+  recall ALL   : +1.000   0.297 0.316
+
+DELTA vs frozen probe (45+ recall): probe-set (n=1867, occ<=1/trunc<=0.5/no-h-filter)
+  MonoFlex*  old(9668-set)=0.018  official(7874-set)=0.049
+  MonoGround* old(9668-set)=0.020  official(7874-set)=0.047

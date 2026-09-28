@@ -1,0 +1,57 @@
+# diffsweep headroom+separation 2026-06-16T02:14:30
+# A=headroom(full-resort gap), B=separation(FPdem/TPreord) | allpoint (R40) | Easy/Mod/Hard
+# Mod(=1) reproduces e4_fp_tp_decomp.txt (gate); re-sort orderings difficulty-agnostic.
+
+[M3D-RPN   ] gate(Mod)=PASS TPshare=0.166
+    Easy base= 15.14(14.53)  full-gap=+19.34(R40 +20.47)  FPdem=+19.34  TPreord=-1.31  FPdem/full=1.0
+    Mod  base= 11.51(11.07)  full-gap=+11.68(R40 +13.93)  FPdem=+11.68  TPreord=-0.33  FPdem/full=1.0
+    Hard base=  8.95( 8.65)  full-gap=+ 8.92(R40 +11.35)  FPdem=+ 8.92  TPreord=-0.13  FPdem/full=1.0
+[MonoDLE   ] gate(Mod)=PASS TPshare=0.221
+    Easy base= 18.45(18.30)  full-gap=+21.61(R40 +24.11)  FPdem=+21.68  TPreord=-4.08  FPdem/full=1.003
+    Mod  base= 15.09(14.63)  full-gap=+14.03(R40 +15.33)  FPdem=+14.06  TPreord=-1.34  FPdem/full=1.002
+    Hard base= 13.09(13.04)  full-gap=+11.97(R40 +14.43)  FPdem=+11.99  TPreord=-0.25  FPdem/full=1.002
+[MonoFlex  ] gate(Mod)=PASS TPshare=0.230
+    Easy base= 23.15(22.32)  full-gap=+16.25(R40 +17.16)  FPdem=+16.74  TPreord=-5.94  FPdem/full=1.03
+    Mod  base= 16.26(15.60)  full-gap=+10.46(R40 +11.68)  FPdem=+10.65  TPreord=-2.13  FPdem/full=1.019
+    Hard base= 13.76(13.44)  full-gap=+ 9.10(R40 +11.38)  FPdem=+ 9.25  TPreord=-1.03  FPdem/full=1.016
+[GUPNet    ] gate(Mod)=PASS TPshare=0.280
+    Easy base= 23.94(23.40)  full-gap=+19.06(R40 +21.45)  FPdem=+19.18  TPreord=-2.94  FPdem/full=1.006
+    Mod  base= 17.11(16.46)  full-gap=+12.04(R40 +13.48)  FPdem=+12.09  TPreord=-0.92  FPdem/full=1.004
+    Hard base= 14.48(13.71)  full-gap=+10.31(R40 +11.24)  FPdem=+10.35  TPreord=-0.11  FPdem/full=1.004
+[DEVIANT   ] gate(Mod)=PASS TPshare=0.277
+    Easy base= 26.02(25.41)  full-gap=+17.76(R40 +19.45)  FPdem=+17.89  TPreord=-4.99  FPdem/full=1.007
+    Mod  base= 17.48(16.71)  full-gap=+11.83(R40 +13.22)  FPdem=+11.88  TPreord=-1.23  FPdem/full=1.005
+    Hard base= 14.89(14.74)  full-gap=+10.28(R40 +12.70)  FPdem=+10.32  TPreord=-0.14  FPdem/full=1.004
+[MonoGround] gate(Mod)=PASS TPshare=0.254
+    Easy base= 24.40(23.36)  full-gap=+17.73(R40 +19.05)  FPdem=+17.81  TPreord=-4.77  FPdem/full=1.004
+    Mod  base= 17.45(16.88)  full-gap=+10.89(R40 +13.08)  FPdem=+10.92  TPreord=-1.60  FPdem/full=1.003
+    Hard base= 14.53(14.02)  full-gap=+ 9.15(R40 +10.95)  FPdem=+ 9.18  TPreord=-0.73  FPdem/full=1.003
+[MonoCon   ] gate(Mod)=PASS TPshare=0.256
+    Easy base= 26.95(26.03)  full-gap=+15.74(R40 +16.67)  FPdem=+17.84  TPreord=-4.82  FPdem/full=1.134
+    Mod  base= 19.59(19.02)  full-gap=+10.58(R40 +12.46)  FPdem=+11.45  TPreord=-1.37  FPdem/full=1.082
+    Hard base= 16.52(15.91)  full-gap=+ 9.27(R40 +10.83)  FPdem=+ 9.91  TPreord=-0.32  FPdem/full=1.069
+[MonoDETR  ] gate(Mod)=PASS TPshare=0.263
+    Easy base= 29.12(28.25)  full-gap=+18.28(R40 +19.02)  FPdem=+18.50  TPreord=-4.13  FPdem/full=1.012
+    Mod  base= 21.18(20.91)  full-gap=+11.42(R40 +13.94)  FPdem=+11.54  TPreord=-1.16  FPdem/full=1.011
+    Hard base= 17.74(17.54)  full-gap=+ 9.80(R40 +12.34)  FPdem=+ 9.89  TPreord=-0.29  FPdem/full=1.009
+[MonoDGP   ] gate(Mod)=PASS TPshare=0.249
+    Easy base= 30.62(30.05)  full-gap=+10.44(R40 +12.47)  FPdem=+17.35  TPreord=-4.83  FPdem/full=1.661
+    Mod  base= 22.82(22.02)  full-gap=+ 8.41(R40 + 9.54)  FPdem=+11.59  TPreord=-1.33  FPdem/full=1.378
+    Hard base= 19.88(19.57)  full-gap=+ 8.16(R40 +10.19)  FPdem=+10.56  TPreord=-0.07  FPdem/full=1.294
+[MonoCoP   ] gate(Mod)=PASS TPshare=0.266
+    Easy base= 32.75(31.86)  full-gap=+16.64(R40 +17.80)  FPdem=+16.95  TPreord=-4.67  FPdem/full=1.019
+    Mod  base= 24.34(23.84)  full-gap=+11.59(R40 +13.49)  FPdem=+11.72  TPreord=-1.07  FPdem/full=1.012
+    Hard base= 20.93(20.44)  full-gap=+10.14(R40 +11.94)  FPdem=+10.24  TPreord=-0.24  FPdem/full=1.01
+[MonoCLUE  ] gate(Mod)=PASS TPshare=0.262
+    Easy base= 34.03(33.58)  full-gap=+12.59(R40 +14.81)  FPdem=+16.20  TPreord=-5.43  FPdem/full=1.287
+    Mod  base= 24.55(24.03)  full-gap=+ 9.73(R40 +11.55)  FPdem=+11.45  TPreord=-1.27  FPdem/full=1.177
+    Hard base= 21.04(20.51)  full-gap=+ 9.08(R40 +10.54)  FPdem=+10.38  TPreord=-0.14  FPdem/full=1.143
+[MonoIA    ] gate(Mod)=PASS TPshare=0.247
+    Easy base= 34.79(33.94)  full-gap=+17.18(R40 +18.11)  FPdem=+17.61  TPreord=-6.17  FPdem/full=1.025
+    Mod  base= 25.18(24.41)  full-gap=+11.64(R40 +12.90)  FPdem=+11.81  TPreord=-1.46  FPdem/full=1.015
+    Hard base= 21.67(20.91)  full-gap=+10.21(R40 +11.44)  FPdem=+10.34  TPreord=-0.31  FPdem/full=1.012
+
+== panel summary per difficulty (all-point) ==
+Easy: headroom min/med/max = +10.44/+17.46/+21.61 | 12/12 ≥+8? 12/12 | TPreord ≤0: 12/12 (range -6.17..-1.31)
+Mod : headroom min/med/max = +8.41/+11.50/+14.03 | 12/12 ≥+8? 12/12 | TPreord ≤0: 12/12 (range -2.13..-0.33)
+Hard: headroom min/med/max = +8.16/+9.53/+11.97 | 12/12 ≥+8? 12/12 | TPreord ≤0: 12/12 (range -1.03..-0.07)

@@ -1,0 +1,16 @@
+# public copy of the camera-ready check budget_saturation.txt, sha256 4b0c4576d1f3e4d3f4575ed701448c82b54cd39b78acb39f0483f2a3799e178e, scrubbed: nothing (every line below is identical to the original)
+# budget_saturation 2026-08-27T22:40:01
+# frac of 3769 val images whose COMPLETE candidate pool holds >= N candidates
+detector     pool_src   N>=5    N>=10   N>=20   N>=30   N>=50     max/img
+MonoDLE      cnet-decode 1.000   1.000   1.000   1.000   1.000     50
+GUPNet       cnet-decode 0.995   0.979   0.936   0.604   0.000     48
+DEVIANT      cnet-decode 0.993   0.979   0.950   0.809   0.000     50
+MonoCon      cnet-decode 0.992   0.972   0.869   0.017   0.000     30
+MonoFlex*    cnet-decode 0.998   0.986   0.936   0.433   0.000     43
+MonoGround*  cnet-decode 0.996   0.981   0.879   0.459   0.000     45
+MonoDETR     query-car  1.000   1.000   1.000   1.000   1.000     50
+MonoDGP      query-car  1.000   1.000   1.000   1.000   1.000     50
+MonoCoP      query-car  1.000   1.000   1.000   1.000   1.000     50
+MonoCLUE     query-car  1.000   1.000   1.000   1.000   1.000     50
+MonoIA       query-car  1.000   1.000   1.000   1.000   1.000     50
+M3D-RPN      floor0     0.998   0.996   0.994   0.992   0.989     3000

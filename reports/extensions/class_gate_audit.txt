@@ -1,0 +1,52 @@
+# public copy (extract) of the camera-ready check gate_audit_closure.txt, sha256 6c8c7d95c53547b92c1fb3fae747e5258142208c693b7636d50de12c28e2cec4, scrubbed: only Part 2 (source lines 192-239) is reproduced; review-process labels and recommendation wording removed (source lines 193, 196-198, 222, 239-245), path made repo-relative (source line 213); every kept number verbatim
+# Part 2 covers Pedestrian/Cyclist and the per-detector Car-anchor checks of supplementary Sec. O.
+# The other parts of the source concern checks not used here and are not reproduced.
+# Mechanism lines: tools/extensions/partb_anchor_gate.py and partb_anchor_mech2.py (released DEVIANT dump);
+# anchor and band lines: reports/extensions/difficulty_class_extension.txt / .csv.
+------------------------------------------------------------------------------------------------
+PART 2 -- PEDESTRIAN +7.63..+8.77 / CYCLIST +6.26..+7.72   GATE = PARTIAL, one pool
+          failing its own Car anchor by 0.34 AP
+------------------------------------------------------------------------------------------------
+The anchor miss is fully diagnosed, reproduced to 0.004 AP, and is a dump-precision
+artifact.  DEVIANT is therefore left out of Part B.
+
+(2.a) DIAGNOSIS.  The Part-B directory DEVIANT/output/run_221/result_kitti/data holds
+      EXACTLY the same predictions as the frozen Part-A pool -- not a different run:
+        Part-A pool (deviant_val.csv, V>=0.2) = 10,186 Car boxes
+        Part-B dir  Car lines                 = 10,186
+        images where the two counts differ    = 0 of 3,138
+      It is the same pool written at 2 decimal places.  Score-precision census over all four
+      Part-B dirs (Car rows):
+        M3D-RPN    12,472 Car,  6,567 distinct scores, 6 decimals        tie ratio 0.4735
+        MonoFlex   17,142 Car,  7,496 distinct scores, 1-19 decimals     tie ratio 0.5627
+        DEVIANT    10,186 Car,     69 distinct scores, 2 decimals        tie ratio 0.9932  <--
+        MonoGround 16,719 Car,  7,165 distinct scores, 1-20 decimals     tie ratio 0.5714
+      69 distinct score values among 10,186 boxes destroys the all-point AP ranking.
+
+(2.b) MECHANISM GATE (tools/extensions/partb_anchor_gate.py, partb_anchor_mech2.py).
+      Take the FULL-PRECISION Part-A DEVIANT pool and impose the 2-dp dump's roundings.
+      The target 17.14 was produced by a DIFFERENT process (difficulty_class_extension.py
+      Part B) reading a DIFFERENT file (the txt dump), so this is a real prediction:
+        full precision                  -> base 17.48  vs Part-A/Table-1 17.48  d=0.002 PASS
+        score only rounded to 2 dp      -> base 17.20  vs Part-B       17.14  d=0.064 (82%)
+        score AND geometry at 2 dp      -> base 17.14  vs Part-B       17.14  d=0.004 PASS
+      Total quantisation cost -0.34 AP == the anchor miss exactly.  MECHANISM PROVEN.
+
+(2.c) THE PER-DETECTOR PART-B CAR-ANCHOR GATE LINE:
+        M3D-RPN     PartB Car/Mod 11.51 vs PartA/Table-1 11.51  d=0.00  [PASS]
+        MonoFlex    PartB Car/Mod 16.27 vs PartA/Table-1 16.26  d=0.01  [PASS]
+        DEVIANT     PartB Car/Mod 17.14 vs PartA/Table-1 17.48  d=0.34  [FAIL]
+        MonoGround  PartB Car/Mod 17.46 vs PartA/Table-1 17.45  d=0.01  [PASS]
+        anchors reproducing: 3/4
+
+(2.d) EFFECT OF DROPPING DEVIANT (recomputed from the existing per-detector rows in
+      difficulty_class_extension.csv; the three retained pools each pass their anchor):
+        Pedestrian Easy      all-4 +10.02..+11.46 med +10.85 | 3-pool +10.75..+11.46 med +10.94
+        Pedestrian Moderate  all-4  +7.63..+8.77  med  +8.23 | 3-pool  +7.94..+8.77  med  +8.53
+        Pedestrian Hard      all-4  +6.22..+7.28  med  +6.84 | 3-pool  +6.55..+7.28  med  +7.13
+        Cyclist    Easy      all-4 +10.93..+13.39 med +12.67 | 3-pool +10.93..+13.39 med +12.17
+        Cyclist    Moderate  all-4  +6.26..+7.72  med  +6.91 | 3-pool  +6.26..+7.72  med  +6.45
+        Cyclist    Hard      all-4  +5.85..+7.00  med  +6.32 | 3-pool  +5.85..+7.00  med  +5.96
+      The Cyclist bands are UNCHANGED (DEVIANT was never an endpoint).  The Pedestrian
+      band MINIMUM RISES, +7.63 -> +7.94, because the quantisation depressed DEVIANT's base
+      and therefore INFLATED its gap.

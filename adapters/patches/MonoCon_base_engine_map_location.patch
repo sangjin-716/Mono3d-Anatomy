@@ -1,0 +1,13 @@
+diff --git a/engine/base_engine.py b/engine/base_engine.py
+index 00c8db7..64135b9 100644
+--- a/engine/base_engine.py
++++ b/engine/base_engine.py
+@@ -192,7 +192,7 @@ class BaseEngine:
+                         ckpt_file: str, 
+                         verbose: bool = False) -> None:
+         
+-        engine_dict = torch.load(ckpt_file)
++        engine_dict = torch.load(ckpt_file, map_location='cuda:0')
+         
+         
+         # Load Engine Attributes

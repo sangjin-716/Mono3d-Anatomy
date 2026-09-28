@@ -1,0 +1,90 @@
+# starred_panel_summaries 2026-09-29T00:04:15
+# script  tools/extensions/starred_panel_summaries.py
+# panel   M3D-RPN, MonoDLE, MonoFlex*, GUPNet, DEVIANT, MonoGround*, MonoCon, MonoDETR, MonoDGP, MonoCoP, MonoCLUE, MonoIA
+# inputs  printed per-detector values of the frozen reports named in each part; no dump is read
+# note    medians here use the printed (rounded) per-detector values, so they can differ from a
+#         report's own median, computed before rounding, by up to the input rounding
+
+====================================================================================================
+PART A -- recall at IoU 0.7 beyond 45 m on the official Moderate set (n = 365 GT)
+====================================================================================================
+base = the base-AP column of the probe tables (AP_R40 on the uniform pool); k = round(rec45 * 365)
+model          base  rec45    k      Wilson 95% CI  >3.5%?
+M3D-RPN       11.10  0.011    4   [  0.4%,   2.8%]     no
+MonoDLE       14.69  0.063   23   [  4.2%,   9.3%]    yes
+MonoFlex*     17.38  0.049   18   [  3.1%,   7.7%]    yes
+GUPNet        16.48  0.041   15   [  2.5%,   6.7%]    yes
+DEVIANT       16.74  0.030   11   [  1.7%,   5.3%]     no
+MonoGround*   18.73  0.047   17   [  2.9%,   7.3%]    yes
+MonoCon       19.05  0.019    7   [  0.9%,   3.9%]     no
+MonoDETR      20.98  0.093   34   [  6.7%,  12.7%]    yes
+MonoDGP       22.29  0.025    9   [  1.3%,   4.6%]     no
+MonoCoP       23.89  0.058   21   [  3.8%,   8.6%]    yes
+MonoCLUE      24.23  0.110   40   [  8.2%,  14.6%]    yes
+MonoIA        24.49  0.088   32   [  6.3%,  12.1%]    yes
+models with rec45 point estimate > 3.5%: 8/12 -> ['MonoDLE', 'MonoFlex*', 'GUPNet', 'MonoGround*', 'MonoDETR', 'MonoCoP', 'MonoCLUE', 'MonoIA']
+Spearman(rec45, base) over the 12 models = +0.524
+
+gates (modern-environment rows):
+  GATE every modern row (rec45, k, Wilson CI, >3.5%) equals reports/final_run/a3_farfield_integrity.txt: PASS
+  GATE modern-only Spearman +0.504 equals the probe report's '+0.504': PASS
+
+====================================================================================================
+PART B -- GT BEV-IoU re-sort: recovery of the 3D-IoU re-sort gain (IoU 0.7, all-point AP3D)
+====================================================================================================
+rec.7 per model: M3D-RPN 96.6%  MonoDLE 95.8%  MonoFlex* 95.6%  GUPNet 95.8%  DEVIANT 96.1%  MonoGround* 95.9%  MonoCon 94.4%  MonoDETR 95.9%  MonoDGP 97.5%  MonoCoP 96.0%  MonoCLUE 95.4%  MonoIA 96.3%
+recovery over the 12 models: median 95.9%  range 94.4%..97.5%  above 90%: 12/12
+  GATE modern-only recovery range 88.5%..97.5% equals the printed 88.5%..97.5%, and the median 95.85% is within input rounding (0.1) of the printed 95.9%: PASS
+
+====================================================================================================
+PART C -- single-factor snapping of matched-box geometry to GT (IoU 0.7, all-point AP3D gain over base)
+====================================================================================================
+lever      median      min      max   (12 models)
+xz        +52.620   +40.70   +58.41
+y          +2.455    +1.88    +2.93
+h          -1.170    -1.96    -0.11
+wl         +1.225    +0.88    +1.69
+yaw        +0.615    +0.19    +1.57
+(xz = ground-plane position x,z; y = vertical position; h = height; wl = dimensions w,l; yaw.
+ The pure-z and full-centre oracles of main Sec. 5.2 follow a different protocol, reported in
+ reports/oracle_anatomy.txt and reports_orig/oracle_anatomy_orig.txt; the purez and centre
+ columns of this table are therefore not summarised here.)
+  GATE modern-only medians of BEVshr, xz, purez, y, h (+95.500, +52.280, +25.135, +2.645, -1.210) are within input rounding of the medians printed in reports/oracle_ladder_o2.txt: PASS
+
+====================================================================================================
+PART D -- 3D-IoU re-ordering evaluated under 3D and under BEV (IoU 0.7, all-point)
+====================================================================================================
+model          3D gap  BEV gain   BEV-3D
+M3D-RPN        +11.68    +12.28    +0.60
+MonoDLE        +14.03    +14.40    +0.37
+MonoFlex*      +11.07    +11.12    +0.05
+GUPNet         +12.04    +12.41    +0.37
+DEVIANT        +11.83    +12.24    +0.41
+MonoGround*    +11.87    +12.05    +0.18
+MonoCon        +10.58    +10.12    -0.46
+MonoDETR       +11.42    +10.97    -0.45
+MonoDGP         +8.41     +7.08    -1.33
+MonoCoP        +11.58    +11.12    -0.46
+MonoCLUE        +9.73     +8.78    -0.95
+MonoIA         +11.64    +11.10    -0.54
+3D gap   range +8.41..+14.03 median +11.610
+BEV gain range +7.08..+14.40 median +11.120
+paired BEV-3D range [-1.33, +0.60];  both positive for 12/12
+  GATE modern-only '3D  gap range +8.41..+14.03 median +11.50' and 'BEV gap range +7.08..+14.40 median +11.15' are printed in reports/final_run/bev_gap_probe.txt: PASS
+
+====================================================================================================
+CHECK against the values printed in the paper
+====================================================================================================
+  MATCH  supp. Sec. H far-field table, MonoFlex* printed .049 / 18 / [3.1,7.7]      recomputed .049 / 18 / [3.1,7.7]
+  MATCH  supp. Sec. H far-field table, MonoGround* printed .047 / 17 / [2.9,7.3]      recomputed .047 / 17 / [2.9,7.3]
+  MATCH  supp. Sec. H, above 3.5%               printed Eight of twelve            recomputed 8/12
+  MATCH  supp. Sec. H, rho_s                    printed 0.52                       recomputed 0.52
+  MATCH  supp. Sec. D, BEV-IoU re-sort          printed median 95.9%               recomputed 95.9%
+  MATCH  supp. Sec. D, range                    printed 94.4 to 97.5%              recomputed 94.4 to 97.5%
+  MATCH  main Sec. 5.2, x,z snapping            printed median +53                 recomputed +53 (+52.620)
+  MATCH  main Sec. 5.2, y, h, w/l, yaw          printed median at most 2.5         recomputed y +2.455, h -1.170, wl +1.225, yaw +0.615
+  MATCH  supp. Sec. D BEV table, 3D gap         printed +8.4 to +14.0, med +11.6   recomputed +8.4 to +14.0, med +11.6
+  MATCH  supp. Sec. D BEV table, BEV gain       printed +7.1 to +14.4, med +11.1   recomputed +7.1 to +14.4, med +11.1
+  MATCH  supp. Sec. D BEV table, BEV-3D         printed [-1.33,+0.60]              recomputed [-1.33,+0.60]
+
+GATES: ALL PASS   PAPER CHECK: 11/11 MATCH

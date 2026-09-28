@@ -1,0 +1,17 @@
+# oracle_anatomy run 2026-07-03T19:07:45
+# variants on matched boxes only (best-IoU GT, no z-gate); native V scores fixed
+# AP = all-point interpolated (R40 in parens); per-bin = recall@IoU0.7 by GT z-bin
+
+[done] MonoFlex*  base= 18.10 | Gz=+26.40 ray=+49.65 centre=+61.09 y=+2.30 dims=+0.69 yaw=+0.50 all=-18.04 | ratio=0.432 |ray-z|=23.25 subadd=80.31
+        perbin recall@0.7 base=[1659, 1230, 301, 68] pure_z=[2337, 2633, 1172, 433] centre=[3259, 3838, 2221, 926]
+[done] MonoGround* base= 19.43 | Gz=+26.22 ray=+47.24 centre=+58.07 y=+2.09 dims=+0.33 yaw=+0.44 all=-19.36 | ratio=0.451 |ray-z|=21.03 subadd=78.20
+        perbin recall@0.7 base=[1670, 1216, 338, 93] pure_z=[2326, 2602, 1242, 438] centre=[3208, 3728, 2163, 917]
+
+====================================================================================================
+GATE-1 rubric inputs (claim_decision_tree.md):
+  G_z panel median = +26.31   (S needs >= 10.0; P needs >= 5.0)
+  ratio median = 0.442  ratio>=0.80: 0/12  >=0.50: 0/12
+  |ray - pure_z| median = 22.14 (S needs <= 2.0)
+  singles medians: y=+2.20 dims=+0.51 yaw=+0.47 (S needs each <= 2.0)
+  per-bin pure_z recall gain > 0 in ALL bins: 2/12 detectors (S needs >= 10)
+  sub-additivity |sum(singles)-allfac| median = 79.26 (disclosure)

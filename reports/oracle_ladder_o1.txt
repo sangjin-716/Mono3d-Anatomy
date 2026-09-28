@@ -1,0 +1,75 @@
+# public copy of oracle-ladder workspace reports/oracle_ladder_o1.txt, sha256 764ed3367050c70ca168215d79a83caf3d2254affab9d3b957bf3a34a940f6e8, scrubbed: READ note (source lines 71-74): interpretive clauses and their gate labels removed, the geometric reading kept; all numbers and table lines verbatim
+# Note: rows use the modern-environment MonoFlex/MonoGround rebuilds. The paper's twelve-model figures (median 95.9%, range 94.4 to 97.5%) use the starred rows of reports_orig/oracle_ladder_o1_orig.txt instead; see Part B of reports/extensions/starred_panel_summaries.txt.
+# O1 bev_quality_ranking 2026-06-14T16:38:39
+# AP3D (all-point, Car moderate, metric=2) under 3 sort keys: native V / GT BEV-IoU / GT 3D-IoU.
+# recovery% = (ceil_bev - base) / (ceil_3d - base): what fraction of the 3D re-ranking
+# headroom is recovered by knowing ONLY ground-plane (BEV) quality. GT oracles = upper bounds.
+# o3 (fresh) validated against frozen _e4cache o_act; o_act = 3D-IoU oracle used for ceil_3d.
+
+[done] M3D-RPN    (anchor    n=12473) |o3-cache|max=0.00e+00
+    IoU0.7  base= 11.51  BEVsort= 22.80  3Dsort= 23.19  head=+11.68  recovery= 96.6%
+    IoU0.5  base= 36.04  BEVsort= 48.01  3Dsort= 48.11  head=+12.07  recovery= 99.2%
+[done] MonoDLE    (centernet n=13002) |o3-cache|max=0.00e+00
+    IoU0.7  base= 15.09  BEVsort= 28.53  3Dsort= 29.12  head=+14.03  recovery= 95.8%
+    IoU0.5  base= 43.62  BEVsort= 54.77  3Dsort= 54.85  head=+11.22  recovery= 99.3%
+[done] MonoFlex   (centernet n=12283) |o3-cache|max=0.00e+00
+    IoU0.7  base= 16.26  BEVsort= 25.72  3Dsort= 26.72  head=+10.46  recovery= 90.5%
+    IoU0.5  base= 44.44  BEVsort= 53.11  3Dsort= 53.17  head=+ 8.73  recovery= 99.2%
+[done] GUPNet     (centernet n=10004) |o3-cache|max=0.00e+00
+    IoU0.7  base= 17.11  BEVsort= 28.64  3Dsort= 29.14  head=+12.04  recovery= 95.8%
+    IoU0.5  base= 44.57  BEVsort= 54.66  3Dsort= 54.73  head=+10.16  recovery= 99.3%
+[done] DEVIANT    (centernet n=10186) |o3-cache|max=0.00e+00
+    IoU0.7  base= 17.48  BEVsort= 28.85  3Dsort= 29.31  head=+11.83  recovery= 96.1%
+    IoU0.5  base= 45.55  BEVsort= 54.71  3Dsort= 54.76  head=+ 9.21  recovery= 99.5%
+[done] MonoGround (centernet n=11169) |o3-cache|max=0.00e+00
+    IoU0.7  base= 17.45  BEVsort= 27.08  3Dsort= 28.34  head=+10.89  recovery= 88.5%
+    IoU0.5  base= 46.25  BEVsort= 55.11  3Dsort= 55.23  head=+ 8.98  recovery= 98.7%
+[done] MonoCon    (centernet n=11793) |o3-cache|max=0.00e+00
+    IoU0.7  base= 19.59  BEVsort= 29.59  3Dsort= 30.17  head=+10.58  recovery= 94.4%
+    IoU0.5  base= 46.27  BEVsort= 53.27  3Dsort= 53.39  head=+ 7.13  recovery= 98.3%
+[done] MonoDETR   (query     n=12090) |o3-cache|max=0.00e+00
+    IoU0.7  base= 21.18  BEVsort= 32.14  3Dsort= 32.60  head=+11.42  recovery= 95.9%
+    IoU0.5  base= 48.85  BEVsort= 56.44  3Dsort= 56.52  head=+ 7.66  recovery= 99.0%
+[done] MonoDGP    (query     n=13921) |o3-cache|max=0.00e+00
+    IoU0.7  base= 22.82  BEVsort= 31.02  3Dsort= 31.23  head=+ 8.41  recovery= 97.5%
+    IoU0.5  base= 49.26  BEVsort= 52.75  3Dsort= 52.56  head=+ 3.30  recovery=105.6%
+[done] MonoCoP    (query     n=13371) |o3-cache|max=0.00e+00
+    IoU0.7  base= 24.34  BEVsort= 35.46  3Dsort= 35.93  head=+11.58  recovery= 96.0%
+    IoU0.5  base= 53.33  BEVsort= 61.15  3Dsort= 61.19  head=+ 7.86  recovery= 99.4%
+[done] MonoCLUE   (query     n=13678) |o3-cache|max=0.00e+00
+    IoU0.7  base= 24.55  BEVsort= 33.83  3Dsort= 34.28  head=+ 9.73  recovery= 95.4%
+    IoU0.5  base= 52.67  BEVsort= 57.32  3Dsort= 57.35  head=+ 4.68  recovery= 99.4%
+[done] MonoIA     (query     n=14894) |o3-cache|max=0.00e+00
+    IoU0.7  base= 25.18  BEVsort= 36.39  3Dsort= 36.82  head=+11.64  recovery= 96.3%
+    IoU0.5  base= 55.48  BEVsort= 63.13  3Dsort= 63.18  head=+ 7.70  recovery= 99.4%
+
+==============================================================================================================
+O1 SUMMARY — GT BEV-quality recovery of the 3D re-ranking headroom (AP3D, all-point)
+==============================================================================================================
+detector   fam       | base.7  BEV.7   3D.7 head.7   rec.7 | base.5  BEV.5   3D.5 head.5   rec.5
+------------------------------------------------------------------------------------------------
+M3D-RPN    anchor    |  11.51  22.80  23.19 +11.68   96.6% |  36.04  48.01  48.11 +12.07   99.2%
+MonoDLE    centernet |  15.09  28.53  29.12 +14.03   95.8% |  43.62  54.77  54.85 +11.22   99.3%
+MonoFlex   centernet |  16.26  25.72  26.72 +10.46   90.5% |  44.44  53.11  53.17  +8.73   99.2%
+GUPNet     centernet |  17.11  28.64  29.14 +12.04   95.8% |  44.57  54.66  54.73 +10.16   99.3%
+DEVIANT    centernet |  17.48  28.85  29.31 +11.83   96.1% |  45.55  54.71  54.76  +9.21   99.5%
+MonoGround centernet |  17.45  27.08  28.34 +10.89   88.5% |  46.25  55.11  55.23  +8.98   98.7%
+MonoCon    centernet |  19.59  29.59  30.17 +10.58   94.4% |  46.27  53.27  53.39  +7.13   98.3%
+MonoDETR   query     |  21.18  32.14  32.60 +11.42   95.9% |  48.85  56.44  56.52  +7.66   99.0%
+MonoDGP    query     |  22.82  31.02  31.23  +8.41   97.5% |  49.26  52.75  52.56  +3.30  105.6%
+MonoCoP    query     |  24.34  35.46  35.93 +11.58   96.0% |  53.33  61.15  61.19  +7.86   99.4%
+MonoCLUE   query     |  24.55  33.83  34.28  +9.73   95.4% |  52.67  57.32  57.35  +4.68   99.4%
+MonoIA     query     |  25.18  36.39  36.82 +11.64   96.3% |  55.48  63.13  63.18  +7.70   99.4%
+
+IoU0.7: headroom range +8.41..+14.03 median +11.50 | recovery range 88.5%..97.5% median 95.9%
+    anchor    recovery median 96.6% (n=1)
+    centernet recovery median 95.1% (n=6)
+    query     recovery median 96.0% (n=5)
+IoU0.5: headroom range +3.30..+12.07 median +8.30 | recovery range 98.3%..105.6% median 99.3%
+    anchor    recovery median 99.2% (n=1)
+    centernet recovery median 99.3% (n=6)
+    query     recovery median 99.4% (n=5)
+
+READ: recovery ~ 100% => GT BEV (ground-plane) quality recovers almost all the 3D re-ranking
+headroom => height/vertical contributes little to the ORDERING problem. recovery << 100%
+(BEV sort ~ base) => most of the rankable headroom needs the vertical term.

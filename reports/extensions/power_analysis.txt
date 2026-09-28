@@ -1,0 +1,356 @@
+# public copy of the camera-ready check power_analysis.txt, sha256 db6e09e1e259496ce0d38f4991630a268d12c1a6d413de020683872f31fa92fe, scrubbed: review-process labels and wording removed (source lines 2, 14, 19-20, 38, 93, 129, 164, 236, 265), manuscript line references generalized (source lines 122, 166, 267-268), paths made repo-relative (source lines 6-7, 40, 365); every kept number verbatim
+# Omitted from this copy: a residual-clustering coefficient (source lines 171-175, 193-197, 215-219) and per-family rank correlations (source lines 187-190, 209-212, 231-234) in section 4, and one interpretive paragraph (source lines 249-263); the public script does not compute them.
+================================================================================
+POWER ANALYSIS
+trend of the oracle ordering gap against base AP over the 12-detector panel
+================================================================================
+python 3.8.10 | numpy 1.24.4 | scipy 1.10.1
+script  : tools/extensions/power_analysis.py
+output  : reports/extensions/power_analysis.txt
+settings: alpha = 0.05 two-sided, target power = 0.80
+Line tags (Lnn) point at the '# Lnn' comment on the producing line of this script.
+
+--------------------------------------------------------------------------------
+0. THE PANEL, AND A DISCLOSURE ABOUT _NATIVE
+--------------------------------------------------------------------------------
+make_figs.py _NATIVE is the source of truth for 10 of 12
+detectors only. make_figs.py (mtime 2026-06-25) predates the 2026-07-03
+original-environment substitution that the SHIPPED paper adopts:
+    MonoFlex   make_figs.py L75 (16.28, +10.11) vs SHIPPED tab:native (18.11, +11.07)
+    MonoGround make_figs.py L76 (17.47, +10.68) vs SHIPPED tab:native (19.42, +11.87)
+Every statistic below is therefore run on THREE panels and all three
+are printed. Two of them are gated against frozen values (section 1).
+
+detector    | family    | b_CEIL g_CEIL | b_ship g_ship | b_mkfg g_mkfg
+M3D-RPN     | anchor    |  11.51  11.68 |  11.51  11.68 |  11.51  11.68
+MonoDLE     | CenterNet |  15.09  14.03 |  15.09  14.03 |  15.09  14.03
+MonoFlex    | CenterNet |  18.08  11.49 |  18.11  11.07 |  16.28  10.11
+GUPNet      | CenterNet |  17.11  12.09 |  17.11  12.04 |  17.11  12.04
+DEVIANT     | CenterNet |  17.48  11.88 |  17.48  11.83 |  17.48  11.83
+MonoGround  | CenterNet |  19.38  12.01 |  19.42  11.87 |  17.47  10.68
+MonoCon     | CenterNet |  19.59  11.45 |  19.59  10.58 |  19.59  10.58
+MonoDETR    | query     |  21.18  11.46 |  21.18  11.42 |  21.18  11.42
+MonoDGP     | query     |  22.82  11.58 |  22.82   8.41 |  22.82   8.41
+MonoCoP     | query     |  24.34  11.69 |  24.34  11.58 |  24.34  11.58
+MonoCLUE    | query     |  24.55  11.39 |  24.55   9.73 |  24.55   9.73
+MonoIA      | query     |  25.18  11.80 |  25.18  11.64 |  25.18  11.64
+
+--------------------------------------------------------------------------------
+1. OLS OF GAP ON BASE AP + SPEARMAN
+--------------------------------------------------------------------------------
+GATE: reports_orig/spearman_gap_base_vB.txt L5-6 read
+      'CEIL* (AP*=M/n_gt) basis : spearman = -0.476  p = 0.1182'
+      'true-IoU re-sort (native): spearman = -0.629  p = 0.0283'
+      A panel that does not reproduce those is the wrong panel.
+
+[HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]
+  n                      = 12 ; base-AP span 11.51 -> 25.18 (= 13.67 AP)
+  OLS slope              = -0.0708 AP of gap per AP of base            (L2)
+  SE(slope), iid         =  0.0496                                     (L2)
+  95% CI on slope        = [-0.1812, +0.0396]   t_{.975,10} = 2.228       (L4)
+  two-sided p (slope)    =  0.1835                                     (L2)
+  Pearson r              = -0.4118                                     (L2)
+  residual SD (df=n-2)   =  0.6825 AP                                  (L3)
+  Spearman rho           = -0.4755   asymptotic p = 0.1182              (L13)
+  fitted total gap change over the span = -0.968 AP
+
+[_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]
+  n                      = 12 ; base-AP span 11.51 -> 25.18 (= 13.67 AP)
+  OLS slope              = -0.1677 AP of gap per AP of base            (L2)
+  SE(slope), iid         =  0.0890                                     (L2)
+  95% CI on slope        = [-0.3660, +0.0305]   t_{.975,10} = 2.228       (L4)
+  two-sided p (slope)    =  0.0888                                     (L2)
+  Pearson r              = -0.5120                                     (L2)
+  residual SD (df=n-2)   =  1.2251 AP                                  (L3)
+  Spearman rho           = -0.6294   asymptotic p = 0.0283              (L13)
+  fitted total gap change over the span = -2.293 AP
+
+[_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]
+  n                      = 12 ; base-AP span 11.51 -> 25.18 (= 13.67 AP)
+  OLS slope              = -0.1341 AP of gap per AP of base            (L2)
+  SE(slope), iid         =  0.0939                                     (L2)
+  95% CI on slope        = [-0.3432, +0.0751]   t_{.975,10} = 2.228       (L4)
+  two-sided p (slope)    =  0.1837                                     (L2)
+  Pearson r              = -0.4116                                     (L2)
+  residual SD (df=n-2)   =  1.3357 AP                                  (L3)
+  Spearman rho           = -0.4406   asymptotic p = 0.1517              (L13)
+  fitted total gap change over the span = -1.833 AP
+
+GATE RESULT
+  CEIL*        rho = -0.4755  p = 0.1182   -> frozen file says -0.476 / 0.1182  MATCH
+  true-IoU ship rho = -0.6294 p = 0.0283   -> frozen file says -0.629 / 0.0283  MATCH
+  true-IoU mkfg rho = -0.4406 p = 0.1517   -> matches NOTHING frozen; confirms the 2
+                                            stale cells. Do not quote this row.
+
+EXACT SPEARMAN p: exact enumeration of the permutation null at n=12 requires
+12! = 479,001,600 pairings and was NOT run. What follows is a Monte-Carlo estimate
+of that exact p (B=200,000 permuted pairings, seed 0), reported with its own
+binomial MC standard error so the reader can see the estimation error.
+  [HEADLINE-TREND  CEIL* (M/n_gt)      [gat] rho = -0.4755  p_MC = 0.12196 (MC SE 0.00073)   (L9)
+  [_NATIVE true-IoU, SHIPPED cells     [gat] rho = -0.6294  p_MC = 0.03231 (MC SE 0.00040)   (L9)
+  [_NATIVE true-IoU, make_figs.py as-is [2/] rho = -0.4406  p_MC = 0.15404 (MC SE 0.00081)   (L9)
+
+--------------------------------------------------------------------------------
+2. MINIMUM DETECTABLE EFFECT AT n=12
+--------------------------------------------------------------------------------
+Held fixed: n=12, the observed residual SD, the observed base-AP configuration.
+  MDES(sig) = t_{.975,10} * SE(slope)                              (L4 x L2)
+  MDES(80%) = the slope whose non-central-t power equals 0.80, by brentq (L5,L6)
+Both are also multiplied by the observed base-AP span, so the reader sees AP of
+gap-narrowing from the weakest to the strongest detector -- the unit the paper uses.
+
+[HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]
+  observed slope            = -0.0708 AP/AP  ->  -0.97 AP over the 13.67-AP span
+  observed power            =  0.253                                (L5)
+  MDES, bare significance   =  0.1104 AP/AP  ->   1.51 AP over the span (L4)
+  MDES, 80% power           =  0.1541 AP/AP  ->   2.11 AP over the span (L6)
+  MDES(80%) / |observed|    =  2.18 x  (design underpowered by this factor)
+
+[_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]
+  observed slope            = -0.1677 AP/AP  ->  -2.29 AP over the 13.67-AP span
+  observed power            =  0.399                                (L5)
+  MDES, bare significance   =  0.1982 AP/AP  ->   2.71 AP over the span (L4)
+  MDES, 80% power           =  0.2767 AP/AP  ->   3.78 AP over the span (L6)
+  MDES(80%) / |observed|    =  1.65 x  (design underpowered by this factor)
+
+[_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]
+  observed slope            = -0.1341 AP/AP  ->  -1.83 AP over the 13.67-AP span
+  observed power            =  0.253                                (L5)
+  MDES, bare significance   =  0.2092 AP/AP  ->   2.86 AP over the span (L4)
+  MDES, 80% power           =  0.2919 AP/AP  ->   3.99 AP over the span (L6)
+  MDES(80%) / |observed|    =  2.18 x  (design underpowered by this factor)
+
+HEADLINE SENTENCE (CEIL* basis, the one the paper headlines):
+  at n=12 this design resolves a gap narrowing of 2.11 AP end to end at 80% power
+  (1.51 AP at bare significance). The narrowing the fitted line actually shows is
+  0.97 AP. So the design is underpowered for its own observed effect by 2.2x, and
+  'no resolvable narrowing' is a statement about the design, not about nature.
+
+--------------------------------------------------------------------------------
+3. REQUIRED n TO RESOLVE THE OBSERVED EFFECT AT 80% POWER
+--------------------------------------------------------------------------------
+Three routes with different test statistics; they disagree by construction, so the
+honest report is the RANGE, not a single number.
+  A) Fisher-z on the observed Spearman rho                                (L7)
+  B) Fisher-z on the observed Pearson r                                   (L7)
+  C) non-central-t on the OLS slope, holding residual SD and sd(base) fixed (L8)
+
+[HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]  sd(base) = 4.153
+  A) Spearman rho -0.4755  ->  n =  33 detectors
+  B) Pearson  r   -0.4118  ->  n =  44 detectors
+  C) OLS slope    -0.0708  ->  n =  46 detectors
+  RANGE  n = 33 to 46   (we have 12; shortfall 21 to 34 detectors)
+
+[_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]  sd(base) = 4.152
+  A) Spearman rho -0.6294  ->  n =  18 detectors
+  B) Pearson  r   -0.5120  ->  n =  28 detectors
+  C) OLS slope    -0.1677  ->  n =  28 detectors
+  RANGE  n = 18 to 28   (we have 12; shortfall 6 to 16 detectors)
+
+[_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]  sd(base) = 4.290
+  A) Spearman rho -0.4406  ->  n =  39 detectors
+  B) Pearson  r   -0.4116  ->  n =  44 detectors
+  C) OLS slope    -0.1341  ->  n =  46 detectors
+  RANGE  n = 39 to 46   (we have 12; shortfall 27 to 34 detectors)
+
+ASSUMPTIONS THAT MUST BE STATED WITH THESE NUMBERS:
+  * Route C holds BOTH the residual SD and the base-AP spread at today's values.
+    New public checkpoints cluster at the TOP of the base-AP range, which shrinks
+    sd(base) and pushes the required n UP. These figures are therefore optimistic.
+  * The sampling unit is the DETECTOR. These are counts of additional published
+    checkpoints, not amounts of additional validation data. More val images would
+    not buy this; more detectors would.
+
+--------------------------------------------------------------------------------
+4. NON-INDEPENDENCE / LINEAGE CLUSTERING
+--------------------------------------------------------------------------------
+Family labels from supplementary tab:gates: anchor n=1 (M3D-RPN),
+CenterNet n=6, query n=5. The panel has THREE labelled families but only TWO
+non-singleton ones. That fact drives everything in this section.
+
+[HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]
+      family residual means:
+        anchor    n=1  mean residual = -0.779 AP
+        CenterNet n=6  mean residual = +0.144 AP
+        query     n=5  mean residual = -0.017 AP
+  (a) CLUSTER-ROBUST (CR0) SLOPE, G=3 CLUSTERS
+      slope -0.0708  cluster-SE 0.0659  t_{.975,df=2} = 4.303            (L10)
+      95% CI [-0.3545, +0.2129]   (iid CI was [-0.1812, +0.0396])
+      cluster-robust MDES at bare significance = 0.2837 AP/AP = 3.88 AP over span
+      dropping the singleton anchor family (G=2, n=11):
+        slope -0.1304  cluster-SE 0.0633  t_{.975,df=1} = 12.706
+        95% CI [-0.9343, +0.6735]  -> MDES 8.11 AP over the 10.09-AP span
+
+[_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]
+      family residual means:
+        anchor    n=1  mean residual = -1.017 AP
+        CenterNet n=6  mean residual = +0.262 AP
+        query     n=5  mean residual = -0.111 AP
+  (a) CLUSTER-ROBUST (CR0) SLOPE, G=3 CLUSTERS
+      slope -0.1677  cluster-SE 0.0841  t_{.975,df=2} = 4.303            (L10)
+      95% CI [-0.5297, +0.1942]   (iid CI was [-0.3660, +0.0305])
+      cluster-robust MDES at bare significance = 0.3619 AP/AP = 4.95 AP over span
+      dropping the singleton anchor family (G=2, n=11):
+        slope -0.2457  cluster-SE 0.0820  t_{.975,df=1} = 12.706
+        95% CI [-1.2874, +0.7960]  -> MDES 10.51 AP over the 10.09-AP span
+
+[_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]
+      family residual means:
+        anchor    n=1  mean residual = -0.520 AP
+        CenterNet n=6  mean residual = +0.104 AP
+        query     n=5  mean residual = -0.021 AP
+  (a) CLUSTER-ROBUST (CR0) SLOPE, G=3 CLUSTERS
+      slope -0.1341  cluster-SE 0.0498  t_{.975,df=2} = 4.303            (L10)
+      95% CI [-0.3482, +0.0801]   (iid CI was [-0.3432, +0.0751])
+      cluster-robust MDES at bare significance = 0.2142 AP/AP = 2.93 AP over span
+      dropping the singleton anchor family (G=2, n=11):
+        slope -0.1672  cluster-SE 0.0603  t_{.975,df=1} = 12.706
+        95% CI [-0.9332, +0.5989]  -> MDES 7.73 AP over the 10.09-AP span
+
+STATISTICS WE DECLINE TO COMPUTE AT THIS n, AND WHY
+  * CLUSTER BOOTSTRAP CI on the slope. NOT COMPUTED. Resampling G=3 clusters with
+    replacement puts 3/27 = 11.1% of draws on a single repeated cluster, and any
+    draw that omits both non-singleton families cannot identify a slope at all.
+    The cluster bootstrap has no valid coverage at G=3. CR0 with t(G-1) is reported
+    in its place -- and CR0 is itself known to be anticonservative at G=3.
+  * FAMILY-MEAN REGRESSION. NOT FITTED. Collapsing to family means leaves n=3
+    points, df=1, one of them a single detector. The three means are printed above
+    as description only; no line is fitted to them and no p-value is reported.
+  * A p-VALUE FROM THE CR0 FIT. NOT REPORTED. With df = G-1 = 2 (or 1) the t
+    critical value is 4.303 (or 12.706) and any resulting 'p' would be theatre.
+    We report the interval and the MDES instead.
+
+--------------------------------------------------------------------------------
+5. LEAVE-ONE-OUT SPEARMAN -- IS THE -0.63 'INFLATED BY MonoDGP'?
+--------------------------------------------------------------------------------
+The claim under test appears in spearman_gap_base_vB.txt L6 and in the paper (Sec. 5):
+the true-IoU value -0.63 is 'inflated by MonoDGP +8.41 duplicate'.
+Leave-one-out tests the LEVERAGE reading of that claim: if MonoDGP is the single
+point driving the correlation, deleting it should move rho toward zero more than
+deleting any other detector.
+
+[HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]   full-12 rho = -0.4755
+  dropped        rho_-i     p_-i     d_rho  |d| rank
+  M3D-RPN       -0.6000   0.0510   -0.1245         2
+  MonoDLE       -0.3727   0.2589   +0.1028         3
+  MonoFlex      -0.5091   0.1097   -0.0336         9
+  GUPNet        -0.3727   0.2589   +0.1028         4
+  DEVIANT       -0.3909   0.2345   +0.0846         7
+  MonoGround    -0.4364   0.1797   +0.0392         8
+  MonoCon       -0.4636   0.1509   +0.0119        11
+  MonoDETR      -0.4636   0.1509   +0.0119        12
+  MonoDGP       -0.4909   0.1252   -0.0154        10
+  MonoCoP       -0.5636   0.0710   -0.0881         6
+  MonoCLUE      -0.3818   0.2466   +0.0937         5
+  MonoIA        -0.6182   0.0426   -0.1427         1
+  rho_-i range over the 12 deletions = [-0.6182, -0.3727]
+  highest-leverage detector = MonoIA  (rho -0.4755 -> -0.6182, d = -0.1427)
+  MonoDGP: rank 10 of 12 by |d_rho|; dropping it gives rho = -0.4909 (p = 0.1252),
+           a change of -0.0154
+
+[_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]   full-12 rho = -0.6294
+  dropped        rho_-i     p_-i     d_rho  |d| rank
+  M3D-RPN       -0.6182   0.0426   +0.0112         9
+  MonoDLE       -0.5545   0.0767   +0.0748         2
+  MonoFlex      -0.6818   0.0208   -0.0524         5
+  GUPNet        -0.5545   0.0767   +0.0748         3
+  DEVIANT       -0.5727   0.0655   +0.0566         4
+  MonoGround    -0.6182   0.0426   +0.0112        10
+  MonoCon       -0.6273   0.0388   +0.0021        11
+  MonoDETR      -0.6455   0.0320   -0.0161         8
+  MonoDGP       -0.6273   0.0388   +0.0021        12
+  MonoCoP       -0.6818   0.0208   -0.0524         6
+  MonoCLUE      -0.5909   0.0556   +0.0385         7
+  MonoIA        -0.7182   0.0128   -0.0888         1
+  rho_-i range over the 12 deletions = [-0.7182, -0.5545]
+  highest-leverage detector = MonoIA  (rho -0.6294 -> -0.7182, d = -0.0888)
+  MonoDGP: rank 12 of 12 by |d_rho|; dropping it gives rho = -0.6273 (p = 0.0388),
+           a change of +0.0021
+
+[_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]   full-12 rho = -0.4406
+  dropped        rho_-i     p_-i     d_rho  |d| rank
+  M3D-RPN       -0.3545   0.2847   +0.0860         4
+  MonoDLE       -0.3000   0.3701   +0.1406         1
+  MonoFlex      -0.5727   0.0655   -0.1322         2
+  GUPNet        -0.3727   0.2589   +0.0678         7
+  DEVIANT       -0.4182   0.2006   +0.0224        11
+  MonoGround    -0.4909   0.1252   -0.0503         8
+  MonoCon       -0.4455   0.1697   -0.0049        12
+  MonoDETR      -0.4636   0.1509   -0.0231        10
+  MonoDGP       -0.4000   0.2229   +0.0406         9
+  MonoCoP       -0.5091   0.1097   -0.0685         6
+  MonoCLUE      -0.3545   0.2847   +0.0860         5
+  MonoIA        -0.5545   0.0767   -0.1140         3
+  rho_-i range over the 12 deletions = [-0.5727, -0.3000]
+  highest-leverage detector = MonoDLE  (rho -0.4406 -> -0.3000, d = +0.1406)
+  MonoDGP: rank 9 of 12 by |d_rho|; dropping it gives rho = -0.4000 (p = 0.2229),
+           a change of +0.0406
+
+VERDICT ON THE LEVERAGE READING: REFUTED on the shipped true-IoU panel.
+  Deleting MonoDGP moves rho by only +0.0021 (from -0.6294 to -0.6273) and ranks 12 of 12
+  -- the SMALLEST leverage of any detector in the panel. The -0.63 is not carried by
+  MonoDGP as an influential point; every single deletion leaves rho in
+  [-0.7182, -0.5545], and 8 of the 12 deletions leave p < 0.05.
+
+BUT THE BASIS READING OF THE SAME CLAIM IS SUPPORTED, and it is a DIFFERENT test.
+  The paper's claim is about MonoDGP's true-IoU gap VALUE (+8.41) being deflated by
+  duplicate promotion, not about deleting the detector. exp1_true_ceiling.txt column
+  'ceil-trueIoU' measures exactly that understatement per detector:
+      M3D-RPN     -0.00 AP
+      MonoDLE     -0.00 AP
+      MonoFlex    +0.16 AP
+      GUPNet      +0.05 AP
+      DEVIANT     +0.05 AP
+      MonoGround  +0.01 AP
+      MonoCon     +0.87 AP
+      MonoDETR    +0.04 AP
+      MonoDGP     +3.18 AP
+      MonoCoP     +0.10 AP
+      MonoCLUE    +1.66 AP
+      MonoIA      +0.16 AP
+  MonoDGP's +3.18 AP is the largest in the panel by 1.9x (next: MonoCLUE +1.66).
+  Direct test -- substitute ONLY MonoDGP's true-IoU gap by its CEIL* gap and
+  recompute rho on the otherwise-unchanged shipped true-IoU panel:
+      MonoDGP gap 8.41 -> 11.58  =>  rho -0.6294 -> -0.5990 (p 0.0283 -> 0.0396)
+  So the gap between the -0.63 (true-IoU) and the -0.48 (CEIL*) headline IS driven
+  by MonoDGP's basis-specific value, while the -0.63 itself is NOT driven by
+  MonoDGP as a deletable leverage point. Both statements are true and they are not
+  in conflict; the paper's wording ('inflated by MonoDGP') means the first.
+
+--------------------------------------------------------------------------------
+6. IS THE RESIDUAL SCATTER JUST EVALUATION NOISE?
+--------------------------------------------------------------------------------
+Only frozen variance figure available without re-running a bootstrap:
+  reports/final_run/e3_endpoint_gap_boot.txt L8
+  'M3D-RPN->MonoIA  point dGap=+0.046 CI[-1.888,+1.816]' (paired drive resample, B=1000)
+  CI half-width                        = 1.852 AP
+  implied SD of the paired contrast    = 0.945 AP  (half-width / 1.96)
+  implied per-detector eval-noise SD  <= 0.668 AP  (contrast SD / sqrt 2)
+
+  [HEADLINE-TREND  CEIL* (M/n_gt)      [gate -0.476]]
+     OLS residual SD = 0.683 AP  ->  residual / noise-floor = 1.02 x
+  [_NATIVE true-IoU, SHIPPED cells     [gate -0.629]]
+     OLS residual SD = 1.225 AP  ->  residual / noise-floor = 1.83 x
+  [_NATIVE true-IoU, make_figs.py as-is [2/12 STALE]]
+     OLS residual SD = 1.336 AP  ->  residual / noise-floor = 2.00 x
+
+READ, stated per basis rather than as one claim:
+  * On the CEIL* basis the residual SD (0.683 AP) is at the drive-resampling noise
+    floor (0.668 AP), ratio 1.02. On that basis there is no resolvable EXCESS
+    between-detector heterogeneity: the only lever on resolution is more detectors.
+  * On the true-IoU basis the residual SD is 1.225 AP, 1.83 x the noise floor. That
+    basis carries real extra scatter, and section 5 identifies its largest source:
+    the per-detector true-IoU understatement (MonoDGP +3.18, MonoCLUE +1.66,
+    MonoCon +0.87 AP), which the CEIL* basis removes by construction.
+  * We therefore do NOT claim the panel scatter is 'all noise'. We claim it on the
+    CEIL* basis only, which is the basis the paper headlines.
+CAVEATS: the per-detector figure is an UPPER bound inferred from ONE frozen paired
+  CI, not from a per-detector bootstrap; the paired common-drive resample removes
+  shared drive variance (making the bound conservative) and the sqrt(2) step assumes
+  the two arms' residual noise is independent. NO bootstrap was re-run for this
+  script. A per-detector drive-clustered bootstrap of the gap would be the correct
+  upgrade and was NOT performed here.
+
+================================================================================
+END
+================================================================================

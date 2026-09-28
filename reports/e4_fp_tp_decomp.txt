@@ -1,0 +1,24 @@
+# e4_fp_tp_decomp run 2026-06-12T23:43:40
+# prereg: reports/e4_prereg.md (definitions frozen before run); native pools;
+# labels frozen from baseline V order (arc matcher, any-difficulty Car GTs, IoU3D>=0.7)
+
+[done] M3D-RPN    GA=PASS GB=PASS | base= 11.51(11.07) FPdem=+11.68 TPreord=+-0.33 full=+11.68 (ref +11.60) | TPshare=0.166
+[done] MonoDLE    GA=PASS GB=PASS | base= 15.09(14.63) FPdem=+14.06 TPreord=+-1.34 full=+14.03 (ref +14.03) | TPshare=0.221
+[done] MonoFlex   GA=PASS GB=FAIL | base= 16.26(15.60) FPdem=+10.65 TPreord=+-2.13 full=+10.46 (ref +10.28) | TPshare=0.230
+[done] GUPNet     GA=PASS GB=PASS | base= 17.11(16.46) FPdem=+12.09 TPreord=+-0.92 full=+12.04 (ref +12.04) | TPshare=0.280
+[done] DEVIANT    GA=PASS GB=PASS | base= 17.48(16.71) FPdem=+11.88 TPreord=+-1.23 full=+11.83 (ref +11.83) | TPshare=0.277
+[done] MonoGround GA=PASS GB=PASS | base= 17.45(16.88) FPdem=+10.92 TPreord=+-1.60 full=+10.89 (ref +10.80) | TPshare=0.254
+[done] MonoCon    GA=PASS GB=FAIL | base= 19.59(19.01) FPdem=+11.45 TPreord=+-1.37 full=+10.58 (ref +11.36) | TPshare=0.256
+[done] MonoDETR   GA=PASS GB=PASS | base= 21.18(20.91) FPdem=+11.54 TPreord=+-1.16 full=+11.42 (ref +11.42) | TPshare=0.263
+[done] MonoDGP    GA=PASS GB=PASS | base= 22.82(22.02) FPdem=+11.59 TPreord=+-1.33 full=+ 8.41 (ref +8.41) | TPshare=0.249
+[done] MonoCoP    GA=PASS GB=PASS | base= 24.34(23.84) FPdem=+11.72 TPreord=+-1.07 full=+11.58 (ref +11.58) | TPshare=0.266
+[done] MonoCLUE   GA=PASS GB=PASS | base= 24.55(24.03) FPdem=+11.45 TPreord=+-1.27 full=+ 9.73 (ref +9.73) | TPshare=0.262
+[done] MonoIA     GA=PASS GB=PASS | base= 25.18(24.41) FPdem=+11.81 TPreord=+-1.46 full=+11.64 (ref +11.64) | TPshare=0.247
+
+== family medians (all-point gaps) ==
+anchor n=1  FPdem=+11.68  TPreord=-0.33  full=+11.68
+cnet   n=6  FPdem=+11.67  TPreord=-1.36  full=+11.36
+query  n=5  FPdem=+11.59  TPreord=-1.27  full=+11.42
+
+READ: no additivity assumed; interpretation rules fixed in e4_prereg.md. GA/GB gate
+failures void interpretation for that model (disclosed, not absorbed).

@@ -1,0 +1,52 @@
+==============================================================================================================
+DETECTOR-PROGRESSION DIAGNOSTIC PROBE  (val dumps only, no retraining)
+S5 kept pool = cls>=0.2 + greedy 2D-NMS@0.5 by native V; arc IoU3D matcher (identical for all 7)
+==============================================================================================================
+[done] MonoFlex* ap=17.38 n_kept= 16109 n_tp=11118 rec=0.256 |dz|=0.785 frac>=0.7=0.202 rho=0.651
+[done] MonoGround* ap=18.73 n_kept= 15809 n_tp=11041 rec=0.273 |dz|=0.756 frac>=0.7=0.210 rho=0.657
+
+##############################################################################################################
+MAIN TABLE  (rows ordered by base AP, weak -> strong)
+##############################################################################################################
+detector  baseAP n_kept  n_TP recall   |dz|   |dx| dimErr yawErr fIoU>=.7 fIoU.05-.7 rho(V,IoU) rho_TP  dup%
+------------------------------------------------------------------------------------------------------------
+MonoFlex*  17.38  16109 11118  0.256  0.785  0.197  0.452   4.24    0.202      0.488      0.651  0.485   6.8
+MonoGround*  18.73  15809 11041  0.273  0.756  0.198  0.455   4.37    0.210      0.489      0.657  0.502   6.4
+
+GT RECALL (TP@IoU0.7) BY DISTANCE BIN  (moderate Car GTs)
+detector  baseAP |    0-15   15-30   30-45     45+     ALL
+----------------------------------------------------------------------
+MonoFlex*  17.38 |   0.570   0.297   0.105   0.035   0.256
+MonoGround*  18.73 |   0.588   0.318   0.119   0.048   0.273
+(moderate GT counts per bin, last row): 0-15=2112 15-30=3178 30-45=2511 45+=1867
+
+DEPTH ERROR mean|dz| (m) ON MATCHED TP, BY DISTANCE BIN
+detector  baseAP |    0-15   15-30   30-45     45+     ALL
+----------------------------------------------------------------------
+MonoFlex*  17.38 |   0.353   0.724   1.220   1.491   0.785
+MonoGround*  18.73 |   0.354   0.688   1.139   1.496   0.756
+
+##############################################################################################################
+MONOTONICITY vs base AP (Spearman across the 7 detectors; +1=rises with AP, -1=falls)
+##############################################################################################################
+metric                  spearman_vs_AP           dir   values weak->strong
+----------------------------------------------------------------------------------------------------
+GT recall                          nan higher=better   0.256 0.273
+recall 0-15                        nan higher=better   0.570 0.588
+recall 15-30                       nan higher=better   0.297 0.318
+recall 30-45                       nan higher=better   0.105 0.119
+recall 45+                         nan higher=better   0.035 0.048
+frac IoU>=0.7 (kept)               nan higher=better   0.202 0.210
+frac IoU0.7 of TP                  nan higher=better   0.293 0.300
+rho(V,IoU) rank                    nan higher=better   0.651 0.657
+mean|dz| depth                     nan  LOWER=better   0.785 0.756
+|dz| 0-15                          nan  LOWER=better   0.353 0.354
+|dz| 15-30                         nan  LOWER=better   0.724 0.688
+|dz| 30-45                         nan  LOWER=better   1.220 1.139
+|dz| 45+                           nan  LOWER=better   1.491 1.496
+|dx| lateral                       nan  LOWER=better   0.197 0.198
+dim err                            nan  LOWER=better   0.452 0.455
+yaw err                            nan  LOWER=better   4.235 4.373
+dup% (pre-NMS)                     nan             ?   0.068 0.064
+
+READ: |spearman|>=0.85 = (near-)monotone with AP. near 0 or wrong sign = FLAT/non-monotone.

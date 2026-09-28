@@ -1,0 +1,238 @@
+# public copy of the camera-ready check budget_matched.txt, sha256 7907288ba095ed2c6e699ac701f26a3f71dc1797337382c47ee9f20fbcb6ad05, scrubbed: review-process labels removed from two headings (source lines 2, 44), paths made repo-relative (source lines 4, 6, 27, 223, 238); every kept number verbatim
+# Omitted from this copy: the P2 N=5 rank coefficient between pool size and recall* (source line 99) and the parenthetical that repeats it with the N=10 and N=20 values (source lines 232-233; those two stay in their own cells); the re-run prints them.
+====================================================================================================
+BUDGET-MATCHED COVERAGE-vs-ORDERING SPLIT
+====================================================================================================
+script  : tools/extensions/budget_matched.py (kernels copied verbatim from
+          tools/decomp/exp1_true_ceiling.py); this file written by budget_matched_finalize.py
+inputs  : _bm_runA.txt, _bm_runB.txt  (two INDEPENDENT processes)
+metric  : Car Moderate, IoU3D 0.7, all-point interpolated AP, 3769 KITTI val images,
+          7874 valid Moderate GTs (asserted per cell)
+
+DEFINITIONS
+  base           = all-point AP of the pool ranked by the detector's native score V
+  AP*            = 100*M/n_gt, M = maximum bipartite matching of pool predictions to valid
+                   Moderate GTs at IoU3D>=0.7 (exact max-over-labelings ceiling)
+  missing AP     = 100 - base
+  ordering share = (AP* - base)/(100 - base)     coverage share = (100 - AP*)/(100 - base)
+  P1 = complete pre-selection pool -> top-N by V           (budget matched only)
+  P2 = complete pool -> uniform 2D-NMS@0.5 -> top-N by V   (protocol AND budget matched)
+
+----------------------------------------------------------------------------------------------------
+GATE 1 -- REPRODUCIBILITY: run A vs run B, independent processes, all cells
+cells compared: 72   disagreements (>0.011): 0
+verdict: PASS -- both runs identical
+
+----------------------------------------------------------------------------------------------------
+GATE 2 -- PORT CORRECTNESS: native_pool() reproduces the frozen exp1_true_ceiling cells
+(reports/exp1_true_ceiling.txt; MonoFlex*/MonoGround* from
+ reports_orig/exp1_true_ceiling_orig.txt)
+detector        base  frozen  recall*  frozen  A / B
+M3D-RPN        11.51   11.51    0.232   0.232  PASS / PASS
+MonoDLE        15.09   15.09    0.291   0.291  PASS / PASS
+MonoFlex*      18.08   18.08    0.296   0.296  PASS / PASS
+GUPNet         17.11   17.11    0.292   0.292  PASS / PASS
+DEVIANT        17.48   17.48    0.294   0.294  PASS / PASS
+MonoGround*    19.38   19.38    0.314   0.314  PASS / PASS
+MonoCon        19.59   19.59    0.310   0.310  PASS / PASS
+MonoDETR       21.18   21.18    0.326   0.326  PASS / PASS
+MonoDGP        22.82   22.82    0.344   0.344  PASS / PASS
+MonoCoP        24.34   24.34    0.360   0.360  PASS / PASS
+MonoCLUE       24.55   24.55    0.359   0.359  PASS / PASS
+MonoIA         25.18   25.18    0.370   0.370  PASS / PASS
+verdict: 12/12 PASS in run A, 12/12 PASS in run B
+
+----------------------------------------------------------------------------------------------------
+COMPLETE PRE-SELECTION POOL SIZES, candidates/image
+detector       complete  after uniform NMS@0.5
+M3D-RPN          483.33                  19.58
+MonoDLE           50.00                  34.49
+MonoFlex*         28.11                  21.26
+GUPNet            30.31                  23.40
+DEVIANT           34.11                  24.73
+MonoGround*       27.74                  20.59
+MonoCon           23.37                  16.86
+MonoDETR          50.00                  29.91
+MonoDGP           50.00                  24.30
+MonoCoP           50.00                  31.07
+MonoCLUE          50.00                  25.57
+MonoIA            50.00                  31.93
+note: M3D-RPN's floor-0 pool is pre-capped at the top-500/image by V before NMS, so its
+      'complete' figure is a top-500 cap of a ~2138/image pool and its post-NMS figure is a
+      LOWER bound on the distinct candidates its full 3000-deep pool would yield.
+
+----------------------------------------------------------------------------------------------------
+NATIVE REFERENCE (unequal budgets) -- the split as the paper computes it
+detector        base     AP*  recall*  order_AP  order_sh  cover_sh
+M3D-RPN        11.51   23.19    0.232    +11.68    0.1320    0.8680
+MonoDLE        15.09   29.12    0.291    +14.03    0.1652    0.8348
+MonoFlex*      18.08   29.57    0.296    +11.49    0.1403    0.8597
+GUPNet         17.11   29.20    0.292    +12.09    0.1459    0.8541
+DEVIANT        17.48   29.36    0.294    +11.88    0.1440    0.8560
+MonoGround*    19.38   31.39    0.314    +12.01    0.1490    0.8510
+MonoCon        19.59   31.04    0.310    +11.45    0.1424    0.8576
+MonoDETR       21.18   32.64    0.326    +11.46    0.1454    0.8546
+MonoDGP        22.82   34.40    0.344    +11.58    0.1500    0.8500
+MonoCoP        24.34   36.03    0.360    +11.69    0.1545    0.8455
+MonoCLUE       24.55   35.94    0.359    +11.39    0.1510    0.8490
+MonoIA         25.18   36.98    0.370    +11.80    0.1577    0.8423
+band   : ordering share 0.132-0.165 | coverage share 0.835-0.868 | coverage miss (1-recall*) 0.630-0.768
+medians: ordering share 0.147 | coverage share 0.853
+coverage share > ordering share: 12/12
+
+====================================================================================================
+PROTOCOL P2  N=5   MATCHED PROTOCOL + MATCHED BUDGET
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN          4.60   11.42   22.83   0.2283    +11.41    0.1288    0.8712    +0.0032
+MonoDLE          5.00   15.02   28.65   0.2865    +13.63    0.1604    0.8396    +0.0048
+MonoFlex*        4.99   17.95   29.07   0.2907    +11.12    0.1355    0.8645    +0.0048
+GUPNet           4.99   17.10   29.10   0.2910    +12.00    0.1447    0.8553    +0.0012
+DEVIANT          4.98   17.39   29.02   0.2902    +11.63    0.1407    0.8593    +0.0033
+MonoGround*      4.99   19.30   30.96   0.3096    +11.66    0.1446    0.8554    +0.0044
+MonoCon          4.97   19.49   30.51   0.3051    +11.02    0.1368    0.8632    +0.0056
+MonoDETR         5.00   21.18   32.41   0.3241    +11.23    0.1425    0.8575    +0.0029
+MonoDGP          5.00   22.81   33.74   0.3374    +10.93    0.1417    0.8583    +0.0083
+MonoCoP          5.00   24.15   35.28   0.3528    +11.13    0.1468    0.8532    +0.0077
+MonoCLUE         5.00   24.47   35.29   0.3529    +10.82    0.1433    0.8567    +0.0077
+MonoIA           5.00   25.00   36.27   0.3627    +11.27    0.1502    0.8498    +0.0075
+band   : ordering gap +10.82..+13.63 AP | ordering share 0.129-0.160 | coverage share 0.840-0.871 | coverage miss 0.637-0.772
+medians: ordering gap +11.25 AP | ordering share 0.143 | coverage share 0.857
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.09x
+spearman(native recall*, matched recall*)        = +0.972 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+PROTOCOL P2  N=10   MATCHED PROTOCOL + MATCHED BUDGET
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN          7.47   11.51   23.20   0.2320    +11.69    0.1321    0.8679    -0.0001
+MonoDLE         10.00   15.14   29.24   0.2924    +14.10    0.1661    0.8339    -0.0009
+MonoFlex*        9.93   18.12   29.71   0.2971    +11.59    0.1415    0.8585    -0.0012
+GUPNet           9.91   17.24   29.69   0.2969    +12.45    0.1505    0.8495    -0.0046
+DEVIANT          9.89   17.58   29.74   0.2974    +12.16    0.1475    0.8525    -0.0035
+MonoGround*      9.87   19.43   31.56   0.3156    +12.13    0.1505    0.8495    -0.0015
+MonoCon          9.85   19.63   31.08   0.3108    +11.45    0.1425    0.8575    -0.0001
+MonoDETR        10.00   21.27   32.92   0.3292    +11.65    0.1480    0.8520    -0.0026
+MonoDGP         10.00   22.93   34.26   0.3426    +11.33    0.1470    0.8530    +0.0030
+MonoCoP         10.00   24.36   36.06   0.3606    +11.70    0.1546    0.8454    -0.0001
+MonoCLUE        10.00   24.64   35.90   0.3590    +11.26    0.1495    0.8505    +0.0015
+MonoIA          10.00   25.21   37.02   0.3702    +11.81    0.1579    0.8421    -0.0002
+band   : ordering gap +11.26..+14.10 AP | ordering share 0.132-0.166 | coverage share 0.834-0.868 | coverage miss 0.630-0.768
+medians: ordering gap +11.70 AP | ordering share 0.149 | coverage share 0.851
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.34x
+spearman(pool/img in this matched cell, recall*) = +0.597 p=0.040 (n=12 non-independent; descriptive)
+spearman(native recall*, matched recall*)        = +0.993 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+PROTOCOL P2  N=20   MATCHED PROTOCOL + MATCHED BUDGET
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN         11.52   11.51   23.20   0.2320    +11.69    0.1321    0.8679    -0.0001
+MonoDLE         20.00   15.14   29.24   0.2924    +14.10    0.1661    0.8339    -0.0009
+MonoFlex*       18.85   18.12   29.72   0.2972    +11.60    0.1417    0.8583    -0.0014
+GUPNet          19.15   17.24   29.69   0.2969    +12.45    0.1505    0.8495    -0.0046
+DEVIANT         19.30   17.58   29.74   0.2974    +12.16    0.1476    0.8524    -0.0036
+MonoGround*     18.31   19.43   31.57   0.3157    +12.14    0.1507    0.8493    -0.0017
+MonoCon         16.66   19.63   31.09   0.3109    +11.46    0.1426    0.8574    -0.0002
+MonoDETR        20.00   21.27   32.92   0.3292    +11.65    0.1480    0.8520    -0.0026
+MonoDGP         19.91   22.93   34.26   0.3426    +11.33    0.1470    0.8530    +0.0030
+MonoCoP         19.99   24.36   36.06   0.3606    +11.70    0.1546    0.8454    -0.0001
+MonoCLUE        19.95   24.64   35.90   0.3590    +11.26    0.1495    0.8505    +0.0015
+MonoIA          20.00   25.21   37.03   0.3703    +11.82    0.1580    0.8420    -0.0003
+band   : ordering gap +11.26..+14.10 AP | ordering share 0.132-0.166 | coverage share 0.834-0.868 | coverage miss 0.630-0.768
+medians: ordering gap +11.70 AP | ordering share 0.149 | coverage share 0.851
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.74x
+spearman(pool/img in this matched cell, recall*) = +0.507 p=0.092 (n=12 non-independent; descriptive)
+spearman(native recall*, matched recall*)        = +0.993 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+PROTOCOL P1  N=5   MATCHED BUDGET ONLY (no NMS, no threshold)
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN          4.96    2.93   17.01   0.1701    +14.08    0.1450    0.8550    -0.0130
+MonoDLE          5.00   14.98   28.58   0.2858    +13.60    0.1599    0.8401    +0.0053
+MonoFlex*        5.00   17.95   29.08   0.2908    +11.13    0.1357    0.8643    +0.0046
+GUPNet           4.99   17.08   29.06   0.2906    +11.98    0.1445    0.8555    +0.0014
+DEVIANT          4.98   17.37   28.99   0.2899    +11.62    0.1407    0.8593    +0.0033
+MonoGround*      4.99   19.28   30.94   0.3094    +11.66    0.1444    0.8556    +0.0046
+MonoCon          4.97   19.49   30.62   0.3062    +11.13    0.1382    0.8618    +0.0042
+MonoDETR         5.00   21.25   32.75   0.3275    +11.50    0.1460    0.8540    -0.0006
+MonoDGP          5.00   22.95   34.91   0.3491    +11.96    0.1553    0.8447    -0.0053
+MonoCoP          5.00   24.47   36.66   0.3666    +12.19    0.1615    0.8385    -0.0070
+MonoCLUE         5.00   24.66   36.44   0.3644    +11.78    0.1563    0.8437    -0.0053
+MonoIA           5.00   25.20   37.19   0.3719    +11.99    0.1603    0.8397    -0.0026
+band   : ordering gap +11.13..+14.08 AP | ordering share 0.136-0.162 | coverage share 0.839-0.864 | coverage miss 0.628-0.830
+medians: ordering gap +11.87 AP | ordering share 0.145 | coverage share 0.855
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.01x
+spearman(pool/img in this matched cell, recall*) = +0.606 p=0.037 (n=12 non-independent; descriptive)
+spearman(native recall*, matched recall*)        = +0.993 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+PROTOCOL P1  N=10   MATCHED BUDGET ONLY (no NMS, no threshold)
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN          9.92    2.43   20.14   0.2014    +17.71    0.1815    0.8185    -0.0495
+MonoDLE         10.00   15.11   29.26   0.2926    +14.15    0.1667    0.8333    -0.0015
+MonoFlex*        9.95   18.11   29.73   0.2973    +11.62    0.1419    0.8581    -0.0016
+GUPNet           9.93   17.23   29.74   0.2974    +12.51    0.1512    0.8488    -0.0053
+DEVIANT          9.90   17.59   29.85   0.2985    +12.26    0.1488    0.8512    -0.0048
+MonoGround*      9.93   19.42   31.56   0.3156    +12.14    0.1507    0.8493    -0.0017
+MonoCon          9.87   19.67   31.46   0.3146    +11.79    0.1467    0.8533    -0.0043
+MonoDETR        10.00   21.43   34.07   0.3407    +12.64    0.1609    0.8391    -0.0155
+MonoDGP         10.00   23.38   37.77   0.3777    +14.39    0.1878    0.8122    -0.0378
+MonoCoP         10.00   24.95   39.87   0.3987    +14.92    0.1988    0.8012    -0.0443
+MonoCLUE        10.00   25.18   39.64   0.3964    +14.46    0.1932    0.8068    -0.0422
+MonoIA          10.00   25.53   39.34   0.3934    +13.81    0.1855    0.8145    -0.0278
+band   : ordering gap +11.62..+17.71 AP | ordering share 0.142-0.199 | coverage share 0.801-0.858 | coverage miss 0.601-0.799
+medians: ordering gap +13.23 AP | ordering share 0.164 | coverage share 0.836
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.01x
+spearman(pool/img in this matched cell, recall*) = +0.550 p=0.064 (n=12 non-independent; descriptive)
+spearman(native recall*, matched recall*)        = +0.958 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+PROTOCOL P1  N=20   MATCHED BUDGET ONLY (no NMS, no threshold)
+detector     pool/img    base     AP*  recall*  order_AP  order_sh  cover_sh d_cover_sh
+M3D-RPN         19.80    2.30   24.31   0.2431    +22.01    0.2252    0.7748    -0.0932
+MonoDLE         20.00   15.11   29.27   0.2927    +14.16    0.1668    0.8332    -0.0016
+MonoFlex*       19.56   18.11   29.74   0.2974    +11.63    0.1420    0.8580    -0.0017
+GUPNet          19.51   17.23   29.74   0.2974    +12.51    0.1512    0.8488    -0.0053
+DEVIANT         19.52   17.59   29.86   0.2986    +12.27    0.1489    0.8511    -0.0049
+MonoGround*     19.30   19.42   31.60   0.3160    +12.18    0.1511    0.8489    -0.0021
+MonoCon         19.20   19.67   31.50   0.3150    +11.83    0.1472    0.8528    -0.0048
+MonoDETR        20.00   21.49   35.12   0.3512    +13.63    0.1735    0.8265    -0.0281
+MonoDGP         20.00   23.59   40.63   0.4063    +17.04    0.2230    0.7770    -0.0730
+MonoCoP         20.00   25.21   43.61   0.4361    +18.40    0.2461    0.7539    -0.0916
+MonoCLUE        20.00   25.37   42.33   0.4233    +16.96    0.2273    0.7727    -0.0763
+MonoIA          20.00   25.71   41.69   0.4169    +15.98    0.2152    0.7848    -0.0575
+band   : ordering gap +11.63..+22.01 AP | ordering share 0.142-0.246 | coverage share 0.754-0.858 | coverage miss 0.564-0.757
+medians: ordering gap +13.89 AP | ordering share 0.170 | coverage share 0.830
+coverage share > ordering share: 12/12   pool-size spread within this cell: 1.04x
+spearman(pool/img in this matched cell, recall*) = +0.456 p=0.136 (n=12 non-independent; descriptive)
+spearman(native recall*, matched recall*)        = +0.967 p=0.000 (does budget matching reshuffle the panel?)
+
+====================================================================================================
+VERDICT
+====================================================================================================
+P2 N= 5: coverage share 0.840-0.871 (median 0.857); coverage>ordering 12/12
+P2 N=10: coverage share 0.834-0.868 (median 0.851); coverage>ordering 12/12
+P2 N=20: coverage share 0.834-0.868 (median 0.851); coverage>ordering 12/12
+P1 N= 5: coverage share 0.839-0.864 (median 0.855); coverage>ordering 12/12
+P1 N=10: coverage share 0.801-0.858 (median 0.836); coverage>ordering 12/12
+P1 N=20: coverage share 0.754-0.858 (median 0.830); coverage>ordering 12/12
+NATIVE  : coverage share 0.835-0.868 (median 0.853); coverage>ordering 12/12
+
+max |coverage share - native coverage share| over all 72 cells : 0.0932  (M3D-RPN, P1 N=20)
+max |coverage share - native coverage share| over the P2 cells  : 0.0083
+
+BUDGET SPREAD vs COVERAGE SPREAD (the decisive comparison)
+  complete pre-selection budget across the panel   : 23.4-2138.3 cand/img = 91x
+     (reports/extensions/pool_census.txt; measured)
+  budget spread inside the P2 N=5 matched cell     : 4.60-5.00 preds/img = 1.09x
+  recall* spread, NATIVE (unequal budgets)         : 0.232-0.370 = 1.59x
+  recall* spread, P2 N=5 (budget spread only 1.09x): 0.228-0.363 = 1.59x
+  -> equalising the budget from 91x to 1.09x leaves the cross-detector coverage spread
+     essentially unchanged, so the coverage differences are not a budget effect.
+
+HONEST RESIDUAL
+  Inside a matched cell, pool size and recall* are still positively rank-associated
+  At N=5 the budget spread is only 1.09x, so this
+  cannot be a budget effect; it reflects that stronger detectors emit more distinct
+  post-NMS boxes AND localise better. It is an association, not a cause, either way.
+  Budgets can only be matched DOWNWARD: query models are architecturally capped at 50
+  queries and five CenterNet dumps hold >=50 Car candidates on 0.000 of images
+  (reports/extensions/budget_saturation.txt), so N=20 is the largest common budget.

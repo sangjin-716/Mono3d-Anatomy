@@ -1,0 +1,15 @@
+========================================================================================
+PAIRED PER-BIN |dz| (m): SAME common objects, per distance bin  [STRONG evidence]
+common set = 4771 moderate Car GTs found by all 4 (best 3D-IoU>=0.3), S5 pool
+========================================================================================
+detector       AP |     0-15    15-30    30-45      45+      ALL
+----------------------------------------------------------------
+GUPNet       16.5 |    0.231    0.419    0.599    0.756    0.343
+MonoDETR     21.0 |    0.206    0.396    0.543    0.745    0.312
+MonoDGP      22.3 |    0.184    0.407    0.615    0.905    0.307
+MonoCoP      23.9 |    0.180    0.380    0.559    0.730    0.294
+(n per bin: 0-15=1885 15-30=2102 30-45=737 45+=47)
+
+READ: same objects for every detector -> any |dz| decrease is REAL depth tightening,
+not easier-matched-set. This is the strong-evidence (matched-objects, distance-binned)
+category most method papers do not report.

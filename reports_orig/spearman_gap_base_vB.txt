@@ -1,0 +1,11 @@
+# spearman(gap, base) over the 12-detector vB panel — three bases (provenance for sec5)
+# generated 2026-07-04T00:54:09
+# Flex*/Ground* from _orig recomputations; other 10 frozen. n=12.
+
+CEIL* (AP*=M/n_gt) basis : spearman = -0.476  p = 0.1182   [in-band |r|<0.5]
+true-IoU re-sort (native): spearman = -0.629  p = 0.0283   [inflated by MonoDGP +8.41 duplicate]
+uniform S5 pool         : spearman = -0.517  p = 0.0849
+
+READ: on the matching-ceiling basis (the AP* magnitude the paper quotes) the trend is
+in-band and not significant; the more-negative true-IoU value is basis-artifact from
+MonoDGP duplicate promotion. Reported descriptively; no basis quoted as a finding.

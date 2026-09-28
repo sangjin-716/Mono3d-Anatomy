@@ -1,0 +1,257 @@
+# public copy of the camera-ready check nearmiss_panelwide.txt, sha256 d49b6609362c0f4f0583deec9059234237cf843a20b3ae1cdef4084552798c94, scrubbed: paths made repo-relative (source lines 31-32, 282), reproduction-gate labels renamed to G1 and G5 (source lines 34, 50), a manuscript line reference dropped (source line 254); every kept number verbatim
+# Omitted from this copy: every twelve-detector union row, i.e. the best IoU3D over all twelve pools jointly (final pool: source lines 88 and 154-157; complete pool: source lines 180 and 246-249), the notes that describe them (source lines 89-90, 181-182, 278-279), the two union gate lines (source lines 62-63, both PASS) and a manuscript-editing note (source lines 55-61). The union rows are an oracle bound over the whole panel, not a property of any one detector; the re-run prints them.
+# nearmiss_panelwide.py  run 2026-08-27T22:55:07
+# STATUS: COMPUTED
+
+====================================================================================================
+PART 0 — ZERO-BIN SAFETY CHECK (is the frozen |dz|<8m candidate gate exact-zero-safe?)
+====================================================================================================
+A 3D box's half-extent along the z axis is at most sqrt((l/2)^2 + (w/2)^2).
+Two boxes can overlap only if |dz| < half_gt + half_pred.  If that sum < 8 m for every
+GT/prediction pair, then a stored best-IoU of exactly 0.0 means genuinely NO overlapping
+candidate anywhere in the pool, not a candidate hidden outside the gate.
+
+GT (moderate Car, val)      max half-z-extent = 2.699 m
+  M3D-RPN     m3drpn_val_floor0.csv                  max pred half-z-extent =  3.204 m   gt+pred =  5.903 m   SAFE
+  MonoDLE     monodle_val.csv                        max pred half-z-extent =  3.038 m   gt+pred =  5.737 m   SAFE
+  MonoFlex    monoflex_val.csv                       max pred half-z-extent =  3.967 m   gt+pred =  6.666 m   SAFE
+  GUPNet      gupnet_val.csv                         max pred half-z-extent =  3.187 m   gt+pred =  5.886 m   SAFE
+  DEVIANT     deviant_val.csv                        max pred half-z-extent =  3.135 m   gt+pred =  5.834 m   SAFE
+  MonoGround  monoground_val.csv                     max pred half-z-extent =  3.933 m   gt+pred =  6.632 m   SAFE
+  MonoCon     monocon_val.csv                        max pred half-z-extent =  3.157 m   gt+pred =  5.856 m   SAFE
+  MonoDETR    monodetr_val_preflatten.csv            max pred half-z-extent =  2.579 m   gt+pred =  5.278 m   SAFE
+  MonoDGP     monodgp_val_preflatten.csv             max pred half-z-extent =  2.563 m   gt+pred =  5.262 m   SAFE
+  MonoCoP     official_monocop_val_preflatten.csv    max pred half-z-extent =  2.554 m   gt+pred =  5.253 m   SAFE
+  MonoCLUE    monoclue_val_preflatten.csv            max pred half-z-extent =  2.563 m   gt+pred =  5.262 m   SAFE
+  MonoIA      monoia_val_preflatten.csv              max pred half-z-extent =  2.636 m   gt+pred =  5.335 m   SAFE
+
+=> worst-case gt+pred half-extent = 6.666 m  <  8 m gate.  ZERO BIN IS EXACT.
+
+====================================================================================================
+PART 1 — REPRODUCTION GATES against the FROZEN paper artifacts
+====================================================================================================
+source of best-IoU floats : cache/decomp/gt_state_matrix.csv
+frozen reference          : reports/pool_waterfall.txt
+
+G1  n_gt = 7874 (expect 7874); bins {'0-15': 1930, '15-30': 3163, '30-45': 2416, '45+': 365} (expect {'0-15': 1930, '15-30': 3163, '30-45': 2416, '45+': 365})  -> PASS
+
+detector         A@0.5 mine/frozen      A@0.7 mine/frozen      C@0.7 mine/frozen     faceii mine/frozen     30m+ no>=0.5 mine/frozen  gate
+M3D-RPN           0.927/0.927            0.734/0.734            0.232/0.232            0.684/0.684         436/2552   vs 436/2552    PASS
+MonoDLE           0.559/0.559            0.294/0.294            0.292/0.292            0.006/0.006        1875/2434   vs 1875/2434    PASS
+MonoFlex          0.548/0.548            0.271/0.271            0.269/0.269            0.005/0.005        2037/2588   vs 2037/2588    PASS
+GUPNet            0.574/0.574            0.298/0.298            0.292/0.292            0.020/0.020        1834/2514   vs 1834/2514    PASS
+DEVIANT           0.570/0.570            0.299/0.299            0.294/0.294            0.017/0.017        1914/2539   vs 1914/2539    PASS
+MonoGround        0.568/0.568            0.285/0.285            0.284/0.284            0.005/0.005        1969/2585   vs 1969/2585    PASS
+MonoCon           0.568/0.568            0.316/0.316            0.311/0.311            0.016/0.016        1943/2510   vs 1943/2510    PASS
+MonoDETR          0.638/0.638            0.360/0.360            0.329/0.329            0.087/0.087        1587/2435   vs 1587/2435    PASS
+MonoDGP           0.692/0.692            0.423/0.423            0.344/0.344            0.186/0.186        1440/2447   vs 1440/2447    PASS
+MonoCoP           0.736/0.736            0.457/0.457            0.361/0.361            0.210/0.210        1244/2405   vs 1244/2405    PASS
+MonoCLUE          0.709/0.709            0.443/0.443            0.361/0.361            0.184/0.184        1369/2417   vs 1369/2417    PASS
+MonoIA            0.723/0.723            0.431/0.431            0.370/0.370            0.142/0.142        1240/2416   vs 1240/2416    PASS
+
+G5  no _a>=0.7 in ANY of 12 pools  : 1176/7874 = 0.149   frozen reports/gt_state_matrix.txt:41 = 1176/7874 = 0.149
+    no _a>=0.5 in ANY of 12 pools  : 194/7874 = 0.025   frozen reports/gt_state_matrix.txt:54 =  194/7874 = 0.025
+    no _a>=0.7 over 11 non-anchor  : 2002/7874 = 0.254   frozen reports/final_run/e2_budget_truncation.txt:10 = 2002/7874 = 0.254
+    -> PASS
+
+
+ALL REPRODUCTION GATES PASS.  The near-miss decomposition below is a pure re-binning of
+the same per-GT best-IoU3D floats that produced the shipped Table/Figure numbers.
+
+====================================================================================================
+PART 2a — NEAR-MISS DECOMPOSITION, FINAL POOL (final output pool (native selection))
+====================================================================================================
+Rows: for each detector, the GTs with NO IoU3D>=0.7 box in this pool, split by the
+BEST IoU3D that any of that detector's boxes achieves against the GT.
+
+detector    fam      n_unc   unc% |  [0.5,0.7)  [0.3,0.5)    (0,0.3)  exactly 0 | med bestIoU
+M3D-RPN     anchor    6047  76.8% |  1962 32.4%  1593 26.3%  1719 28.4%   773 12.8% |       0.372
+MonoDLE     cnet      5572  70.8% |  2040 36.6%  1416 25.4%  1443 25.9%   673 12.1% |       0.402
+MonoFlex    cnet      5752  73.1% |  2119 36.8%  1436 25.0%  1363 23.7%   834 14.5% |       0.402
+GUPNet      cnet      5575  70.8% |  2029 36.4%  1308 23.5%  1222 21.9%  1016 18.2% |       0.394
+DEVIANT     cnet      5561  70.6% |  2018 36.3%  1369 24.6%  1213 21.8%   961 17.3% |       0.394
+MonoGround  cnet      5638  71.6% |  2135 37.9%  1342 23.8%  1129 20.0%  1032 18.3% |       0.408
+MonoCon     cnet      5428  68.9% |  1936 35.7%  1278 23.5%  1303 24.0%   911 16.8% |       0.384
+MonoDETR    query     5283  67.1% |  1912 36.2%  1214 23.0%  1352 25.6%   805 15.2% |       0.385
+MonoDGP     query     5164  65.6% |  1915 37.1%  1395 27.0%  1240 24.0%   614 11.9% |       0.409
+MonoCoP     query     5029  63.9% |  2012 40.0%  1355 26.9%  1231 24.5%   431  8.6% |       0.434
+MonoCLUE    query     5031  63.9% |  1981 39.4%  1323 26.3%  1174 23.3%   553 11.0% |       0.431
+MonoIA      query     4959  63.0% |  2103 42.4%  1283 25.9%  1150 23.2%   423  8.5% |       0.453
+----------------------------------------------------------------------------------------------------
+
+-- same decomposition, by GT distance bin (FINAL pool) --
+detector    bin      n_unc |  [0.5,0.7)  [0.3,0.5)    (0,0.3)  exactly 0 |     med
+M3D-RPN     0-15       969 |   618 63.8%   232 23.9%   109 11.2%    10  1.0% |   0.558
+M3D-RPN     15-30     2526 |   847 33.5%   791 31.3%   694 27.5%   194  7.7% |   0.404
+M3D-RPN     30-45     2193 |   465 21.2%   522 23.8%   788 35.9%   418 19.1% |   0.259
+M3D-RPN     45+        359 |    32  8.9%    48 13.4%   128 35.7%   151 42.1% |   0.022
+
+MonoDLE     0-15       891 |   589 66.1%   197 22.1%    70  7.9%    35  3.9% |   0.567
+MonoDLE     15-30     2247 |   925 41.2%   654 29.1%   514 22.9%   154  6.9% |   0.445
+MonoDLE     30-45     2092 |   494 23.6%   521 24.9%   714 34.1%   363 17.4% |   0.291
+MonoDLE     45+        342 |    32  9.4%    44 12.9%   145 42.4%   121 35.4% |   0.076
+
+MonoFlex    0-15       832 |   592 71.2%   164 19.7%    28  3.4%    48  5.8% |   0.592
+MonoFlex    15-30     2332 |  1013 43.4%   628 26.9%   483 20.7%   208  8.9% |   0.459
+MonoFlex    30-45     2234 |   469 21.0%   550 24.6%   754 33.8%   461 20.6% |   0.266
+MonoFlex    45+        354 |    45 12.7%    94 26.6%    98 27.7%   117 33.1% |   0.187
+
+GUPNet      0-15       842 |   552 65.6%   190 22.6%    52  6.2%    48  5.7% |   0.565
+GUPNet      15-30     2219 |   925 41.7%   605 27.3%   464 20.9%   225 10.1% |   0.447
+GUPNet      30-45     2164 |   505 23.3%   449 20.7%   640 29.6%   570 26.3% |   0.244
+GUPNet      45+        350 |    47 13.4%    64 18.3%    66 18.9%   173 49.4% |   0.003
+
+DEVIANT     0-15       812 |   545 67.1%   158 19.5%    37  4.6%    72  8.9% |   0.571
+DEVIANT     15-30     2210 |   930 42.1%   622 28.1%   427 19.3%   231 10.5% |   0.450
+DEVIANT     30-45     2185 |   495 22.7%   514 23.5%   668 30.6%   508 23.2% |   0.272
+DEVIANT     45+        354 |    48 13.6%    75 21.2%    81 22.9%   150 42.4% |   0.137
+
+MonoGround  0-15       775 |   548 70.7%   161 20.8%    24  3.1%    42  5.4% |   0.582
+MonoGround  15-30     2278 |  1038 45.6%   589 25.9%   397 17.4%   254 11.2% |   0.472
+MonoGround  30-45     2226 |   527 23.7%   541 24.3%   584 26.2%   574 25.8% |   0.283
+MonoGround  45+        359 |    22  6.1%    51 14.2%   124 34.5%   162 45.1% |   0.055
+
+MonoCon     0-15       719 |   484 67.3%   169 23.5%    45  6.3%    21  2.9% |   0.586
+MonoCon     15-30     2199 |   931 42.3%   617 28.1%   442 20.1%   209  9.5% |   0.455
+MonoCon     30-45     2150 |   504 23.4%   462 21.5%   722 33.6%   462 21.5% |   0.253
+MonoCon     45+        360 |    17  4.7%    30  8.3%    94 26.1%   219 60.8% |   0.000
+
+MonoDETR    0-15       683 |   503 73.6%   114 16.7%    36  5.3%    30  4.4% |   0.599
+MonoDETR    15-30     2165 |   894 41.3%   614 28.4%   434 20.0%   223 10.3% |   0.448
+MonoDETR    30-45     2104 |   447 21.2%   443 21.1%   802 38.1%   412 19.6% |   0.249
+MonoDETR    45+        331 |    68 20.5%    43 13.0%    80 24.2%   140 42.3% |   0.105
+
+MonoDGP     0-15       594 |   437 73.6%   104 17.5%    27  4.5%    26  4.4% |   0.608
+MonoDGP     15-30     2123 |   907 42.7%   685 32.3%   396 18.7%   135  6.4% |   0.463
+MonoDGP     30-45     2091 |   544 26.0%   538 25.7%   699 33.4%   310 14.8% |   0.311
+MonoDGP     45+        356 |    27  7.6%    68 19.1%   118 33.1%   143 40.2% |   0.112
+
+MonoCoP     0-15       558 |   441 79.0%    74 13.3%    29  5.2%    14  2.5% |   0.599
+MonoCoP     15-30     2066 |   989 47.9%   619 30.0%   359 17.4%    99  4.8% |   0.490
+MonoCoP     30-45     2061 |   540 26.2%   600 29.1%   704 34.2%   217 10.5% |   0.338
+MonoCoP     45+        344 |    42 12.2%    62 18.0%   139 40.4%   101 29.4% |   0.169
+
+MonoCLUE    0-15       559 |   426 76.2%    78 14.0%    31  5.5%    24  4.3% |   0.601
+MonoCLUE    15-30     2055 |   975 47.4%   588 28.6%   382 18.6%   110  5.4% |   0.489
+MonoCLUE    30-45     2091 |   518 24.8%   572 27.4%   705 33.7%   296 14.2% |   0.316
+MonoCLUE    45+        326 |    62 19.0%    85 26.1%    56 17.2%   123 37.7% |   0.224
+
+MonoIA      0-15       567 |   427 75.3%    86 15.2%    29  5.1%    25  4.4% |   0.601
+MonoIA      15-30     1976 |   963 48.7%   566 28.6%   356 18.0%    91  4.6% |   0.494
+MonoIA      30-45     2085 |   662 31.8%   571 27.4%   633 30.4%   219 10.5% |   0.372
+MonoIA      45+        331 |    51 15.4%    60 18.1%   132 39.9%    88 26.6% |   0.190
+
+
+====================================================================================================
+PART 2b — NEAR-MISS DECOMPOSITION, COMPLETE POOL (complete native pool (pre-selection))
+====================================================================================================
+Rows: for each detector, the GTs with NO IoU3D>=0.7 box in this pool, split by the
+BEST IoU3D that any of that detector's boxes achieves against the GT.
+
+detector    fam      n_unc   unc% |  [0.5,0.7)  [0.3,0.5)    (0,0.3)  exactly 0 | med bestIoU
+M3D-RPN     anchor    2098  26.6% |  1521 72.5%   369 17.6%   163  7.8%    45  2.1% |       0.598
+MonoDLE     cnet      5559  70.6% |  2090 37.6%  1489 26.8%  1627 29.3%   353  6.4% |       0.411
+MonoFlex    cnet      5742  72.9% |  2180 38.0%  1544 26.9%  1585 27.6%   433  7.5% |       0.417
+GUPNet      cnet      5529  70.2% |  2174 39.3%  1459 26.4%  1535 27.8%   361  6.5% |       0.430
+DEVIANT     cnet      5521  70.1% |  2136 38.7%  1533 27.8%  1480 26.8%   372  6.7% |       0.422
+MonoGround  cnet      5626  71.5% |  2221 39.5%  1458 25.9%  1448 25.7%   499  8.9% |       0.426
+MonoCon     cnet      5389  68.4% |  1990 36.9%  1423 26.4%  1591 29.5%   385  7.1% |       0.409
+MonoDETR    query     5037  64.0% |  2184 43.4%  1321 26.2%  1268 25.2%   264  5.2% |       0.455
+MonoDGP     query     4543  57.7% |  2118 46.6%  1277 28.1%   969 21.3%   179  3.9% |       0.481
+MonoCoP     query     4272  54.3% |  2192 51.3%  1111 26.0%   834 19.5%   135  3.2% |       0.508
+MonoCLUE    query     4389  55.7% |  2099 47.8%  1186 27.0%   926 21.1%   178  4.1% |       0.490
+MonoIA      query     4477  56.9% |  2293 51.2%  1207 27.0%   829 18.5%   148  3.3% |       0.505
+----------------------------------------------------------------------------------------------------
+
+-- same decomposition, by GT distance bin (COMPLETE pool) --
+detector    bin      n_unc |  [0.5,0.7)  [0.3,0.5)    (0,0.3)  exactly 0 |     med
+M3D-RPN     0-15        72 |    60 83.3%     9 12.5%     1  1.4%     2  2.8% |   0.634
+M3D-RPN     15-30      626 |   497 79.4%    80 12.8%    41  6.5%     8  1.3% |   0.620
+M3D-RPN     30-45     1113 |   842 75.7%   183 16.4%    71  6.4%    17  1.5% |   0.602
+M3D-RPN     45+        287 |   122 42.5%    97 33.8%    50 17.4%    18  6.3% |   0.478
+
+MonoDLE     0-15       886 |   600 67.7%   212 23.9%    74  8.4%     0  0.0% |   0.572
+MonoDLE     15-30     2246 |   938 41.8%   678 30.2%   560 24.9%    70  3.1% |   0.449
+MonoDLE     30-45     2087 |   512 24.5%   548 26.3%   812 38.9%   215 10.3% |   0.307
+MonoDLE     45+        340 |    40 11.8%    51 15.0%   181 53.2%    68 20.0% |   0.122
+
+MonoFlex    0-15       828 |   604 72.9%   177 21.4%    45  5.4%     2  0.2% |   0.595
+MonoFlex    15-30     2331 |  1030 44.2%   653 28.0%   546 23.4%   102  4.4% |   0.464
+MonoFlex    30-45     2229 |   496 22.3%   612 27.5%   859 38.5%   262 11.8% |   0.299
+MonoFlex    45+        354 |    50 14.1%   102 28.8%   135 38.1%    67 18.9% |   0.238
+
+GUPNet      0-15       825 |   568 68.8%   200 24.2%    57  6.9%     0  0.0% |   0.571
+GUPNet      15-30     2215 |   951 42.9%   644 29.1%   551 24.9%    69  3.1% |   0.457
+GUPNet      30-45     2150 |   585 27.2%   533 24.8%   818 38.0%   214 10.0% |   0.321
+GUPNet      45+        339 |    70 20.6%    82 24.2%   109 32.2%    78 23.0% |   0.261
+
+DEVIANT     0-15       803 |   577 71.9%   176 21.9%    47  5.9%     3  0.4% |   0.585
+DEVIANT     15-30     2202 |   957 43.5%   673 30.6%   486 22.1%    86  3.9% |   0.461
+DEVIANT     30-45     2166 |   546 25.2%   593 27.4%   822 38.0%   205  9.5% |   0.319
+DEVIANT     45+        350 |    56 16.0%    91 26.0%   125 35.7%    78 22.3% |   0.234
+
+MonoGround  0-15       775 |   554 71.5%   177 22.8%    37  4.8%     7  0.9% |   0.583
+MonoGround  15-30     2276 |  1061 46.6%   627 27.5%   476 20.9%   112  4.9% |   0.481
+MonoGround  30-45     2218 |   576 26.0%   594 26.8%   762 34.4%   286 12.9% |   0.319
+MonoGround  45+        357 |    30  8.4%    60 16.8%   173 48.5%    94 26.3% |   0.132
+
+MonoCon     0-15       701 |   484 69.0%   167 23.8%    48  6.8%     2  0.3% |   0.590
+MonoCon     15-30     2191 |   952 43.5%   660 30.1%   507 23.1%    72  3.3% |   0.464
+MonoCon     30-45     2141 |   531 24.8%   540 25.2%   843 39.4%   227 10.6% |   0.300
+MonoCon     45+        356 |    23  6.5%    56 15.7%   193 54.2%    84 23.6% |   0.154
+
+MonoDETR    0-15       630 |   486 77.1%   114 18.1%    29  4.6%     1  0.2% |   0.606
+MonoDETR    15-30     2081 |   959 46.1%   622 29.9%   436 21.0%    64  3.1% |   0.476
+MonoDETR    30-45     2032 |   636 31.3%   520 25.6%   725 35.7%   151  7.4% |   0.352
+MonoDETR    45+        294 |   103 35.0%    65 22.1%    78 26.5%    48 16.3% |   0.357
+
+MonoDGP     0-15       448 |   354 79.0%    67 15.0%    23  5.1%     4  0.9% |   0.609
+MonoDGP     15-30     1866 |   975 52.3%   550 29.5%   304 16.3%    37  2.0% |   0.512
+MonoDGP     30-45     1890 |   719 38.0%   573 30.3%   521 27.6%    77  4.1% |   0.429
+MonoDGP     45+        339 |    70 20.6%    87 25.7%   121 35.7%    61 18.0% |   0.266
+
+MonoCoP     0-15       410 |   339 82.7%    49 12.0%    22  5.4%     0  0.0% |   0.615
+MonoCoP     15-30     1745 |   980 56.2%   476 27.3%   257 14.7%    32  1.8% |   0.526
+MonoCoP     30-45     1804 |   799 44.3%   498 27.6%   451 25.0%    56  3.1% |   0.463
+MonoCoP     45+        313 |    74 23.6%    88 28.1%   104 33.2%    47 15.0% |   0.311
+
+MonoCLUE    0-15       463 |   376 81.2%    58 12.5%    27  5.8%     2  0.4% |   0.609
+MonoCLUE    15-30     1802 |   968 53.7%   501 27.8%   305 16.9%    28  1.6% |   0.521
+MonoCLUE    30-45     1835 |   666 36.3%   573 31.2%   522 28.4%    74  4.0% |   0.418
+MonoCLUE    45+        289 |    89 30.8%    54 18.7%    72 24.9%    74 25.6% |   0.294
+
+MonoIA      0-15       461 |   367 79.6%    76 16.5%    16  3.5%     2  0.4% |   0.613
+MonoIA      15-30     1831 |   981 53.6%   510 27.9%   291 15.9%    49  2.7% |   0.515
+MonoIA      30-45     1950 |   839 43.0%   580 29.7%   460 23.6%    71  3.6% |   0.459
+MonoIA      45+        235 |   106 45.1%    41 17.4%    62 26.4%    26 11.1% |   0.458
+
+
+====================================================================================================
+PART 3 — HEADLINE RANGES (final output pool; the pool the paper's 63-77% coverage
+          statement is about)
+====================================================================================================
+  [0.5,0.7) near miss                         32.4% (M3D-RPN) ..  42.4% (MonoIA)   median  36.7%
+  [0.3,0.5)                                   23.0% (MonoDETR) ..  27.0% (MonoDGP)   median  25.2%
+  (0,0.3)                                     20.0% (MonoGround) ..  28.4% (M3D-RPN)   median  23.9%
+  exactly 0 (no overlapping candidate)         8.5% (MonoIA) ..  18.3% (MonoGround)   median  13.6%
+  median best achieved IoU3D over uncovered GTs   0.372 .. 0.453
+
+PART 3b — the same shares in the far field (30 m+), FINAL pool
+  30m+  [0.5,0.7) near miss                   19.5% (M3D-RPN) ..  29.5% (MonoIA)   median  21.5%
+  30m+  exactly 0                             12.7% (MonoIA) ..  29.6% (GUPNet)   median  22.3%
+
+====================================================================================================
+SCOPE / CAVEATS
+====================================================================================================
+* Universe: KITTI val (Chen split, 3769 images), official Moderate Car filter
+  (occ<=1, trunc<=0.3, 2D box height>25 px), n_gt = 7874.  Same universe as the paper.
+* 'best IoU3D' is a PRESENCE-layer quantity: the max IoU3D over all of a detector's
+  boxes in the pool for that GT.  It is NOT the official score-ordered one-to-one TP
+  assignment, and none of these numbers are AP.  No AP claim is made or implied.
+* FINAL pool = the detector's own native output (the pool behind the paper's 63-77%
+  coverage statement).  COMPLETE pool = the full pre-selection candidate set, which for
+  the dense-anchor exemplar (M3D-RPN) is ~3000 anchors/image and is therefore NOT
+  comparable in budget to the others.
+* The exactly-0 bin is exact only under the Part 0 dimension check (VERIFIED this run).
+
+[written] nearmiss_panelwide.csv  rows=130

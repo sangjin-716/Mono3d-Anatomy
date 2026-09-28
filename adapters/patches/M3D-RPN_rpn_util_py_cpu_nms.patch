@@ -1,0 +1,17 @@
+diff --git a/lib/rpn_util.py b/lib/rpn_util.py
+index b3bd6fb..6c2ce99 100644
+--- a/lib/rpn_util.py
++++ b/lib/rpn_util.py
+@@ -13,7 +13,11 @@ import gc
+ from lib.util import *
+ from lib.core import *
+ from lib.augmentations import *
+-from lib.nms.gpu_nms import gpu_nms
++from lib.nms.py_cpu_nms import py_cpu_nms
++
++def gpu_nms(dets, thresh, device_id=0):
++    # torch-1.x port: identical (+1 offset) NMS math on CPU, same keep semantics
++    return py_cpu_nms(dets, thresh)
+ import torch.nn.functional as F
+ 
+ from copy import deepcopy

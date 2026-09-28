@@ -1,0 +1,20 @@
+# public copy of the camera-ready check pool_census.txt, sha256 53a3c0bd33e9ce56ed4b74aa98570b2aeb1fb16366987e206c89791aeb46614c, scrubbed: nothing (every line below is identical to the original)
+# pool_census run 2026-08-27T22:35:01  (val images=3769)
+# COMPLETE = pool used as stage-A in pool_waterfall.py ; FINAL = native_pool() in e4_fp_tp_decomp.py
+
+detector    fam                   complete/img                final/img            score floor
+MonoDLE     cnet    mean    50.0 med   50.0 min    50 max     50 mean     3.4 med    3.0 min     0 max     17   cls_min=0.00542 V_min=0.00001  gate=cls>=0.2
+MonoFlex    cnet    mean    28.1 med   29.0 min     2 max     43 mean     3.3 med    3.0 min     0 max     14   cls_min=0.00383 V_min=0.00000  gate=V>=0.2
+GUPNet      cnet    mean    30.3 med   31.0 min     1 max     48 mean     2.7 med    2.0 min     0 max     11   cls_min=0.00000 V_min=0.00000  gate=V>=0.2
+DEVIANT     cnet    mean    34.1 med   35.0 min     1 max     50 mean     2.7 med    2.0 min     0 max     12   cls_min=0.00000 V_min=0.00000  gate=V>=0.2
+MonoGround  cnet    mean    27.7 med   29.0 min     1 max     45 mean     3.0 med    2.0 min     0 max     17   cls_min=0.00252 V_min=0.00000  gate=V>=0.2
+MonoCon     cnet    mean    23.4 med   24.0 min     1 max     30 mean     3.1 med    2.0 min     0 max     17   cls_min=0.00011 V_min=0.00011  gate=V>=0.4
+MonoDETR    query   mean    50.0 med   50.0 min    50 max     50 mean     3.2 med    2.0 min     0 max     16   cls_min=0.00001  gate=flatrank<50 & cls>=0.2  | raw dump rows/img mean=150.0
+MonoDGP     query   mean    50.0 med   50.0 min    50 max     50 mean     3.7 med    3.0 min     0 max     26   cls_min=0.00024  gate=flatrank<50 & cls>=0.2  | raw dump rows/img mean=50.0
+MonoCoP     query   mean    50.0 med   50.0 min    50 max     50 mean     3.5 med    3.0 min     0 max     20   cls_min=0.00026  gate=flatrank<50 & cls>=0.2  | raw dump rows/img mean=50.0
+MonoCLUE    query   mean    50.0 med   50.0 min    50 max     50 mean     3.6 med    3.0 min     0 max     21   cls_min=0.00016  gate=flatrank<50 & cls>=0.2  | raw dump rows/img mean=150.0
+MonoIA      query   mean    50.0 med   50.0 min    50 max     50 mean     4.0 med    3.0 min     0 max     22   cls_min=0.00016  gate=flatrank<50 & cls>=0.2  | raw dump rows/img mean=150.0
+M3D-RPN     anchor  mean  2138.3 med 2277.0 min     1 max   3000 (final = NMS0.4->top40->V>=0.75, see below)   V_min=0.00048
+
+M3D-RPN floor-0 total rows = 8012124; images at 300-cap = 3621
+m3drpn_val.csv (non-floor0 native dump) rows = 794481, per-img mean   225.8 med  300.0 min     1 max    300, V_min=0.05000

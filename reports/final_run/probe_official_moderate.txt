@@ -1,0 +1,64 @@
+# E1' probe channels on the OFFICIAL moderate set (occ<=1, trunc<=0.3, h>25px)
+# matcher/pool identical to frozen probe; only the recall GT filter changes
+GATE GT-count: 7874 (expect 7874) -> PASS
+[done] M3D-RPN    rec_all=0.231 rec45=0.011 |dz|45=1.651
+[done] MonoDLE    rec_all=0.292 rec45=0.063 |dz|45=1.484
+[done] MonoFlex   rec_all=0.270 rec45=0.030 |dz|45=1.489
+[done] GUPNet     rec_all=0.292 rec45=0.041 |dz|45=1.302
+[done] DEVIANT    rec_all=0.294 rec45=0.030 |dz|45=1.340
+[done] MonoGround rec_all=0.285 rec45=0.022 |dz|45=1.528
+[done] MonoCon    rec_all=0.310 rec45=0.019 |dz|45=1.749
+[done] MonoDETR   rec_all=0.329 rec45=0.093 |dz|45=1.317
+[done] MonoDGP    rec_all=0.342 rec45=0.025 |dz|45=1.611
+[done] MonoCoP    rec_all=0.361 rec45=0.058 |dz|45=1.576
+[done] MonoCLUE   rec_all=0.360 rec45=0.110 |dz|45=1.331
+[done] MonoIA     rec_all=0.369 rec45=0.088 |dz|45=1.423
+
+OFFICIAL-MODERATE RECALL@IoU0.7 BY BIN (n per bin: 0-15=1930 15-30=3163 30-45=2416 45+=365)
+M3D-RPN     11.10 |   0.498   0.201   0.089   0.011   0.231
+MonoDLE     14.69 |   0.538   0.290   0.134   0.063   0.292
+MonoFlex    15.57 |   0.569   0.263   0.077   0.030   0.270
+GUPNet      16.48 |   0.563   0.298   0.104   0.041   0.292
+DEVIANT     16.74 |   0.579   0.301   0.096   0.030   0.294
+MonoGround  16.82 |   0.598   0.280   0.081   0.022   0.285
+MonoCon     19.05 |   0.622   0.305   0.111   0.019   0.310
+MonoDETR    20.98 |   0.646   0.316   0.128   0.093   0.329
+MonoDGP     22.29 |   0.689   0.326   0.132   0.025   0.342
+MonoCoP     23.89 |   0.710   0.347   0.147   0.058   0.361
+MonoCLUE    24.23 |   0.708   0.348   0.135   0.110   0.360
+MonoIA      24.49 |   0.705   0.375   0.135   0.088   0.369
+
+OFFICIAL-MODERATE |dz| ON MATCHED, BY MATCHED-GT BIN
+M3D-RPN     11.10 |   0.450   0.856   1.200   1.651
+MonoDLE     14.69 |   0.387   0.735   1.152   1.484
+MonoFlex    15.57 |   0.353   0.724   1.217   1.489
+GUPNet      16.48 |   0.341   0.711   1.145   1.302
+DEVIANT     16.74 |   0.321   0.690   1.148   1.340
+MonoGround  16.82 |   0.351   0.689   1.135   1.528
+MonoCon     19.05 |   0.348   0.710   1.228   1.749
+MonoDETR    20.98 |   0.304   0.691   1.234   1.317
+MonoDGP     22.29 |   0.269   0.678   1.119   1.611
+MonoCoP     23.89 |   0.271   0.660   1.132   1.576
+MonoCLUE    24.23 |   0.273   0.649   1.136   1.331
+MonoIA      24.49 |   0.267   0.630   1.098   1.423
+
+SPEARMAN vs base AP (official set):
+  recall 0-15  : +0.965   0.498 0.538 0.569 0.563 0.579 0.598 0.622 0.646 0.689 0.710 0.708 0.705
+  recall 15-30 : +0.944   0.201 0.290 0.263 0.298 0.301 0.280 0.305 0.316 0.326 0.347 0.348 0.375
+  recall 30-45 : +0.704   0.089 0.134 0.077 0.104 0.096 0.081 0.111 0.128 0.132 0.147 0.135 0.135
+  recall 45+   : +0.504   0.011 0.063 0.030 0.041 0.030 0.022 0.019 0.093 0.025 0.058 0.110 0.088
+  recall ALL   : +0.923   0.231 0.292 0.270 0.292 0.294 0.285 0.310 0.329 0.342 0.361 0.360 0.369
+
+DELTA vs frozen probe (45+ recall): probe-set (n=1867, occ<=1/trunc<=0.5/no-h-filter)
+  M3D-RPN    old(9668-set)=0.010  official(7874-set)=0.011
+  MonoDLE    old(9668-set)=0.033  official(7874-set)=0.063
+  MonoFlex   old(9668-set)=0.018  official(7874-set)=0.030
+  GUPNet     old(9668-set)=0.013  official(7874-set)=0.041
+  DEVIANT    old(9668-set)=0.011  official(7874-set)=0.030
+  MonoGround old(9668-set)=0.020  official(7874-set)=0.022
+  MonoCon    old(9668-set)=0.012  official(7874-set)=0.019
+  MonoDETR   old(9668-set)=0.028  official(7874-set)=0.093
+  MonoDGP    old(9668-set)=0.012  official(7874-set)=0.025
+  MonoCoP    old(9668-set)=0.022  official(7874-set)=0.058
+  MonoCLUE   old(9668-set)=0.028  official(7874-set)=0.110
+  MonoIA     old(9668-set)=0.035  official(7874-set)=0.088

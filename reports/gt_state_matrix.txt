@@ -1,0 +1,86 @@
+# gt_state_matrix run 2026-06-12T16:55:42
+# presence-layer states only; official TP matching NOT reproduced (terminology restricted)
+# GT key = (sid, moderate-Car label-file line-order index); kernels verbatim from pool_waterfall.py
+
+[pass] M3D-RPN done
+[pass] MonoDLE done
+[pass] MonoFlex done
+[pass] GUPNet done
+[pass] DEVIANT done
+[pass] MonoGround done
+[pass] MonoCon done
+[pass] MonoDETR done
+[pass] MonoDGP done
+[pass] MonoCoP done
+[pass] MonoCLUE done
+[pass] MonoIA done
+
+== GATES ==
+G1 key-set: n=7874 (expect 7874) dup=0:True missing=0:True -> PASS
+G2 final-subset-of-pool violations: 0 -> PASS
+G3 M3D-RPN    A7=0.734/0.734 C7=0.232/0.232 faceii=0.684/0.684 -> PASS
+G3 MonoDLE    A7=0.294/0.294 C7=0.292/0.292 faceii=0.006/0.006 -> PASS
+G3 MonoFlex   A7=0.271/0.271 C7=0.269/0.269 faceii=0.005/0.005 -> PASS
+G3 GUPNet     A7=0.298/0.298 C7=0.292/0.292 faceii=0.020/0.020 -> PASS
+G3 DEVIANT    A7=0.299/0.299 C7=0.294/0.294 faceii=0.017/0.017 -> PASS
+G3 MonoGround A7=0.285/0.285 C7=0.284/0.284 faceii=0.005/0.005 -> PASS
+G3 MonoCon    A7=0.316/0.316 C7=0.311/0.311 faceii=0.016/0.016 -> PASS
+G3 MonoDETR   A7=0.360/0.360 C7=0.329/0.329 faceii=0.087/0.087 -> PASS
+G3 MonoDGP    A7=0.423/0.423 C7=0.344/0.344 faceii=0.186/0.186 -> PASS
+G3 MonoCoP    A7=0.457/0.457 C7=0.361/0.361 faceii=0.210/0.210 -> PASS
+G3 MonoCLUE   A7=0.443/0.443 C7=0.361/0.361 faceii=0.184/0.184 -> PASS
+G3 MonoIA     A7=0.431/0.431 C7=0.370/0.370 faceii=0.142/0.142 -> PASS
+G4 query lost-typing coverage: untyped lost GTs = 0 -> PASS
+[written] experiments/dgp_cop_diag/gt_state_matrix.csv rows=7874
+
+== IoU0.7 (primary) ==
+agreement: GTs by #models with accurate POOL candidate (0..12):
+  0:1176 1:1234 2:781 3:687 4:583 5:457 6:493 7:406 8:343 9:373 10:358 11:445 12:538
+agreement: GTs by #models with FINAL_ACCURATE_PRESENT (0..12):
+  0:2492 1:940 2:648 3:567 4:448 5:408 6:355 7:319 8:278 9:306 10:324 11:369 12:420
+PANEL HARD CORE (no IoU>=0.7 candidate in ANY of the 12 complete native pools): 1176 / 7874 = 0.149
+  bin [0-15] n=1930 hard-core=0.013 final-present-nowhere=0.077
+  bin [15-30] n=3163 hard-core=0.107 final-present-nowhere=0.280
+  bin [30-45] n=2416 hard-core=0.274 final-present-nowhere=0.506
+  bin [45-+] n=365 hard-core=0.416 final-present-nowhere=0.647
+hard-core occ/trunc vs rest: occ 0.57/0.38, trunc 0.003/0.008, z 34.5/23.4 m
+outside hard core: candidate exists somewhere but FINAL_ACCURATE_PRESENT nowhere: 1316 (0.167 of all GTs)
+
+== IoU0.5 (secondary) ==
+agreement: GTs by #models with accurate POOL candidate (0..12):
+  0:194 1:461 2:457 3:492 4:454 5:441 6:432 7:413 8:489 9:481 10:544 11:724 12:2292
+agreement: GTs by #models with FINAL_ACCURATE_PRESENT (0..12):
+  0:1131 1:505 2:425 3:335 4:402 5:373 6:370 7:379 8:390 9:450 10:489 11:655 12:1970
+PANEL HARD CORE (no IoU>=0.5 candidate in ANY of the 12 complete native pools): 194 / 7874 = 0.025
+  bin [0-15] n=1930 hard-core=0.002 final-present-nowhere=0.013
+  bin [15-30] n=3163 hard-core=0.015 final-present-nowhere=0.106
+  bin [30-45] n=2416 hard-core=0.035 final-present-nowhere=0.250
+  bin [45-+] n=365 hard-core=0.167 final-present-nowhere=0.452
+hard-core occ/trunc vs rest: occ 0.64/0.40, trunc 0.002/0.008, z 38.0/24.7 m
+outside hard core: candidate exists somewhere but FINAL_ACCURATE_PRESENT nowhere: 937 (0.119 of all GTs)
+
+== family state distribution OUTSIDE the IoU0.7 hard core (share of those GTs) ==
+model      fam    NO_POOL_CAND  LOST_BEFORE_FINAL  FINAL_ACC_PRESENT  retention(C/A)
+M3D-RPN    anchor        0.138              0.590              0.273          0.316
+MonoDLE    cnet          0.654              0.002              0.344          0.994
+MonoFlex   cnet          0.682              0.001              0.317          0.995
+GUPNet     cnet          0.650              0.007              0.343          0.980
+DEVIANT    cnet          0.649              0.006              0.345          0.983
+MonoGround cnet          0.664              0.002              0.334          0.995
+MonoCon    cnet          0.629              0.006              0.365          0.984
+MonoDETR   query         0.576              0.037              0.387          0.913
+MonoDGP    query         0.503              0.093              0.405          0.814
+MonoCoP    query         0.462              0.113              0.425          0.790
+MonoCLUE   query         0.480              0.096              0.424          0.816
+MonoIA     query         0.493              0.072              0.435          0.858
+
+== query lost-stage typing (accurate candidates of LOST GTs; candidate-level) ==
+MonoDETR   lost_gts= 246 acc-cands typed=  289 | thr_only=1.000 budget_only=0.000 both=0.000
+MonoDGP    lost_gts= 621 acc-cands typed=  865 | thr_only=1.000 budget_only=0.000 both=0.000
+MonoCoP    lost_gts= 757 acc-cands typed=  954 | thr_only=1.000 budget_only=0.000 both=0.000
+MonoCLUE   lost_gts= 642 acc-cands typed=  892 | thr_only=1.000 budget_only=0.000 both=0.000
+MonoIA     lost_gts= 482 acc-cands typed=  603 | thr_only=1.000 budget_only=0.000 both=0.000
+
+SCOPE LOCK: hard-core shares are statements about the complete native pools exposed
+by the studied 12-model panel ONLY — no generalization beyond it; no temporal causal
+reading of family/generation differences; presence-layer states, not evaluator TPs.

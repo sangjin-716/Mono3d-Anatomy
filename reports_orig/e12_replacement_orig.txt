@@ -1,0 +1,9 @@
+# e12_replacement run 2026-07-03T20:24:15
+# among A-pass GTs (accurate pool candidate exists): did the BEST candidate survive?
+
+[done] MonoFlex*  A-pass= 2350 | best-survived=0.994 REPLACED=0.000 LOST=0.006 (ref face-ii 0.006) -> GATE-PASS
+[done] MonoGround* A-pass= 2494 | best-survived=0.993 REPLACED=0.000 LOST=0.007 (ref face-ii 0.007) -> GATE-PASS
+
+READ: REPLACED = suppression that is harmless at GT level (another accurate candidate
+of the same GT reaches the final output). LOST equals the face-ii numerator by
+construction; gate enforces 3-decimal equality with pool_waterfall.txt.

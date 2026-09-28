@@ -1,0 +1,30 @@
+# public copy of mono3d_crossdataset/results/kitti_orig/oracle_ladder_o1_orig.txt, sha256 a957328cc3e64ab8c44acc3d15ddc05f8d3ff362be3f4df599fb604a594158c2, scrubbed: READ note (source lines 27-30): interpretive clauses and their gate labels removed, the geometric reading kept; all numbers and table lines verbatim
+# O1 bev_quality_ranking 2026-07-03T19:53:16
+# AP3D (all-point, Car moderate, metric=2) under 3 sort keys: native V / GT BEV-IoU / GT 3D-IoU.
+# recovery% = (ceil_bev - base) / (ceil_3d - base): what fraction of the 3D re-ranking
+# headroom is recovered by knowing ONLY ground-plane (BEV) quality. GT oracles = upper bounds.
+# o3 (fresh) validated against frozen _e4cache o_act; o_act = 3D-IoU oracle used for ceil_3d.
+
+[done] MonoFlex*  (centernet n=12283) |o3-cache|max=0.00e+00
+    IoU0.7  base= 18.08  BEVsort= 28.91  3Dsort= 29.41  head=+11.33  recovery= 95.6%
+    IoU0.5  base= 45.49  BEVsort= 54.48  3Dsort= 54.54  head=+ 9.05  recovery= 99.4%
+[done] MonoGround* (centernet n=11158) |o3-cache|max=0.00e+00
+    IoU0.7  base= 19.38  BEVsort= 30.90  3Dsort= 31.38  head=+12.00  recovery= 95.9%
+    IoU0.5  base= 47.37  BEVsort= 56.65  3Dsort= 56.69  head=+ 9.32  recovery= 99.6%
+
+==============================================================================================================
+O1 SUMMARY — GT BEV-quality recovery of the 3D re-ranking headroom (AP3D, all-point)
+==============================================================================================================
+detector   fam       | base.7  BEV.7   3D.7 head.7   rec.7 | base.5  BEV.5   3D.5 head.5   rec.5
+------------------------------------------------------------------------------------------------
+MonoFlex*  centernet |  18.08  28.91  29.41 +11.33   95.6% |  45.49  54.48  54.54  +9.05   99.4%
+MonoGround* centernet |  19.38  30.90  31.38 +12.00   95.9% |  47.37  56.65  56.69  +9.32   99.6%
+
+IoU0.7: headroom range +11.33..+12.00 median +11.67 | recovery range 95.6%..95.9% median 95.8%
+    centernet recovery median 95.8% (n=2)
+IoU0.5: headroom range +9.05..+9.32 median +9.18 | recovery range 99.4%..99.6% median 99.5%
+    centernet recovery median 99.5% (n=2)
+
+READ: recovery ~ 100% => GT BEV (ground-plane) quality recovers almost all the 3D re-ranking
+headroom => height/vertical contributes little to the ORDERING problem. recovery << 100%
+(BEV sort ~ base) => most of the rankable headroom needs the vertical term.

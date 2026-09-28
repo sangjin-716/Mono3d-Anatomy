@@ -1,0 +1,12 @@
+# public copy of reports/final_run/e3_endpoint_gap_boot.txt, sha256 2b405d4f9a7b8d7fd36147396ca95f1dd6ef8e60c8d8c7494ba179e3a368349f, scrubbed: a wording-rule phrase in the READ note
+# e3_endpoint_gap_boot run 2026-06-13T03:02:26
+# dGap = gap(B) - gap(A) per identical drive resample; B=1000; S5 pools; dense-401 (R40)
+
+[arm] monodle    base=15.06(14.69) ceil=29.25(30.00) gap=+14.19(+15.31)
+[arm] monoia     base=25.12(24.49) ceil=37.00(37.50) gap=+11.88(+13.01)
+[done] MonoDLE->MonoIA    point dGap=-2.310 CI[-3.997,-0.931] (R40 -2.302 CI[-4.116,-0.113]) zero-in-CI=NO
+[arm] m3drpn     base=11.42(11.10) ceil=23.25(25.00) gap=+11.83(+13.90)
+[done] M3D-RPN->MonoIA    point dGap=+0.046 CI[-1.888,+1.816] (R40 -0.894 CI[-2.182,+2.375]) zero-in-CI=YES
+
+READ: zero-in-CI=YES -> an endpoint gap CHANGE is not resolvable under drive resampling;
+the matching reading is then 'no resolvable endpoint change', not 'did not shrink'.

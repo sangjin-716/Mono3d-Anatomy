@@ -1,0 +1,6 @@
+# gap_exact_orig run 2026-07-03T19:32:09
+# same machinery as tools/decomp/gap_exact.py; pools S5 (cls>=0.2 + 2D-NMS@0.5 by V)
+# inputs: ORIGINAL-ENV dumps (torch1.4 rebuild, published numbers reproduced)
+
+[done] MonoFlex*   dump@db53a6b4 GATE-OK | base R11/R40/allpt= 22.31/ 17.38/ 18.10  ceil= 36.36/ 30.00/ 29.66  gap_allpt=+11.56
+[done] MonoGround* dump@033e0a8c GATE-OK | base R11/R40/allpt= 23.60/ 18.73/ 19.43  ceil= 36.36/ 32.50/ 31.56  gap_allpt=+12.13

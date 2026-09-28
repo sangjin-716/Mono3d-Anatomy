@@ -1,0 +1,153 @@
+# class_capability  2026-09-28T22:07:35
+# script  tools/extensions/class_capability.py
+# KITTI val (ImageSets/val.txt) n_img=3769
+# Question: which of the twelve released checkpoints emit Pedestrian and Cyclist, and which
+# classes the full-validation outputs used by the paper contain (supplementary Sec. O,
+# main Sec. 5.1). Part E also checks three release-document statements of Sec. P.
+
+====================================================================================================
+PART A -- released per-prediction dumps (data/dumps)
+====================================================================================================
+A dump row is one candidate box. The 23-column schema (data/DUMPS.md) has no class-label
+column, the column `cls` is a score, and each adapter keeps Car candidates only.
+
+detector             file                        dump@        rows  imgs  rows/img  label col  adapter Car selection
+M3D-RPN              m3drpn_val.csv              b44d95fa   794481  3519    1-300   none       adapters/m3drpn_dump_accv.py:185  if conf.lbls[int(box[5] - 1)] != 'Car':
+MonoDLE              monodle_val.csv             902e861a   188450  3769   50-50    none       adapters/monodle_dump.py:96  if int(dets[i, j, 0]) != CAR:
+MonoFlex*            monoflex_orig_val.csv       db53a6b4   105945  3769    2-43    none       adapters/monoflex_dump_orig.py:75  car = np.where(np.floor(result[:, 0] + 1e-6).astype(int) == 0)[0]   # Car only
+MonoFlex (modern)    monoflex_modern_val.csv     15e56428   105944  3769    2-43    none       adapters/monoflex_dump.py:73  car = np.where(np.floor(result[:, 0] + 1e-6).astype(int) == 0)[0]   # Car only
+GUPNet               gupnet_val.csv              f0353acc   114224  3769    1-48    none       adapters/gupnet_dump.py:76  if int(dets[i, j, 0]) != 1:        # Car = class 1
+DEVIANT              deviant_val.csv             c5388e2b   128576  3767    1-50    none       adapters/deviant_dump.py:94  if int(dets[i, j, 0]) != CAR:
+MonoGround*          monoground_orig_val.csv     033e0a8c   104552  3768    1-45    none       adapters/monoground_dump_orig.py:96  car = np.where(np.floor(result[:, 0] + 1e-6).astype(int) == 0)[0]   # Car only
+MonoGround (modern)  monoground_modern_val.csv   71948092   104552  3768    1-45    none       adapters/monoground_dump.py:95  car = np.where(np.floor(result[:, 0] + 1e-6).astype(int) == 0)[0]   # Car only
+MonoCon              monocon_val.csv             94d590dd    88089  3765    1-30    none       adapters/monocon_dump.py:106  if anno["name"][j] != "Car":
+MonoDETR             monodetr_val.csv            896aab21   185676  3769   41-50    none       adapters/monodetr_dump.py:73  if int(dets[i, j, 0]) != CAR:
+MonoDGP              dgp_val.csv                 e08899d5   188450  3769   50-50    none       adapters/dgp_cop_dump.py:126  cls = logits.sigmoid().max(-1).values
+MonoCoP              official_monocop_val.csv    bed43329   188450  3769   50-50    none       adapters/dgp_cop_dump.py:126  cls = logits.sigmoid().max(-1).values
+MonoCLUE             monoclue_val.csv            9973ae1e   188450  3769   50-50    none       adapters/monoclue_dump.py:78  if int(dets[i, j, 0]) != CAR:
+MonoIA               monoia_val.csv              27e9555e   188450  3769   50-50    none       adapters/monoia_dump.py:70  if int(dets[i,j,0])!=CAR: continue
+dgp_cop_dump.py keeps every query, with its maximum class probability as `cls`, and decodes
+it with the Car mean size. Part B shows that the MonoDGP and MonoCoP checkpoints are Car-only.
+MonoDLE: the adapter writes the K=50 heatmap top-k with no score threshold and drops non-Car
+peaks, so 50 rows in every image means no Pedestrian or Cyclist peak in any val top-50.
+RESULT A: every released dump holds Car candidates only, including the full-validation
+dumps of GUPNet (gupnet_val.csv) and MonoCon (monocon_val.csv).
+
+====================================================================================================
+PART B -- complete pools of the five query-based detectors (auxiliary dumps)
+====================================================================================================
+Every query of every val image with the sigmoid probability of each class channel.
+A query counts once even where the pool stores one row per query and class.
+
+detector  file                                  dump@       rows queries car_ch max p(Car) max p(other1) max p(other2) q: other>=0.05
+MonoDETR  monodetr_val_preflatten.csv           96d8cb1c  565350  188450      1   0.977914      0.000314      0.000410              0
+MonoDGP   monodgp_val_preflatten.csv            f4399779  188450  188450      1   0.950693      0.000179      0.000158              0
+MonoCoP   official_monocop_val_preflatten.csv   7a112ab9  188450  188450      1   0.965398      0.000263      0.000479              0
+MonoCLUE  monoclue_val_preflatten.csv           e44818d2  565350  188450      1   0.951192      0.000212      0.000167              0
+MonoIA    monoia_val_preflatten.csv             4958701a  565350  188450      1   0.976415      0.000211      0.000305              0
+RESULT B: over 5 checkpoints the largest non-Car probability of any val query is 0.000479, while the Car
+channel reaches at least 0.951 in each. These are Car-only checkpoints.
+
+====================================================================================================
+PART C -- native full-validation prediction directories (upstream test scripts)
+====================================================================================================
+Written by each repository's own test script at its native threshold during the paper's
+runs. Not released. Class histogram of the first token of every non-empty line, and a
+content hash (MD5 of the files concatenated in name order, 12 hex).
+
+M3D-RPN     <UPSTREAM_ROOT>/M3D-RPN/results_origsid/data  files=3769  md5=b3d9083e2a96
+            Car=12472  Pedestrian=1612  Cyclist=476  [= difficulty_class_extension.txt Part B]
+MonoFlex    <UPSTREAM_ROOT>/MonoFlex/tmp_eval/inference/kitti_train/data  files=3769  md5=ff6c5c57ff06 (modern environment)
+            Car=17142  Pedestrian=2064  Cyclist=919  [= difficulty_class_extension.txt Part B]
+DEVIANT     <UPSTREAM_ROOT>/DEVIANT/output/run_221/result_kitti/data  files=3769  md5=40321d0a07f6 (scores and geometry at 2 decimals)
+            Car=10186  Pedestrian=1432  Cyclist=377  [= difficulty_class_extension.txt Part B]
+MonoGround  <UPSTREAM_ROOT>/MonoGround/tmp/inference/kitti_train/val/label_2  files=3769  md5=40807fffed3b (modern environment)
+            Car=16719  Pedestrian=1982  Cyclist=981  [= difficulty_class_extension.txt Part B]
+MonoDLE     <UPSTREAM_ROOT>/MonoDLE/outputs/data  files=3769  md5=2c520f014d29
+            Car=13002  Pedestrian=0  Cyclist=0
+MonoCLUE    <UPSTREAM_ROOT>/MonoCLUE/outputs/monoclue/outputs/data  files=3769  md5=c906c65509b5
+            Car=13686  Pedestrian=0  Cyclist=0
+MonoIA      <UPSTREAM_ROOT>/MonoIA/outputs/monoia_car/monoia_car/outputs/data  files=3769  md5=0a63a0a772c0
+            Car=14894  Pedestrian=0  Cyclist=0
+No native full-validation directory of GUPNet or MonoCon is kept from the paper's runs.
+Their full-validation outputs are the released dumps of Part A, which hold Car only.
+
+====================================================================================================
+PART D -- checkpoint probe of GUPNet and MonoCon (repository's own decode, GPU)
+====================================================================================================
+GUPNet: released checkpoint md5 443be3c140ad, first 640 val images, top-k 50, native threshold 0.2, torch 1.9.0+cu111
+   config writelist ['Car', 'Pedestrian', 'Cyclist']
+   Pedestrian  top-k peaks   6503   at >= 0.2:   223   max score 0.762716
+   Car         top-k peaks  19181   at >= 0.2:  1678   max score 0.865197
+   Cyclist     top-k peaks   6316   at >= 0.2:    79   max score 0.731658
+MonoCon: released checkpoint md5 d83187011566, first 320 val images, top-k 30, native threshold 0.4, torch 1.10.0
+   head NUM_CLASSES 3
+   at the native threshold 0.4: Car=961  Pedestrian=129  Cyclist=40
+   with no threshold (all top-k):  Car=7572  Pedestrian=1318  Cyclist=694
+
+====================================================================================================
+PART E -- release documents of the upstream repositories
+====================================================================================================
+[GUPNet checkpoint classes] github.com/SuperMHP/GUPNet README.md  (sha256 8e9f93e9c4f4)
+   L57   We also provide the trained checkpoint which achieved the best multi-category performanc
+   L63   Pedestrian@IoU=0.5
+   L64   Cyclist@IoU=0.5
+[GUPNet checkpoint classes] github.com/SuperMHP/GUPNet code/experiments/config.yaml  (sha256 cebc5757caa4)
+   L10   writelist: ['Car','Pedestrian','Cyclist']
+[MonoCon checkpoint classes] github.com/2gunsu/monocon-pytorch utils/kitti_convert_utils.py  (sha256 af0a50daea94)
+   L13   CLASSES = ('Pedestrian', 'Cyclist', 'Car')
+[MonoCon checkpoint classes] config.yaml shipped with the monocon-pytorch checkpoint  (sha256 b8e431787358)
+   L30   NUM_CLASSES: 3
+[Waymo-trained checkpoints (Sec. P)] github.com/abhi1kumar/DEVIANT README.md  (sha256 75735aa82eba)
+   L185  | Waymo Val  | GUP Net | [run_1050](experiments/run_1050.yaml)                | [gdrive]
+   L186  | Waymo Val  | DEVIANT | [run_1051](experiments/run_1051.yaml)                | [gdrive]
+[Waymo-trained checkpoints (Sec. P)] github.com/abhi1kumar/DEVIANT experiments/run_1050.yaml  (sha256 691bb431e96a)
+   L4    type: 'waymo'
+   L6    train_split_name: 'train'
+[Waymo-trained checkpoints (Sec. P)] github.com/abhi1kumar/DEVIANT experiments/run_1051.yaml  (sha256 d440ef170fe1)
+   L4    type: 'waymo'
+   L6    train_split_name: 'train'
+[EPro-PnP-Det (Sec. P)] github.com/tjiiv-cprg/EPro-PnP EPro-PnP-Det/README.md  (sha256 caeb7535b356)
+   L15   EPro-PnP-Det extends the one-stage detector FCOS3D with a deformable correspondence netw
+   L61   | Config | Description | TTA | NDS |
+   L72   | Config | Description | TTA | NDS |
+   L63   | [epropnp_det_basic](configs/epropnp_det_basic.py) | Basic EPro-PnP | ✗ | 0.425 (Val) |
+   model tables: 2, metric columns: ['NDS'], occurrences of 'mAP' in the README: 0
+
+====================================================================================================
+SUMMARY -- twelve panel checkpoints
+====================================================================================================
+detector    emits Ped+Cyc full-val outputs of the paper                  evidence
+M3D-RPN     yes           released dump: Car only; native dir: Car, Ped, Cyc C
+MonoDLE     no            released dump: Car only; native dir: Car only  A; C
+MonoFlex    yes           released dump: Car only; native dir: Car, Ped, Cyc C
+GUPNet      yes           released dump: Car only; no native dir         D
+DEVIANT     yes           released dump: Car only; native dir: Car, Ped, Cyc C
+MonoGround  yes           released dump: Car only; native dir: Car, Ped, Cyc C
+MonoCon     yes           released dump: Car only; no native dir         D
+MonoDETR    no            released dump: Car only                        B
+MonoDGP     no            released dump: Car only                        B
+MonoCoP     no            released dump: Car only                        B
+MonoCLUE    no            released dump: Car only; native dir: Car only  B; C
+MonoIA      no            released dump: Car only; native dir: Car only  B; C
+
+  M3D-RPN     [C] yes native full-val output holds 1612 Pedestrian and 476 Cyclist boxes
+  MonoDLE     [A] no  all 50 top-k slots of every val image are Car peaks (188450 rows = 3769 x 50, adapter keeps Car, no score cut)
+  MonoDLE     [C] no  native full-val output holds Car only (13002 boxes)
+  MonoFlex    [C] yes native full-val output holds 2064 Pedestrian and 919 Cyclist boxes (modern environment)
+  GUPNet      [D] yes 223 Pedestrian and 79 Cyclist detections above the native threshold on 640 val images
+  DEVIANT     [C] yes native full-val output holds 1432 Pedestrian and 377 Cyclist boxes (scores and geometry at 2 decimals)
+  MonoGround  [C] yes native full-val output holds 1982 Pedestrian and 981 Cyclist boxes (modern environment)
+  MonoCon     [D] yes 129 Pedestrian and 40 Cyclist detections above the native threshold on 320 val images
+  MonoDETR    [B] no  non-Car channels never exceed 0.000410 on any of 188450 val queries
+  MonoDGP     [B] no  non-Car channels never exceed 0.000179 on any of 188450 val queries
+  MonoCoP     [B] no  non-Car channels never exceed 0.000479 on any of 188450 val queries
+  MonoCLUE    [B] no  non-Car channels never exceed 0.000212 on any of 188450 val queries
+  MonoCLUE    [C] no  native full-val output holds Car only (13686 boxes)
+  MonoIA      [B] no  non-Car channels never exceed 0.000305 on any of 188450 val queries
+  MonoIA      [C] no  native full-val output holds Car only (14894 boxes)
+
+Checkpoints that emit Pedestrian and Cyclist: 6 of 12: M3D-RPN, MonoFlex, GUPNet, DEVIANT, MonoGround, MonoCon
+Supplementary Sec. O list (M3D-RPN, MonoFlex, GUPNet, DEVIANT, MonoGround, MonoCon): MATCH
+GUPNet and MonoCon full-validation dumps: Car only (Part A). Sec. O and main Sec. 5.1 use the multi-class native directories of Part C for M3D-RPN, MonoFlex and MonoGround.
+[written] reports/extensions/class_capability.txt

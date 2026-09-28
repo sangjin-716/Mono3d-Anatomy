@@ -1,0 +1,28 @@
+# public copy of reports/final_run/bev_gap_probe.txt, sha256 478a647d2eef471bf392bcdc7bbbd22139102f9dbcbac63b9383d8e727851fdd, scrubbed: nothing (every line after these two header lines is identical to the original; its script, bev_gap_probe.py, is not part of this repository)
+# Note: rows use the modern-environment MonoFlex/MonoGround rebuilds. The paper's BEV-transfer table uses the starred rows of reports_orig/bev_transfer_orig.txt for those two; see Part D of reports/extensions/starred_panel_summaries.txt.
+# bev_gap_probe 2026-06-14T15:23:34
+# all-point AP @ IoU0.7; oracle = true-3D-IoU re-sort (o_act, cached); eval under metric=2 (3D)
+# and metric=1 (BEV). BEV oracle uses 3D-IoU sort => LOWER BOUND on the true BEV oracle gap.
+# question: is the +8.4..14.0 re-ranking gap metric-specific, or also present in BEV?
+
+[done] M3D-RPN    3D base= 11.51 ceil= 23.19 gap=+11.68 | BEV base= 16.26 ceil= 28.54 gap=+12.28 | dz(base BEV-3D)=+ 4.75
+[done] MonoDLE    3D base= 15.09 ceil= 29.12 gap=+14.03 | BEV base= 20.96 ceil= 35.36 gap=+14.40 | dz(base BEV-3D)=+ 5.87
+[done] MonoFlex   3D base= 16.26 ceil= 26.72 gap=+10.46 | BEV base= 23.63 ceil= 34.82 gap=+11.19 | dz(base BEV-3D)=+ 7.37
+[done] GUPNet     3D base= 17.11 ceil= 29.14 gap=+12.04 | BEV base= 22.76 ceil= 35.17 gap=+12.41 | dz(base BEV-3D)=+ 5.65
+[done] DEVIANT    3D base= 17.48 ceil= 29.31 gap=+11.83 | BEV base= 23.47 ceil= 35.72 gap=+12.24 | dz(base BEV-3D)=+ 5.99
+[done] MonoGround 3D base= 17.45 ceil= 28.34 gap=+10.89 | BEV base= 25.16 ceil= 37.15 gap=+11.99 | dz(base BEV-3D)=+ 7.71
+[done] MonoCon    3D base= 19.59 ceil= 30.17 gap=+10.58 | BEV base= 26.31 ceil= 36.44 gap=+10.12 | dz(base BEV-3D)=+ 6.72
+[done] MonoDETR   3D base= 21.18 ceil= 32.60 gap=+11.42 | BEV base= 27.94 ceil= 38.91 gap=+10.97 | dz(base BEV-3D)=+ 6.76
+[done] MonoDGP    3D base= 22.82 ceil= 31.23 gap=+ 8.41 | BEV base= 29.27 ceil= 36.35 gap=+ 7.08 | dz(base BEV-3D)=+ 6.44
+[done] MonoCoP    3D base= 24.34 ceil= 35.93 gap=+11.58 | BEV base= 30.34 ceil= 41.46 gap=+11.12 | dz(base BEV-3D)=+ 6.00
+[done] MonoCLUE   3D base= 24.55 ceil= 34.28 gap=+ 9.73 | BEV base= 30.88 ceil= 39.66 gap=+ 8.78 | dz(base BEV-3D)=+ 6.32
+[done] MonoIA     3D base= 25.18 ceil= 36.82 gap=+11.64 | BEV base= 32.02 ceil= 43.12 gap=+11.10 | dz(base BEV-3D)=+ 6.84
+
+3D  gap range +8.41..+14.03 median +11.50
+BEV gap range +7.08..+14.40 median +11.15 (lower bound)
+per-model BEV/3D gap ratio: M3D-RPN=1.05, MonoDLE=1.03, MonoFlex=1.07, GUPNet=1.03, DEVIANT=1.04, MonoGround=1.10, MonoCon=0.96, MonoDETR=0.96, MonoDGP=0.84, MonoCoP=0.96, MonoCLUE=0.90, MonoIA=0.95
+
+READ: gap_BEV ~ gap_3D (ratio near 1) => the re-ranking gap is NOT metric-specific; it is a
+ground-plane (x-z) phenomenon, corroborating the ray-coupled-3D-centre finding (height/y
+contributes little). gap_BEV << gap_3D => much of the gap is vertical/height => would
+qualify finding #4. base(BEV)-base(3D) = how much height costs the native AP.

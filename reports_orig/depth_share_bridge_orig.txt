@@ -1,0 +1,18 @@
+# public copy of mono3d_crossdataset/results/kitti_orig/depth_share_bridge_orig.txt, sha256 98d4c86b266ee43062f60ebb2dcbf02537b2ac4c9b8c513481713d78e5b4c5c4, scrubbed: an internal analysis label and an unsupported 'the information exists' clause in the READ note
+[done] MonoFlex*  base= 17.38 A(IoU)= 30.00 B(IoU_z*)= 13.65 depth-share=129.5% AUROC=0.778 (n+=1632,n-=2315) sp(V,act)=+0.651 sp(V,z*)=+0.682
+[done] MonoGround* base= 18.73 A(IoU)= 32.50 B(IoU_z*)= 15.41 depth-share=124.1% AUROC=0.750 (n+=1524,n-=2037) sp(V,act)=+0.657 sp(V,z*)=+0.672
+
+========================================================================================================
+DEPTH-SHARE BRIDGE (S5 pool, official eval) — how much of the order-ceiling gap requires depth knowledge
+  depth share = (A - B)/(A - base); B-base = gap closable WITHOUT depth knowledge
+  AUROC: V separating depth-displaced would-be-TPs (IoU_z*>=0.5, IoU_act<0.1) from ghosts (IoU_z*<0.1)
+========================================================================================================
+detector     base  A=IoU B=IoU_z*    gap  B-base depth-share | AUROC(V)    n+     n- | sp(V,act) sp(V,z*)
+---------------------------------------------------------------------------------------------------------
+MonoFlex*   17.38  30.00    13.65 +12.62   -3.73      129.5% |    0.778  1632   2315 |    +0.651   +0.682
+MonoGround*  18.73  32.50    15.41 +13.77   -3.32      124.1% |    0.750  1524   2037 |    +0.657   +0.672
+
+READ: depth-share ~ 1 & AUROC ~ 0.5 across families => the in-pool ordering failure is
+depth-located AND invisible to the detector's own score channel (cross-
+detector disagreement predicts |dz| at rho~0.40, but V does not carry it).
+depth-share ~ 0 => rank and depth decoupled; the gap would be a pure scoring problem.

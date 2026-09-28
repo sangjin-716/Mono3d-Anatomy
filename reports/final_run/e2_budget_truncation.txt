@@ -1,0 +1,10 @@
+# e2_budget_truncation run 2026-06-13T03:02:25
+# DIAGNOSTIC: budget sensitivity only — does NOT remove the family-budget confound
+
+[K=3000] A@0.7=0.734 A@0.5=0.927 | per-bin A7: 0.963 0.802 0.539 0.214  (GT=7874)
+[K= 150] A@0.7=0.453 A@0.5=0.670 | per-bin A7: 0.739 0.451 0.271 0.156  (GT=7874)
+[K=  50] A@0.7=0.330 A@0.5=0.510 | per-bin A7: 0.662 0.287 0.158 0.090  (GT=7874)
+
+reference: CenterNet native decoded pools A@0.7 = 0.271-0.316 (28-50 cands/img);
+query 150-hypothesis pools A@0.7 = 0.360-0.457.
+hard-core sensitivity: full-12 = 1176/7874 = 0.149; minus-anchor (11 models) = 2002/7874 = 0.254

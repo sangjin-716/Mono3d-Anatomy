@@ -1,0 +1,17 @@
+# diffsweep anatomy 2026-07-03T20:02:04
+# C=geometry anatomy (separate oracles, NOT additive): pure_z / ray-consistent-centre / full-centre
+# S5 pool (pool_mask thr0.2 + NMS0.5). all-point (R40). Mod(=1) reproduces oracle_anatomy.txt (gate).
+
+[MonoFlex* ] gate(Mod)=ratio✓  n=16109 matched=11579
+    Easy base= 25.07  pure_z=+29.44  ray=+54.95  centre=+64.38  | pure_z/centre=0.457  ray/centre=0.854
+    Mod  base= 18.10  pure_z=+26.40  ray=+49.65  centre=+61.09  | pure_z/centre=0.432  ray/centre=0.813
+    Hard base= 15.47  pure_z=+24.75  ray=+44.91  centre=+56.42  | pure_z/centre=0.439  ray/centre=0.796
+[MonoGround*] gate(Mod)=ratio✓  n=15809 matched=11482
+    Easy base= 26.19  pure_z=+28.25  ray=+52.84  centre=+62.69  | pure_z/centre=0.451  ray/centre=0.843
+    Mod  base= 19.43  pure_z=+26.22  ray=+47.24  centre=+58.07  | pure_z/centre=0.451  ray/centre=0.814
+    Hard base= 16.17  pure_z=+24.56  ray=+42.69  centre=+53.77  | pure_z/centre=0.457  ray/centre=0.794
+
+== panel summary per difficulty (median ratios; separate oracles, not additive) ==
+Easy: pure_z/centre median=0.454  ray/centre median=0.849  | full-centre gap min/med/max = +62.7/+63.5/+64.4
+Mod : pure_z/centre median=0.442  ray/centre median=0.813  | full-centre gap min/med/max = +58.1/+59.6/+61.1
+Hard: pure_z/centre median=0.448  ray/centre median=0.795  | full-centre gap min/med/max = +53.8/+55.1/+56.4

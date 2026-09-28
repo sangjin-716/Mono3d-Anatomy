@@ -1,0 +1,4 @@
+MonoDGP (DETR): transfer dAP = -8.52 ± 2.78 (3 drive-disjoint seeds)
+MonoCoP (DETR): transfer dAP = -9.31 ± 3.80 (3 drive-disjoint seeds)
+GUPNet (CenterNet): transfer dAP = -7.34 ± 3.79 (3 drive-disjoint seeds)
+MonoFlex (CenterNet): transfer dAP = -8.78 ± 2.69 (3 drive-disjoint seeds)

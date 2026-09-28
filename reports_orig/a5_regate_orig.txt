@@ -1,0 +1,14 @@
+# a5_regate run 2026-07-03T19:28:55
+# released native cell: cls>=0.1 (DETECTIONS_THRESHOLD), no box-NMS, rank by V; o_act on this pool
+# compare vs E4 V-gated cell (canonical table) and cls>=0.2 reference
+
+[MonoFlex* ] NATIVE(cls>=0.1) n= 22369 base= 18.11(17.29) ceil= 29.18 gap_allpt=+11.07 (R40 +12.07)
+[MonoFlex* ] ref(cls>=0.2)    n= 17142 base= 18.10(17.35) ceil= 29.30 gap_allpt=+11.21 (R40 +12.23)
+             E4 V-gated cell (replaced): base=16.26 gap=+10.46
+
+[MonoGround*] NATIVE(cls>=0.1) n= 21284 base= 19.42(18.64) ceil= 31.30 gap_allpt=+11.87 (R40 +13.49)
+[MonoGround*] ref(cls>=0.2)    n= 16719 base= 19.42(18.68) ceil= 31.40 gap_allpt=+11.98 (R40 +13.59)
+             E4 V-gated cell (replaced): base=17.45 gap=+10.89
+
+READ: the released-faithful native cells (cls>=0.1) replace the E4 V-gated MonoFlex/MonoGround
+rows in native_gap_canonical.md. Panel base-AP rank order is checked unchanged below.

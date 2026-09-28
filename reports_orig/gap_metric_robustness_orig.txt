@@ -1,0 +1,21 @@
+# public copy of mono3d_crossdataset/results/kitti_orig/gap_metric_robustness_orig.txt, sha256 a6cd2af961a6d63685c49cdd7a6ff622df24a187ecdf8da4fed86b0730bd080e, scrubbed: review-process label in the READ note (source line 20), worded as in the public copy of reports/gap_metric_robustness.txt; all numbers verbatim
+[done] MonoFlex*  base R11/R40= 22.31/ 17.38  ceil R11/R40= 36.36/ 30.00  gap R11=+14.04 R40=+12.62  |  IoU0.5 R40 base/ceil=45.76/57.50
+[done] MonoGround* base R11/R40= 23.60/ 18.73  ceil R11/R40= 36.36/ 32.50  gap R11=+12.76 R40=+13.77  |  IoU0.5 R40 base/ceil=47.99/60.00
+
+====================================================================================================
+GAP METRIC ROBUSTNESS — order-ceiling gap under R11 vs R40 (same pools, same oracle scores)
+====================================================================================================
+detector    baseR11  baseR40  ceilR11  ceilR40  gapR11  gapR40  shrink | gap@IoU0.5(R40)
+----------------------------------------------------------------------------------------
+MonoFlex*     22.31    17.38    36.36    30.00  +14.04  +12.62   +1.42 |          +11.74
+MonoGround*    23.60    18.73    36.36    32.50  +12.76  +13.77   -1.01 |          +12.01
+
+R40 gap: range +12.62..+13.77  sd=0.58
+R11 gap: range +12.76..+14.04  sd=0.64
+spearman(gapR11, gapR40) across 12 = -1.000
+spearman(gapR11 vs baseR11)        = -1.000
+
+READ: the C1 claim must be the version that survives BOTH columns. If R11 gaps stay
+large and ~stable (even if smaller than R40), the qualitative 'large, non-closing
+ordering headroom' stands and the R40 number is reported as an R40 diagnostic with the
+quantization caveat. Gap@IoU0.5 column addresses the metric-tautology concern.

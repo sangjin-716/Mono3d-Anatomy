@@ -1,0 +1,29 @@
+# exp1_true_ceiling 2026-06-20T03:25:11
+# AP* = 100 * sum(M)/sum(valid_gt) ; M = max bipartite matching pool-pred x valid(Mod)-GT @ IoU3D>=0.7
+# AP* is the EXACT upper bound on evaluator-realizable AP (max over labelings); native/true-IoU/FP-dem are LOWER bounds.
+# allpoint AP, Car, Moderate, IoU0.7. pools verbatim from e4_fp_tp_decomp.native_pool.
+
+detector     base trueIoU  FPdem  CEIL* recall* ceil-trueIoU eff_base eff_trueIoU
+M3D-RPN     11.51   23.19  23.19  23.19   0.232        -0.00    0.496       1.000
+MonoDLE     15.09   29.12  29.15  29.12   0.291        -0.00    0.518       1.000
+MonoFlex    16.26   26.72  26.91  26.90   0.269        +0.18    0.605       0.993
+GUPNet      17.11   29.14  29.20  29.20   0.292        +0.05    0.586       0.998
+DEVIANT     17.48   29.31  29.37  29.36   0.294        +0.05    0.595       0.998
+MonoGround  17.45   28.34  28.37  28.36   0.284        +0.02    0.615       0.999
+MonoCon     19.59   30.17  31.04  31.04   0.310        +0.87    0.631       0.972
+MonoDETR    21.18   32.60  32.73  32.64   0.326        +0.04    0.649       0.999
+MonoDGP     22.82   31.23  34.41  34.40   0.344        +3.18    0.663       0.908
+MonoCoP     24.34   35.93  36.07  36.03   0.360        +0.10    0.676       0.997
+MonoCLUE    24.55   34.28  36.00  35.94   0.359        +1.66    0.683       0.954
+MonoIA      25.18   36.82  37.00  36.98   0.370        +0.16    0.681       0.996
+
+== panel medians (all-point AP) ==
+base=18.54  trueIoU=29.74  FPdem=30.20  CEIL*=30.20
+median (CEIL* - trueIoU) understatement = +0.08 AP
+median (CEIL* - FPdem)                  = -0.01 AP
+median native efficiency  base/CEIL*    = 0.623
+median reported efficiency trueIoU/CEIL*= 0.998
+
+READ: trueIoU re-sort (paper's headline 'ceiling') is a LOWER bound; CEIL*=M/n_gt is the exact
+max-over-labelings upper bound. (CEIL* - trueIoU) is how much the reported number UNDERSTATES the
+true fixed-pool re-ranking ceiling. FP-dem<=CEIL* and trueIoU<=CEIL* must hold (sanity).

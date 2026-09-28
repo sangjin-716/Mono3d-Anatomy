@@ -1,0 +1,12 @@
+The data and figure sources in this directory, namely the report views in data/ (data/vB_reports/)
+and the TikZ source fig_unified_src.tex, are licensed under the
+
+    Creative Commons Attribution 4.0 International License (CC-BY-4.0)
+    https://creativecommons.org/licenses/by/4.0/
+
+as are the frozen reports they are built from (../reports/LICENSE). You are free to share and adapt
+these materials for any purpose, provided you give appropriate credit by citing the accompanying
+paper.
+
+The Python scripts in this directory are source code and are licensed under Apache-2.0
+(see ../LICENSE).

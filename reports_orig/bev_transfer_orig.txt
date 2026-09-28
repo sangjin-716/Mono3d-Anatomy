@@ -1,0 +1,4 @@
+# bev_transfer_orig 2026-07-03T20:03:59
+# A5 (cls>=0.1) pool; 3D-IoU re-sort; allpt AP under metric=2 (3D) and metric=1 (BEV)
+[done] MonoFlex*   3D base= 18.11 gap=+11.07 | BEV base= 23.71 gain=+11.12 | paired diff=+0.05
+[done] MonoGround* 3D base= 19.42 gap=+11.87 | BEV base= 25.17 gain=+12.05 | paired diff=+0.18

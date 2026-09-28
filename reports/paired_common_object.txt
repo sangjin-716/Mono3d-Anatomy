@@ -1,0 +1,126 @@
+======================================================================================================================
+PAIRED COMMON-OBJECT DECOMPOSITION  (val dumps only, NO retraining)
+S5 kept pool = cls>=0.2 + greedy 2D-NMS@0.5 by native V; arc 3D-IoU matcher; moderate Car GT (occ<=1 & trunc<=0.5)
+per moderate GT -> best 3D-IoU box over kept preds; detected = best-IoU>=0.3
+PRECISION = best-IoU / |dz| (geometry of SAME box).  RANK = Spearman(V,IoU) + score-percentile of good box vs FPs.
+======================================================================================================================
+[matrix] monoflex  ap=15.60 n_kept= 16107 mod_GTs= 9668 found(IoU>=0.3)= 6318 (0.653)
+[matrix] gupnet    ap=16.50 n_kept=  9836 mod_GTs= 9668 found(IoU>=0.3)= 5848 (0.605)
+[matrix] monodetr  ap=21.00 n_kept= 11399 mod_GTs= 9668 found(IoU>=0.3)= 6030 (0.624)
+[matrix] dgp       ap=22.30 n_kept= 11821 mod_GTs= 9668 found(IoU>=0.3)= 6299 (0.652)
+[matrix] monocop   ap=23.90 n_kept= 12483 mod_GTs= 9668 found(IoU>=0.3)= 6505 (0.673)
+[matrix] monoia    ap=24.50 n_kept= 13338 mod_GTs= 9668 found(IoU>=0.3)= 6674 (0.690)
+[universe] total distinct moderate Car GT slots = 9668
+
+######################################################################################################################
+PAIR gupnet -> monodetr: COMMON objects detected by ALL of ['gupnet', 'monodetr']
+   common-set size N = 5202 moderate Car GTs (same objects for every row)
+######################################################################################################################
+detector  baseAP |  medIoU  med|dz|  frac>=.7 |  rho(V,IoU)  medGoodPct
+-----------------------------------------------------------------------
+gupnet     16.50 |   0.672    0.366     0.440 |       0.361       0.690
+monodetr   21.00 |   0.697    0.327     0.494 |       0.451       0.740
+-----------------------------------------------------------------------
+  Δ (gupnet->monodetr) on SAME 5202 objects:
+    PRECISION: med-IoU 0.025 (+=tighter)   med|dz| -0.039 (-=less depth err)   frac>=.7 0.054
+    RANK:      med good-box score-pct 0.051 (+=ranked higher vs own FPs)
+
+######################################################################################################################
+PAIR monodetr -> dgp: COMMON objects detected by ALL of ['monodetr', 'dgp']
+   common-set size N = 5421 moderate Car GTs (same objects for every row)
+######################################################################################################################
+detector  baseAP |  medIoU  med|dz|  frac>=.7 |  rho(V,IoU)  medGoodPct
+-----------------------------------------------------------------------
+monodetr   21.00 |   0.691    0.333     0.478 |       0.463       0.729
+dgp        22.30 |   0.697    0.329     0.493 |       0.463       0.738
+-----------------------------------------------------------------------
+  Δ (monodetr->dgp) on SAME 5421 objects:
+    PRECISION: med-IoU 0.007 (+=tighter)   med|dz| -0.003 (-=less depth err)   frac>=.7 0.015
+    RANK:      med good-box score-pct 0.008 (+=ranked higher vs own FPs)
+
+######################################################################################################################
+PAIR dgp -> monocop: COMMON objects detected by ALL of ['dgp', 'monocop']
+   common-set size N = 5860 moderate Car GTs (same objects for every row)
+######################################################################################################################
+detector  baseAP |  medIoU  med|dz|  frac>=.7 |  rho(V,IoU)  medGoodPct
+-----------------------------------------------------------------------
+dgp        22.30 |   0.688    0.343     0.474 |       0.454       0.717
+monocop    23.90 |   0.698    0.330     0.495 |       0.465       0.728
+-----------------------------------------------------------------------
+  Δ (dgp->monocop) on SAME 5860 objects:
+    PRECISION: med-IoU 0.010 (+=tighter)   med|dz| -0.012 (-=less depth err)   frac>=.7 0.022
+    RANK:      med good-box score-pct 0.011 (+=ranked higher vs own FPs)
+
+######################################################################################################################
+ALL-4 CORE: COMMON objects detected by ALL of ['gupnet', 'monodetr', 'dgp', 'monocop']
+   common-set size N = 4771 moderate Car GTs (same objects for every row)
+######################################################################################################################
+detector  baseAP |  medIoU  med|dz|  frac>=.7 |  rho(V,IoU)  medGoodPct
+-----------------------------------------------------------------------
+gupnet     16.50 |   0.683    0.343     0.465 |       0.338       0.719
+monodetr   21.00 |   0.707    0.312     0.519 |       0.431       0.764
+dgp        22.30 |   0.712    0.307     0.531 |       0.432       0.768
+monocop    23.90 |   0.720    0.294     0.557 |       0.428       0.780
+-----------------------------------------------------------------------
+  Δ (gupnet->monocop) on SAME 4771 objects:
+    PRECISION: med-IoU 0.038 (+=tighter)   med|dz| -0.050 (-=less depth err)   frac>=.7 0.092
+    RANK:      med good-box score-pct 0.061 (+=ranked higher vs own FPs)
+
+######################################################################################################################
+ALL-6 (incl monoflex+monoia): COMMON objects detected by ALL of ['monoflex', 'gupnet', 'monodetr', 'dgp', 'monocop', 'monoia']
+   common-set size N = 4488 moderate Car GTs (same objects for every row)
+######################################################################################################################
+detector  baseAP |  medIoU  med|dz|  frac>=.7 |  rho(V,IoU)  medGoodPct
+-----------------------------------------------------------------------
+monoflex   15.60 |   0.679    0.326     0.450 |       0.432       0.840
+gupnet     16.50 |   0.693    0.328     0.486 |       0.314       0.737
+monodetr   21.00 |   0.715    0.298     0.541 |       0.406       0.779
+dgp        22.30 |   0.719    0.295     0.551 |       0.415       0.782
+monocop    23.90 |   0.727    0.279     0.578 |       0.408       0.793
+monoia     24.50 |   0.733    0.266     0.591 |       0.392       0.806
+-----------------------------------------------------------------------
+  Δ (monoflex->monoia) on SAME 4488 objects:
+    PRECISION: med-IoU 0.054 (+=tighter)   med|dz| -0.060 (-=less depth err)   frac>=.7 0.141
+    RANK:      med good-box score-pct -0.034 (+=ranked higher vs own FPs)
+
+######################################################################################################################
+STEP 3 — DIFFERENTIAL (coverage gain): GTs detected by NEWEST but NOT OLDEST
+######################################################################################################################
+
+gupnet -> monocop:  gained=1094   (lost: monocop found but gupnet not = 437)
+   dist bins: 0-15=119  15-30=375  30-45=486  45+=114
+   occlusion: occ0=575  occ1=519
+
+gupnet -> monodetr:  gained=828   (lost: monodetr found but gupnet not = 646)
+   dist bins: 0-15=106  15-30=267  30-45=325  45+=130
+   occlusion: occ0=489  occ1=339
+
+monodetr -> dgp:  gained=878   (lost: dgp found but monodetr not = 609)
+   dist bins: 0-15=39  15-30=295  30-45=476  45+=68
+   occlusion: occ0=429  occ1=449
+
+dgp -> monocop:  gained=645   (lost: monocop found but dgp not = 439)
+   dist bins: 0-15=45  15-30=192  30-45=307  45+=101
+   occlusion: occ0=377  occ1=268
+
+######################################################################################################################
+CLEAN TABLE — detector x metrics on the ALL-4-CORE COMMON object set (same objects everyone)
+######################################################################################################################
+detector  baseAP  medIoU  med|dz|  frac>=.7  rho(V,IoU)  medGoodPct
+-------------------------------------------------------------------
+gupnet     16.50   0.683    0.343     0.465       0.338       0.719
+monodetr   21.00   0.707    0.312     0.519       0.431       0.764
+dgp        22.30   0.712    0.307     0.531       0.432       0.768
+monocop    23.90   0.720    0.294     0.557       0.428       0.780
+
+VERDICT INPUTS (spearman of metric vs AP across the 4 core detectors, on the fixed common set):
+  PRECISION  med-IoU vs AP   = 1.000   (gupnet->monocop span 0.038, +=tighter)
+  PRECISION  med|dz| vs AP   = -1.000   (span -0.050, want NEGATIVE rho / NEGATIVE span)
+  PRECISION  frac>=0.7 vs AP = 1.000   (span 0.092, +=more clear 0.7)
+  RANK       good-box pct vs AP = 1.000   (span 0.061, +=ranked higher vs FPs)
+  RANK       Spearman(V,IoU) vs AP = 0.400
+
+======================================================================================================================
+ONE-LINE VERDICT
+======================================================================================================================
+On the same 4771 objects, the improvement is DOMINANTLY precision, with both rise: [med-IoU 0.683->0.720, med|dz| 0.343->0.294, frac>=.7 0.465->0.557, good-box pct 0.719->0.780]

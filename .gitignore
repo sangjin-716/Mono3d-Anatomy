@@ -1,0 +1,75 @@
+# === Heavy artifacts (use data/DUMPS.md download pointer instead) ===
+*.pth
+*.ckpt
+*.npz
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.pkl
+
+# === Per-prediction dumps / raw data ===
+experiments/
+ckpts/
+diag_worktrees/
+data/kitti/
+data/kitti_monoflex/
+data/KITTIDataset/
+**/label_2/
+**/*_val.csv
+**/*_train.csv
+results/
+
+# === Upstream detector repo clones (re-clone from GitHub) ===
+MonoDGP/
+MonoDETR/
+MonoCoP/
+MonoCLUE/
+MonoIA/
+DEVIANT/
+MonoFlex/
+MonoGround/
+MonoDLE/
+MonoCon/
+GUPNet/
+M3D-RPN/
+
+# === Local notes and tool state (never commit) ===
+.claude/
+**/memory/
+*_private*.md
+*redteam*
+
+# === Local paths config (each user supplies their own) ===
+paths.py
+
+# === Secrets / credentials ===
+*.env
+.env*
+.netrc
+**/auth.json
+.codex/
+*.key
+*.pem
+id_rsa*
+
+# === Third-party copyrighted PDFs ===
+docs/papers/
+*.pdf
+
+# === Build cache / editor ===
+__pycache__/
+*.pyc
+*.pyo
+*.bak
+*.swp
+.DS_Store
+/tmp/
+*.log
+
+# === Local re-runs and scratch (camera-ready release layout) ===
+reports_rerun/
+cache/
+data/dumps/
+data/KITTIDataset/
+upstream/

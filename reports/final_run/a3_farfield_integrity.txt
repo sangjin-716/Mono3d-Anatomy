@@ -1,0 +1,28 @@
+# public copy of reports/final_run/a3_farfield_integrity.txt, sha256 11c451f5c8a4d583a72eb6ef5b80c2bd0a63bad66bdd9c57fc345cbd6c90a7d4, scrubbed: review-round label (source line 20) and wording-rule labels (source lines 21-22) neutralized; manuscript sync list (source lines 25-34) dropped except the one census fact it carried (80.4%); table and numbers verbatim
+# Note: rows use the modern-environment MonoFlex/MonoGround rebuilds. The paper's far-field table uses the original-environment MonoFlex*/MonoGround* rows (rec45 0.049 / 0.047, reports_orig/probe_official_moderate_orig.txt), which gives 8/12 point estimates above 3.5%. The twelve-model table with the starred rows (k, Wilson CI, 8/12, Spearman 0.52) is Part A of reports/extensions/starred_panel_summaries.txt.
+# A3 far-field integrity pack (2026-06-13). NO drive-cluster CI (A3b excluded).
+# official KITTI moderate denominator: total 7,874; per-bin n: {'0-15': 1930, '15-30': 3163, '30-45': 2416, '45+': 365}
+# 45m+ bin n=365. k = round(recall*365) (recall printed to 3 dp -> k exact).
+
+model        rec45    k       Wilson95% CI  >3.5%?
+M3D-RPN      0.011    4   [  0.4%,  2.8%]        no
+MonoDLE      0.063   23   [  4.2%,  9.3%]       yes
+MonoFlex     0.030   11   [  1.7%,  5.3%]        no
+GUPNet       0.041   15   [  2.5%,  6.7%]       yes
+DEVIANT      0.030   11   [  1.7%,  5.3%]        no
+MonoGround   0.022    8   [  1.1%,  4.3%]        no
+MonoCon      0.019    7   [  0.9%,  3.9%]        no
+MonoDETR     0.093   34   [  6.7%, 12.7%]       yes
+MonoDGP      0.025    9   [  1.3%,  4.6%]        no
+MonoCoP      0.058   21   [  3.8%,  8.6%]       yes
+MonoCLUE     0.110   40   [  8.2%, 14.6%]       yes
+MonoIA       0.088   32   [  6.3%, 12.1%]       yes
+
+# models with 45m+ recall point-estimate > 3.5%: 6/12 -> ['MonoDLE', 'GUPNet', 'MonoDETR', 'MonoCoP', 'MonoCLUE', 'MonoIA']
+# (an earlier '8/12' typo corrected to 6/12; verified here)
+# Not supported: 'below X% for every model' (MonoCLUE Wilson upper = 14.6%).
+# Supported: point estimates 1.1-11.0% with Wilson CIs; n=365; non-monotone; rho_s(=0.50) is
+#          an n=12 MODEL-level descriptive stat, NOT to be conflated with the n=365 bin.
+
+## Height-filter census:
+80.4% of annotated cars beyond 45 m fall outside the official height filter.

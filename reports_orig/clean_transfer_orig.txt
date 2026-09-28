@@ -1,0 +1,2 @@
+MonoFlex* (CenterNet): transfer dAP = -9.72 ± 3.13 (3 drive-disjoint seeds)
+MonoGround* (CenterNet): transfer dAP = -8.84 ± 0.88 (3 drive-disjoint seeds)

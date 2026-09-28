@@ -1,0 +1,119 @@
+# operating_point_sweep run 2026-06-11T19:16:16
+# prereg: reports/prereg_2b_sweep.md (primary cell = thr0.2+NMS0.5; all else secondary)
+# AP columns: all-point interpolated AP (official R40 in parens)
+
+== M3D-RPN (dump rows=794481; floor note: min cls=0.050)
+  base thr=0.00 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.03)  NMS 0.6: 11.49(11.01)  NMSNone:  2.42( 2.02)
+  base thr=0.05 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.03)  NMS 0.6: 11.49(11.01)  NMSNone:  2.42( 2.02)
+  base thr=0.10 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.03)  NMS 0.6: 11.49(11.01)  NMSNone:  2.41( 2.02)
+  base thr=0.20 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.10)  NMS 0.6: 11.49(11.09)  NMSNone:  2.41( 2.01)
+  base thr=0.30 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.10)  NMS 0.6: 11.49(11.09)  NMSNone:  2.40( 2.01)
+  base thr=0.40 | NMS 0.4: 11.49(11.10)  NMS 0.5: 11.49(11.10)  NMS 0.6: 11.49(11.09)  NMSNone:  2.40( 2.00)
+  gap S5* thr=0.20 NMS= 0.5 | base= 11.49 ceil= 23.09 gap_allpt=+11.60 (R40 +13.90)
+  gap     thr=0.10 NMS= 0.5 | base= 11.49 ceil= 23.10 gap_allpt=+11.61 (R40 +13.97)
+  gap     thr=0.30 NMS= 0.5 | base= 11.49 ceil= 23.09 gap_allpt=+11.60 (R40 +13.90)
+  gap     thr=0.20 NMS=None | base=  2.41 ceil=  2.82 gap_allpt= +0.41 (R40 +0.32)
+  topK K=  20 | base= 11.49
+  topK K=  50 | base= 11.49  gap_allpt=+11.60
+  topK K= 100 | base= 11.49
+  topK K=None | base= 11.49  gap_allpt=+11.60
+
+== MonoDLE (dump rows=188450; floor note: min cls=0.005)
+  base thr=0.00 | NMS 0.4: 15.16(14.36)  NMS 0.5: 15.14(14.33)  NMS 0.6: 15.13(14.31)  NMSNone: 15.11(14.26)
+  base thr=0.05 | NMS 0.4: 15.16(14.60)  NMS 0.5: 15.14(14.57)  NMS 0.6: 15.13(14.55)  NMSNone: 15.11(14.50)
+  base thr=0.10 | NMS 0.4: 15.15(14.67)  NMS 0.5: 15.14(14.64)  NMS 0.6: 15.13(14.62)  NMSNone: 15.11(14.58)
+  base thr=0.20 | NMS 0.4: 15.14(14.71)  NMS 0.5: 15.12(14.69)  NMS 0.6: 15.11(14.67)  NMSNone: 15.09(14.63)
+  base thr=0.30 | NMS 0.4: 15.10(14.76)  NMS 0.5: 15.08(14.73)  NMS 0.6: 15.07(14.72)  NMSNone: 15.05(14.68)
+  base thr=0.40 | NMS 0.4: 15.03(14.79)  NMS 0.5: 15.01(14.77)  NMS 0.6: 15.00(14.76)  NMSNone: 14.99(14.73)
+  gap S5* thr=0.20 NMS= 0.5 | base= 15.12 ceil= 29.14 gap_allpt=+14.02 (R40 +15.31)
+  gap     thr=0.10 NMS= 0.5 | base= 15.14 ceil= 29.22 gap_allpt=+14.08 (R40 +15.36)
+  gap     thr=0.30 NMS= 0.5 | base= 15.08 ceil= 28.96 gap_allpt=+13.88 (R40 +15.27)
+  gap     thr=0.20 NMS=None | base= 15.09 ceil= 29.12 gap_allpt=+14.03 (R40 +15.33)
+  topK K=  20 | base= 15.12
+  topK K=  50 | base= 15.12  gap_allpt=+14.02
+  topK K= 100 | base= 15.12
+  topK K=None | base= 15.12  gap_allpt=+14.02
+
+== MonoFlex (dump rows=105944; floor note: min cls=0.004)
+  base thr=0.00 | NMS 0.4: 16.29(15.55)  NMS 0.5: 16.29(15.54)  NMS 0.6: 16.29(15.53)  NMSNone: 16.29(15.48)
+  base thr=0.05 | NMS 0.4: 16.29(15.55)  NMS 0.5: 16.29(15.54)  NMS 0.6: 16.29(15.53)  NMSNone: 16.29(15.48)
+  base thr=0.10 | NMS 0.4: 16.29(15.58)  NMS 0.5: 16.29(15.56)  NMS 0.6: 16.29(15.55)  NMSNone: 16.28(15.52)
+  base thr=0.20 | NMS 0.4: 16.28(15.59)  NMS 0.5: 16.28(15.57)  NMS 0.6: 16.28(15.56)  NMSNone: 16.27(15.54)
+  base thr=0.30 | NMS 0.4: 16.26(15.62)  NMS 0.5: 16.26(15.61)  NMS 0.6: 16.26(15.60)  NMSNone: 16.25(15.59)
+  base thr=0.40 | NMS 0.4: 16.24(15.66)  NMS 0.5: 16.23(15.65)  NMS 0.6: 16.23(15.64)  NMSNone: 16.23(15.63)
+  gap S5* thr=0.20 NMS= 0.5 | base= 16.28 ceil= 26.96 gap_allpt=+10.68 (R40 +11.93)
+  gap     thr=0.10 NMS= 0.5 | base= 16.29 ceil= 27.00 gap_allpt=+10.72 (R40 +11.94)
+  gap     thr=0.30 NMS= 0.5 | base= 16.26 ceil= 26.86 gap_allpt=+10.60 (R40 +11.89)
+  gap     thr=0.20 NMS=None | base= 16.27 ceil= 26.56 gap_allpt=+10.28 (R40 +11.48)
+  topK K=  20 | base= 16.28
+  topK K=  50 | base= 16.28  gap_allpt=+10.68
+  topK K= 100 | base= 16.28
+  topK K=None | base= 16.28  gap_allpt=+10.68
+
+== GUPNet (dump rows=114224; floor note: min cls=0.000)
+  base thr=0.00 | NMS 0.4: 17.25(16.35)  NMS 0.5: 17.24(16.33)  NMS 0.6: 17.23(16.31)  NMSNone: 17.23(16.10)
+  base thr=0.05 | NMS 0.4: 17.24(16.40)  NMS 0.5: 17.23(16.38)  NMS 0.6: 17.23(16.36)  NMSNone: 17.22(16.34)
+  base thr=0.10 | NMS 0.4: 17.23(16.42)  NMS 0.5: 17.22(16.41)  NMS 0.6: 17.21(16.40)  NMSNone: 17.21(16.37)
+  base thr=0.20 | NMS 0.4: 17.13(16.49)  NMS 0.5: 17.12(16.48)  NMS 0.6: 17.12(16.47)  NMSNone: 17.11(16.46)
+  base thr=0.30 | NMS 0.4: 16.94(16.58)  NMS 0.5: 16.93(16.57)  NMS 0.6: 16.93(16.56)  NMSNone: 16.92(16.55)
+  base thr=0.40 | NMS 0.4: 16.46(15.90)  NMS 0.5: 16.46(15.89)  NMS 0.6: 16.46(15.89)  NMSNone: 16.45(15.87)
+  gap S5* thr=0.20 NMS= 0.5 | base= 17.12 ceil= 29.18 gap_allpt=+12.06 (R40 +13.52)
+  gap     thr=0.10 NMS= 0.5 | base= 17.22 ceil= 29.59 gap_allpt=+12.37 (R40 +13.59)
+  gap     thr=0.30 NMS= 0.5 | base= 16.93 ceil= 28.49 gap_allpt=+11.55 (R40 +13.43)
+  gap     thr=0.20 NMS=None | base= 17.11 ceil= 29.14 gap_allpt=+12.04 (R40 +13.48)
+  topK K=  20 | base= 17.12
+  topK K=  50 | base= 17.12  gap_allpt=+12.06
+  topK K= 100 | base= 17.12
+  topK K=None | base= 17.12  gap_allpt=+12.06
+
+== DEVIANT (dump rows=128576; floor note: min cls=0.000)
+  base thr=0.00 | NMS 0.4: 17.58(16.48)  NMS 0.5: 17.58(16.45)  NMS 0.6: 17.59(16.42)  NMSNone: 17.59(16.35)
+  base thr=0.05 | NMS 0.4: 17.57(16.64)  NMS 0.5: 17.58(16.61)  NMS 0.6: 17.58(16.59)  NMSNone: 17.58(16.56)
+  base thr=0.10 | NMS 0.4: 17.56(16.69)  NMS 0.5: 17.56(16.66)  NMS 0.6: 17.56(16.65)  NMSNone: 17.56(16.62)
+  base thr=0.20 | NMS 0.4: 17.50(16.76)  NMS 0.5: 17.50(16.74)  NMS 0.6: 17.49(16.73)  NMSNone: 17.48(16.71)
+  base thr=0.30 | NMS 0.4: 17.34(16.84)  NMS 0.5: 17.34(16.83)  NMS 0.6: 17.34(16.82)  NMSNone: 17.33(16.81)
+  base thr=0.40 | NMS 0.4: 16.91(16.14)  NMS 0.5: 16.90(16.13)  NMS 0.6: 16.90(16.13)  NMSNone: 16.89(16.12)
+  gap S5* thr=0.20 NMS= 0.5 | base= 17.50 ceil= 29.35 gap_allpt=+11.86 (R40 +13.26)
+  gap     thr=0.10 NMS= 0.5 | base= 17.56 ceil= 29.62 gap_allpt=+12.07 (R40 +13.34)
+  gap     thr=0.30 NMS= 0.5 | base= 17.34 ceil= 28.78 gap_allpt=+11.44 (R40 +13.17)
+  gap     thr=0.20 NMS=None | base= 17.48 ceil= 29.31 gap_allpt=+11.83 (R40 +13.22)
+  topK K=  20 | base= 17.50
+  topK K=  50 | base= 17.50  gap_allpt=+11.86
+  topK K= 100 | base= 17.50
+  topK K=None | base= 17.50  gap_allpt=+11.86
+
+== MonoGround (dump rows=104552; floor note: min cls=0.003)
+  base thr=0.00 | NMS 0.4: 17.49(16.80)  NMS 0.5: 17.48(16.76)  NMS 0.6: 17.47(16.74)  NMSNone: 17.48(16.71)
+  base thr=0.05 | NMS 0.4: 17.49(16.80)  NMS 0.5: 17.48(16.76)  NMS 0.6: 17.47(16.74)  NMSNone: 17.48(16.71)
+  base thr=0.10 | NMS 0.4: 17.49(16.82)  NMS 0.5: 17.48(16.79)  NMS 0.6: 17.47(16.77)  NMSNone: 17.47(16.74)
+  base thr=0.20 | NMS 0.4: 17.49(16.85)  NMS 0.5: 17.48(16.82)  NMS 0.6: 17.47(16.80)  NMSNone: 17.47(16.79)
+  base thr=0.30 | NMS 0.4: 17.48(16.88)  NMS 0.5: 17.47(16.85)  NMS 0.6: 17.46(16.84)  NMSNone: 17.46(16.82)
+  base thr=0.40 | NMS 0.4: 17.47(16.93)  NMS 0.5: 17.46(16.91)  NMS 0.6: 17.45(16.89)  NMSNone: 17.45(16.88)
+  gap S5* thr=0.20 NMS= 0.5 | base= 17.48 ceil= 28.46 gap_allpt=+10.98 (R40 +13.18)
+  gap     thr=0.10 NMS= 0.5 | base= 17.48 ceil= 28.49 gap_allpt=+11.01 (R40 +13.21)
+  gap     thr=0.30 NMS= 0.5 | base= 17.47 ceil= 28.41 gap_allpt=+10.94 (R40 +13.15)
+  gap     thr=0.20 NMS=None | base= 17.47 ceil= 28.27 gap_allpt=+10.80 (R40 +12.97)
+  topK K=  20 | base= 17.48
+  topK K=  50 | base= 17.48  gap_allpt=+10.98
+  topK K= 100 | base= 17.48
+  topK K=None | base= 17.48  gap_allpt=+10.98
+
+== MonoCon (dump rows=88089; floor note: min cls=0.000)
+  base thr=0.00 | NMS 0.4: 19.64(18.74)  NMS 0.5: 19.63(18.71)  NMS 0.6: 19.62(18.69)  NMSNone: 19.67(18.63)
+  base thr=0.05 | NMS 0.4: 19.63(19.02)  NMS 0.5: 19.62(18.98)  NMS 0.6: 19.61(18.96)  NMSNone: 19.65(18.85)
+  base thr=0.10 | NMS 0.4: 19.62(19.04)  NMS 0.5: 19.62(19.01)  NMS 0.6: 19.61(18.98)  NMSNone: 19.64(18.91)
+  base thr=0.20 | NMS 0.4: 19.61(19.08)  NMS 0.5: 19.60(19.05)  NMS 0.6: 19.60(19.03)  NMSNone: 19.62(18.95)
+  base thr=0.30 | NMS 0.4: 19.59(19.13)  NMS 0.5: 19.59(19.10)  NMS 0.6: 19.58(19.08)  NMSNone: 19.60(18.99)
+  base thr=0.40 | NMS 0.4: 19.59(19.13)  NMS 0.5: 19.59(19.10)  NMS 0.6: 19.58(19.08)  NMSNone: 19.59(19.01)
+  gap S5* thr=0.20 NMS= 0.5 | base= 19.60 ceil= 30.96 gap_allpt=+11.36 (R40 +13.45)
+  gap     thr=0.10 NMS= 0.5 | base= 19.62 ceil= 31.02 gap_allpt=+11.41 (R40 +13.49)
+  gap     thr=0.30 NMS= 0.5 | base= 19.59 ceil= 30.89 gap_allpt=+11.31 (R40 +13.40)
+  gap     thr=0.20 NMS=None | base= 19.62 ceil= 30.13 gap_allpt=+10.52 (R40 +12.34)
+  topK K=  20 | base= 19.60
+  topK K=  50 | base= 19.60  gap_allpt=+11.36
+  topK K= 100 | base= 19.60
+  topK K=None | base= 19.60  gap_allpt=+11.36
+
+READ: per prereg, the C1 ordering-headroom wording requires (e) gap>0 & median>=6 at every
+gap cell and (f) S5-vs-best-cell gap difference <3 AP for >=6/7. M3D-RPN thr<=0.05 cells are
+floor-limited until the floor-0 dump lands (flagged above by min cls).

@@ -1,0 +1,272 @@
+# public copy of the camera-ready check difficulty_class_extension.txt, sha256 5a003c0c7eca507a452623c04017c93afccb95059e1664555760344f38b3eeab, scrubbed: local paths made repo-relative or written relative to paths.UPSTREAM_ROOT (source lines 2-4, 168-171, 269-270); no line removed, every number verbatim
+# Note: Sec. O uses the M3D-RPN, MonoFlex and MonoGround rows of Part B (DEVIANT excluded, see class_gate_audit.txt). The companion difficulty_class_extension.csv is byte-identical to its original.
+# difficulty_class_extension  2026-08-28T00:38:30
+# script  tools/extensions/difficulty_class_extension.py
+# env     python 3.9 (original environment)
+# GT      KITTI training/label_2    split ImageSets/val.txt   n_img=3769
+# Part A  = tools/decomp/exp1_true_ceiling.py with difficulty swept 0/1/2 (native panel pools)
+# Part B  = Pedestrian/Cyclist from complete native KITTI prediction dirs (see PART B header)
+
+==============================================================================================================
+PART A -- KITTI Car, IoU3D>=0.7, native panel pools, all-point interpolated AP
+==============================================================================================================
+[A] M3D-RPN    Easy     npool= 12473 base= 15.14 trueIoU= 34.48 gap=+19.34 AP*= 34.48 headroom=+19.34 M/n_gt=1002/2906=0.345
+[A] M3D-RPN    Moderate npool= 12473 base= 11.51 trueIoU= 23.19 gap=+11.68 AP*= 23.19 headroom=+11.68 M/n_gt=1826/7874=0.232
+[A] M3D-RPN    Hard     npool= 12473 base=  8.95 trueIoU= 17.87 gap= +8.92 AP*= 17.86 headroom= +8.92 M/n_gt=1958/10960=0.179
+    (224s)
+[A] MonoDLE    Easy     npool= 13002 base= 18.45 trueIoU= 40.06 gap=+21.61 AP*= 40.02 headroom=+21.57 M/n_gt=1163/2906=0.400
+[A] MonoDLE    Moderate npool= 13002 base= 15.09 trueIoU= 29.12 gap=+14.03 AP*= 29.12 headroom=+14.03 M/n_gt=2293/7874=0.291
+[A] MonoDLE    Hard     npool= 13002 base= 13.09 trueIoU= 25.06 gap=+11.97 AP*= 25.06 headroom=+11.97 M/n_gt=2747/10960=0.251
+    (122s)
+[A] MonoFlex   Easy     npool= 12283 base= 23.15 trueIoU= 39.40 gap=+16.25 AP*= 39.81 headroom=+16.67 M/n_gt=1157/2906=0.398
+[A] MonoFlex   Moderate npool= 12283 base= 16.26 trueIoU= 26.72 gap=+10.46 AP*= 26.90 headroom=+10.64 M/n_gt=2118/7874=0.269
+[A] MonoFlex   Hard     npool= 12283 base= 13.76 trueIoU= 22.86 gap= +9.10 AP*= 22.99 headroom= +9.24 M/n_gt=2520/10960=0.230
+    (114s)
+[A] GUPNet     Easy     npool= 10004 base= 23.94 trueIoU= 43.00 gap=+19.06 AP*= 43.01 headroom=+19.07 M/n_gt=1250/2906=0.430
+[A] GUPNet     Moderate npool= 10004 base= 17.11 trueIoU= 29.14 gap=+12.04 AP*= 29.20 headroom=+12.09 M/n_gt=2299/7874=0.292
+[A] GUPNet     Hard     npool= 10004 base= 14.48 trueIoU= 24.80 gap=+10.31 AP*= 24.84 headroom=+10.35 M/n_gt=2722/10960=0.248
+    (117s)
+[A] DEVIANT    Easy     npool= 10186 base= 26.02 trueIoU= 43.79 gap=+17.76 AP*= 43.84 headroom=+17.82 M/n_gt=1274/2906=0.438
+[A] DEVIANT    Moderate npool= 10186 base= 17.48 trueIoU= 29.31 gap=+11.83 AP*= 29.36 headroom=+11.88 M/n_gt=2312/7874=0.294
+[A] DEVIANT    Hard     npool= 10186 base= 14.89 trueIoU= 25.17 gap=+10.28 AP*= 25.21 headroom=+10.32 M/n_gt=2763/10960=0.252
+    (119s)
+[A] MonoGround Easy     npool= 11169 base= 24.40 trueIoU= 42.13 gap=+17.73 AP*= 42.15 headroom=+17.75 M/n_gt=1225/2906=0.422
+[A] MonoGround Moderate npool= 11169 base= 17.45 trueIoU= 28.34 gap=+10.89 AP*= 28.36 headroom=+10.91 M/n_gt=2233/7874=0.284
+[A] MonoGround Hard     npool= 11169 base= 14.53 trueIoU= 23.68 gap= +9.15 AP*= 23.70 headroom= +9.17 M/n_gt=2597/10960=0.237
+    (117s)
+[A] MonoCon    Easy     npool= 11793 base= 26.95 trueIoU= 42.69 gap=+15.74 AP*= 44.74 headroom=+17.79 M/n_gt=1300/2906=0.447
+[A] MonoCon    Moderate npool= 11793 base= 19.59 trueIoU= 30.17 gap=+10.58 AP*= 31.04 headroom=+11.45 M/n_gt=2444/7874=0.310
+[A] MonoCon    Hard     npool= 11793 base= 16.52 trueIoU= 25.79 gap= +9.27 AP*= 26.43 headroom= +9.91 M/n_gt=2897/10960=0.264
+    (124s)
+[A] MonoDETR   Easy     npool= 12090 base= 29.12 trueIoU= 47.40 gap=+18.28 AP*= 47.45 headroom=+18.33 M/n_gt=1379/2906=0.475
+[A] MonoDETR   Moderate npool= 12090 base= 21.18 trueIoU= 32.60 gap=+11.42 AP*= 32.64 headroom=+11.46 M/n_gt=2570/7874=0.326
+[A] MonoDETR   Hard     npool= 12090 base= 17.74 trueIoU= 27.53 gap= +9.80 AP*= 27.57 headroom= +9.84 M/n_gt=3022/10960=0.276
+    (143s)
+[A] MonoDGP    Easy     npool= 13921 base= 30.62 trueIoU= 41.06 gap=+10.44 AP*= 47.90 headroom=+17.28 M/n_gt=1392/2906=0.479
+[A] MonoDGP    Moderate npool= 13921 base= 22.82 trueIoU= 31.23 gap= +8.41 AP*= 34.40 headroom=+11.58 M/n_gt=2709/7874=0.344
+[A] MonoDGP    Hard     npool= 13921 base= 19.88 trueIoU= 28.04 gap= +8.16 AP*= 30.44 headroom=+10.56 M/n_gt=3336/10960=0.304
+    (150s)
+[A] MonoCoP    Easy     npool= 13371 base= 32.75 trueIoU= 49.40 gap=+16.64 AP*= 49.62 headroom=+16.87 M/n_gt=1442/2906=0.496
+[A] MonoCoP    Moderate npool= 13371 base= 24.34 trueIoU= 35.93 gap=+11.58 AP*= 36.03 headroom=+11.69 M/n_gt=2837/7874=0.360
+[A] MonoCoP    Hard     npool= 13371 base= 20.93 trueIoU= 31.07 gap=+10.14 AP*= 31.15 headroom=+10.22 M/n_gt=3414/10960=0.311
+    (153s)
+[A] MonoCLUE   Easy     npool= 13678 base= 34.03 trueIoU= 46.62 gap=+12.59 AP*= 50.17 headroom=+16.14 M/n_gt=1458/2906=0.502
+[A] MonoCLUE   Moderate npool= 13678 base= 24.55 trueIoU= 34.28 gap= +9.73 AP*= 35.94 headroom=+11.39 M/n_gt=2830/7874=0.359
+[A] MonoCLUE   Hard     npool= 13678 base= 21.04 trueIoU= 30.12 gap= +9.08 AP*= 31.39 headroom=+10.35 M/n_gt=3440/10960=0.314
+    (156s)
+[A] MonoIA     Easy     npool= 14894 base= 34.79 trueIoU= 51.97 gap=+17.18 AP*= 52.34 headroom=+17.55 M/n_gt=1521/2906=0.523
+[A] MonoIA     Moderate npool= 14894 base= 25.18 trueIoU= 36.82 gap=+11.64 AP*= 36.98 headroom=+11.80 M/n_gt=2912/7874=0.370
+[A] MonoIA     Hard     npool= 14894 base= 21.67 trueIoU= 31.88 gap=+10.21 AP*= 32.00 headroom=+10.33 M/n_gt=3507/10960=0.320
+    (160s)
+
+---- GATES ----
+GATE-1/2 M3D-RPN    base  11.51 vs e4  11.51 (d=0.000)  |  gap +11.68 vs e4 full +11.68 (d=0.003)  [PASS]
+GATE-1/2 MonoDLE    base  15.09 vs e4  15.09 (d=0.002)  |  gap +14.03 vs e4 full +14.03 (d=0.001)  [PASS]
+GATE-1/2 MonoFlex   base  16.26 vs e4  16.26 (d=0.002)  |  gap +10.46 vs e4 full +10.46 (d=0.004)  [PASS]
+GATE-1/2 GUPNet     base  17.11 vs e4  17.11 (d=0.000)  |  gap +12.04 vs e4 full +12.04 (d=0.005)  [PASS]
+GATE-1/2 DEVIANT    base  17.48 vs e4  17.48 (d=0.002)  |  gap +11.83 vs e4 full +11.83 (d=0.004)  [PASS]
+GATE-1/2 MonoGround base  17.45 vs e4  17.45 (d=0.002)  |  gap +10.89 vs e4 full +10.89 (d=0.001)  [PASS]
+GATE-1/2 MonoCon    base  19.59 vs e4  19.59 (d=0.003)  |  gap +10.58 vs e4 full +10.58 (d=0.000)  [PASS]
+GATE-1/2 MonoDETR   base  21.18 vs e4  21.18 (d=0.003)  |  gap +11.42 vs e4 full +11.42 (d=0.000)  [PASS]
+GATE-1/2 MonoDGP    base  22.82 vs e4  22.82 (d=0.002)  |  gap  +8.41 vs e4 full  +8.41 (d=0.005)  [PASS]
+GATE-1/2 MonoCoP    base  24.34 vs e4  24.34 (d=0.003)  |  gap +11.58 vs e4 full +11.58 (d=0.004)  [PASS]
+GATE-1/2 MonoCLUE   base  24.55 vs e4  24.55 (d=0.005)  |  gap  +9.73 vs e4 full  +9.73 (d=0.002)  [PASS]
+GATE-1/2 MonoIA     base  25.18 vs e4  25.18 (d=0.003)  |  gap +11.64 vs e4 full +11.64 (d=0.001)  [PASS]
+GATE-3   M3D-RPN    Table1 E/M/H 15.14/11.51/ 8.95  got 15.14/11.51/ 8.95  maxd=0.004  [PASS]
+GATE-3   MonoDLE    Table1 E/M/H 18.45/15.09/13.09  got 18.45/15.09/13.09  maxd=0.004  [PASS]
+GATE-3   GUPNet     Table1 E/M/H 23.94/17.11/14.48  got 23.94/17.11/14.48  maxd=0.004  [PASS]
+GATE-3   DEVIANT    Table1 E/M/H 26.02/17.48/14.89  got 26.02/17.48/14.89  maxd=0.004  [PASS]
+GATE-3   MonoCon    Table1 E/M/H 26.95/19.59/16.52  got 26.95/19.59/16.52  maxd=0.003  [PASS]
+GATE-3   MonoDETR   Table1 E/M/H 29.12/21.18/17.74  got 29.12/21.18/17.74  maxd=0.004  [PASS]
+GATE-3   MonoDGP    Table1 E/M/H 30.62/22.82/19.88  got 30.62/22.82/19.88  maxd=0.002  [PASS]
+GATE-3   MonoCoP    Table1 E/M/H 32.75/24.34/20.93  got 32.75/24.34/20.93  maxd=0.004  [PASS]
+GATE-3   MonoCLUE   Table1 E/M/H 34.03/24.55/21.04  got 34.03/24.55/21.04  maxd=0.005  [PASS]
+GATE-3   MonoIA     Table1 E/M/H 34.79/25.18/21.67  got 34.79/25.18/21.67  maxd=0.004  [PASS]
+GATE-3*  MonoFlex   Table1(orig-env, EXCLUDED from gate) E/M/H 25.08/18.11/15.52  got(modern) 23.15/16.26/13.76
+GATE-3*  MonoGround Table1(orig-env, EXCLUDED from gate) E/M/H 26.18/19.42/16.22  got(modern) 24.40/17.45/14.53
+GATE-4   M3D-RPN    AP*  23.19 vs exp1_true_ceiling.txt  23.19 (d=0.000) [PASS]
+GATE-4   MonoDLE    AP*  29.12 vs exp1_true_ceiling.txt  29.12 (d=0.001) [PASS]
+GATE-4   MonoFlex   AP*  26.90 vs exp1_true_ceiling.txt  26.90 (d=0.001) [PASS]
+GATE-4   GUPNet     AP*  29.20 vs exp1_true_ceiling.txt  29.20 (d=0.003) [PASS]
+GATE-4   DEVIANT    AP*  29.36 vs exp1_true_ceiling.txt  29.36 (d=0.002) [PASS]
+GATE-4   MonoGround AP*  28.36 vs exp1_true_ceiling.txt  28.36 (d=0.001) [PASS]
+GATE-4   MonoCon    AP*  31.04 vs exp1_true_ceiling.txt  31.04 (d=0.001) [PASS]
+GATE-4   MonoDETR   AP*  32.64 vs exp1_true_ceiling.txt  32.64 (d=0.001) [PASS]
+GATE-4   MonoDGP    AP*  34.40 vs exp1_true_ceiling.txt  34.40 (d=0.004) [PASS]
+GATE-4   MonoCoP    AP*  36.03 vs exp1_true_ceiling.txt  36.03 (d=0.000) [PASS]
+GATE-4   MonoCLUE   AP*  35.94 vs exp1_true_ceiling.txt  35.94 (d=0.001) [PASS]
+GATE-4   MonoIA     AP*  36.98 vs exp1_true_ceiling.txt  36.98 (d=0.002) [PASS]
+
+ALL GATES 1-4 PASS.
+
+======================================================================================================================
+TABLE A1 -- base / true-IoU re-sort / ordering gap, by difficulty (Car IoU0.7, all-point AP)
+======================================================================================================================
+detector   |  E base E resort  E gap |  M base M resort  M gap |  H base H resort  H gap
+----------------------------------------------------------------------------------------
+M3D-RPN    |   15.14    34.48 +19.34 |   11.51    23.19 +11.68 |    8.95    17.87  +8.92
+MonoDLE    |   18.45    40.06 +21.61 |   15.09    29.12 +14.03 |   13.09    25.06 +11.97
+MonoFlex   |   23.15    39.40 +16.25 |   16.26    26.72 +10.46 |   13.76    22.86  +9.10
+GUPNet     |   23.94    43.00 +19.06 |   17.11    29.14 +12.04 |   14.48    24.80 +10.31
+DEVIANT    |   26.02    43.79 +17.76 |   17.48    29.31 +11.83 |   14.89    25.17 +10.28
+MonoGround |   24.40    42.13 +17.73 |   17.45    28.34 +10.89 |   14.53    23.68  +9.15
+MonoCon    |   26.95    42.69 +15.74 |   19.59    30.17 +10.58 |   16.52    25.79  +9.27
+MonoDETR   |   29.12    47.40 +18.28 |   21.18    32.60 +11.42 |   17.74    27.53  +9.80
+MonoDGP    |   30.62    41.06 +10.44 |   22.82    31.23  +8.41 |   19.88    28.04  +8.16
+MonoCoP    |   32.75    49.40 +16.64 |   24.34    35.93 +11.58 |   20.93    31.07 +10.14
+MonoCLUE   |   34.03    46.62 +12.59 |   24.55    34.28  +9.73 |   21.04    30.12  +9.08
+MonoIA     |   34.79    51.97 +17.18 |   25.18    36.82 +11.64 |   21.67    31.88 +10.21
+
+======================================================================================================================
+TABLE A2 -- matching ceiling AP* = 100*M/n_gt (exact max-over-labelings upper bound) and matching recall
+======================================================================================================================
+detector   |   E AP*  E head  E M/ngt |   M AP*  M head  M M/ngt |   H AP*  H head  H M/ngt
+-------------------------------------------------------------------------------------------
+M3D-RPN    |   34.48  +19.34    0.345 |   23.19  +11.68    0.232 |   17.86   +8.92    0.179
+MonoDLE    |   40.02  +21.57    0.400 |   29.12  +14.03    0.291 |   25.06  +11.97    0.251
+MonoFlex   |   39.81  +16.67    0.398 |   26.90  +10.64    0.269 |   22.99   +9.24    0.230
+GUPNet     |   43.01  +19.07    0.430 |   29.20  +12.09    0.292 |   24.84  +10.35    0.248
+DEVIANT    |   43.84  +17.82    0.438 |   29.36  +11.88    0.294 |   25.21  +10.32    0.252
+MonoGround |   42.15  +17.75    0.422 |   28.36  +10.91    0.284 |   23.70   +9.17    0.237
+MonoCon    |   44.74  +17.79    0.447 |   31.04  +11.45    0.310 |   26.43   +9.91    0.264
+MonoDETR   |   47.45  +18.33    0.475 |   32.64  +11.46    0.326 |   27.57   +9.84    0.276
+MonoDGP    |   47.90  +17.28    0.479 |   34.40  +11.58    0.344 |   30.44  +10.56    0.304
+MonoCoP    |   49.62  +16.87    0.496 |   36.03  +11.69    0.360 |   31.15  +10.22    0.311
+MonoCLUE   |   50.17  +16.14    0.502 |   35.94  +11.39    0.359 |   31.39  +10.35    0.314
+MonoIA     |   52.34  +17.55    0.523 |   36.98  +11.80    0.370 |   32.00  +10.33    0.320
+
+== PANEL SUMMARY (Car) ==
+Easy     n_valid_gt=  2906 | true-IoU re-sort gap  +10.44..+21.61 median +17.46  >0: 12/12
+                          | AP*-base headroom     +16.14..+21.57 median +17.77  >0: 12/12
+                          | matching recall M/ngt 0.345..0.523 median 0.443  -> 44.3% of GTs are even reachable
+Moderate n_valid_gt=  7874 | true-IoU re-sort gap  +8.41..+14.03 median +11.50  >0: 12/12
+                          | AP*-base headroom     +10.64..+14.03 median +11.63  >0: 12/12
+                          | matching recall M/ngt 0.232..0.370 median 0.302  -> 30.2% of GTs are even reachable
+Hard     n_valid_gt= 10960 | true-IoU re-sort gap  +8.16..+11.97 median +9.53  >0: 12/12
+                          | AP*-base headroom     +8.92..+11.97 median +10.27  >0: 12/12
+                          | matching recall M/ngt 0.179..0.320 median 0.258  -> 25.8% of GTs are even reachable
+
+R40-official base/re-sort (secondary, for reference):
+detector   |  E base E resort |  M base M resort |  H base H resort
+-------------------------------------------------------------------
+M3D-RPN    |   14.53    35.00 |   11.07    25.00 |    8.65    20.00
+MonoDLE    |   18.30    42.42 |   14.63    29.97 |   13.05    27.47
+MonoFlex   |   22.32    39.48 |   15.60    27.28 |   13.44    24.82
+GUPNet     |   23.40    44.85 |   16.46    29.94 |   13.72    24.95
+DEVIANT    |   25.40    44.85 |   16.71    29.94 |   14.74    27.44
+MonoGround |   23.36    42.41 |   16.88    29.96 |   14.02    24.97
+MonoCon    |   26.03    42.70 |   19.01    31.47 |   15.91    26.74
+MonoDETR   |   28.25    47.27 |   20.91    34.85 |   17.54    29.88
+MonoDGP    |   30.05    42.52 |   22.02    31.56 |   19.57    29.77
+MonoCoP    |   31.86    49.65 |   23.84    37.34 |   20.44    32.38
+MonoCLUE   |   33.58    48.39 |   24.03    35.59 |   20.51    31.06
+MonoIA     |   33.94    52.06 |   24.41    37.31 |   20.91    32.35
+
+==============================================================================================================
+PART B -- Pedestrian / Cyclist extension
+==============================================================================================================
+Only detectors whose RELEASED checkpoint can emit non-Car objects AND for which a complete
+3769-image native KITTI prediction directory already exists on disk are usable.  Sources:
+   M3D-RPN     <UPSTREAM_ROOT>/M3D-RPN/results_origsid/data   (3769 files)
+   MonoFlex    <UPSTREAM_ROOT>/MonoFlex/tmp_eval/inference/kitti_train/data   (3769 files)
+   DEVIANT     <UPSTREAM_ROOT>/DEVIANT/output/run_221/result_kitti/data   (3769 files)
+   MonoGround  <UPSTREAM_ROOT>/MonoGround/tmp/inference/kitti_train/val/label_2   (3769 files)
+
+---- GATE-5 (Part-B machinery cross-check on the Part-A DEVIANT Car pool) ----
+GATE-5   DEVIANT Car/Moderate true-IoU re-sort: PartB path 29.31 vs PartA frozen path 29.31  (d=0.000)  [PASS]
+
+[B] M3D-RPN     native class histogram: Car=12472  Cyclist=476  Pedestrian=1612   (total 14560; 0 blank lines skipped)
+    M3D-RPN     Car       @0.7 Easy     base= 15.14 trueIoU= 34.48 gap=+19.34 AP*= 34.48 headroom=+19.34 M/n_gt=1002/2906=0.345
+    M3D-RPN     Car       @0.7 Moderate base= 11.51 trueIoU= 23.19 gap=+11.68 AP*= 23.19 headroom=+11.68 M/n_gt=1826/7874=0.232
+    M3D-RPN     Car       @0.7 Hard     base=  8.95 trueIoU= 17.87 gap= +8.92 AP*= 17.86 headroom= +8.92 M/n_gt=1958/10960=0.179
+    M3D-RPN     Car       @0.5 Easy     base= 48.58 trueIoU= 65.44 gap=+16.86 AP*= 65.35 headroom=+16.77 M/n_gt=1899/2906=0.653
+    M3D-RPN     Car       @0.5 Moderate base= 36.04 trueIoU= 48.11 gap=+12.07 AP*= 48.09 headroom=+12.05 M/n_gt=3787/7874=0.481
+    M3D-RPN     Car       @0.5 Hard     base= 28.78 trueIoU= 38.49 gap= +9.71 AP*= 38.49 headroom= +9.70 M/n_gt=4218/10960=0.385
+    M3D-RPN     Pedestrian@0.5 Easy     base=  5.02 trueIoU= 15.96 gap=+10.94 AP*= 15.96 headroom=+10.94 M/n_gt=181/1134=0.160
+    M3D-RPN     Pedestrian@0.5 Moderate base=  3.97 trueIoU= 11.90 gap= +7.94 AP*= 11.90 headroom= +7.94 M/n_gt=207/1739=0.119
+    M3D-RPN     Pedestrian@0.5 Hard     base=  3.25 trueIoU=  9.81 gap= +6.55 AP*=  9.81 headroom= +6.55 M/n_gt=213/2172=0.098
+    M3D-RPN     Cyclist   @0.5 Easy     base=  3.49 trueIoU= 15.66 gap=+12.17 AP*= 15.66 headroom=+12.17 M/n_gt=44/281=0.157
+    M3D-RPN     Cyclist   @0.5 Moderate base=  1.82 trueIoU=  8.27 gap= +6.45 AP*=  8.27 headroom= +6.45 M/n_gt=45/544=0.083
+    M3D-RPN     Cyclist   @0.5 Hard     base=  1.65 trueIoU=  7.50 gap= +5.85 AP*=  7.50 headroom= +5.85 M/n_gt=45/600=0.075
+    (183s)
+[B] MonoFlex    native class histogram: Car=17142  Cyclist=919  Pedestrian=2064   (total 20125; 30 blank lines skipped)
+    MonoFlex    Car       @0.7 Easy     base= 23.15 trueIoU= 38.89 gap=+15.74 AP*= 39.85 headroom=+16.70 M/n_gt=1158/2906=0.398
+    MonoFlex    Car       @0.7 Moderate base= 16.27 trueIoU= 26.56 gap=+10.29 AP*= 26.96 headroom=+10.70 M/n_gt=2123/7874=0.270
+    MonoFlex    Car       @0.7 Hard     base= 13.78 trueIoU= 22.82 gap= +9.05 AP*= 23.13 headroom= +9.35 M/n_gt=2535/10960=0.231
+    MonoFlex    Car       @0.5 Easy     base= 60.75 trueIoU= 68.04 gap= +7.29 AP*= 71.09 headroom=+10.35 M/n_gt=2066/2906=0.711
+    MonoFlex    Car       @0.5 Moderate base= 44.62 trueIoU= 52.71 gap= +8.09 AP*= 54.11 headroom= +9.50 M/n_gt=4261/7874=0.541
+    MonoFlex    Car       @0.5 Hard     base= 39.45 trueIoU= 47.26 gap= +7.81 AP*= 48.34 headroom= +8.89 M/n_gt=5298/10960=0.483
+    MonoFlex    Pedestrian@0.5 Easy     base=  6.99 trueIoU= 17.74 gap=+10.75 AP*= 17.81 headroom=+10.82 M/n_gt=202/1134=0.178
+    MonoFlex    Pedestrian@0.5 Moderate base=  5.40 trueIoU= 13.93 gap= +8.53 AP*= 13.97 headroom= +8.57 M/n_gt=243/1739=0.140
+    MonoFlex    Pedestrian@0.5 Hard     base=  4.39 trueIoU= 11.52 gap= +7.13 AP*= 11.56 headroom= +7.16 M/n_gt=251/2172=0.116
+    MonoFlex    Cyclist   @0.5 Easy     base=  8.75 trueIoU= 22.14 gap=+13.39 AP*= 22.06 headroom=+13.31 M/n_gt=62/281=0.221
+    MonoFlex    Cyclist   @0.5 Moderate base=  4.97 trueIoU= 12.68 gap= +7.72 AP*= 12.68 headroom= +7.72 M/n_gt=69/544=0.127
+    MonoFlex    Cyclist   @0.5 Hard     base=  4.50 trueIoU= 11.50 gap= +7.00 AP*= 11.50 headroom= +7.00 M/n_gt=69/600=0.115
+    (260s)
+[B] DEVIANT     native class histogram: Car=10186  Cyclist=377  Pedestrian=1432   (total 11995; 0 blank lines skipped)
+    DEVIANT     Car       @0.7 Easy     base= 25.37 trueIoU= 43.88 gap=+18.51 AP*= 43.94 headroom=+18.57 M/n_gt=1277/2906=0.439
+    DEVIANT     Car       @0.7 Moderate base= 17.14 trueIoU= 29.23 gap=+12.10 AP*= 29.29 headroom=+12.15 M/n_gt=2306/7874=0.293
+    DEVIANT     Car       @0.7 Hard     base= 14.61 trueIoU= 25.09 gap=+10.48 AP*= 25.13 headroom=+10.52 M/n_gt=2754/10960=0.251
+    DEVIANT     Car       @0.5 Easy     base= 61.32 trueIoU= 71.65 gap=+10.32 AP*= 71.75 headroom=+10.43 M/n_gt=2085/2906=0.717
+    DEVIANT     Car       @0.5 Moderate base= 45.25 trueIoU= 54.73 gap= +9.48 AP*= 54.89 headroom= +9.64 M/n_gt=4322/7874=0.549
+    DEVIANT     Car       @0.5 Hard     base= 39.82 trueIoU= 48.29 gap= +8.47 AP*= 48.41 headroom= +8.59 M/n_gt=5306/10960=0.484
+    DEVIANT     Pedestrian@0.5 Easy     base= 10.22 trueIoU= 20.24 gap=+10.02 AP*= 20.37 headroom=+10.15 M/n_gt=231/1134=0.204
+    DEVIANT     Pedestrian@0.5 Moderate base=  7.69 trueIoU= 15.32 gap= +7.63 AP*= 15.41 headroom= +7.72 M/n_gt=268/1739=0.154
+    DEVIANT     Pedestrian@0.5 Hard     base=  6.19 trueIoU= 12.41 gap= +6.22 AP*= 12.48 headroom= +6.29 M/n_gt=271/2172=0.125
+    DEVIANT     Cyclist   @0.5 Easy     base=  4.26 trueIoU= 17.44 gap=+13.18 AP*= 17.44 headroom=+13.18 M/n_gt=49/281=0.174
+    DEVIANT     Cyclist   @0.5 Moderate base=  2.38 trueIoU=  9.74 gap= +7.36 AP*=  9.74 headroom= +7.36 M/n_gt=53/544=0.097
+    DEVIANT     Cyclist   @0.5 Hard     base=  2.16 trueIoU=  8.83 gap= +6.68 AP*=  8.83 headroom= +6.68 M/n_gt=53/600=0.088
+    (172s)
+[B] MonoGround  native class histogram: Car=16719  Cyclist=981  Pedestrian=1982   (total 19682; 49 blank lines skipped)
+    MonoGround  Car       @0.7 Easy     base= 24.40 trueIoU= 41.75 gap=+17.35 AP*= 42.19 headroom=+17.79 M/n_gt=1226/2906=0.422
+    MonoGround  Car       @0.7 Moderate base= 17.46 trueIoU= 28.27 gap=+10.81 AP*= 28.46 headroom=+11.00 M/n_gt=2241/7874=0.285
+    MonoGround  Car       @0.7 Hard     base= 14.56 trueIoU= 23.73 gap= +9.17 AP*= 23.87 headroom= +9.31 M/n_gt=2616/10960=0.239
+    MonoGround  Car       @0.5 Easy     base= 62.15 trueIoU= 70.67 gap= +8.52 AP*= 72.40 headroom=+10.25 M/n_gt=2104/2906=0.724
+    MonoGround  Car       @0.5 Moderate base= 46.61 trueIoU= 55.36 gap= +8.75 AP*= 56.15 headroom= +9.53 M/n_gt=4421/7874=0.561
+    MonoGround  Car       @0.5 Hard     base= 41.11 trueIoU= 49.16 gap= +8.05 AP*= 49.78 headroom= +8.67 M/n_gt=5456/10960=0.498
+    MonoGround  Pedestrian@0.5 Easy     base= 11.89 trueIoU= 23.36 gap=+11.46 AP*= 23.37 headroom=+11.47 M/n_gt=265/1134=0.234
+    MonoGround  Pedestrian@0.5 Moderate base=  9.00 trueIoU= 17.76 gap= +8.77 AP*= 17.77 headroom= +8.77 M/n_gt=309/1739=0.178
+    MonoGround  Pedestrian@0.5 Hard     base=  7.36 trueIoU= 14.64 gap= +7.28 AP*= 14.64 headroom= +7.28 M/n_gt=318/2172=0.146
+    MonoGround  Cyclist   @0.5 Easy     base=  3.30 trueIoU= 14.23 gap=+10.93 AP*= 14.23 headroom=+10.93 M/n_gt=40/281=0.142
+    MonoGround  Cyclist   @0.5 Moderate base=  1.83 trueIoU=  8.09 gap= +6.26 AP*=  8.09 headroom= +6.26 M/n_gt=44/544=0.081
+    MonoGround  Cyclist   @0.5 Hard     base=  1.71 trueIoU=  7.67 gap= +5.96 AP*=  7.67 headroom= +5.96 M/n_gt=46/600=0.077
+    (271s)
+
+======================================================================================================================
+TABLE B1 -- class extension, 4 detectors, native full prediction files, all-point AP
+======================================================================================================================
+detector    class        IoU | E base  gap   AP*  head | M base  gap   AP*  head | H base  gap   AP*  head
+----------------------------------------------------------------------------------------------------------
+M3D-RPN     Car          0.7 |  15.14+19.34 34.48+19.34 |  11.51+11.68 23.19+11.68 |   8.95 +8.92 17.86 +8.92
+M3D-RPN     Car          0.5 |  48.58+16.86 65.35+16.77 |  36.04+12.07 48.09+12.05 |  28.78 +9.71 38.49 +9.70
+M3D-RPN     Pedestrian   0.5 |   5.02+10.94 15.96+10.94 |   3.97 +7.94 11.90 +7.94 |   3.25 +6.55  9.81 +6.55
+M3D-RPN     Cyclist      0.5 |   3.49+12.17 15.66+12.17 |   1.82 +6.45  8.27 +6.45 |   1.65 +5.85  7.50 +5.85
+MonoFlex    Car          0.7 |  23.15+15.74 39.85+16.70 |  16.27+10.29 26.96+10.70 |  13.78 +9.05 23.13 +9.35
+MonoFlex    Car          0.5 |  60.75 +7.29 71.09+10.35 |  44.62 +8.09 54.11 +9.50 |  39.45 +7.81 48.34 +8.89
+MonoFlex    Pedestrian   0.5 |   6.99+10.75 17.81+10.82 |   5.40 +8.53 13.97 +8.57 |   4.39 +7.13 11.56 +7.16
+MonoFlex    Cyclist      0.5 |   8.75+13.39 22.06+13.31 |   4.97 +7.72 12.68 +7.72 |   4.50 +7.00 11.50 +7.00
+DEVIANT     Car          0.7 |  25.37+18.51 43.94+18.57 |  17.14+12.10 29.29+12.15 |  14.61+10.48 25.13+10.52
+DEVIANT     Car          0.5 |  61.32+10.32 71.75+10.43 |  45.25 +9.48 54.89 +9.64 |  39.82 +8.47 48.41 +8.59
+DEVIANT     Pedestrian   0.5 |  10.22+10.02 20.37+10.15 |   7.69 +7.63 15.41 +7.72 |   6.19 +6.22 12.48 +6.29
+DEVIANT     Cyclist      0.5 |   4.26+13.18 17.44+13.18 |   2.38 +7.36  9.74 +7.36 |   2.16 +6.68  8.83 +6.68
+MonoGround  Car          0.7 |  24.40+17.35 42.19+17.79 |  17.46+10.81 28.46+11.00 |  14.56 +9.17 23.87 +9.31
+MonoGround  Car          0.5 |  62.15 +8.52 72.40+10.25 |  46.61 +8.75 56.15 +9.53 |  41.11 +8.05 49.78 +8.67
+MonoGround  Pedestrian   0.5 |  11.89+11.46 23.37+11.47 |   9.00 +8.77 17.77 +8.77 |   7.36 +7.28 14.64 +7.28
+MonoGround  Cyclist      0.5 |   3.30+10.93 14.23+10.93 |   1.83 +6.26  8.09 +6.26 |   1.71 +5.96  7.67 +5.96
+
+== PANEL SUMMARY (class extension, n=4 detectors) ==
+Car        @0.7 Easy     n_gt=  2906 | gap +15.74..+19.34 med +17.93 (>0 4/4) | AP*-base +16.70..+19.34 med +18.18 | M/ngt med 0.410
+Car        @0.7 Moderate n_gt=  7874 | gap +10.29..+12.10 med +11.25 (>0 4/4) | AP*-base +10.70..+12.15 med +11.34 | M/ngt med 0.277
+Car        @0.7 Hard     n_gt= 10960 | gap +8.92..+10.48 med +9.11 (>0 4/4) | AP*-base +8.92..+10.52 med +9.33 | M/ngt med 0.235
+Car        @0.5 Easy     n_gt=  2906 | gap +7.29..+16.86 med +9.42 (>0 4/4) | AP*-base +10.25..+16.77 med +10.39 | M/ngt med 0.714
+Car        @0.5 Moderate n_gt=  7874 | gap +8.09..+12.07 med +9.12 (>0 4/4) | AP*-base +9.50..+12.05 med +9.59 | M/ngt med 0.545
+Car        @0.5 Hard     n_gt= 10960 | gap +7.81..+9.71 med +8.26 (>0 4/4) | AP*-base +8.59..+9.70 med +8.78 | M/ngt med 0.484
+Pedestrian @0.5 Easy     n_gt=  1134 | gap +10.02..+11.46 med +10.85 (>0 4/4) | AP*-base +10.15..+11.47 med +10.88 | M/ngt med 0.191
+Pedestrian @0.5 Moderate n_gt=  1739 | gap +7.63..+8.77 med +8.23 (>0 4/4) | AP*-base +7.72..+8.77 med +8.26 | M/ngt med 0.147
+Pedestrian @0.5 Hard     n_gt=  2172 | gap +6.22..+7.28 med +6.84 (>0 4/4) | AP*-base +6.29..+7.28 med +6.86 | M/ngt med 0.120
+Cyclist    @0.5 Easy     n_gt=   281 | gap +10.93..+13.39 med +12.67 (>0 4/4) | AP*-base +10.93..+13.31 med +12.67 | M/ngt med 0.165
+Cyclist    @0.5 Moderate n_gt=   544 | gap +6.26..+7.72 med +6.91 (>0 4/4) | AP*-base +6.26..+7.72 med +6.91 | M/ngt med 0.090
+Cyclist    @0.5 Hard     n_gt=   600 | gap +5.85..+7.00 med +6.32 (>0 4/4) | AP*-base +5.85..+7.00 med +6.32 | M/ngt med 0.082
+
+[written] reports/extensions/difficulty_class_extension.txt
+[written] reports/extensions/difficulty_class_extension.csv

@@ -1,0 +1,24 @@
+# c2_iou05_separation run 2026-06-13T16:13:09
+# E4 decomposition re-evaluated at IoU3D 0.5 (TP labels @0.5, AP min_overlap=0.5);
+# question: does FP-demotion still reproduce the full oracle and TP-reorder ~0 at the looser bar?
+
+[done] M3D-RPN    base05= 36.04 FPdem=+12.07 TPreord=+-1.40 full=+12.07 | TPshare05=0.373
+[done] MonoDLE    base05= 43.62 FPdem=+11.42 TPreord=+-2.05 full=+11.22 | TPshare05=0.442
+[done] MonoFlex   base05= 44.44 FPdem=+ 9.34 TPreord=+-3.22 full=+ 8.73 | TPshare05=0.479
+[done] GUPNet     base05= 44.57 FPdem=+10.37 TPreord=+-1.46 full=+10.16 | TPshare05=0.546
+[done] DEVIANT    base05= 45.55 FPdem=+ 9.41 TPreord=+-1.60 full=+ 9.21 | TPshare05=0.538
+[done] MonoGround base05= 46.25 FPdem=+ 9.19 TPreord=+-2.03 full=+ 8.98 | TPshare05=0.526
+[done] MonoCon    base05= 46.27 FPdem=+ 9.35 TPreord=+-1.77 full=+ 7.13 | TPshare05=0.485
+[done] MonoDETR   base05= 48.85 FPdem=+ 7.98 TPreord=+-1.37 full=+ 7.66 | TPshare05=0.489
+[done] MonoDGP    base05= 49.26 FPdem=+ 9.42 TPreord=+-1.64 full=+ 3.30 | TPshare05=0.450
+[done] MonoCoP    base05= 53.33 FPdem=+ 8.27 TPreord=+-1.30 full=+ 7.86 | TPshare05=0.485
+[done] MonoCLUE   base05= 52.67 FPdem=+ 8.48 TPreord=+-1.72 full=+ 4.68 | TPshare05=0.473
+[done] MonoIA     base05= 55.48 FPdem=+ 8.21 TPreord=+-1.59 full=+ 7.70 | TPshare05=0.454
+
+anchor n=1 FPdem med +12.07  TPreord med +-1.40  full med +12.07
+cnet   n=6 FPdem med +9.38  TPreord med +-1.90  full med +9.09
+query  n=5 FPdem med +8.27  TPreord med +-1.59  full med +7.66
+
+READ: if FPdem still ~= full and TPreord ~0 at IoU0.5 -> separation finding is NOT an
+IoU0.7-cliff artifact (robust). If TPreord grows positive -> separation is partly
+threshold-specific; scope the claim to IoU0.7.
