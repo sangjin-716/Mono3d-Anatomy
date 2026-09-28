@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/ap_corrector_arc.py for the public release. Computation unchanged.
-Produces no report of its own; it is the shared matcher module (read_gt, poly, iou3d, match,
-DET feature list, KITTI paths) imported by the other tools/decomp scripts. Its CLI needs a
-detector's train-split dump, which is not part of the released dumps.
+"""Shared matcher module (read_gt, poly, iou3d, match, DET feature list, KITTI paths) imported by
+the other tools/decomp scripts. It writes no report of its own. Its CLI needs a detector's
+train-split dump, which is not part of the released dumps.
 
 Parametrized post-hoc depth-corrector AP gate for ANY detector with train+val
 dumps (same 33-col schema as dgp/cop). Produces the 4-number table used for the

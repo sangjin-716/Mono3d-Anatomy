@@ -1,9 +1,6 @@
-"""Ported from camera-ready checks/xdsfix_pgd_oracle/pred_census.py for the public release.
-Computation unchanged. Produces the car-prediction census and per-depth-bin coverage of a converted oracle pkl
-(console); in the paper it gives the PGD and EPro-PnP-Det boxes per image (pred_car per image).
-
-pred_census.py — car-class prediction census on a converted oracle pkl, plus
-coverage (bipartite M) broken down by GT camera-frame depth bin.
+"""Prints the car-class prediction census of a converted oracle pkl, plus coverage (bipartite M)
+broken down by GT camera-frame depth bin. In the paper it gives the PGD and EPro-PnP-Det boxes
+per image (pred_car per image).
 Usage: python pred_census.py <pkl> <tag>
 """
 import pickle, sys, os

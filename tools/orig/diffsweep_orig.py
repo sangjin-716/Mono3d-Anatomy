@@ -1,19 +1,18 @@
-"""Ported from mono3d_crossdataset/tools/diffsweep_orig.py for the public release. Computation
-unchanged. Produces reports_orig/difficulty_sweep_orig/headroom_sep_by_difficulty.{txt,json}.
+"""Produces reports_orig/difficulty_sweep_orig/headroom_sep_by_difficulty.{txt,json}.
 
-Difficulty robustness sweep — A (headroom) + B (separation) for Easy/Mod/Hard, for the
+Difficulty robustness sweep, A (headroom) + B (separation) for Easy/Mod/Hard, for the
 original-environment MonoFlex*/MonoGround* dumps (a copy of
 tools/decomp/diffsweep_headroom_sep.py with inputs switched). Its Mod rows are the starred
-separation decomposition (the starred detectors have no frozen e4_fp_tp_decomp counterpart).
+separation decomposition (reports/e4_fp_tp_decomp.txt has no starred rows).
 
-REUSES tools/decomp/e4_fp_tp_decomp.py VERBATIM (native_pool, the cached o_act+lab, and the
+Reuses tools/decomp/e4_fp_tp_decomp.py unchanged (native_pool, the cached o_act+lab, and the
 base/fpd/tpr/full score construction). The ONLY change: the final ap_summaries is looped over
 difficulty in {0(Easy),1(Mod),2(Hard)}. The re-sort orderings and TP/FP labels are
-difficulty-AGNOSTIC (frozen any-Car-GT); only the evaluation GT subset changes with difficulty
+difficulty-AGNOSTIC (fixed any-Car-GT); only the evaluation GT subset changes with difficulty
 (official _prepare_data filter).
 Writes the cache <CACHE_DIR>/orig/_e4cache_<name>.npz (o_act + TP labels) that
-exp1_ceiling_orig.py and c2_iou05_orig.py reuse — run this script before those two.
-The other detectors' native_pool branches are kept verbatim but never executed here.
+exp1_ceiling_orig.py and c2_iou05_orig.py reuse, so run this script before those two.
+The other detectors' native_pool branches are kept but never executed here.
 Run from the repository root: python tools/orig/diffsweep_orig.py
 """
 import os, sys, shutil, json, datetime

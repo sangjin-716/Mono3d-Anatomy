@@ -1,16 +1,15 @@
-"""Ported from tools/decomp/exact_ap.py for the public release. Computation unchanged; the
-official KITTI kernels are imported from the vendored evaluator/kitti_eval (no detector repo needed).
-Produces no report of its own (the __main__ validation gates print to stdout).
+"""All-point interpolated AP ("all-threshold PR area") for KITTI, a de-quantized AP summary.
 
-All-point interpolated AP ("all-threshold PR area") for KITTI — de-quantized AP summary.
+The official KITTI kernels are imported from the vendored evaluator/kitti_eval, so no detector
+repo is needed. Writes no report; the __main__ validation gates print to stdout.
 
 NOT a "continuous/true AUC": recall is still discrete (finite GT), precision uses the official
 monotone interpolation envelope, integration is stepwise, and everything is downstream of the
-official KITTI matching rules. Name it "all-point interpolated AP" in all prose.
+official KITTI matching rules. We call it "all-point interpolated AP".
 
-Reuses the official matching machinery verbatim (calculate_iou_partly / _prepare_data /
-compute_statistics_jit / fused_compute_statistics / get_thresholds) — zero matching
-re-implementation. Differences are ONLY (a) which thresholds are evaluated and (b) how the
+Reuses the official matching code unchanged (calculate_iou_partly / _prepare_data /
+compute_statistics_jit / fused_compute_statistics / get_thresholds); the matching is not
+re-implemented. Differences are ONLY (a) which thresholds are evaluated and (b) how the
 envelope is summarized:
   R40_official  = mean of 41-pt envelope at indices 1..40            (== get_mAP_R40)
   R11_official  = mean of 41-pt envelope at indices 0,4,...,40       (== get_mAP, true R11)
@@ -18,7 +17,7 @@ envelope is summarized:
                                                                       param41 == R40_official)
   allpoint      = step-integral of the envelope over RAW recall using ALL unique detection
                   thresholds; recall ties collapsed to max envelope precision.
-Tie policy: thresholds are score values — all detections with equal score enter together
+Tie policy: thresholds are score values, so all detections with equal score enter together
 (official kernel semantics, >= threshold); the all-threshold list is np.unique(scores).
 
 Validation gates (run __main__):

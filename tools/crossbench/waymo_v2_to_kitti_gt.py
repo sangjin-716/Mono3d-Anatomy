@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 """
-Ported from mono3d_crossdataset/tools/waymo_v2_to_kitti_gt.py for the public release.
-Computation unchanged. Produces the KITTI-format Waymo val ground truth (labels + calib)
-under <WAYMO_ROOT>/waymo_kitti/validation/{label,calib}/ and conversion_report.json.
+Writes the KITTI-format Waymo val ground truth (labels + calib) under
+<WAYMO_ROOT>/waymo_kitti/validation/{label,calib}/ and conversion_report.json.
 
 waymo_v2_to_kitti_gt.py -- Waymo v2 parquet -> KITTI-format GT (labels + calib), reproducing
 DEVIANT/data/waymo/converter.py semantics EXACTLY, labels-only (no images, no lidar).

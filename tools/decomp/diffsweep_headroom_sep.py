@@ -1,12 +1,11 @@
-"""Ported from tools/decomp/diffsweep_headroom_sep.py for the public release. Computation unchanged.
-Produces reports/final_run/difficulty_sweep/headroom_sep_by_difficulty.{txt,json}.
+"""Produces reports/final_run/difficulty_sweep/headroom_sep_by_difficulty.{txt,json}.
 
-Difficulty robustness sweep — A (headroom) + B (separation) for Easy/Mod/Hard.
+Difficulty robustness sweep, A (headroom) + B (separation) for Easy/Mod/Hard.
 
-REUSES tools/decomp/e4_fp_tp_decomp.py VERBATIM (native_pool, the cached o_act+lab, and the
+Reuses tools/decomp/e4_fp_tp_decomp.py unchanged (native_pool, the cached o_act+lab, and the
 base/fpd/tpr/full score construction). The ONLY change: the final ap_summaries is looped over
 difficulty in {0(Easy),1(Mod),2(Hard)}. The re-sort orderings and TP/FP labels are
-difficulty-AGNOSTIC (frozen any-Car-GT); only the evaluation GT subset changes with difficulty
+difficulty-AGNOSTIC (fixed any-Car-GT); only the evaluation GT subset changes with difficulty
 (official _prepare_data filter). So moderate(=1) reproduces e4_fp_tp_decomp.txt exactly = the gate.
 Run e4_fp_tp_decomp.py first: it writes the _e4cache_<model>.npz files this script requires.
 Native pools need the pre-flatten query dumps and the floor-0 M3D-RPN dump in DUMP_DIR.

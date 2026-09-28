@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 """
-Ported from mono3d_crossdataset/tools/nusc_oracle.py for the public release. Computation
-unchanged. Produces the nuScenes base / true-IoU re-sort cells of the preliminary
-cross-benchmark audit (printed to stdout; the run scripts append it to a log).
+Prints the nuScenes base / true-IoU re-sort cells of the preliminary cross-benchmark audit (the
+run scripts append the output to a log).
 
 nusc_oracle.py -- same fixed-pool oracle diagnostics as Waymo/KITTI, on a nuScenes per-camera
 prediction pkl (mmdet3d DumpResults layout, or the output of ct_to_oracle_pkl.py /

@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/c3_conditioned.py for the public release. Computation unchanged.
-Produces reports/final_run/c3_conditioned_analysis.md.
+"""Produces reports/final_run/c3_conditioned_analysis.md.
 
-C3 conditioning — does cross-detector disagreement predict depth error AFTER controlling
+C3 conditioning: does cross-detector disagreement predict depth error AFTER controlling
 for common difficulty (distance/occlusion/truncation)? Existing matched dumps only.
 6 detectors (MonoCLUE excluded: its matched dump predates the validated MonoCLUE re-dump) -> 15 pairs.
 Per pair: join on shared GT (sid, gt_z); disagreement d=|z_a-z_b|; error e=|mean(z_a,z_b)-gt_z|.

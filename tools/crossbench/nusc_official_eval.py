@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/nusc_official_eval.py for the public release. Computation unchanged.
-Produces the official nuScenes devkit metrics (metrics_summary.json, mAP / NDS) under
+"""Writes the official nuScenes devkit metrics (metrics_summary.json, mAP / NDS) under
 crossbench/nusc/official_eval_<tag>/ in the re-run output directory.
 
 nusc_official_eval.py -- reproduction gate: official nuScenes detection eval

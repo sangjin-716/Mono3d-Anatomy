@@ -1,10 +1,9 @@
-"""Ported from mono3d_crossdataset/tools/e12_orig.py for the public release. Computation
-unchanged. Produces reports_orig/e12_replacement_orig.txt.
+"""Produces reports_orig/e12_replacement_orig.txt.
 
 E12 (GATE-5 consequence #2): replacement-share re-print for the original-environment
 MonoFlex*/MonoGround* dumps (a copy of tools/decomp/e12_replacement.py with inputs switched).
-Kernels/stages copied VERBATIM from gt_state_matrix.py (which copied pool_waterfall.py);
-self-contained. The other detectors' branches are kept verbatim but never executed here.
+Kernels/stages are copied unchanged from gt_state_matrix.py (which copied pool_waterfall.py), so
+the script is self-contained. The other detectors' branches are kept but never executed here.
 Per moderate GT with an accurate pool candidate (IoU3D>=0.7, |dz|<8m): did the BEST pool
 candidate survive native eligibility? Outcomes among A-pass GTs:
   BEST_SURVIVED  best-IoU candidate row is among the eligibility survivors
@@ -12,7 +11,7 @@ candidate survive native eligibility? Outcomes among A-pass GTs:
   LOST           best dropped and no accurate candidate in final (face-ii numerator)
 GATE: counts must satisfy BEST_SURVIVED+REPLACED+LOST == A-pass, and LOST/A-pass must
 equal pool_waterfall_orig.txt face-ii to 3 decimals (reads reports_orig/pool_waterfall_orig.txt
-if shipped, else the re-run of waterfall_orig.py — run that first).
+if present, else the re-run of waterfall_orig.py, so run that first).
 Run from the repository root: python tools/orig/e12_orig.py
 """
 import os, sys, re, datetime

@@ -1,12 +1,11 @@
-"""Ported from tools/decomp/gt_state_matrix.py for the public release. Computation unchanged.
-Produces reports/gt_state_matrix.txt and <CACHE_DIR>/decomp/gt_state_matrix.csv (read by
+"""Produces reports/gt_state_matrix.txt and <CACHE_DIR>/decomp/gt_state_matrix.csv (read by
 e2_budget_truncation.py).
 
 GT-level state matrix across the 12-detector panel.
-COPY-EXTENDED from pool_waterfall.py (left unmodified): moderate-GT
-filter, |dz|<8m candidate gate, native stage definitions and IoU3D kernel are verbatim.
+Extends a copy of pool_waterfall.py (which is not modified): the moderate-GT
+filter, |dz|<8m candidate gate, native stage definitions and IoU3D kernel are unchanged.
 
-States (PRESENCE layer only — official score-ordered one-to-one TP matching is NOT
+States (PRESENCE layer only; official score-ordered one-to-one TP matching is NOT
 reproduced here; the terms "realized"/"TP"/"successful detection" are NOT
 used anywhere downstream):
   NO_POOL_CANDIDATE       best complete-pool IoU3D < thr
@@ -22,8 +21,8 @@ order; recorded in the report (gate G1 additionally proves key-set equality).
 Gates (ALL must pass; on any failure the script aborts BEFORE writing aggregates):
   G1 GT key set identical across 12 models; zero duplicates; zero missing (expected 7874)
   G2 c_best <= a_best + 1e-9 for every (GT, model)  [final subset of pool]
-  G3 per-model A@0.7 / C@0.7 / face-ii reproduce the frozen reports/pool_waterfall.txt to 3 decimals
-Extra (query family only): lost-stage typing — for each LOST GT, every accurate candidate
+  G3 per-model A@0.7 / C@0.7 / face-ii reproduce reports/pool_waterfall.txt to 3 decimals
+Extra (query family only): lost-stage typing: for each LOST GT, every accurate candidate
 (IoU3D>=0.7, |dz|<8) is classified by which native eligibility predicate it fails:
 budget_only (flatrank>=50, cls>=0.2) / thr_only (flatrank<50, cls<0.2) / both. Sanity:
 typed candidate count >= 1 per LOST GT (else FAIL).

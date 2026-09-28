@@ -1,12 +1,11 @@
-"""Ported from tools/decomp/oracle_anatomy.py for the public release. Computation unchanged.
-Produces reports/oracle_anatomy.txt.
+"""Produces reports/oracle_anatomy.txt.
 
-Oracle anatomy ladder — what is the "+oracle-depth" ceiling made of?
+Oracle anatomy ladder: what is the "+oracle-depth" ceiling made of?
 
 Per detector (12), S5 kept pool, native V scores kept FIXED; geometry oracles only:
   base       : boxes as-is
-  pure_z     : z -> matched-GT z; x,y FROZEN (the 1-D range fix; NO lateral correction)
-  ray        : ray-slide to GT z (x,y slide along camera ray) — the paper's existing lever
+  pure_z     : z -> matched-GT z; x,y FIXED (the 1-D range fix; NO lateral correction)
+  ray        : ray-slide to GT z (x,y slide along camera ray), the paper's existing lever
   centre     : (x,y,z) -> GT 3D centre (dims/yaw kept)
   y_only     : y -> GT y (elevation only)
   dims       : (h,w,l) -> GT dims (position/yaw kept)

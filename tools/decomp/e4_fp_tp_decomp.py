@@ -1,10 +1,9 @@
-"""Ported from tools/decomp/e4_fp_tp_decomp.py for the public release. Computation unchanged.
-Produces reports/e4_fp_tp_decomp.txt (and the _e4cache_<model>.npz files that
+"""Produces reports/e4_fp_tp_decomp.txt (and the _e4cache_<model>.npz files that
 exp1_true_ceiling.py, c2_iou05_separation.py and diffsweep_headroom_sep.py reuse).
 
-E4 — FP-demotion vs TP-quality-reordering decomposition of the ordering gap.
-Definitions frozen in reports/e4_prereg.md before this run. Native pools,
-exact_ap evaluator, o_act via iou_act_and_zstar, TP/FP labels frozen from baseline order.
+E4: FP-demotion vs TP-quality-reordering decomposition of the ordering gap.
+Definitions fixed in reports/e4_prereg.md before this run. Native pools,
+exact_ap evaluator, o_act via iou_act_and_zstar, TP/FP labels fixed from baseline order.
 Native pools need, besides the released dumps, the pre-flatten query dumps
 (<f>_val_preflatten.csv) and the floor-0 M3D-RPN dump (m3drpn_val_floor0.csv) in DUMP_DIR.
 Run from the repository root: python tools/decomp/e4_fp_tp_decomp.py

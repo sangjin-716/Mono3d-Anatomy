@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Ported from the camera-ready check power_analysis.py (same file name) for the public release.
-Computation unchanged. Produces reports/extensions/power_analysis.txt (a re-run writes
+Produces reports/extensions/power_analysis.txt (a re-run writes
 reports_rerun/extensions/power_analysis.txt); supplementary Sec. N, Table N, and main Sec. 5.1
 "Trend".
 
-Two descriptive blocks of the original script (a residual-clustering coefficient across the three
-families and per-family rank correlations) are not part of the public release; they are not used
-by the paper. Every other statistic is computed and printed exactly as in the original.
-
 Power of the trend test: what effect could this 12-detector design have detected, and how does
-the lineage structure of the panel limit it. Uses frozen on-disk numbers only.
+the lineage structure of the panel limit it. Uses numbers from the reports only.
 No number here is estimated, interpolated, or reconstructed.
 
-INPUT PROVENANCE (all read-only, transcribed verbatim into the dicts below)
+INPUT PROVENANCE (all read-only, copied exactly into the dicts below)
  [A] the paper's figure script make_figs.py L75-78 (not part of this repository) -- the _NATIVE
      dict (detector -> (base all-point AP, native true-IoU-re-sort gap)).
      mtime 2026-06-25, i.e. BEFORE the 2026-07-03 original-environment substitution.
@@ -23,7 +18,7 @@ INPUT PROVENANCE (all read-only, transcribed verbatim into the dicts below)
  [C] reports/exp1_true_ceiling.txt  (10 rows, 2026-06-20) and
      reports_orig/exp1_true_ceiling_orig.txt (MonoFlex*, MonoGround*, 2026-07-03) -- the
      CEIL*=M/n_gt matching-ceiling basis that the paper headlines for the trend statement.
- [D] reports_orig/spearman_gap_base_vB.txt (frozen 2026-07-04T00:54:09) -- the VALIDATION GATE.
+ [D] reports_orig/spearman_gap_base_vB.txt (written 2026-07-04T00:54:09) -- the VALIDATION GATE.
      Lines 5-6:
        "CEIL* (AP*=M/n_gt) basis : spearman = -0.476  p = 0.1182"
        "true-IoU re-sort (native): spearman = -0.629  p = 0.0283"

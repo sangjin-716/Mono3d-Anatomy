@@ -1,6 +1,5 @@
-"""Ported from tools/dgp_cop_oracle_matrix.py for the public release. Computation unchanged.
-Produces no report cited by the paper; its helpers (write_kitti, pool_mask, apply_nms,
-greedy_nms_keep) are the shared pool/NMS/KITTI-writer kernels imported by the tools/decomp scripts.
+"""Shared pool/NMS/KITTI-writer kernels (write_kitti, pool_mask, apply_nms, greedy_nms_keep)
+imported by the tools/decomp scripts. No report cited by the paper comes from its CLI.
 The CLI below writes <out_dir>/oraclemtx_<name>.csv (reports_rerun/ by default).
 
 Controlled oracle-protocol matrix for one model's val records.

@@ -1,11 +1,10 @@
-"""Ported from tools/decomp/fast_subset_dense.py for the public release. Computation unchanged.
-Produces no report (library + validation gate printed to stdout).
+"""Produces no report (library + validation gate printed to stdout).
 
-Dense-sampled (401-pt) subset evaluator — subclass of the validated CachedEval
-(fast_subset_eval.py untouched). Bootstrap primary metric decision (fixed before running):
+Dense-sampled (401-pt) subset evaluator, a subclass of the validated CachedEval
+(fast_subset_eval.py is not modified). Bootstrap primary metric decision (fixed before running):
 true all-point AP needs ~10k thresholds per replicate (infeasible at B=2000), so the paired
 bootstrap uses the 401-pt dense interpolated AP, whose convergence to all-point was measured
-at ≈0.07–0.09 absolute (exact_ap ladder: DGP 22.834→22.905, GUPNet 17.030→17.122) — a bias
+at ≈0.07–0.09 absolute (exact_ap ladder: DGP 22.834→22.905, GUPNet 17.030→17.122), a bias
 that cancels in PAIRED ΔAP. Official R40 is computed alongside as secondary.
 Validation gate: full-set eval == exact_ap param401 and == official R40 (<0.02).
 Run from the repository root: python tools/decomp/fast_subset_dense.py

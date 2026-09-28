@@ -1,8 +1,7 @@
-"""Ported from mono3d_crossdataset/tools/gap_metric_robustness_orig.py for the public release.
-Computation unchanged. Produces reports_orig/gap_metric_robustness_orig.txt.
+"""Produces reports_orig/gap_metric_robustness_orig.txt.
 
 GAP METRIC ROBUSTNESS for the original-environment MonoFlex*/MonoGround* dumps (a copy of
-tools/decomp/gap_metric_robustness.py with inputs switched) — does the 'stable +12-15 rank gap'
+tools/decomp/gap_metric_robustness.py with inputs switched): does the 'stable +12-15 rank gap'
 survive the metric?
 
 Known issue: all 12 R40 order-ceilings sit exactly on the 2.5-AP grid (recall-quantization),

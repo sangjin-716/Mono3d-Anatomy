@@ -1,11 +1,10 @@
-"""Ported from mono3d_crossdataset/tools/diffsweep_anatomy_orig.py for the public release.
-Computation unchanged. Produces reports_orig/difficulty_sweep_orig/anatomy_by_difficulty.{txt,json}.
+"""Produces reports_orig/difficulty_sweep_orig/anatomy_by_difficulty.{txt,json}.
 
-Difficulty robustness sweep — C (geometry anatomy) for Easy/Mod/Hard, for the
+Difficulty robustness sweep, C (geometry anatomy) for Easy/Mod/Hard, for the
 original-environment MonoFlex*/MonoGround* dumps (a copy of tools/decomp/diffsweep_anatomy.py
 with inputs switched).
 
-REUSES tools/decomp/oracle_anatomy.py VERBATIM (S5 pool = pool_mask thr0.2 + NMS0.5; best-IoU GT
+Reuses tools/decomp/oracle_anatomy.py unchanged (S5 pool = pool_mask thr0.2 + NMS0.5; best-IoU GT
 match; pure_z / ray-consistent-centre / full-centre oracle geometries). ONLY change: the final
 ap_of is looped over difficulty {0,1,2}. The matched-box geometry oracles are difficulty-agnostic;
 only the evaluation GT subset changes. Mod(=1) reproduces oracle_anatomy_orig.txt.

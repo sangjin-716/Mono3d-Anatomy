@@ -1,17 +1,16 @@
-"""Ported from tools/decomp/depth_share_bridge.py for the public release. Computation unchanged.
-Produces reports/depth_share_bridge.txt. Also provides iou_act_and_zstar(), DETS and DIAG
-(the cache/work directory) to the other tools/decomp scripts.
+"""Produces reports/depth_share_bridge.txt. Also provides iou_act_and_zstar(), DETS and DIAG
+(<CACHE_DIR>/decomp) to the other tools/decomp scripts.
 
-DEPTH-SHARE BRIDGE — is the un-closable ~13AP rank gap depth-located? (AP currency)
+DEPTH-SHARE BRIDGE: is the un-closable ~13AP rank gap depth-located? (AP currency)
 
 Per detector on the S5 kept pool (post-NMS; gap anatomy showed this pool has ~no
 duplicates, so its gap = TP-vs-FP ordering failure):
   base = AP(V)                      (detector as-is)
-  A    = AP(rank by IoU_act)        (full order-ceiling; IoU vs ALL GTs, NO z-gate —
+  A    = AP(rank by IoU_act)        (full order-ceiling; IoU vs ALL GTs, NO z-gate;
                                      the |dz|<8 gate would censor depth-displaced boxes)
   B    = AP(rank by IoU_z*)         (rank by "ray-conditional quality at oracle depth":
-                                     each box slid along the camera ray to each GT's z —
-                                     IDENTICAL transform to the +50 oracle-depth lever —
+                                     each box slid along the camera ray to each GT's z,
+                                     the SAME transform as the +50 oracle-depth lever,
                                      and scored by the best resulting IoU3D)
   depth share of gap = (A - B) / (A - base)
      B ~= base  -> ordering the pool needs depth knowledge (gap = depth-blindness)

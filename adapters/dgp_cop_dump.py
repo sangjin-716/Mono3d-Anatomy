@@ -1,14 +1,12 @@
 """Generic per-prediction dump for MonoDGP and (clean) MonoCoP -> 33-col schema.
 
-Ported from tools/dgp_cop_dump.py for the public release. Computation unchanged.
 Produces data/dumps/dgp_val.csv (MonoDGP) and data/dumps/official_monocop_val.csv (MonoCoP),
 the two 33-column released dumps (23 prediction columns + 10 GT-matching columns).
-Changes: the GT label dir is --label_dir (default paths.LABEL_DIR; the original looked for
-<repo>/data/KITTIDataset or <repo>/data/kitti, i.e. the same KITTI labels), and --root_dir
-optionally overrides cfg["dataset"]["root_dir"] instead of placing KITTI at the repo-relative
-path the config expects (the original runs used repo-relative data symlinks).
+The GT labels are read from --label_dir (default paths.LABEL_DIR). --root_dir optionally
+overrides cfg["dataset"]["root_dir"]; without it, KITTI has to be at the repo-relative path the
+config expects (a symlink works).
 
-Inference only — no training, no weight/arch change. Emits ALL queries (no score
+Inference only: no training, no weight/arch change. Emits ALL queries (no score
 threshold), score V = cls.max * exp(-log_sigma), and matches each query to Car GT
 by greedy IoU (V-descending) for oracle/analysis.
 

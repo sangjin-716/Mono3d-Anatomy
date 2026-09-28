@@ -1,5 +1,4 @@
-"""Ported from the camera-ready check budget_saturation.py (same file name) for the public release.
-Computation unchanged. Produces reports/extensions/budget_saturation.txt (a re-run writes
+"""Produces reports/extensions/budget_saturation.txt (a re-run writes
 reports_rerun/extensions/budget_saturation.txt); supplementary Sec. L ("budgets can only be matched
 downward"; N=20 is the largest common budget).
 

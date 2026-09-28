@@ -32,7 +32,7 @@ DUMP_DIR = os.environ.get("MONO3D_DUMP_DIR", os.path.join(_HERE, "data", "dumps"
 CACHE_DIR = os.environ.get("MONO3D_CACHE_DIR", os.path.join(_HERE, "cache"))
 
 # Where re-runs write their reports. Kept separate so a re-run never overwrites the
-# frozen reports in reports/ and reports_orig/ that the paper cites.
+# reports in reports/ and reports_orig/ that the paper cites.
 OUT_DIR = os.environ.get("MONO3D_OUT_DIR", os.path.join(_HERE, "reports_rerun"))
 
 # Optional: only needed for tools/crossbench (Waymo / nuScenes preliminary audit).

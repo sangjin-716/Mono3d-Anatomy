@@ -1,12 +1,11 @@
-"""Ported from tools/decomp/paired_perbin_dz.py for the public release. Computation unchanged.
-Produces reports/paired_perbin_dz.txt.
+"""Produces reports/paired_perbin_dz.txt.
 
 Paired per-distance-bin depth table (MonoCoP-Table-5 style, but confound-free):
 per-DISTANCE-BIN median |dz| on the SAME common objects across detectors.
 = "same matched objects, distance-binned depth error"; removes the matched-set confound of the
 per-detector progression table.
 
-Reuses paired_common_object.build_detection_matrix verbatim (S5 pool, arc IoU3D,
+Reuses paired_common_object.build_detection_matrix unchanged (S5 pool, arc IoU3D,
 moderate GT, found = best-IoU>=0.3). Common set = GTs found by ALL 4 core detectors.
 Run from the repository root: python tools/decomp/paired_perbin_dz.py
 """

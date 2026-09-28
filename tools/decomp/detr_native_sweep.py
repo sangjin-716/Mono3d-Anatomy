@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/detr_native_sweep.py for the public release. Computation unchanged.
-Produces reports/detr_native_sweep.txt.
+"""Produces reports/detr_native_sweep.txt.
 
 DETR-native operating-point sweep (reports/prereg_2b_detr_sweep.md rev3) on the validated
 pre-flatten dumps (<f>_val_preflatten.csv in DUMP_DIR; not part of the 14 released val dumps).
@@ -13,7 +12,7 @@ Car-hypothesis universe per model: 50 rows/img (each query's Car hypothesis).
   F gap  (K_flat,thr) ∈ {(50,.2)=NATIVE,(150,0),(50,.3),(150,.2)}: ceiling = rank by oracle
          IoU3D (cache _pfcache_<f>.npz via iou_act_and_zstar on the 50/img Car pool)
   S diag cls-consistent (gate cls≥.2, rank cls) / V-consistent (per-image count matched to
-         native, select+rank by V) — DIAGNOSTIC-ONLY labels
+         native, select+rank by V); DIAGNOSTIC-ONLY labels
   IoU0.5 robustness: base+ceiling at the native cell with min_overlap=0.5
 Metrics: all-point interpolated AP primary + official R40 (same call), Car moderate.
 Run from the repository root: python tools/decomp/detr_native_sweep.py

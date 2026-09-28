@@ -1,6 +1,5 @@
-"""Ported from final_camera_ready/tools/figs/verify_cr.py for the public release.
-Computation unchanged. Produces a console report (page size, min font size, fonts, embedded images)
-for each camera-ready PDF in reports_rerun/figures/ and a 200-dpi preview in reports_rerun/figures/png/.
+"""Prints page size, minimum font size, fonts and embedded images of each camera-ready PDF in
+reports_rerun/figures/, and writes a 200-dpi preview to reports_rerun/figures/png/.
 Requires PyMuPDF (pip install pymupdf).
 Run from the repository root: python figures/verify_cr.py [fig1_progression ...]"""
 import pymupdf, sys, os, glob

@@ -1,4 +1,3 @@
-# Ported from mono3d_crossdataset/configs/fcos3d_dump_full.py for the public release.
 # Official mmdet3d FCOS3D finetune config with only the evaluator replaced by DumpResults, so
 # inference writes the per-camera prediction pkl used by nusc_official_reformat.py and the oracle.
 # Edit the two placeholders: your mmdetection3d checkout and the cache directory of this

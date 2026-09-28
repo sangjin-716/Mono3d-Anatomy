@@ -1,9 +1,5 @@
-"""Ported from tools/decomp/exact_ap.py for the public release. Computation unchanged.
-Produces no report of its own.
-
-Thin re-export of evaluator/exact_ap.py, which holds the identical code (the original
-tools/decomp/exact_ap.py and evaluator/exact_ap.py were byte-identical before porting). Kept so the
-scripts in this directory can keep `from exact_ap import ap_summaries`.
+"""Thin re-export of evaluator/exact_ap.py, so the scripts in this directory can keep
+`from exact_ap import ap_summaries`. Writes no report.
 Validation gates: python evaluator/exact_ap.py [--full]  (or this file, which forwards to it).
 """
 import os, sys

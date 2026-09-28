@@ -1,13 +1,11 @@
 """MonoDETR per-detection dump adapter -> shared 23-col schema (val+train).
 
-Ported from tools/decomp/adapters/monodetr_dump.py for the public release. Computation unchanged.
 Produces data/dumps/monodetr_val.csv (the script writes monodetr_val.csv and monodetr_train.csv
 into --outdir, default <OUT_DIR>/dumps/).
-Config: the original run used a copy of the repo's configs/monodetr.yaml whose only change was an
-absolute dataset.root_dir; this port applies the same override from --root_dir
+Config: the repo's configs/monodetr.yaml with dataset.root_dir set from --root_dir
 (default paths.KITTI_ROOT). The `lib.*` imports are the upstream MonoDETR package (--repo).
 Uses MonoDETR's NATIVE extract_dets_from_outputs (top-K over query×class) so the
-dump is faithful (reproduces official mod 20.83) — dgp_cop_dump's per-query decode
+dump is faithful (reproduces official mod 20.83); dgp_cop_dump's per-query decode
 differs (gave 20.13). Inference-only, repo read-only.
 
 MonoDETR detections tensor cols: [0]label [1]cls(=topk prob, the THRESHOLD score)

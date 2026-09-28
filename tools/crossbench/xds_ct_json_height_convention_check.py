@@ -1,5 +1,4 @@
-"""Ported from camera-ready checks/xds_ct_json_height_convention_check.py for the public
-release. Computation unchanged. Produces a console check (no file): which height reference
+"""Console check (writes no file) of which height reference
 CenterTrack writes as 'translation' in its nuScenes results json (box centre, bottom or top),
 by matching car detections (score > 0.5, first 40 MB of the json) to devkit car annotations
 within 1.5 m in BEV. Supports the height convention used in ct_to_oracle_pkl.py.

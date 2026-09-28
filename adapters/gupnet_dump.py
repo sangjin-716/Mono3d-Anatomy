@@ -1,6 +1,5 @@
 """GUPNet per-detection dump adapter -> shared 23-col schema.
 
-Ported from tools/decomp/adapters/gupnet_dump.py for the public release. Computation unchanged.
 Produces data/dumps/gupnet_val.csv (the script writes gupnet_val.csv and gupnet_train.csv into
 --outdir, default <OUT_DIR>/dumps/).
 

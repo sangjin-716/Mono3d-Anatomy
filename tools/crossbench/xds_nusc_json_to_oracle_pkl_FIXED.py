@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xds_nusc_json_to_oracle_pkl_FIXED.py for the public
-release. Computation unchanged (two comments translated to English). Produces the per-camera
-oracle pkl for the EPro-PnP-Det, FCOS3D and PGD nuScenes cells, consumed by nusc_oracle.py.
+"""Writes the per-camera oracle pkl for the EPro-PnP-Det, FCOS3D and PGD nuScenes cells, which
+nusc_oracle.py reads.
 
 Height-convention-corrected copy of ct_to_oracle_pkl.py: the only code difference is that the
 bottom-referenced camera tensor is wrapped with origin=(0.5, 1.0, 0.5) (y unchanged) instead of

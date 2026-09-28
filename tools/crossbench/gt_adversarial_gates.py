@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 """Adversarial gates A (alignment vs predictions) + B (projection consistency) for converted Waymo GT.
 
-Ported from mono3d_crossdataset/tools/gt_adversarial_gates.py for the public release. Computation unchanged
-(the console labels were translated to English). Produces a console summary and
-crossbench/waymo/gates_AB.json under the re-run output directory.
+Prints a summary and writes crossbench/waymo/gates_AB.json under the re-run output directory.
 Gate A: fraction of frames whose confident GUPNet predictions (score > 0.3) match some
 converted Car GT in 2D (IoU > 0.5). Gate B: projected 3D centre of every Car GT inside its
 2D box (+20 px margin), z > 0, and 2D box inside the 1920x1280 image.

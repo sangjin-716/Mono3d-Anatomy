@@ -1,13 +1,12 @@
 """Shared geometry/IO for the cross-architecture mono3D failure decomposition.
 
-Single source of truth for the validated 3D-IoU (report §10: shapely BEV-polygon
+Single source of truth for the validated 3D-IoU (shapely BEV-polygon
 intersection x height-overlap / union, loc y = bottom-center, ry = KITTI col-14).
 The BEV polygon convention here matches MonoDGP's own Object3d.generate_corners3d()
 exactly (x_corners=[l/2,...], z_corners=[w/2,...], R=[[c,0,s],[0,1,0],[-s,0,c]]),
 so iou3d() is faithful to the detector's box parametrisation.
 
-Reused verbatim from the validated probe scripts (recall_decomp3.py / axis_split).
-Do NOT rewrite the IoU here per-detector — import from this module.
+Do not re-implement the IoU per detector; import it from this module.
 """
 from __future__ import annotations
 import math

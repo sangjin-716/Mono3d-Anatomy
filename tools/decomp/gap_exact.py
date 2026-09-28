@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/gap_exact.py for the public release. Computation unchanged.
-Produces reports/gap_exact.txt (and the _bridgecache_<f>.npz o_act/o_z caches reused by
+"""Produces reports/gap_exact.txt (and the _bridgecache_<f>.npz o_act/o_z caches reused by
 gap_metric_robustness.py and e3_endpoint_gap_boot.py; built on first run).
 
 Order-ceiling gap under official R11 / official R40 / all-point interpolated AP,

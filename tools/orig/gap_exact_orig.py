@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/gap_exact_orig.py for the public release. Computation
-unchanged. Produces reports_orig/gap_exact_orig.txt.
+"""Produces reports_orig/gap_exact_orig.txt.
 
-The paper's gap_exact machinery (tools/decomp/gap_exact.py), verbatim, applied to the
+The paper's gap_exact machinery (tools/decomp/gap_exact.py), unchanged, applied to the
 ORIGINAL-ENV MonoFlex/MonoGround dumps (dump stems monoflex_orig / monoground_orig).
-Also writes the S5-pool oracle-IoU cache <stem>_bridgecache.npz reused by bridge_orig.py and
-gap_metric_robustness_orig.py.
+Also writes the oracle-IoU cache of the S5 pool (cls>=0.2 + 2D-NMS@0.5 by V),
+<stem>_bridgecache.npz, which bridge_orig.py and gap_metric_robustness_orig.py reuse.
 Run from the repository root: python tools/orig/gap_exact_orig.py
 """
 import os, sys, shutil, datetime, hashlib

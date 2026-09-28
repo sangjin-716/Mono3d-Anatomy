@@ -1,10 +1,9 @@
 """MonoFlex per-detection dump adapter (MODERN environment) -> 23-col schema.
 
-Ported from tools/decomp/adapters/monoflex_dump.py for the public release. Computation
-unchanged. Produces data/dumps/monoflex_modern_val.csv (the script writes monoflex_val.csv and
+Produces data/dumps/monoflex_modern_val.csv (the script writes monoflex_val.csv and
 monoflex_train.csv into --outdir, default <OUT_DIR>/dumps/modern/; rename the val file to
 monoflex_modern_val.csv). The panel entry MonoFlex* uses the ORIGINAL-environment dump
-instead (adapters/monoflex_dump_orig.py); this modern dump drifts -1.97 AP (see README).
+instead (adapters/monoflex_dump_orig.py); this modern dump drifts -1.97 AP (see adapters/README.md).
 
 The 23 columns are the prediction part of the 33-col DETR-dump schema. Inference-only, read-only on the repo. Dumps BOTH val+train in
 one GPU pass (model loaded once). DETECTIONS_THRESHOLD=0 -> full top-50 pool;

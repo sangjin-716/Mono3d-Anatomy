@@ -1,9 +1,7 @@
-"""Ported from tools/decomp/task0_sequence_mapping.py (the frame -> drive mapping part only) for
-the public release. Computation unchanged. Produces <CACHE_DIR>/decomp/frame_sequence.csv, the
-KITTI object-frame -> raw-drive table that the drive-grouped folds and the drive-cluster
-bootstrap read (clean_transfer_strong.py, phase1_drive_oof.py, bootstrap_floor.py,
-e3_endpoint_gap_boot.py). The original scripts read the same table from a pre-built CSV; it is
-rebuilt here from the KITTI object devkit so no extra file has to be shipped.
+"""Produces <CACHE_DIR>/decomp/frame_sequence.csv, the KITTI object-frame -> raw-drive table that
+the drive-grouped folds and the drive-cluster bootstrap read (clean_transfer_strong.py,
+phase1_drive_oof.py, bootstrap_floor.py, e3_endpoint_gap_boot.py). The table is built from the
+KITTI object devkit.
 
 Mapping convention (KITTI object devkit): object index i (0-based, %06d filename) ->
 train_rand[i] (1-based line number) -> train_mapping[line-1] = (date, drive, frame_in_drive).

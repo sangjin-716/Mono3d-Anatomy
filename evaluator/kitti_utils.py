@@ -1,4 +1,4 @@
-"""KITTI calibration reader (get_calib_from_file + Calibration), vendored verbatim from
+"""KITTI calibration reader (get_calib_from_file + Calibration), copied unchanged from
 MonoDGP (https://github.com/PuFanqi23/MonoDGP, lib/datasets/kitti/kitti_utils.py, MIT License,
 Copyright (c) 2025 Fanqi Pu). Only these two definitions are kept; the rest of the file
 (image transforms, which need OpenCV) is not used by this repository.

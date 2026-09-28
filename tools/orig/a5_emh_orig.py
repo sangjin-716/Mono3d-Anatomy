@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/a5_emh_orig.py for the public release. Computation
-unchanged. Prints the Easy/Moderate/Hard all-point AP3D of the starred rows of main Table 1
-to stdout (the original wrote no report file); the stdout of the release re-run is captured in
-reports_orig/emh_orig.txt.
+"""Prints the Easy/Moderate/Hard all-point AP3D of the starred rows of main Table 1 to stdout
+and writes no file. reports_orig/emh_orig.txt is a saved copy of that output.
 
 A5 released-native pool (cls>=0.1, no box-NMS, rank by V) all-point AP3D at Easy/Moderate/Hard
 for MonoFlex*/MonoGround*, so Table 1's starred rows are one pool.

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Waymo official-evaluator reproduction gate, v2 (adds MonoRCNN++).
 
-Ported from camera-ready checks/waymo_gate/gate_deltas_v2.py for the public release.
-Computation unchanged (comments and two console labels shortened). Reads the evaluator tables
-written by run_gate.sh (crossbench/waymo_gate/gate_<det>_fullval_<iou>.txt in the re-run output
-directory) and prints the gate deltas against the published references transcribed below.
+Reads the evaluator tables written by run_gate.sh (crossbench/waymo_gate/gate_<det>_fullval_<iou>.txt
+in the re-run output directory) and prints the gate deltas against the published references
+transcribed below.
 
 INSTRUMENT
   python 3.9, tensorflow 2.11.0, waymo-open-dataset-tf-2-11-0 1.6.1 (pip wheel, prebuilt
@@ -26,7 +25,7 @@ REFERENCES (values transcribed in the dictionaries below)
         GUPNet and DEVIANT rows.
   C. Yang et al. "MonoCLUE." arXiv:2511.07862v1, SUPPLEMENTARY Table 4.
      AP3D and APH3D, IoU 0.7, Level 1 and Level 2, All/0-30/30-50/50-inf.
-  D. The evaluator log shipped inside the DEVIANT release archives (see AUTHORS_LOG below).
+  D. The evaluator log included in the DEVIANT release archives (see AUTHORS_LOG below).
   Independence caveat: B and C report values numerically identical to A where they
   overlap, i.e. they are transcriptions of the original DEVIANT/GUPNet tables, not
   independent re-runs. They add coverage (LEVEL_2, AP3D) but not independent

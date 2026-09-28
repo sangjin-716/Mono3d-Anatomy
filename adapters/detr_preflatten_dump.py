@@ -1,16 +1,15 @@
 """PRE-FLATTEN per-query dump for MonoDETR-family models (DGP/CoP/CLUE/IA variant; MonoDETR
 itself uses adapters/monodetr_preflatten_dump.py because its forward signature differs).
 
-Ported from tools/detr_preflatten_dump.py for the public release. Computation unchanged.
-Produces the auxiliary per-hypothesis pools monodgp_val_preflatten.csv and
-official_monocop_val_preflatten.csv (release asset mono3d_anatomy_query_complete_pools_v1.zip; used for the query-lineage
-native pools). For MonoCLUE/MonoIA this generic raw-head decode is NOT valid (it skips their
-repo-specific decode corrections); use adapters/detr_preflatten_native.py for those two.
-Changes: --label_dir (default paths.LABEL_DIR) replaces the repo-relative label lookup of the
-final record-only AP print, and --root_dir optionally overrides cfg["dataset"]["root_dir"].
+Produces the complete per-hypothesis pools monodgp_val_preflatten.csv and
+official_monocop_val_preflatten.csv (release asset mono3d_anatomy_query_complete_pools_v1.zip),
+used for the native pools of the query-based detectors. Do not use it for MonoCLUE or MonoIA:
+this generic raw-head decode skips their repo-specific decode corrections, so use
+adapters/detr_preflatten_native.py for those two. --label_dir (default paths.LABEL_DIR) is only
+used for the AP printed at the end, and --root_dir optionally overrides cfg["dataset"]["root_dir"].
 
-Per prereg_2b_detr_sweep.md rev2: for every val image and each of the 50 inference queries, store
-the decoded 3D box (Car mean-size convention, identical math to tools/dgp_cop_dump.py), ALL
+Following reports/prereg_2b_detr_sweep.md (rev2): for every val image and each of the 50 inference
+queries, store the decoded 3D box (Car mean-size convention, same math as adapters/dgp_cop_dump.py), ALL
 foreground class sigmoid probs (cls_car/ped/cyc; family has no explicit no-object logit),
 log_sigma/sigma, V_car = cls_car*exp(-log_sigma), V_maxcls (old-dump compat check), query_id,
 argmax_cls, layer_id ('last'), flat_rank_car (rank of the (q,Car) hypothesis among the 150
@@ -26,12 +25,12 @@ is derivable deterministically; Car-hypothesis states are additionally materiali
 EMBEDDED HYPOTHESIS-LEVEL UNIT TEST (abort gate): per image, the full ALL-CLASS native
 pipeline is reconstructed from stored quantities (K_flat -> thr -> cls*sigma scores) and
 compared against the repo's OWN extract_dets_from_outputs + decode_detections output on the
-SAME tensors — (class,score) multiset (<2e-4), counts for all classes, and Car 3D boxes
+SAME tensors: (class,score) multiset (<2e-4), counts for all classes, and Car 3D boxes
 (<1e-3). Any mismatching image aborts with nonzero exit. At the end the reconstruction's
 Car-mod-R40 is computed with the repo's official evaluator for the record.
 
 The `lib.*` imports are the detector repo passed as --repo.
-Run (repo env, cwd=repo): python <release>/adapters/detr_preflatten_dump.py \
+Run (repo env, cwd=repo): python <Mono3d-Anatomy>/adapters/detr_preflatten_dump.py \
   --repo <repo> --cfg <yaml> --ckpt <pth> --out <csv> --tag <tag> [--car_idx auto]
 """
 from __future__ import annotations

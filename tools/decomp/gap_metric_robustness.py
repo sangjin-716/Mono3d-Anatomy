@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/gap_metric_robustness.py for the public release. Computation unchanged.
-Produces reports/gap_metric_robustness.txt.
+"""Produces reports/gap_metric_robustness.txt.
 
-Gap metric robustness — does the stable +12-15 rank gap survive the metric?
+Gap metric robustness: does the stable +12-15 rank gap survive the metric?
 
 Known issue (seen on 3 detectors): all 12 R40 order-ceilings sit exactly on the
 2.5-AP grid (recall-quantization), and gap_R11 < gap_R40 by ~3-4 AP. This script computes

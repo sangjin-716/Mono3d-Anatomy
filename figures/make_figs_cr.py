@@ -1,9 +1,8 @@
-"""Ported from final_camera_ready/tools/figs/make_figs_cr.py for the public release.
-Computation unchanged. Produces reports_rerun/figures/{fig1_progression, fig2_headroom,
-fig3_anatomy, fig4_waterfall, fig4v2_plane_agreement}.pdf (paths.OUT_DIR/figures).
+"""Camera-ready versions of the five paper figures (ACCV 2026 #1015).
 
-Camera-ready versions of the five paper figures (ACCV 2026 #1015).
-Data are parsed from figures/data/vB_reports/ by the verified repro prefixes (see cr_common.py),
+Produces reports_rerun/figures/{fig1_progression, fig2_headroom, fig3_anatomy, fig4_waterfall,
+fig4v2_plane_agreement}.pdf (paths.OUT_DIR/figures).
+Data are parsed from figures/data/vB_reports/ by the data-parsing part of the repro scripts (see cr_common.py),
 with the same series, colours, markers and text strings as the submitted PDFs, and a new
 size/layout: 4.80 in wide (placed at scale 1.0 at \\linewidth), all glyphs >= 6.5 pt, no ink
 overlaps. Two data corrections of the camera-ready version differ from the submitted figures:

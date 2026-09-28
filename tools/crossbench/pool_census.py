@@ -1,8 +1,7 @@
-"""Ported from camera-ready checks/xdsfix_fcos3d_oracle/pool_census.py for the public release.
-Computation unchanged. Produces the car-prediction census of a converted oracle pkl (console); in the paper it gives
-the FCOS3D boxes per image (pred_car per image).
+"""Prints the car-prediction census of a converted oracle pkl; in the paper it gives the FCOS3D
+boxes per image (pred_car per image).
 
-pool_census.py — characterise the fixed detection pool an oracle cell was computed on.
+It characterises the fixed detection pool an oracle cell was computed on.
 Reports, for the Car class (label 0): total pred boxes, car pred boxes, per-image rate,
 score distribution, and camera-frame depth (z) histogram. GT side is identical across pkls
 (same eval_ann_info template) and is printed once as a reference.

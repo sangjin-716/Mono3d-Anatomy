@@ -1,18 +1,17 @@
-"""Ported from mono3d_crossdataset/tools/waterfall_orig.py for the public release. Computation
-unchanged. Produces reports_orig/pool_waterfall_orig.txt.
+"""Produces reports_orig/pool_waterfall_orig.txt.
 
 POOL WATERFALL (GATE for the missing/suppressed split) for the original-environment MonoFlex*/MonoGround*
-dumps (a copy of tools/decomp/pool_waterfall.py with the model list and inputs switched) —
+dumps (a copy of tools/decomp/pool_waterfall.py with the model list and inputs switched),
 per model: candidate existence -> eligibility -> budget -> final ranking, on COMPLETE native pools.
 
-Data sources (the other detectors' branches are kept verbatim but never executed here; they read
+Data sources (the other detectors' branches are kept but never executed here; they read
 the complete-pool release assets through extra_dump()):
   query family : validated v2 preflatten dumps (Car hypotheses = every query's Car channel)
   M3D-RPN      : floor-0 dump (complete native pre-NMS top-3000 Car-argmax pool; validated)
   CenterNet    : established full dumps (top-K heatmap pools incl sub-threshold; validated)
 
 Per moderate-GT (GT-side, candidate gate = |z_cand - z_gt| < 8 m; SAFE for IoU>=0.5 existence
-since IoU>=0.5 forces small dz — disclosed):
+since IoU>=0.5 forces small dz):
   stage A existence  : best IoU3D over the COMPLETE pool   (acc@0.5 / acc@0.7 flags)
   stage B eligibility: best IoU3D over eligibility survivors (native thr; M3D-RPN: writer 0.75
                        + its native NMS@0.4+top40; query: K_flat50 & cls>=0.2; CenterNet: thr0.2)
@@ -20,7 +19,7 @@ since IoU>=0.5 forces small dz — disclosed):
 Faces per GT (moderate): MISSING = no accurate candidate in pool (A fails);
 SUPPRESSED-ACC = A passes (IoU>=0.7 candidate exists) but C fails; among suppressed,
 REPLACED = another same-GT candidate survives to final with IoU>=0.7 (by construction
-suppressed-acc & C-fail means NOT replaced — replacement is counted at the candidate level:
+suppressed-acc & C-fail means NOT replaced; replacement is counted at the candidate level:
 the best pool candidate was dropped but a different candidate of the same GT made C pass ->
 those GTs are NOT counted suppressed; so non-replacement is explicit).
 Outputs per model: waterfall counts overall + far bins; face-(ii) share =

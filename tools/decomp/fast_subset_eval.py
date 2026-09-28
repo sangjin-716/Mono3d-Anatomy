@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/fast_subset_eval.py for the public release. Computation unchanged.
-Produces no report (library).
+"""Produces no report (library).
 
-Cached subset evaluator for KITTI AP3D R40 (Car, moderate, IoU0.7) — for drive-cluster bootstrap.
+Cached subset evaluator for KITTI AP3D R40 (Car, moderate, IoU0.7), for the drive-cluster bootstrap.
 NOT a reimplementation: it precomputes the per-image 3D-IoU overlaps (the only GPU step, via the OFFICIAL
 calculate_iou_partly) + the official _prepare_data ONCE per variant, then evaluates any image SUBSET by
 re-assembling the official `parted_overlaps` (block-diagonal) and running the OFFICIAL jit aggregation

@@ -1,5 +1,4 @@
-"""Ported from final_camera_ready/tools/figs/cmp_text.py for the public release.
-Computation unchanged. Produces a console report comparing two directories of the five figure PDFs:
+"""Prints a comparison of two directories of the five figure PDFs:
 text spans (multiset, sizes, positions at 0.1 pt) and vector drawings (colour, fill, points at 0.1 pt).
 Requires PyMuPDF (pip install pymupdf).
 Run from the repository root: python figures/cmp_text.py <candidate_dir> <reference_dir>

@@ -1,10 +1,9 @@
-"""Ported from tools/decomp/e2_budget_truncation.py for the public release. Computation unchanged.
-Produces reports/final_run/e2_budget_truncation.txt.
+"""Produces reports/final_run/e2_budget_truncation.txt.
 
-E2 — anchor candidate-budget truncation sensitivity (DIAGNOSTIC ONLY — does not and
-cannot remove the budget confound; reported as budget sensitivity).
+E2: anchor candidate-budget truncation sensitivity (DIAGNOSTIC ONLY; it does not and
+cannot remove the budget confound, and is reported as budget sensitivity).
 Floor-0 M3D-RPN pool truncated per frame to native-score top-150 / top-50; recompute
-official-moderate existence A@0.7/A@0.5 (waterfall kernels verbatim). Plus
+official-moderate existence A@0.7/A@0.5 (waterfall kernels unchanged). Plus
 hard-core-minus-anchor sensitivity from gt_state_matrix.csv (union over the 11 non-anchor
 models; run gt_state_matrix.py first, it writes <CACHE_DIR>/decomp/gt_state_matrix.csv).
 Needs the floor-0 M3D-RPN dump (m3drpn_val_floor0.csv) in DUMP_DIR.

@@ -1,12 +1,11 @@
-"""Ported from tools/decomp/e3_endpoint_gap_boot.py for the public release. Computation unchanged.
-Produces reports/final_run/e3_endpoint_gap_boot.txt.
+"""Produces reports/final_run/e3_endpoint_gap_boot.txt.
 
-E3 — endpoint ordering-gap difference under paired drive-cluster bootstrap.
+E3: endpoint ordering-gap difference under paired drive-cluster bootstrap.
 Stat per replicate (identical drive resample across all four arms):
     dGap = (AP_ceil(B) - AP_base(B)) - (AP_ceil(A) - AP_base(A))
 Pairs: (MonoDLE -> MonoIA) and (M3D-RPN -> MonoIA). S5 uniform pools (the battery where
 ceiling scores o_act exist), dense-401 primary / official R40 secondary, B=1000,
-RandomState(0) — same machinery class as bootstrap_floor.py.
+RandomState(0), the same machinery class as bootstrap_floor.py.
 The o_act cache (_bridgecache_<f>.npz) is the one gap_exact.py writes; if it is absent it is
 built here with the same call (depth_share_bridge.iou_act_and_zstar on the S5 pool).
 Drive map: frame_sequence.py (built from the KITTI devkit mapping).

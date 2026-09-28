@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/probe_official_moderate.py for the public release. Computation unchanged.
-Produces reports/final_run/probe_official_moderate.txt.
+"""Produces reports/final_run/probe_official_moderate.txt.
 
-E1' — progression probe channels re-aggregated on the OFFICIAL KITTI moderate set
+E1': progression probe channels re-aggregated on the OFFICIAL KITTI moderate set
 (occ<=1 AND trunc<=0.3 AND bbox pixel height>25). Near-copy of
 probe_detector_progression.py (matcher/pools/kernels identical); ONLY read_gt_mod
 changes + GT-count gate (total must equal 7,874 = pool_waterfall count) + delta table vs

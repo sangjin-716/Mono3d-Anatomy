@@ -1,7 +1,6 @@
-"""Ported from tools/decomp/pool_waterfall.py for the public release. Computation unchanged.
-Produces reports/pool_waterfall.txt.
+"""Produces reports/pool_waterfall.txt.
 
-Pool waterfall — per family, per model:
+Pool waterfall, per family and per model:
 candidate existence → eligibility → budget → final ranking, on COMPLETE native pools.
 
 Data sources (all in DUMP_DIR):
@@ -13,7 +12,7 @@ Data sources (all in DUMP_DIR):
 The pre-flatten and floor-0 dumps are not among the 14 released val dumps.
 
 Per moderate-GT (GT-side, candidate gate = |z_cand − z_gt| < 8 m; SAFE for IoU≥0.5 existence
-since IoU≥0.5 forces small Δz — disclosed):
+since IoU≥0.5 forces small Δz):
   stage A existence  : best IoU3D over the COMPLETE pool   (acc@0.5 / acc@0.7 flags)
   stage B eligibility: best IoU3D over eligibility survivors (native thr; M3D-RPN: writer 0.75
                        + its native NMS@0.4+top40; query: K_flat50∧cls≥0.2; CenterNet: thr0.2)
@@ -21,7 +20,7 @@ since IoU≥0.5 forces small Δz — disclosed):
 Faces per GT (moderate): MISSING = no accurate candidate in pool (A fails);
 SUPPRESSED-ACC = A passes (IoU≥0.7 candidate exists) but C fails; among suppressed,
 REPLACED = another same-GT candidate survives to final with IoU≥0.7 (by construction
-suppressed-acc & C-fail means NOT replaced — replacement is counted at the candidate level:
+suppressed-acc & C-fail means NOT replaced; replacement is counted at the candidate level:
 the best pool candidate was dropped but a different candidate of the same GT made C pass →
 those GTs are NOT counted suppressed; so non-replacement is explicit).
 Outputs per model: waterfall counts overall + far bins; face-(ii) share =

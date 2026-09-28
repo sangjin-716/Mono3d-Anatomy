@@ -1,7 +1,6 @@
-"""Ported from final_camera_ready/tools/figs/repro_make_fig4v2_vB.py for the public release.
-Computation unchanged. Produces the data (and, run standalone, the submitted-layout PDF in
-reports_rerun/figures/submitted_layout/) of the supplementary generation-selection figure;
-the camera-ready layout is make_figs_cr.py (fig4v2_plane_agreement.pdf).
+"""Data (and, run standalone, the submitted-layout PDF in reports_rerun/figures/submitted_layout/)
+of the supplementary generation-selection figure. The camera-ready layout is make_figs_cr.py
+(fig4v2_plane_agreement.pdf).
 
 (a) generation-selection plane (pool_waterfall aggregates), (b) cross-detector agreement +
 panel-unreached set (gt_state_matrix.txt). y-axis = RETENTION RATE (presence layer; no TP matching).

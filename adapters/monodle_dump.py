@@ -1,7 +1,6 @@
-"""MonoDLE per-prediction val dump — 23-col CenterNet-family format
+"""MonoDLE per-prediction val dump, 23-col CenterNet-family format
 (same schema as gupnet_val.csv / monoflex_*_val.csv).
 
-Ported from tools/monodle_dump.py for the public release. Computation unchanged.
 Produces data/dumps/monodle_val.csv (written to <OUT_DIR>/dumps/ by default, so a re-run never
 overwrites the downloaded dump).
 
@@ -16,9 +15,9 @@ Column semantics (MonoDLE):
   z_pred = z_3d = decoded depth; dup_rank = #other Car preds IoU2D>=0.5 with higher V
 
 The `lib.*` imports are the upstream MonoDLE package (the script runs with cwd = the MonoDLE
-repo, whose dataset root_dir 'data/KITTI' is repo-relative). Config: adapters/configs/monodle/
-kitti_accv_eval.yaml (upstream experiments/example/kitti_example.yaml with a single GPU and an
-explicit root_dir).
+repo, whose dataset root_dir 'data/KITTI' is repo-relative). Config:
+adapters/configs/monodle/kitti_accv_eval.yaml (upstream experiments/example/kitti_example.yaml
+with a single GPU and an explicit root_dir).
 Run (MonoDLE env, torch 1.10 in our runs):
   python adapters/monodle_dump.py [--repo <UPSTREAM_ROOT>/MonoDLE] [--ckpt ...] [--out ...]
 """

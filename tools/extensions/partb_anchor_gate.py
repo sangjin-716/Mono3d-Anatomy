@@ -1,12 +1,11 @@
-"""Ported from the camera-ready check partb_anchor_gate.py (same file name) for the public release.
-Computation unchanged. Prints (stdout) the mechanism and per-detector Car-anchor lines of
+"""Prints the mechanism and per-detector Car-anchor lines of
 reports/extensions/class_gate_audit.txt (supplementary Sec. O: DEVIANT 17.14 vs 17.48; three
-kept detectors within 0.01). Needs only the released DEVIANT dump and the frozen
+kept detectors within 0.01). Needs only the released DEVIANT dump and
 reports/extensions/difficulty_class_extension.csv (override with --csv).
 
 Part-B Car-anchor gate + score-quantisation mechanism test.
 
-A check found DEVIANT's Part-B Car/Moderate base = 17.14 against the frozen
+A check found DEVIANT's Part-B Car/Moderate base = 17.14 against the
 Part-A / Table-1 value 17.48 (d = 0.34 AP), while the other three Part-B pools
 reproduce their anchors to <= 0.01 AP.
 

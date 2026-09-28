@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/ct_to_oracle_pkl.py for the public release. Computation
-unchanged (two comments translated to English). Produces the per-camera oracle pkl for the
-CenterNet (CenterTrack e140) nuScenes cell, consumed by nusc_oracle.py.
+"""Writes the per-camera oracle pkl for the CenterNet (CenterTrack e140) nuScenes cell, which
+nusc_oracle.py reads.
 
 ct_to_oracle_pkl.py -- CenterTrack nuScenes det results (GLOBAL frame) -> per-camera
 oracle pkl in the exact shape nusc_oracle.py consumes (pred_instances_3d + eval_ann_info),

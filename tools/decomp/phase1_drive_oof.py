@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/phase1_drive_oof.py for the public release. Computation unchanged.
-Produces reports/drive_grouped_oof.md (+ drive_grouped_oof_results.json next to it).
+"""Produces reports/drive_grouped_oof.md (+ drive_grouped_oof_results.json next to it).
 
 Phase 1: drive-grouped OOF vs image-fold OOF (no detector retraining; existing dumps).
 Same canonical settings (S5, IoU3D>=.05/|dz|<8 match, DET15, GBM OMP=1, calib-ray reproj, official eval,

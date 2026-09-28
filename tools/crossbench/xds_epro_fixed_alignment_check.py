@@ -1,5 +1,4 @@
-"""Ported from camera-ready checks/xds_epro_fixed_alignment_check.py for the public
-release. Computation unchanged. Produces a console check (no file): median vertical offset
+"""Console check (writes no file): median vertical offset
 between car predictions (score > 0.3) and the nearest car GT (within 1 m in x-z) in the
 EPro-PnP-Det pkl written by xds_nusc_json_to_oracle_pkl_FIXED.py (target ~0).
 """

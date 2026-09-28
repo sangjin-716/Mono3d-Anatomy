@@ -1,13 +1,10 @@
-"""Ported from camera-ready checks/xdsfix_fcos3d_oracle/gate_content_equality.py for the public release.
-Computation unchanged. Produces a console content comparison (max abs difference and md5 of boxes/scores/labels) of
-two converted oracle pkls; used to check that a fresh EPro-PnP-Det conversion equals the
-earlier one element by element.
+"""Compares two converted oracle pkls element by element and prints the max abs difference and
+md5 of boxes, scores and labels.
 
-gate_content_equality.py — stronger form of the reproduction check: a freshly converted
-EPro-PnP oracle pkl vs the earlier one that produced the table row must be identical
-in content (per-image box tensors, scores, labels), not merely identical in the 2-decimal
-oracle printout.
-Usage: python gate_content_equality.py <mine.pkl> <frozen.pkl>
+This is a stronger form of the reproduction check: a freshly converted EPro-PnP-Det oracle pkl
+and the earlier one that produced the table row must be identical in content (per-image box
+tensors, scores, labels), not merely identical in the 2-decimal oracle printout.
+Usage: python gate_content_equality.py <mine.pkl> <reference.pkl>
 """
 import os, pickle, sys, hashlib
 import numpy as np

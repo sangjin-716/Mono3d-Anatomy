@@ -1,7 +1,6 @@
-"""DEVIANT per-prediction val dump — 23-col CenterNet-family format
+"""DEVIANT per-prediction val dump, 23-col CenterNet-family format
 (same schema as gupnet_val.csv / monoflex_*_val.csv).
 
-Ported from tools/deviant_dump.py for the public release. Computation unchanged.
 Produces data/dumps/deviant_val.csv (written to <OUT_DIR>/dumps/ by default, so a re-run never
 overwrites the downloaded dump).
 

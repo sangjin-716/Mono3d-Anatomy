@@ -1,12 +1,11 @@
-"""Ported from mono3d_crossdataset/tools/gt_state_matrix_vB.py for the public release. Computation
-unchanged. Produces reports_orig/gt_state_matrix_vB.txt and <OUT_DIR>/gt_state_matrix_vB.csv.
+"""Produces reports_orig/gt_state_matrix_vB.txt and <OUT_DIR>/gt_state_matrix_vB.csv.
 
 GT-level state matrix across the 12-detector panel, vB version: the main-panel
 tools/decomp/gt_state_matrix.py with MonoFlex*/MonoGround* read from the original-environment
-dumps. COPY-EXTENDED from tools/decomp/pool_waterfall.py (left unmodified): moderate-GT
-filter, |dz|<8m candidate gate, native stage definitions and IoU3D kernel are verbatim.
+dumps. Extends a copy of tools/decomp/pool_waterfall.py (which is not modified): the moderate-GT
+filter, |dz|<8m candidate gate, native stage definitions and IoU3D kernel are unchanged.
 
-States (PRESENCE layer only — official score-ordered one-to-one TP matching is NOT
+States (PRESENCE layer only; official score-ordered one-to-one TP matching is NOT
 reproduced here; the terms "realized"/"TP"/"successful detection" are NOT used anywhere
 downstream):
   NO_POOL_CANDIDATE       best complete-pool IoU3D < thr
@@ -24,7 +23,7 @@ Gates (ALL must pass; on any failure the script aborts BEFORE writing aggregates
   G2 c_best <= a_best + 1e-9 for every (GT, model)  [final subset of pool]
   G3 per-model A@0.7 / C@0.7 / face-ii reproduce reports/pool_waterfall.txt and
      pool_waterfall_orig.txt to 3 decimals
-Extra (query family only): lost-stage typing — for each LOST GT, every accurate candidate
+Extra (query family only): lost-stage typing: for each LOST GT, every accurate candidate
 (IoU3D>=0.7, |dz|<8) is classified by which native eligibility predicate it fails:
 budget_only (flatrank>=50, cls>=0.2) / thr_only (flatrank<50, cls<0.2) / both. Sanity:
 typed candidate count >= 1 per LOST GT (else FAIL).
@@ -32,8 +31,7 @@ typed candidate count >= 1 per LOST GT (else FAIL).
 Inputs: the released per-prediction dumps for the six CenterNet-family detectors, plus the
 complete pools of the two complete-pool release assets (data/DUMPS.md):
 <detector>_val_preflatten.csv for the five query detectors and m3drpn_val_floor0.csv for M3D-RPN,
-read from DUMP_DIR (or $MONO3D_EXTRA_DUMP_DIR, see tools/orig/_orig_common.extra_dump). Its frozen
-output is reports_orig/gt_state_matrix_vB.txt.
+read from DUMP_DIR (or $MONO3D_EXTRA_DUMP_DIR, see extra_dump() in tools/orig/_orig_common.py).
 Run from the repository root: python tools/orig/gt_state_matrix_vB.py
 """
 import os, sys, re, datetime

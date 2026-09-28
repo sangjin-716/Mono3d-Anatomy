@@ -4,9 +4,7 @@ evaluator vendored in evaluator/kitti_eval). If this ~= our dump's S2 (16.46), t
 reproduces GUPNet's predictions exactly (faithful) and the 16.23-vs-16.46 gap is purely
 C++-devkit vs python-eval.
 
-Ported from tools/decomp/adapters/gupnet_native_eval.py for the public release. Computation
-unchanged (the evaluator import moved from the MonoDGP copy of kitti_eval_python to the identical
-copy in evaluator/kitti_eval). Produces only printed numbers (gate G1/G2 cross-check for GUPNet).
+It writes no report; the numbers are printed (gate G1/G2 cross-check for GUPNet).
 Run in a GUPNet env (torch 1.9 in our runs): python adapters/gupnet_native_eval.py
 """
 import os, sys, shutil, argparse

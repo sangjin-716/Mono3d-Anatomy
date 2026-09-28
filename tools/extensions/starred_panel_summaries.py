@@ -1,10 +1,10 @@
 """Panel-level summaries of the twelve-detector panel of the paper, in which MonoFlex* and
 MonoGround* are the original-environment runs (reports_orig/) and the other ten detectors are the
-rows of the main reports (reports/). Written for the public release. Produces
+rows of the main reports (reports/). Produces
 reports/extensions/starred_panel_summaries.txt (a re-run writes
 reports_rerun/extensions/starred_panel_summaries.txt).
 
-Each frozen per-detector report below prints the modern-environment MonoFlex and MonoGround rows
+Each per-detector report below prints the modern-environment MonoFlex and MonoGround rows
 and summarises over those. The paper uses the starred rows instead, so the panel-level numbers it
 prints (medians, ranges, counts, a rank correlation) appear in no single report. This script
 recomputes them from the printed per-detector values only; it runs no detector and reads no dump.
@@ -18,7 +18,7 @@ recomputes them from the printed per-detector values only; it runs no detector a
   D. cross-metric (BEV) transfer of the 3D-IoU re-ordering (supplementary Sec. D, BEV-transfer table)
        reports/final_run/bev_gap_probe.txt + reports_orig/bev_transfer_orig.txt
 Gates: the modern-only summaries recomputed here must equal the summary lines printed in the
-frozen reports, medians up to the rounding of the printed inputs (and, for A, the modern rows must
+reports, medians up to the rounding of the printed inputs (and, for A, the modern rows must
 equal reports/final_run/a3_farfield_integrity.txt). A final block compares every panel-level value
 with the value printed in the paper.
 Run from the repository root: python tools/extensions/starred_panel_summaries.py

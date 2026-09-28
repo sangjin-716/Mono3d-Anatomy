@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/operating_point_sweep.py for the public release. Computation unchanged.
-Produces reports/operating_point_sweep.txt.
+"""Produces reports/operating_point_sweep.txt.
 
 Operating-point battery (pre-registered: reports/prereg_2b_sweep.md).
 
@@ -12,7 +11,7 @@ validated all-point interpolated AP + official R40 from exact_ap.ap_summaries.
       (0.2,none). Ceiling scores = oracle IoU computed ONCE on each detector's FULL dump pool
       (cache _opcache_<f>.npz, aligned to dump row index) so every cell subset inherits them.
   (iii) top-K sweep at the S5 cell: per-image top-K by V, K in {20,50,100,all}; gap at K=50,all.
-M3D-RPN NOTE: its released val dump has a score floor of 0.05 — its thr=0 and 0.05 cells are
+M3D-RPN NOTE: its released val dump has a score floor of 0.05, so its thr=0 and 0.05 cells are
 identical and flagged.
 Run from the repository root: python tools/decomp/operating_point_sweep.py
 """

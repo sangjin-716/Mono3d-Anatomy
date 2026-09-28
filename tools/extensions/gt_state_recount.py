@@ -1,6 +1,5 @@
-"""Ported from the camera-ready check trackC_gtstate_recount.py for the public release (renamed
-without its internal track label). Computation unchanged. Produces
-reports/extensions/gt_state_recount.txt (a re-run writes reports_rerun/extensions/gt_state_recount.txt);
+"""Produces reports/extensions/gt_state_recount.txt (a re-run writes
+reports_rerun/extensions/gt_state_recount.txt);
 supplementary Secs. I and J (panel-unreached 14.8% over all twelve pools, 25.1% over the eleven
 non-anchor pools, 2.4% at IoU 0.5, a further 16.3%, CenterNet-style pool existence 0.294 to 0.317).
 
@@ -9,8 +8,8 @@ Recounts the presence-layer shares directly from the two per-GT state matrices:
            tools/orig/gt_state_matrix_vB.py (default reports_rerun/gt_state_matrix_vB.csv)
   pre-vB : modern-environment panel, the CSV written by tools/decomp/gt_state_matrix.py
            (default cache/decomp/gt_state_matrix.csv)
-The printed text of the original is kept; its closing adjudication note is not printed (the
-public copy omits it too). Read-only. Run from the repository root after the two scripts above:
+Its closing adjudication note is not printed (reports/extensions/gt_state_recount.txt leaves it
+out too). Read-only. Run from the repository root after the two scripts above:
     python tools/extensions/gt_state_recount.py [--vb CSV] [--modern CSV] [--out TXT]
 """
 import argparse, csv, os, sys

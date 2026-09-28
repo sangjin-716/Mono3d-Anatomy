@@ -1,14 +1,13 @@
-"""Ported from mono3d_crossdataset/tools/anatomy_orig.py for the public release. Computation
-unchanged. Produces reports_orig/oracle_anatomy_orig.txt.
+"""Produces reports_orig/oracle_anatomy_orig.txt.
 
 ORACLE ANATOMY LADDER (GATE-1) for the original-environment MonoFlex*/MonoGround* dumps
-(a copy of tools/decomp/oracle_anatomy.py with inputs switched) — what is the "+oracle-depth"
+(a copy of tools/decomp/oracle_anatomy.py with inputs switched): what is the "+oracle-depth"
 ceiling made of?
 
 Per detector, S5 kept pool, native V scores kept FIXED; geometry oracles only:
   base       : boxes as-is
-  pure_z     : z -> matched-GT z; x,y FROZEN (the 1-D range fix; NO lateral correction)
-  ray        : ray-slide to GT z (x,y slide along camera ray) — the paper's existing lever
+  pure_z     : z -> matched-GT z; x,y FIXED (the 1-D range fix; NO lateral correction)
+  ray        : ray-slide to GT z (x,y slide along camera ray), the paper's existing lever
   centre     : (x,y,z) -> GT 3D centre (dims/yaw kept)
   y_only     : y -> GT y (elevation only)
   dims       : (h,w,l) -> GT dims (position/yaw kept)

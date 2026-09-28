@@ -1,5 +1,4 @@
 """
-    Ported from mono3d_crossdataset/tools/waymo_eval_patched.py for the public release. Computation unchanged.
     Produces the official Waymo evaluator table (AP_3D / APH_3D / Recall@0.95, LEVEL_1/LEVEL_2,
     All / [0,30) / [30,50) / [50,+inf)) used for the Waymo reproduction gate, VEHICLE IoU 0.7.
 
@@ -10,7 +9,7 @@
       WEVAL_GT_SET  ground-truth index list (DEVIANT data/waymo/ImageSets/val_org.txt)
       WEVAL_PD_DIR  directory of KITTI-format prediction files (%06d.txt)
       WEVAL_GT_DIR  directory holding validation_org/<segment>/label_0/<id>.txt
-    Metric config, Hungarian matcher, breakdown generators and printing are the release's own.
+    Metric config, Hungarian matcher, breakdown generators and printing are unchanged from DEVIANT.
     Run with the official waymo-open-dataset-tf-2-11-0 1.6.1 package (TensorFlow 2.11), e.g.
       WEVAL_PD_SET=... WEVAL_GT_SET=... WEVAL_PD_DIR=... WEVAL_GT_DIR=... python -u waymo_eval_patched.py
     (see run_gate.sh). Original DEVIANT usage: python -u data/waymo/waymo_eval.py --sanity

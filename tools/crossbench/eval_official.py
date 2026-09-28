@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xds_repair/eval_official.py for the public release.
-Computation unchanged. Produces <out_dir>/metrics_summary.json and [RESULT] lines (mAP, NDS,
-TP errors, per-class mean distance AP) for the PGD reproduction gate.
+"""Official nuScenes detection_cvpr_2019 eval on a submission json, used for the PGD
+reproduction gate. Writes <out_dir>/metrics_summary.json and prints [RESULT] lines (mAP, NDS,
+TP errors, per-class mean distance AP).
 
-eval_official.py -- official nuScenes detection_cvpr_2019 eval on a submission json.
 Usage: python eval_official.py <results.json> <out_dir>
 """
 import json

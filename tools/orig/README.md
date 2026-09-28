@@ -1,20 +1,23 @@
-# tools/orig — starred-detector recomputations (MonoFlex\*, MonoGround\*)
+# tools/orig
 
-The panel of the paper uses dumps from the original torch-1.4 environment for MonoFlex\* and
-MonoGround\* (released dump stems `monoflex_orig`, `monoground_orig`; see `adapters/`). The
-scripts in this folder re-run the fixed-pool diagnostics of `tools/decomp/` on those two dumps.
-Each one is a path-substitution port of the script that wrote the frozen report: the kernels are
-the ones in `tools/decomp/`, which they import by module name (`_orig_common.py` puts
-`tools/decomp` on `sys.path`). Re-runs write to `reports_rerun/` (`paths.OUT_DIR`) under the
-report's file name (without the `reports_orig/` prefix); work directories and caches go to
-`cache/orig/` (`paths.CACHE_DIR`).
+These scripts run the `tools/decomp/` analyses on the MonoFlex\* and MonoGround\* dumps from the
+authors' original torch-1.4 environment (stems `monoflex_orig` and `monoground_orig`, see
+`data/DUMPS.md`). They import the analysis code from `tools/decomp/` (`_orig_common.py` adds it to
+`sys.path`), so only the inputs and output paths change.
 
-Run everything from the repository root, e.g. `python tools/orig/gap_exact_orig.py`.
+Run them from the repository root:
 
-| script | report (frozen copy) | paper item |
+```bash
+python tools/orig/gap_exact_orig.py
+```
+
+Reports go to `reports_rerun/` (`paths.OUT_DIR`) under the same file name they have in
+`reports_orig/`. Caches and work directories go to `cache/orig/` (`paths.CACHE_DIR`).
+
+| script | report | paper item |
 |---|---|---|
 | `a5_regate_orig.py` | `reports_orig/a5_regate_orig.txt` | native ordering-gap cells of the starred rows (cls>=0.1 native pool) |
-| `a5_emh_orig.py` | `reports_orig/emh_orig.txt` (its stdout, captured in the release re-run; the original wrote no file) | Table 1 Easy/Moderate/Hard, starred rows |
+| `a5_emh_orig.py` | `reports_orig/emh_orig.txt` (saved stdout; the script writes no file) | Table 1 Easy/Moderate/Hard, starred rows |
 | `gap_exact_orig.py` | `reports_orig/gap_exact_orig.txt` | de-quantized gap (all-point/R40/R11), dump hashes |
 | `diffsweep_orig.py` | `reports_orig/difficulty_sweep_orig/headroom_sep_by_difficulty.{txt,json}` | separation decomposition (Mod rows), difficulty sweep |
 | `exp1_ceiling_orig.py` | `reports_orig/exp1_true_ceiling_orig.txt` | matching ceiling AP\* = M/n_gt |
@@ -36,69 +39,81 @@ Run everything from the repository root, e.g. `python tools/orig/gap_exact_orig.
 | `bootstrap_orig.py` | `reports_orig/bootstrap_floor_orig.txt` | drive-cluster bootstrap floor (23 comparisons) |
 | `spearman_gap_base_vB.py` | `reports_orig/spearman_gap_base_vB.txt` | gap-vs-base Spearman (3 bases) |
 | `make_vB_reports.py` | `reports_rerun/vB_reports/` (= `figures/data/vB_reports/`) | merged 12-detector view read by the figures |
-| no script in this release | `reports_orig/oracle_ladder_o1_orig.txt` | BEV re-sort oracle (O1), starred rows |
-| no script in this release | `reports_orig/oracle_ladder_o2_orig.txt` | single-factor geometry oracle (O2), starred rows |
+| no script | `reports_orig/oracle_ladder_o1_orig.txt` | BEV re-sort oracle (O1), starred rows |
+| no script | `reports_orig/oracle_ladder_o2_orig.txt` | single-factor geometry oracle (O2), starred rows |
 
-The panel-level numbers that combine these starred rows with the other ten detectors of
-`reports/` (O1, O2, the BEV transfer and the far-field census) are recomputed from the printed
-values by `tools/extensions/starred_panel_summaries.py`
-(`reports/extensions/starred_panel_summaries.txt`).
+The panel-level O1, O2, BEV transfer and far-field numbers combine these starred rows with the
+other ten detectors in `reports/`. `tools/extensions/starred_panel_summaries.py` computes them from
+the printed values (`reports/extensions/starred_panel_summaries.txt`).
 
-`make_vB_reports.py` rebuilds the six files of `figures/data/vB_reports/` byte for byte from the
-reports shipped in `reports/` and `reports_orig/` (it also writes a `final_run/native_gap_canonical.md`
-view that the figures do not read; Fig. 3a takes those cells as literal values).
+`make_vB_reports.py` rebuilds the six files in `figures/data/vB_reports/` from `reports/` and
+`reports_orig/`. It also writes `reports_rerun/vB_reports/final_run/native_gap_canonical.md`. The
+figure scripts do not read that file: the Fig. 3a native values are constants in
+`figures/repro_make_figs_vB.py`.
 
-## Order and shared caches
+## Run order
 
-The scripts share caches exactly as the originals did, so a few must run first:
+Some scripts share caches, so run these first:
 
-1. `gap_exact_orig.py` writes `cache/orig/<stem>_bridgecache.npz` (S5-pool oracle IoUs), reused by
-   `bridge_orig.py` and `gap_metric_robustness_orig.py` (each rebuilds it if missing).
+1. `gap_exact_orig.py` writes `cache/orig/<stem>_bridgecache.npz`, the oracle 3D IoUs of the
+   boxes left after a score cut of 0.2 and 2D NMS at IoU 0.5. `bridge_orig.py` and
+   `gap_metric_robustness_orig.py` reuse it and rebuild it if it is missing.
 2. `diffsweep_orig.py` writes `cache/orig/_e4cache_<name>.npz` (native-pool oracle IoUs and TP
-   labels). `exp1_ceiling_orig.py` reads the TP labels for its FP-demotion column (nan without the
-   cache); `c2_iou05_orig.py` reuses the oracle IoUs.
-3. `waterfall_orig.py` before `e12_orig.py` and `gt_state_matrix_vB.py` (they gate on its face-ii
-   shares; the frozen `reports_orig/pool_waterfall_orig.txt` is used instead when it is present).
-4. Bootstrap: `transfer_save_orig.py`, `make_ladder_preds_orig.py --with-main`, then
-   `bootstrap_orig.py --ladder monodle gupnet`, `--ladder deviant monoflex_orig`,
-   `--ladder monoflex_orig monoground_orig`, `--ladder monoground_orig monocon`,
-   `--transfer monoflex_orig {0,1,2}`, and `--collate`. The collate also reads the sixteen
-   main-panel comparison JSONs written by `tools/decomp/bootstrap_floor.py`
-   (`cache/decomp/_bootstrap_out/`, or `$MONO3D_MAIN_BOOTSTRAP_OUT`). Each comparison takes
-   about 30 minutes (B = 1000 drive resamples; `NBOOT` overrides it).
-5. `make_vB_reports.py` last; it reads `reports/probe_detector_progression.txt` for the main-panel
-   rows.
+   labels). `exp1_ceiling_orig.py` needs the TP labels for its FP-demotion column, which is nan
+   without the cache. `c2_iou05_orig.py` reuses the oracle IoUs.
+3. `e12_orig.py` and `gt_state_matrix_vB.py` check their counts against the `suppressed-acc`
+   shares in `reports_orig/pool_waterfall_orig.txt`: among GTs that have an IoU 0.7 candidate in the pool, the fraction missed in the final output. If that file is missing they read the re-run output, so run `waterfall_orig.py` first.
+4. The bootstrap runs in this order:
 
-The drive-grouped scripts (`transfer_*`, `bootstrap_orig.py`) read the KITTI frame-to-drive
-table from `tools/decomp/frame_sequence.py`, which builds it from the KITTI object devkit
-mapping files (`<KITTI_ROOT>/mapping/train_mapping.txt`, `train_rand.txt`).
+   ```bash
+   python tools/orig/transfer_save_orig.py
+   python tools/orig/make_ladder_preds_orig.py --with-main
+   python tools/orig/bootstrap_orig.py --ladder monodle gupnet
+   python tools/orig/bootstrap_orig.py --ladder deviant monoflex_orig
+   python tools/orig/bootstrap_orig.py --ladder monoflex_orig monoground_orig
+   python tools/orig/bootstrap_orig.py --ladder monoground_orig monocon
+   python tools/orig/bootstrap_orig.py --transfer monoflex_orig 0
+   python tools/orig/bootstrap_orig.py --transfer monoflex_orig 1
+   python tools/orig/bootstrap_orig.py --transfer monoflex_orig 2
+   python tools/orig/bootstrap_orig.py --collate
+   ```
+
+   Each comparison takes about 30 minutes with B = 1000 drive resamples. Set `NBOOT` to change B.
+
+   `--collate` also reads the sixteen main-panel comparison JSONs written by
+   `tools/decomp/bootstrap_floor.py`, from `cache/decomp/_bootstrap_out/` or
+   `$MONO3D_MAIN_BOOTSTRAP_OUT`. Those comparisons need prediction folders written by scripts that
+   are not in this release, so `bootstrap_floor.py` can only be run with `--collate` on existing
+   JSONs.
+5. `make_vB_reports.py` goes last. It reads `reports/probe_detector_progression.txt` for the
+   main-panel rows.
+
+The drive-grouped scripts (`transfer_*`, `bootstrap_orig.py`) get the frame-to-drive table from
+`tools/decomp/frame_sequence.py`, which builds it from the KITTI devkit mapping files
+`<KITTI_ROOT>/mapping/train_mapping.txt` and `train_rand.txt`.
 
 ## Inputs
 
-All scripts except `gt_state_matrix_vB.py` need only the per-prediction dumps
-(`mono3d_anatomy_dumps_v1.zip`): the two starred dumps, plus the four main-panel neighbours
-MonoDLE, GUPNet, DEVIANT and MonoCon for `make_ladder_preds_orig.py --with-main`.
-`gt_state_matrix_vB.py` evaluates all twelve detectors on their
-complete native pools, so it also needs the two complete-pool assets of release v1.0
-(`<detector>_val_preflatten.csv` for the five query detectors, `m3drpn_val_floor0.csv` for
-M3D-RPN; see `data/DUMPS.md`). `_orig_common.extra_dump` reads them from `paths.DUMP_DIR`, or from
-`$MONO3D_EXTRA_DUMP_DIR` if set. The branches of `native_pool()` / `stages_for()` for the other
-detectors are kept verbatim in `exp1_ceiling_orig.py`, `c2_iou05_orig.py`, `diffsweep_orig.py`,
-`waterfall_orig.py` and `e12_orig.py`, but these scripts evaluate only the two starred
-detectors, so those branches are never executed.
+All scripts except `gt_state_matrix_vB.py` only need `mono3d_anatomy_dumps_v1.zip`: the two
+starred dumps, plus MonoDLE, GUPNet, DEVIANT and MonoCon for
+`make_ladder_preds_orig.py --with-main`.
 
-## Release check
+`gt_state_matrix_vB.py` evaluates all twelve detectors on their complete native pools, so it also
+needs the two complete-pool assets of release v1.0: `mono3d_anatomy_query_complete_pools_v1.zip`
+(`<detector>_val_preflatten.csv` for the five query detectors) and
+`mono3d_anatomy_m3drpn_complete_pool_v1.zip` (`m3drpn_val_floor0.csv`), see `data/DUMPS.md`. It
+reads them from `paths.DUMP_DIR`, or from `$MONO3D_EXTRA_DUMP_DIR` if set.
 
-In the release check (numpy 2.0.2, shapely 2.0.7, see the main README), every script above that
-writes a frozen report reproduces it line by line, apart from the run-timestamp line and, for a
-scrubbed public copy, its `# public copy ...` first line, with these exceptions:
+## Differences from reports_orig/
 
-- one integer in `oracle_anatomy_orig.txt`: the MonoFlex\* per-bin pure-z recall count in the
-  0-15 m bin is 2336 instead of 2337 (the frozen report was made with numpy 1.24.4). All AP values
-  and summary lines are identical. The 3D IoU used by the matchers (`ap_corrector_arc.iou3d`,
-  shapely/GEOS polygons) can differ in rare degenerate cases across numpy/shapely/GEOS versions;
-- `gt_state_matrix_vB.py` reproduces every number of its report; only the `[written]` path line differs;
-- `bootstrap_orig.py` was spot-checked on 4 of its 23 comparisons, all identical;
-- `reports_orig/emh_orig.txt` is itself the release re-run of `a5_emh_orig.py` (its two `[A5]`
-  lines verbatim; the header lines and the READ note were added);
-- the two `oracle_ladder_*_orig.txt` reports have no script in this release.
+With numpy 2.0.2 and shapely 2.0.7 the outputs match `reports_orig/` line for line, apart from
+the timestamp line, the `# public copy ...` first line of some reports, and these cases:
+
+- `oracle_anatomy_orig.txt`: the MonoFlex\* pure-z recall count in the 0-15 m bin is 2336 instead
+  of 2337. All AP values and summary lines are the same. The shipped report was made with numpy
+  1.24.4, and the 3D IoU used for matching (`ap_corrector_arc.iou3d`, shapely/GEOS polygons) can
+  differ in rare degenerate cases across numpy, shapely and GEOS versions.
+- `gt_state_matrix_vB.txt`: only the `[written]` path line differs.
+- `bootstrap_floor_orig.txt`: 4 of the 23 comparisons have been re-run, and all four match.
+- `emh_orig.txt`: only the two `[A5]` lines come from the script. The header lines and the READ
+  note were added by hand.

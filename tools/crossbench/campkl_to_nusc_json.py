@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/campkl_to_nusc_json.py for the public release.
-Computation unchanged. Produces a nuScenes submission json from a per-camera DumpResults pkl.
+"""Writes a nuScenes submission json from a per-camera DumpResults pkl.
 
 NOT used for any number in the paper. The FCOS3D and PGD reproduction-gate values and oracle
 cells come from the official mmdet3d formatter (nusc_official_reformat.py, reformat_official.py).

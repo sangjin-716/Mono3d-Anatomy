@@ -1,5 +1,4 @@
-"""Ported from mono3d_crossdataset/tools/bootstrap_orig.py for the public release. Computation
-unchanged. Produces reports_orig/bootstrap_floor_orig.txt (--collate) and one JSON per
+"""Produces reports_orig/bootstrap_floor_orig.txt (--collate) and one JSON per
 comparison in <OUT_DIR>/_bootstrap_out_orig/.
 
 Paired drive-cluster bootstrap (GATE-3) for the comparisons that involve the

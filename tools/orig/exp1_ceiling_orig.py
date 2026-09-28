@@ -1,5 +1,4 @@
-"""Ported from mono3d_crossdataset/tools/exp1_ceiling_orig.py for the public release. Computation
-unchanged. Produces reports_orig/exp1_true_ceiling_orig.txt.
+"""Produces reports_orig/exp1_true_ceiling_orig.txt.
 
 EXP-1: the TRUE fixed-pool ceiling AP* = M / n_gt, for the original-environment MonoFlex* and
 MonoGround* dumps (a copy of tools/decomp/exp1_true_ceiling.py with the model list and inputs
@@ -16,7 +15,7 @@ it sits.
 
 The FP-demotion column reads the TP labels cached by diffsweep_orig.py
 (<CACHE_DIR>/orig/_e4cache_<name>.npz); run diffsweep_orig.py first, otherwise that column is nan.
-native_pool() keeps the other detectors' branches verbatim (never executed here; they read
+native_pool() keeps the other detectors' branches (never executed here; they read
 the complete-pool release assets through extra_dump()).
 CPU + the official evaluator (numba.cuda), no training.
 Run from the repository root: python tools/orig/exp1_ceiling_orig.py

@@ -1,5 +1,4 @@
-"""Ported from the camera-ready check partb_anchor_mech2.py (same file name) for the public release.
-Computation unchanged. Prints (stdout) the "score AND geometry at 2 dp -> 17.14" line of
+"""Prints the "score AND geometry at 2 dp -> 17.14" line of
 reports/extensions/class_gate_audit.txt (supplementary Sec. O). Needs only the released DEVIANT dump.
 Run from the repository root: python tools/extensions/partb_anchor_mech2.py
 

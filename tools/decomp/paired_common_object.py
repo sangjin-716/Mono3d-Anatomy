@@ -1,6 +1,4 @@
-"""Ported from an internal probe script (renamed to
-paired_common_object.py) for the public release. Computation unchanged.
-Produces reports/paired_common_object.txt.
+"""Produces reports/paired_common_object.txt.
 
 PAIRED COMMON-OBJECT decomposition (val dumps only, NO retraining).
 

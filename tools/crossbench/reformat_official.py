@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xds_repair/reformat_official.py for the public
-release. Computation unchanged. Produces the PGD submission json
+"""Produces the PGD submission json
 <out_dir>/pred_instances_3d/results_nusc.json (official mmdet3d formatter), which
 eval_official.py scores for the PGD reproduction gate and the oracle chain converts.
 

@@ -1,14 +1,13 @@
-"""Ported from mono3d_crossdataset/tools/a5_regate_orig.py for the public release. Computation
-unchanged. Produces reports_orig/a5_regate_orig.txt.
+"""Produces reports_orig/a5_regate_orig.txt.
 
-A5 — released-code-faithful native cell for the original-environment MonoFlex*/MonoGround*
-dumps (a copy of tools/decomp/a5_regate_flex_ground.py with inputs switched).
+A5: released-code-faithful native cell for the original-environment MonoFlex*/MonoGround*
+dumps.
 Released convention (verified in code): MonoFlex/MonoGround detector_infer.py L103 gate on
 RAW heatmap score `scores >= det_threshold` (= cls), BEFORE the uncertainty multiply
 (L227 scores *= uncertainty_conf -> our V). cfg.TEST.DETECTIONS_THRESHOLD = 0.1.
 So native cell = cls>=0.1, NO box-NMS (CenterNet), rank by V; o_act recomputed on THIS pool.
-The E4 canonical table gated these two on V (col='V') — this re-gate replaces those cells
-(main Table 1 / native_gap_canonical.md starred rows). Re-aggregation of frozen dumps; no inference.
+The E4 canonical table gated these two on V (col='V'); this re-gate replaces those cells
+(main Table 1 / native_gap_canonical.md starred rows). Re-aggregation of the released dumps; no inference.
 Run from the repository root: python tools/orig/a5_regate_orig.py
 """
 import os, sys, shutil, datetime

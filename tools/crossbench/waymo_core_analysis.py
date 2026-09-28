@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 """
-Ported from mono3d_crossdataset/tools/waymo_core_analysis.py for the public release.
-Computation unchanged. Produces crossbench/waymo/core_table_full.json (re-run output directory):
-the Waymo base / true-IoU re-sort cells of the preliminary cross-benchmark audit.
+Writes crossbench/waymo/core_table_full.json (re-run output directory): the Waymo base /
+true-IoU re-sort cells of the preliminary cross-benchmark audit.
 
-waymo_core_analysis.py -- the paper's core fixed-pool diagnostics on Waymo val (3 detectors),
-using the paper's OWN evaluator (evaluator/exact_ap.py + official KITTI matching kernels) verbatim.
+The paper's core fixed-pool diagnostics on Waymo val (3 detectors), using the paper's own
+evaluator unchanged (evaluator/exact_ap.py + official KITTI matching kernels).
 
 Outputs per detector, Car, difficulty=moderate-rule (reduces to 2D-height>=25px since occ=trunc=0),
 metric=3D, IoU 0.7 and 0.5:

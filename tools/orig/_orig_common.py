@@ -1,8 +1,8 @@
-"""Release helper shared by the scripts in tools/orig (not a port of an original script).
+"""Helper shared by the scripts in tools/orig.
 
 The scripts in tools/orig re-run the fixed-pool diagnostics of tools/decomp on the
 original-environment (torch-1.4) dumps of MonoFlex* and MonoGround* (released dump stems
-monoflex_orig / monoground_orig). Like the originals, they import the main-panel modules of
+monoflex_orig / monoground_orig). They import the main-panel modules of
 tools/decomp (ap_corrector_arc, dgp_cop_oracle_matrix, exact_ap, depth_share_bridge,
 fast_subset_dense, frame_sequence) by bare module name, so importing this module puts
 tools/decomp on sys.path. It also names the directories the scripts share.

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xdsfix_pgd/pgd_bisect_eval.py for the public release.
-Computation unchanged. Produces crossbench/nusc/xdsfix_pgd/bisect_rows.json and eval_<variant>/
-devkit outputs in the re-run output directory, read by nds_residual.py.
+"""Writes crossbench/nusc/xdsfix_pgd/bisect_rows.json and eval_<variant>/ devkit outputs in the
+re-run output directory, read by nds_residual.py.
 
 pgd_bisect_eval.py -- bisection of the PGD nuScenes gap between the hand-written converter
 (campkl_to_nusc_json.py) and the official mmdet3d formatter.

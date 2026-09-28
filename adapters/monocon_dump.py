@@ -1,22 +1,20 @@
-"""MonoCon (2gunsu reimpl) per-prediction val dump — 23-col CenterNet-family format.
+"""MonoCon (2gunsu reimpl) per-prediction val dump, 23-col CenterNet-family format.
 
-Ported from tools/monocon_dump.py for the public release. Computation unchanged.
 Produces data/dumps/monocon_val.csv (written to <OUT_DIR>/dumps/ by default, so a re-run never
 overwrites the downloaded dump).
 
 Read-only tap: sets head.test_thres = -1e9 so all K=30 native top-k candidates pass,
 then reuses the repo's OWN _get_eval_formats pipeline (origin shift, validity filter,
-2D clip, KITTI anno dict) — guaranteeing identical geometry to the native writer.
+2D clip, KITTI anno dict), so the geometry is identical to the native writer's.
 log_sigma_raw / heatmap score / pred_idx are recomputed from pred_dict with the same
 get_local_maximum+topk and attached to anno rows by exact combined-score matching.
 
 Column semantics (MonoCon, like GUPNet/DEVIANT):
-  cls = V = combined score (heatmap * exp(-d1)) — the quantity natively thresholded (0.4)
+  cls = V = combined score (heatmap * exp(-d1)), the quantity natively thresholded (0.4)
   log_sigma_raw = depth head channel 1 (d1); sigma = exp(-d1)
-  K = 30 (native max_objs; smaller than other CenterNets' 50 — native pool definition)
+  K = 30 (native max_objs, smaller than the other CenterNets' 50; this is the native pool)
 
-Config: the config.yaml shipped next to the released 2gunsu checkpoint; the original run used a
-copy (config_accv.yaml) whose only difference was DATA.ROOT, which this port sets from
+Config: the config.yaml that comes with the released 2gunsu checkpoint, with DATA.ROOT set from
 --kitti_root (default paths.KITTI_ROOT). The upstream engine is used as is except for
 adapters/patches/MonoCon_base_engine_map_location.patch (torch.load(..., map_location='cuda:0')).
 Run (MonoCon env, torch 1.10 in our runs; any cwd):

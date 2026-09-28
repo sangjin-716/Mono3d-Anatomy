@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xds_nusc_official_eval.py for the public release. Computation unchanged.
-Produces the official nuScenes devkit metrics (metrics_summary.json, mAP / NDS) under
+"""Writes the official nuScenes devkit metrics (metrics_summary.json, mAP / NDS) under
 crossbench/nusc/xds_official_eval_<tag>/ in the re-run output directory.
 
-nusc_official_eval.py -- reproduction gate: official nuScenes detection eval
+Reproduction gate: official nuScenes detection eval
 (detection_cvpr_2019, val split) on a results json (nuScenes submission format); the result is
 compared with the published number.
 Used for the EPro-PnP-Det gate: the input is the submission json written by the EPro-PnP

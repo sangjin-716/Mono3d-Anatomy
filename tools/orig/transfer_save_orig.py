@@ -1,12 +1,10 @@
-"""Ported from mono3d_crossdataset/tools/transfer_save_orig.py for the public release.
-Computation unchanged. Produces the prediction dirs consumed by bootstrap_orig.py --transfer
+"""Produces the prediction dirs consumed by bootstrap_orig.py --transfer
 (no report of its own).
 
 Bootstrap prerequisite: refit the clean-transfer correctors for the original-environment
 MonoFlex*/MonoGround* dumps (2 detectors x 3 seeds, identical recipe to transfer_orig.py /
 tools/decomp/clean_transfer_strong.py) and SAVE the base / corrected S5 prediction dirs +
-test-frame lists for the paired drive-cluster bootstrap (a copy of
-tools/decomp/clean_transfer_save.py with inputs switched).
+test-frame lists for the paired drive-cluster bootstrap.
 Out: <CACHE_DIR>/orig/_bootstrap_preds_orig/<f>_s<seed>_{base,corr}/data + <f>_s<seed>_frames.txt
      + provenance.json (script, dump sha8, recipe, timestamp).
 Run from the repository root: python tools/orig/transfer_save_orig.py

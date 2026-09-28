@@ -1,16 +1,14 @@
-"""MonoDETR PRE-FLATTEN dump (prereg_2b_detr_sweep.md rev3).
+"""MonoDETR PRE-FLATTEN dump (reports/prereg_2b_detr_sweep.md, rev3).
 
-Ported from tools/decomp/adapters/monodetr_preflatten_dump.py for the public release. Computation
-unchanged. Produces the auxiliary per-hypothesis pool monodetr_val_preflatten.csv (not among the
-released dumps; used for the query-lineage native pools).
-Config: the original run used a copy of the repo's configs/monodetr.yaml whose only change was an
-absolute dataset.root_dir; this port applies the same override from --root_dir
+Produces the complete per-hypothesis pool monodetr_val_preflatten.csv (release asset
+mono3d_anatomy_query_complete_pools_v1.zip), used for the native pools of the query-based detectors.
+Config: the repo's configs/monodetr.yaml with dataset.root_dir set from --root_dir
 (default paths.KITTI_ROOT). The `lib.*` imports are the upstream MonoDETR package (--repo).
 
-Design: call the repo's NATIVE extract_dets_from_outputs with topk=150 — this returns EVERY
+Design: call the repo's NATIVE extract_dets_from_outputs with topk=150, which returns EVERY
 (query, class) hypothesis with the native-faithful geometry decode (the 20.13-vs-20.83 issue
 of per-query re-decoding is avoided entirely). Rows are per-HYPOTHESIS (150/img, label col
-included); the Car analysis selects label==1 rows (exactly 50/img — every query's Car
+included); the Car analysis selects label==1 rows (exactly 50/img: every query's Car
 hypothesis present, no 150→50 crowding censoring).
 
 Columns: sid, query_id, class_id, flat_rank (0..149, raw-cls order), native_top50

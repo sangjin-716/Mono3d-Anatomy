@@ -1,16 +1,15 @@
-"""Ported from tools/decomp/e12_replacement.py for the public release. Computation unchanged.
-Produces reports/e12_replacement.txt.
+"""Produces reports/e12_replacement.txt.
 
 E12: replacement-share re-print.
-Kernels/stages copied VERBATIM from gt_state_matrix.py (which copied pool_waterfall.py);
-self-contained — gt_state_matrix.py executes at module level and must not be imported.
+Kernels/stages are copied unchanged from gt_state_matrix.py (which copied pool_waterfall.py), so
+the script is self-contained; gt_state_matrix.py executes at module level and must not be imported.
 Per moderate GT with an accurate pool candidate (IoU3D>=0.7, |dz|<8m): did the BEST pool
 candidate survive native eligibility? Outcomes among A-pass GTs:
   BEST_SURVIVED  best-IoU candidate row is among the eligibility survivors
   REPLACED       best dropped, but final output still has an accurate candidate (c>=0.7)
   LOST           best dropped and no accurate candidate in final (face-ii numerator)
 GATE: counts must satisfy BEST_SURVIVED+REPLACED+LOST == A-pass, and LOST/A-pass must
-equal the frozen reports/pool_waterfall.txt face-ii to 3 decimals; otherwise output is discarded.
+equal the face-ii of reports/pool_waterfall.txt to 3 decimals; otherwise output is discarded.
 Complete native pools need the pre-flatten query dumps and the floor-0 M3D-RPN dump in DUMP_DIR.
 Run from the repository root: python tools/decomp/e12_replacement.py
 """

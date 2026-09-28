@@ -1,11 +1,10 @@
-"""Ported from final_camera_ready/tools/figs/cr_common.py for the public release.
-Computation unchanged. Produces nothing itself; shared by make_figs_cr.py (reports_rerun/figures/*.pdf).
+"""Shared helpers for make_figs_cr.py, which builds the camera-ready figures
+(reports_rerun/figures/*.pdf). Writes nothing itself.
 
-Shared helpers for the camera-ready figure rebuild.
-
-Data: executed VERBATIM from the verified repro scripts (repro_make_figs_vB.py up to the
-'# ============ Fig 1' marker, repro_make_fig4v2_vB.py up to the first plt.subplots), so the CR
-figures consume exactly the parsed values that reproduced the submitted PDFs bit-for-bit.
+Data: the data-parsing part of repro_make_figs_vB.py (everything before the '# ============ Fig 1'
+marker) and of repro_make_fig4v2_vB.py (everything before the first plt.subplots) is executed as
+it is, so the camera-ready figures use exactly the parsed values that reproduced the submitted
+PDFs bit-for-bit.
 Layout: 4.80 in wide (= \\linewidth, placed at scale 1.0). Fonts: DejaVu Sans Condensed
 (TrueType, pdf.fonttype 42). Every glyph >= 6.5 pt including mathtext subscripts.
 """

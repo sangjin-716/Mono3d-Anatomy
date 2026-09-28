@@ -1,14 +1,14 @@
-"""Pre-flatten dump v2 — NATIVE-extract + NATIVE-decode based (for MonoDETR-family repos whose
+"""Pre-flatten dump v2, based on the repo's NATIVE extract and NATIVE decode, for MonoDETR-family
+repos whose raw-head re-decode is unsafe: MonoCLUE, MonoIA (MonoDETR's v1 dump already matched
+with 0 error).
 
-Ported from tools/decomp/adapters/detr_preflatten_native.py for the public release. Computation
-unchanged. Produces the auxiliary per-hypothesis pools monoclue_val_preflatten.csv and
-monoia_val_preflatten.csv (v2; release asset mono3d_anatomy_query_complete_pools_v1.zip; used for the query-lineage native
-pools). Config: the original runs used copies of the repo configs whose only edits were recorded
-as sed commands: MonoCLUE configs/monoclue.yaml with an absolute dataset.root_dir; MonoIA
-config/monoia_val.yaml with an absolute dataset.root_dir and model.focal_embedding_path pointing at
-the repo's focal_list_feat.npy. This port applies the same edits via --root_dir and
---focal_embedding_path. The `lib.*` imports are the detector repo passed as --repo.
-raw-head re-decode is unsafe: MonoCLUE, MonoIA; MonoDETR's v1 already validated 0-err).
+Produces the complete per-hypothesis pools monoclue_val_preflatten.csv and
+monoia_val_preflatten.csv (release asset mono3d_anatomy_query_complete_pools_v1.zip), used for the
+native pools of the query-based detectors. Config: the repo configs with these edits, applied
+through arguments: MonoCLUE configs/monoclue.yaml with an absolute dataset.root_dir (--root_dir);
+MonoIA config/monoia_val.yaml with an absolute dataset.root_dir (--root_dir) and
+model.focal_embedding_path pointing at the repo's focal_list_feat.npy (--focal_embedding_path).
+The `lib.*` imports are the detector repo passed as --repo.
 
 Geometry path: extract_dets_from_outputs(topk=Q*C) -> the repo's OWN decode_detections with
 threshold=-1e9 (only skip in this family is the threshold -> rows stay 1:1 aligned with dets,

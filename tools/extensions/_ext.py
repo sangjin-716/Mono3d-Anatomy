@@ -1,4 +1,4 @@
-"""Shared setup for the scripts in tools/extensions/ (camera-ready checks, supplementary Secs. L-O).
+"""Shared setup for the scripts in tools/extensions/ (checks for supplementary Secs. L-O).
 
 Usage at the top of a script in this directory:
     import os, sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

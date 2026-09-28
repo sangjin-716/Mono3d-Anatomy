@@ -1,8 +1,7 @@
-"""Ported from tools/decomp/c2_iou05_separation.py for the public release. Computation unchanged.
-Produces reports/final_run/c2_iou05_separation.txt.
+"""Produces reports/final_run/c2_iou05_separation.txt.
 
-C2 — does the E4 separation result (FP-demotion ~= full, TP-reorder ~0) survive at IoU0.5?
-Copy-extend of e4_fp_tp_decomp.py (not modified): same native pools, same o_act cache,
+C2: does the E4 separation result (FP-demotion ~= full, TP-reorder ~0) survive at IoU0.5?
+Extends a copy of e4_fp_tp_decomp.py (which is not modified): same native pools, same o_act cache,
 but TP labels at IoU3D>=0.5 and AP evaluated at min_overlap=0.5. Tests whether the separation
 is an IoU0.7-cliff artifact.
 Native pools need, besides the released dumps, the pre-flatten query dumps

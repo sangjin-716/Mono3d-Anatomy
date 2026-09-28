@@ -1,13 +1,12 @@
 # Copy of the upstream M3D-RPN scripts/test_rpn_3d.py with only the checkpoint paths and a
 # devkit-eval guard changed (native-run half of the reproduction gate G1 for M3D-RPN).
 #
-# Ported from M3D-RPN/scripts/test_rpn_3d_accv.py (our script inside the upstream M3D-RPN clone)
-# for the public release. Computation unchanged. Produces the repo's native KITTI-format
-# detections in output/tmp_results/data (renumbered split ids), graded afterwards with the
-# official evaluator in evaluator/kitti_eval (reproduces 14.531/11.073/8.646 R40 E/M/H).
+# Produces the repo's native KITTI-format detections in output/tmp_results/data (renumbered split
+# ids). Graded with the official evaluator in evaluator/kitti_eval, they give 14.531/11.073/8.646
+# R40 E/M/H.
 #
-# Run from the M3D-RPN repo root (py_cpu_nms patch applied):
-#   cd <UPSTREAM_ROOT>/M3D-RPN && python <release>/adapters/test_rpn_3d_accv.py
+# Run from the M3D-RPN repo root, with adapters/patches/M3D-RPN_rpn_util_py_cpu_nms.patch applied:
+#   cd <UPSTREAM_ROOT>/M3D-RPN && python <Mono3d-Anatomy>/adapters/test_rpn_3d_accv.py
 import os, sys, argparse
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 sys.path.insert(0, _ROOT)

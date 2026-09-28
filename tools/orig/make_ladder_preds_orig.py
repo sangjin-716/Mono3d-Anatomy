@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/make_ladder_preds_orig.py for the public release.
-Computation unchanged. Produces the ladder prediction dirs consumed by bootstrap_orig.py --ladder
+"""Produces the ladder prediction dirs consumed by bootstrap_orig.py --ladder
 (no report of its own).
 
 S5 (cls>=0.2 + 2D-NMS@0.5 by V) prediction dirs for the ORIGINAL-ENV MonoFlex/MonoGround dumps,
 in the exact format of the main-panel ladder dirs <CACHE_DIR>/decomp/_ladder_preds/<f>/data
 (full val, native V scores), written to <CACHE_DIR>/orig/_ladder_preds_orig/<f>/data.
---with-main (release addition) also writes the four main-panel neighbours that the starred
+--with-main also writes the four main-panel neighbours that the starred
 ladder steps compare against (monodle, gupnet, deviant, monocon), with the same code; the paper
 built those main-panel dirs with the identical pool/NMS/write_kitti recipe.
 Run from the repository root: python tools/orig/make_ladder_preds_orig.py [--with-main]

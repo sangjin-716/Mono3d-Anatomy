@@ -1,6 +1,5 @@
-"""Ported from tools/decomp/bootstrap_floor.py for the public release. Computation unchanged.
-Produces reports/bootstrap_floor.txt (--collate); the run cited by the paper is frozen in
-reports_orig/bootstrap_floor_orig.txt.
+"""Writes reports_rerun/bootstrap_floor.txt (--collate). The numbers cited by the paper are in
+reports_orig/bootstrap_floor_orig.txt (tools/orig/bootstrap_orig.py --collate).
 
 Paired drive-cluster bootstrap. Floor definition (fixed before running): floor_c = half-width of
 the 95% percentile bootstrap interval of paired ΔAP (identical drive resamples both arms); panel
@@ -11,12 +10,12 @@ B = NBOOT (default 1000).
 Modes (CLI):
   --transfer f seed   one transfer comparison (base vs corr on its test frames)
   --ladder fA fB      one adjacent-ladder comparison (full val, S5 prediction dirs)
-  --collate           gather all jsons -> reports/bootstrap_floor.txt
+  --collate           gather all jsons -> reports_rerun/bootstrap_floor.txt
 Inputs (KITTI-format prediction dirs, under <CACHE_DIR>/decomp):
   _bootstrap_preds/<f>_s<seed>_{base,corr}/data + <f>_s<seed>_frames.txt  (clean-transfer
       corrector refit of clean_transfer_strong.py, saved per seed)
   _ladder_preds/<f>/data                                                   (S5 pool, native V)
-  These were written by helper scripts of the original study that are not part of this release.
+  These were written by helper scripts that are not in this repository.
 Outputs: <CACHE_DIR>/decomp/_bootstrap_out/<tag>.json per comparison.
 Drive map: frame_sequence.py (built from the KITTI devkit mapping).
 Run from the repository root: python tools/decomp/bootstrap_floor.py --collate

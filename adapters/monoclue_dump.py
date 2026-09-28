@@ -1,14 +1,10 @@
 """MonoCLUE val per-detection dump -> shared 23-col schema (matches monodetr_val.csv).
 
-Recovered from the one-off script that wrote the released monoclue_val.csv (it lived only in a
-temporary directory; its text is preserved in the session record) and ported for the public
-release. Computation unchanged. Produces data/dumps/monoclue_val.csv (written to
-<OUT_DIR>/dumps/monoclue_val.csv by default, so a re-run never overwrites the downloaded dump).
-Changes: paths are arguments. The original read a copy of configs/monoclue.yaml whose only edit
-was dataset.root_dir -> the local KITTI root (made with
-  sed "s#root_dir:.*#root_dir: '<KITTI_ROOT>/'#" configs/monoclue.yaml > monoclue_abs.yaml),
-which --kitti_root now applies in memory, and the released checkpoint symlinked as
-outputs/monoclue/checkpoint_best.pth (now --ckpt).
+Rewritten from the one-off script that wrote the released monoclue_val.csv. Produces
+data/dumps/monoclue_val.csv (written to <OUT_DIR>/dumps/monoclue_val.csv by default, so a re-run
+never overwrites the downloaded dump).
+Config: the repo's configs/monoclue.yaml with dataset.root_dir set to --kitti_root (applied in
+memory). --ckpt is the released checkpoint (default <repo>/outputs/monoclue/checkpoint_best.pth).
 Same NATIVE decode as MonoDETR/DGP (extract_dets_from_outputs, score=cls*sigma, NMS-free).
 SAM=False (sam is a train-only target; inference doesn't need it).
 The lib.* imports are the upstream MonoCLUE packages (--repo). Run in a MonoCLUE env (torch 1.9

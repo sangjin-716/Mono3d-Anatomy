@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xds_repair/nusc_official_reformat.py for the public
-release. Computation unchanged. Produces the FCOS3D nuScenes reproduction-gate values (mAP / NDS
-and TP errors, printed as [RESULT] lines) and the submission json
+"""Produces the FCOS3D nuScenes reproduction-gate values (mAP / NDS and TP errors, printed as
+[RESULT] lines) and the submission json
 <out_root>/official_reformat_<tag>/pred_instances_3d/results_nusc.json used by the oracle chain.
 
 Drives the OFFICIAL mmdet3d formatting path

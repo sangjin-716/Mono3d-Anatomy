@@ -1,13 +1,10 @@
-"""Ported from final_camera_ready/tools/figs/data_identity.py for the public release.
-Computation unchanged. Produces a console report: for each of the five figures, whether the
-camera-ready figure (make_figs_cr.py) plots exactly the same data arrays and axes texts as the
-submitted-layout figure (repro_make_figs_vB.py / repro_make_fig4v2_vB.py).
+"""Prints, for each of the five figures, whether the camera-ready figure (make_figs_cr.py) plots
+exactly the same data arrays and axes texts as the submitted-layout figure
+(repro_make_figs_vB.py / repro_make_fig4v2_vB.py). It compares data arrays, not pixels.
 Run from the repository root: python figures/data_identity.py
 Two differences are expected, both data corrections of the camera-ready figures (make_figs_cr.py
 docstring): the grey series of fig1_progression (native base AP of Table 1 instead of the
-uniform-pool AP_R40 base) and one grey label of fig4_waterfall (MonoFlex* 0.79 -> 0.78).
-
-Compare the plotted data arrays (not pixels) of the submitted-repro figures vs the CR figures."""
+uniform-pool AP_R40 base) and one grey label of fig4_waterfall (MonoFlex* 0.79 -> 0.78)."""
 import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)

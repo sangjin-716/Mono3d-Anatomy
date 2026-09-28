@@ -1,5 +1,4 @@
-"""Ported from mono3d_crossdataset/tools/transfer_orig.py for the public release. Computation
-unchanged. Produces reports_orig/clean_transfer_orig.txt.
+"""Produces reports_orig/clean_transfer_orig.txt.
 
 Clean drive-disjoint cal->test corrector transfer, NO retraining (val is already out-of-sample
 for every detector), for the original-environment MonoFlex*/MonoGround* dumps (a copy of

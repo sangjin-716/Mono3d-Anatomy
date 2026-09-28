@@ -1,10 +1,7 @@
-"""Ported from camera-ready checks/xdsfix_fcos3d_oracle/align_check.py for the public release.
-Computation unchanged. Produces a console height-convention check of a converted oracle pkl (the same file exists
-as xdsfix_pgd_oracle/align_check.py).
+"""Height-convention sanity check on a converted oracle pkl (prints to the console).
 
-align_check.py — height-convention sanity check on a converted oracle pkl.
-Verbatim logic of xds_epro_fixed_alignment_check.py,
-parameterised over the pkl path. Target median_dy ~ 0; the +h/2 converter bug gives ~+0.86.
+Same logic as xds_epro_fixed_alignment_check.py, parameterised over the pkl path.
+Target median_dy ~ 0; the +h/2 converter bug gives ~+0.86.
 """
 import os, pickle, sys, numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/build_monoflex_orig_env.sh (+ the repo-setup and native-eval
-# steps of run_mf_orig.sh / run_mg_orig.sh) for the public release. Recipe unchanged.
+
 # Builds the ORIGINAL MonoFlex/MonoGround environment (python 3.7, torch 1.4.0 + CUDA 10.1,
 # DCNv2 compiled against it) used for the panel entries MonoFlex* and MonoGround*, then runs each
 # repo's own evaluation of its released checkpoint (reproduction gate G1).

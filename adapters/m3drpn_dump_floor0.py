@@ -2,19 +2,17 @@
 # pre-NMS top-3000 pool). Used as the complete anchor pool (m3drpn_val_floor0.csv, ~2.9 GB);
 # native-NMS reconstruction from it reproduces the evaluated output 14.531/11.073/8.646.
 #
-# Ported from M3D-RPN/scripts/m3drpn_dump_floor0.py (our script inside the upstream M3D-RPN clone)
-# for the public release. Computation unchanged. Produces m3drpn_val_floor0.csv (auxiliary pool;
-# release asset mono3d_anatomy_m3drpn_complete_pool_v1.zip)
-# (written to <OUT_DIR>/dumps/m3drpn_val_floor0.csv by default, so a re-run never overwrites the
-# downloaded dump).
+# Produces m3drpn_val_floor0.csv (release asset mono3d_anatomy_m3drpn_complete_pool_v1.zip),
+# written to <OUT_DIR>/dumps/m3drpn_val_floor0.csv by default, so a re-run never overwrites the
+# downloaded file.
 #
 # Tap = PRE-NMS candidate pool of im_detect_3d (top nms_topN_pre=3000 by score),
-# Car rows with score >= 0.05 (cap 300/img), each decoded EXACTLY like the native
+# all Car rows (no score floor, cap 3000/img), each decoded EXACTLY like the native
 # writer in test_kitti_3d: convertAlpha2Rot -> hill_climb -> convertRot2Alpha,
 # y3d += h3d/2. File ids are the renumbered split ids; sid column is mapped back
 # to original KITTI ids. The mapping is new_id i -> i-th entry of ImageSets/val.txt (the order
-# in which data/kitti_split1/setup_split.py renumbers the val images); the original run read the
-# same mapping from a CSV (val_id_map.csv, identical content; pass it with --id_map if you have it).
+# in which M3D-RPN's data/kitti_split1/setup_split.py renumbers the val images). --id_map
+# optionally reads the same mapping from a CSV (val_id_map.csv).
 #
 # Column notes: cls = V = class softmax score (the only score M3D-RPN has; its
 # writer thresholds the same quantity at 0.75). No uncertainty head exists ->
@@ -22,7 +20,7 @@
 #
 # Run from the M3D-RPN repo root (it imports the repo's lib.*), in a torch-1.x env with the
 # py_cpu_nms patch applied (adapters/patches/M3D-RPN_rpn_util_py_cpu_nms.patch):
-#   cd <UPSTREAM_ROOT>/M3D-RPN && python <release>/adapters/m3drpn_dump_floor0.py
+#   cd <UPSTREAM_ROOT>/M3D-RPN && python <Mono3d-Anatomy>/adapters/m3drpn_dump_floor0.py
 import os, sys, argparse
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 sys.path.insert(0, _ROOT)

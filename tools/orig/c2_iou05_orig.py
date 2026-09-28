@@ -1,12 +1,11 @@
-"""Ported from mono3d_crossdataset/tools/c2_iou05_orig.py for the public release. Computation
-unchanged. Produces reports_orig/c2_iou05_orig.txt.
+"""Produces reports_orig/c2_iou05_orig.txt.
 
-C2 — does the E4 separation result (FP-demotion ~= full, TP-reorder ~0) survive at IoU0.5?
+C2: does the E4 separation result (FP-demotion ~= full, TP-reorder ~0) survive at IoU0.5?
 Original-environment MonoFlex*/MonoGround* version of tools/decomp/c2_iou05_separation.py:
 same native pools, same o_act cache (_e4cache_<name>.npz written by diffsweep_orig.py, or
 recomputed), but TP labels at IoU3D>=0.5 and AP evaluated at min_overlap=0.5. Tests whether
 the separation finding is an IoU0.7-cliff artifact. The other detectors' native_pool branches
-are kept verbatim but never executed here.
+are kept but never executed here.
 Run from the repository root: python tools/orig/c2_iou05_orig.py
 """
 import os, sys, shutil, datetime

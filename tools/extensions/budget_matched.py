@@ -1,6 +1,5 @@
-"""Ported from the camera-ready check budget_matched.py (same file name) for the public release.
-Computation unchanged. Produces the per-run cell files reports_rerun/extensions/_bm_run{A,B}.txt,
-which budget_matched_finalize.py cross-checks and turns into reports/extensions/budget_matched.txt
+"""Produces the per-run cell files reports_rerun/extensions/_bm_run{A,B}.txt, which
+budget_matched_finalize.py cross-checks and turns into reports/extensions/budget_matched.txt
 (supplementary Sec. L, Table L).
 
 BUDGET-MATCHED coverage-vs-ordering split.
@@ -29,12 +28,12 @@ the 3769 val images whose COMPLETE pool holds >= N candidates is >= 0.992 (N=5),
 top-k is 30) and at N=50 five CenterNet detectors are at 0.000. N=20 is therefore the largest
 budget every detector in the panel can actually supply.
 
-GATE. With pool = native_pool() (verbatim from tools/decomp/e4_fp_tp_decomp.py) the script must
+GATE. With pool = native_pool() (copied from tools/decomp/e4_fp_tp_decomp.py) the script must
 reproduce reports/exp1_true_ceiling.txt base / recall*. MonoFlex/MonoGround are gated against
 reports_orig/exp1_true_ceiling_orig.txt, because the panel uses their original-environment
 (torch-1.4) dumps (stems monoflex_orig / monoground_orig).
 
-Kernels (max_matching, ceiling_recall, annos_for, native_pool) are COPIED VERBATIM from
+Kernels (max_matching, ceiling_recall, annos_for, native_pool) are copied unchanged from
 tools/decomp/exp1_true_ceiling.py / e4_fp_tp_decomp.py -- those are scripts, not libraries;
 importing them re-runs and overwrites reports.
 

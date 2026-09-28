@@ -1,6 +1,5 @@
-"""Ported from the camera-ready check difficulty_class_extension.py (same file name) for the
-public release. Computation unchanged. Produces reports/extensions/difficulty_class_extension.txt
-and .csv (a re-run writes reports_rerun/extensions/); supplementary Sec. O, Table O.
+"""Produces reports/extensions/difficulty_class_extension.txt and .csv (a re-run writes
+reports_rerun/extensions/); supplementary Sec. O, Table O.
 
 NOT RE-RUNNABLE FROM THE RELEASED DATA ALONE. Part B reads each detector's complete native
 multi-class KITTI prediction directory (Car, Pedestrian, Cyclist), which is not released; the
@@ -14,13 +13,13 @@ DIFFICULTY + CLASS EXTENSION.
 
 PIPELINE PROVENANCE
 -------------------
-Part A is tools/decomp/exp1_true_ceiling.py (the frozen AP* script behind
+Part A is tools/decomp/exp1_true_ceiling.py (the AP* script behind
 reports/exp1_true_ceiling.txt) with exactly two changes:
    (a) difficulty swept d in {0,1,2} instead of pinned to 1, in BOTH
        ap_summaries(..., difficulty=d) and _prepare_data(..., difficulty=d);
-   (b) FP-demotion dropped (not requested; it needs the frozen Car/Moderate labels).
-Pools are the NATIVE panel pools, verbatim from e4_fp_tp_decomp.native_pool -- the same
-pools that produce the shipped Table 1 (sec3_panel.tex) base AP.
+   (b) FP-demotion dropped (it needs the fixed Car/Moderate labels).
+Pools are the NATIVE panel pools, copied from e4_fp_tp_decomp.native_pool -- the same
+pools that produce the Table 1 base AP of the paper.
 
 Part B evaluates the four panel detectors that have a COMPLETE native KITTI-format
 prediction directory containing non-Car rows, using the official evaluator's own 3D IoU
@@ -30,13 +29,13 @@ REPRODUCTION GATES (all must pass or the script aborts)
 ------------------------------------------------------
 GATE-1  Moderate base all-point AP, 12/12, vs reports/e4_fp_tp_decomp.txt  (tol 0.05)
 GATE-2  Moderate true-IoU re-sort gain, 12/12, vs reports/e4_fp_tp_decomp.txt "full"
-GATE-3  Easy AND Hard base all-point AP vs the SHIPPED Table 1 E/H columns, for the ten
+GATE-3  Easy AND Hard base all-point AP vs the paper's Table 1 E/H columns, for the ten
         non-starred detectors (MonoFlex*/MonoGround* are original-torch-1.4-env rows and
         legitimately differ from the modern dumps).  <- validates the difficulty sweep
 GATE-4  Moderate AP* vs reports/exp1_true_ceiling.txt CEIL* column, 12/12
 GATE-5  Part-B machinery cross-check: recompute one detector's Car/Moderate true-IoU
         re-sort AP through the Part-B path (evaluator-IoU o_act + in-memory score swap)
-        and compare to the Part-A frozen path (shapely o_act + write_kitti).
+        and compare to the Part-A path (shapely o_act + write_kitti).
 
 READ-ONLY on all inputs.  Writes only reports_rerun/extensions/difficulty_class_extension.{txt,csv}.
 MonoFlex and MonoGround enter through their MODERN-environment dumps (stems monoflex /

@@ -1,5 +1,4 @@
-"""Ported from camera-ready checks/xds_epro_conversion_diag.py for the public release.
-Computation unchanged. Produces a console check (no file): median position / size / yaw of
+"""Console check (writes no file): median position / size / yaw of
 car predictions (score > 0.3) and car GT in two converted oracle pkls, EPro-PnP-Det converted
 with ct_to_oracle_pkl.py (preds_epropnp_full.pkl) and CenterNet (preds_centertrack_full.pkl).
 It exposes the +h/2 vertical offset that led to xds_nusc_json_to_oracle_pkl_FIXED.py.

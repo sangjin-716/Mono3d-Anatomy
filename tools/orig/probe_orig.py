@@ -1,6 +1,4 @@
-"""Ported from an internal probe script (renamed) for
-the public release. Computation unchanged. Produces reports_orig/probe_orig.txt (a verbatim copy
-of the frozen report under a new name).
+"""Produces reports_orig/probe_orig.txt.
 
 Detector-progression diagnostic probe (NO retraining, val dumps only) for the
 original-environment MonoFlex*/MonoGround* dumps (a copy of the main-panel

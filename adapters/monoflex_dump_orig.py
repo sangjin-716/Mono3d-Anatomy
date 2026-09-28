@@ -1,11 +1,9 @@
 """MonoFlex per-detection dump adapter (ORIGINAL torch-1.4 environment) -> 23-col schema.
 
-Ported from tools/monoflex_dump_orig.py of the original-environment workspace (itself a copy
-of tools/decomp/adapters/monoflex_dump.py with only REPO repointed to the original-environment
-MonoFlex copy) for the public release. Computation unchanged. Produces
-data/dumps/monoflex_orig_val.csv (the panel entry MonoFlex*): the script writes
-monoflex_val.csv / monoflex_train.csv into --outdir (default <OUT_DIR>/dumps/orig/); the val
-file was renamed monoflex_orig_val.csv. Must run inside the monoflex_orig environment built by
+Same code as adapters/monoflex_dump.py, with the default --repo pointing at the
+original-environment MonoFlex copy. Produces data/dumps/monoflex_orig_val.csv (the panel entry
+MonoFlex*): the script writes monoflex_val.csv / monoflex_train.csv into --outdir (default
+<OUT_DIR>/dumps/orig/); rename the val file to monoflex_orig_val.csv. Must run inside the monoflex_orig environment built by
 adapters/build_monoflex_orig_env.sh (Python 3.7, torch 1.4.0, CUDA 10.1).
 
 The 23 columns are the prediction part of the 33-col DETR-dump schema. Inference-only, read-only on the repo. Dumps BOTH val+train in

@@ -1,6 +1,4 @@
-"""Ported from an internal probe script (renamed to
-probe_detector_progression.py) for the public release. Computation unchanged.
-Produces reports/probe_detector_progression.txt.
+"""Produces reports/probe_detector_progression.txt.
 
 Detector-progression diagnostic probe (NO retraining, val dumps only).
 

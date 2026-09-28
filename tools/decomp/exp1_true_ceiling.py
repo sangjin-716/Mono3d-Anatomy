@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/exp1_true_ceiling.py for the public release. Computation unchanged.
-Produces reports/exp1_true_ceiling.txt.
+"""Produces reports/exp1_true_ceiling.txt.
 
 EXP-1: the TRUE fixed-pool ceiling AP* = M / n_gt.
 
@@ -12,7 +11,7 @@ labelings). Compare to native, true-IoU re-sort (the paper's "ceiling"), FP-demo
 The reported true-IoU "ceiling" is a LOWER bound; this prints how far below the true
 ceiling it sits.
 
-Run e4_fp_tp_decomp.py first: this script reads its _e4cache_<model>.npz (o_act + frozen TP
+Run e4_fp_tp_decomp.py first: this script reads its _e4cache_<model>.npz (o_act + fixed TP
 labels); without the cache the FPdem column is nan. Native pools need the pre-flatten query
 dumps and the floor-0 M3D-RPN dump in DUMP_DIR. No training.
 Run from the repository root: python tools/decomp/exp1_true_ceiling.py

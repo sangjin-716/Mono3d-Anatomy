@@ -1,5 +1,4 @@
-"""Ported from the camera-ready check budget_matched_finalize.py (same file name) for the public
-release. Computation unchanged. Produces reports/extensions/budget_matched.txt (a re-run writes
+"""Produces reports/extensions/budget_matched.txt (a re-run writes
 reports_rerun/extensions/budget_matched.txt); supplementary Sec. L, Table L.
 
 Cross-check the two independent budget_matched runs and emit the final report.
@@ -11,9 +10,8 @@ required correctness gate, not decoration.
 Inputs: reports_rerun/extensions/_bm_runA.txt and _bm_runB.txt (tools/extensions/budget_matched.py
 --tag A / --tag B), or --a/--b.
 
-Note on the public copy: reports/extensions/budget_matched.txt omits the P2 N=5 rank coefficient
-between pool size and recall* (two lines of the source report). This script still computes and
-prints every per-cell coefficient.
+Note: reports/extensions/budget_matched.txt leaves out the P2 N=5 rank coefficient between pool
+size and recall* (two lines). This script still computes and prints every per-cell coefficient.
 """
 import os, re, sys, argparse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

@@ -1,19 +1,18 @@
-"""MonoGround per-prediction val dump (MODERN environment) — 23-col format.
+"""MonoGround per-prediction val dump (MODERN environment), 23-col format.
 
-Ported from tools/monoground_dump.py for the public release. Computation unchanged.
 Produces data/dumps/monoground_modern_val.csv (written to <OUT_DIR>/dumps/monoground_val.csv by
 default; the released file name adds "_modern"). The panel entry MonoGround* uses the
 ORIGINAL-environment dump instead (adapters/monoground_dump_orig.py); the modern build drifts
--1.90 AP (see README).
+-1.90 AP (see adapters/README.md).
 
-Near-verbatim copy of adapters/monoflex_dump.py (same MonoFlex-codebase
+Nearly the same code as adapters/monoflex_dump.py (same MonoFlex-codebase
 forward contract: result[N,14] = cls,alpha,box2d(4),h,w,l,x,y,z,ry,score + eval_utils
 {vis_scores, estimated_depth_error}), pointed at the MonoGround repo/ckpt.
   cls <- vis_scores (heatmap score), V <- result[:,13] (native ranking score,
   thresholded at DETECTIONS_THRESHOLD 0.2 natively; we dump at 0.0 = full top-K pool)
 Data: the repo's own config/paths_catalog.py is used; set its DatasetCatalog.DATA_DIR to a
-KITTI copy in the MonoFlex layout (<DATA_DIR>/training/{image_2,calib,label_2,ImageSets}) —
-the one-line edit made in both original runs.
+KITTI copy in the MonoFlex layout (<DATA_DIR>/training/{image_2,calib,label_2,ImageSets}).
+This is a one-line edit.
 The `config`/`model`/`utils`/`data` imports are the upstream MonoGround packages (cwd = repo).
 Run: python adapters/monoground_dump.py [--repo ...] [--ckpt ...] [--out ...]  (any cwd)
 """

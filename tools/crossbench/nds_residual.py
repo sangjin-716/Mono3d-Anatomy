@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""Ported from camera-ready checks/xdsfix_pgd/nds_residual.py for the public release.
-Computation unchanged. Produces a console report (nds_residual.txt in the original run): the
-PGD NDS excess over the published value, located in the true-positive error terms of NDS.
+"""Prints the PGD NDS excess over the published value and locates it in the true-positive error
+terms of NDS.
 
 nds_residual.py -- (a) verify the nuScenes NDS formula reproduces every rung of the
 PGD bisection ladder (pgd_bisect_eval.py) from its own (mAP, tp_errors), and (b) quantify

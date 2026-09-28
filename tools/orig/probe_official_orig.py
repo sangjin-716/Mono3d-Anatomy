@@ -1,7 +1,6 @@
-"""Ported from mono3d_crossdataset/tools/probe_official_orig.py for the public release.
-Computation unchanged. Produces reports_orig/probe_official_moderate_orig.txt.
+"""Produces reports_orig/probe_official_moderate_orig.txt.
 
-E1' — progression probe channels re-aggregated on the OFFICIAL KITTI moderate set
+E1': progression probe channels re-aggregated on the OFFICIAL KITTI moderate set
 (occ<=1 AND trunc<=0.3 AND bbox pixel height>25), for the original-environment
 MonoFlex*/MonoGround* dumps (a copy of tools/decomp/probe_official_moderate.py with inputs
 switched). Matcher/pools/kernels identical to the detector-progression probe (probe_orig.py);

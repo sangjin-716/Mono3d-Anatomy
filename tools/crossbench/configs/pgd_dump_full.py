@@ -1,4 +1,3 @@
-# Ported from mono3d_crossdataset/configs/pgd_dump_full.py for the public release.
 # Official mmdet3d PGD 2x finetune config with only the evaluator replaced by DumpResults, so
 # inference writes the per-camera prediction pkl used by reformat_official.py and the oracle.
 # Edit the two placeholders: your mmdetection3d checkout and the cache directory of this

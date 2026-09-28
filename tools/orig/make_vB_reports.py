@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/make_vB_reports.py for the public release. Computation
-unchanged. Produces <OUT_DIR>/vB_reports/ (the merged view shipped as figures/data/vB_reports/).
+"""Produces <OUT_DIR>/vB_reports/ (the merged view that is in the repository as
+figures/data/vB_reports/).
 
-Build the merged 'vB reports view' consumed by the figure generators (figures/): frozen main
+Build the merged 'vB reports view' consumed by the figure generators (figures/): the main
 reports with the MonoFlex/MonoGround rows replaced by the ORIG-env rows (names kept PLAIN so the
 figure parsers keyed on detector names work unchanged; the star is a table convention).
-Inputs: reports/ (frozen main reports) and the tools/orig reports (reports_orig/ when shipped
-there, else the re-run in OUT_DIR). The main-panel detector-progression probe report is read as
+Inputs: reports/ (main reports) and the tools/orig reports (reports_orig/ when present, else the
+re-run in OUT_DIR). The main-panel detector-progression probe report is read as
 reports/probe_detector_progression.txt;
 an input that is not present is reported and skipped. Rerun-safe (idempotent overwrite).
 Run from the repository root: python tools/orig/make_vB_reports.py

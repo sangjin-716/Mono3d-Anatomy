@@ -1,18 +1,17 @@
-"""Ported from mono3d_crossdataset/tools/bridge_orig.py for the public release. Computation
-unchanged. Produces reports_orig/depth_share_bridge_orig.txt.
+"""Produces reports_orig/depth_share_bridge_orig.txt.
 
 DEPTH-SHARE BRIDGE for the original-environment MonoFlex*/MonoGround* dumps (a copy of
-tools/decomp/depth_share_bridge.py with inputs switched) — is the un-closable ~13AP rank gap
+tools/decomp/depth_share_bridge.py with inputs switched): is the un-closable ~13AP rank gap
 depth-located? (AP currency)
 
 Per detector on the S5 kept pool (post-NMS; gap anatomy showed this pool has ~no
 duplicates, so its gap = TP-vs-FP ordering failure):
   base = AP(V)                      (detector as-is)
-  A    = AP(rank by IoU_act)        (full order-ceiling; IoU vs ALL GTs, NO z-gate —
+  A    = AP(rank by IoU_act)        (full order-ceiling; IoU vs ALL GTs, NO z-gate;
                                      the |dz|<8 gate would censor depth-displaced boxes)
   B    = AP(rank by IoU_z*)         (rank by "ray-conditional quality at oracle depth":
-                                     each box slid along the camera ray to each GT's z —
-                                     IDENTICAL transform to the +50 oracle-depth lever —
+                                     each box slid along the camera ray to each GT's z,
+                                     the SAME transform as the +50 oracle-depth lever,
                                      and scored by the best resulting IoU3D)
   depth share of gap = (A - B) / (A - base)
      B ~= base  -> ordering the pool needs depth knowledge (gap = depth-blindness)
@@ -20,7 +19,7 @@ duplicates, so its gap = TP-vs-FP ordering failure):
 Plus FP separation: among boxes with IoU_act < 0.1, can V tell depth-displaced
 would-be-TPs (IoU_z* >= 0.5) from true ghosts (IoU_z* < 0.1)? AUROC(V).
 Scope note: this tests the detector's OWN score channel; cross-detector depth disagreement
-(rho~0.40) already shows the depth-error information exists — claim is V doesn't carry it.
+(rho~0.40) already shows the depth-error information exists; the claim is that V doesn't carry it.
 
 Reuses the <stem>_bridgecache.npz oracle-IoU cache written by gap_exact_orig.py (or builds it).
 Run from the repository root: python tools/orig/bridge_orig.py

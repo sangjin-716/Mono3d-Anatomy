@@ -1,16 +1,16 @@
-# Versions of the release check (Python 3.9.25, Linux x86-64, one NVIDIA GPU, CUDA 12.1).
-# Python 3.9 or 3.10. numpy is pinned to 2.0.x on purpose, see README.md ("Environment").
+# Versions we tested with (Python 3.9.25, Linux x86-64, one NVIDIA GPU, CUDA 12.1).
+# Python 3.9 or 3.10. numpy is pinned to 2.0.x on purpose, see docs/REPRODUCE.md ("Environment").
 numpy==2.0.2
 pandas==2.3.3
 scipy==1.13.1
 scikit-learn==1.6.1
 numba==0.60.0
 # numba.cuda (the official rotated-IoU kernel) also needs the CUDA toolkit's NVVM and libdevice,
-# which pip does not install: use a system CUDA toolkit (CUDA_HOME) or, as in the release check,
+# which pip does not install: use a system CUDA toolkit (CUDA_HOME) or, as we did,
 #   conda install -c nvidia/label/cuda-12.1.0 cuda-nvcc      (tested: cuda-nvcc 12.1.66)
 shapely==2.0.7
 
 # figures/ only
 matplotlib==3.9.4
-# figures/verify_cr.py also needs pymupdf, and figures/fig_unified_src.tex needs a LaTeX engine
-# such as tectonic. Neither is needed for any number.
+# figures/verify_cr.py and figures/cmp_text.py also need pymupdf, and figures/fig_unified_src.tex
+# needs a LaTeX engine such as tectonic. Neither is needed for any number.

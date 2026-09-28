@@ -1,10 +1,9 @@
-"""Class-capability census of the twelve released checkpoints (supplementary Sec. O) and
-release-document checks for the cross-benchmark detectors (supplementary Sec. P).
+"""Class-capability census of the twelve released checkpoints (supplementary Sec. O) and checks
+of the upstream release documents for the cross-benchmark detectors (supplementary Sec. P).
 
-Written for the public release to trace statements of supplementary Secs. O and P and main
-Sec. 5.1 that had no report of their own. It has no frozen predecessor and changes no number of
-the paper. Produces reports/extensions/class_capability.txt (a re-run writes
-reports_rerun/extensions/class_capability.txt). Read-only on every input.
+It backs statements of supplementary Secs. O and P and main Sec. 5.1 that had no report of their
+own, and changes no number of the paper. Produces reports/extensions/class_capability.txt (a
+re-run writes reports_rerun/extensions/class_capability.txt). Read-only on every input.
 
   Part A  Released per-prediction dumps (data/dumps). Class-label column, rows, images and
           the Car-selection line of the adapter that wrote each dump. No GPU.

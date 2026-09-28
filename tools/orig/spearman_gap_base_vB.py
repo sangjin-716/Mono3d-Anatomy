@@ -1,11 +1,8 @@
 #!/usr/bin/env python
-"""Ported for the public release from the inline Python snippet that generated
-mono3d_crossdataset/results/kitti_orig/spearman_gap_base_vB.txt (the snippet printed to stdout,
-redirected into that file; it had no script file of its own). Computation unchanged.
-Produces reports_orig/spearman_gap_base_vB.txt.
+"""Produces reports_orig/spearman_gap_base_vB.txt.
 
 spearman(gap, base) over the 12-detector vB panel on three bases. The per-detector cells are
-copied from frozen reports (no dump is read):
+copied from the reports (no dump is read):
   CEIL* basis (base, AP*=M/n_gt) : reports/exp1_true_ceiling.txt (ten detectors) and
                                    reports_orig/exp1_true_ceiling_orig.txt (MonoFlex*, MonoGround*)
   true-IoU re-sort, native pools : reports/final_run/native_gap_canonical.md (ten detectors) and

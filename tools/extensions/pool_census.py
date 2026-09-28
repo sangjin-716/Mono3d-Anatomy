@@ -1,5 +1,4 @@
-"""Ported from the camera-ready check pool_census.py (same file name) for the public release.
-Computation unchanged. Produces reports/extensions/pool_census.txt (a re-run writes
+"""Produces reports/extensions/pool_census.txt (a re-run writes
 reports_rerun/extensions/pool_census.txt); supplementary Sec. L (complete pre-selection pool
 sizes, 23.4 to 2138.3 candidates per image).
 

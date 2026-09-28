@@ -1,8 +1,8 @@
-"""Ported from the camera-ready check nearmiss_panelwide.py (same file name) for the public release.
-Computation unchanged. Produces reports/extensions/nearmiss_panelwide.txt (a re-run writes
+"""Produces reports/extensions/nearmiss_panelwide.txt (a re-run writes
 reports_rerun/extensions/nearmiss_panelwide.{txt,csv}); supplementary Sec. M, Table M, and main
 Sec. 5.1 "Coverage in Fixed-Pool Accounting". A re-run also prints the twelve-detector union rows
-and their two gate lines, which the public copy omits because the paper does not report them.
+and their two gate lines, which reports/extensions/nearmiss_panelwide.txt leaves out because the
+paper does not report them.
 
 Panel-wide near-miss decomposition.
 
@@ -15,19 +15,18 @@ QUESTION:
     == 0.0      no overlapping candidate at all -> "propose a new candidate"
 
 NO NEW IoU CODE IS WRITTEN HERE.  The per-GT best-IoU3D floats are read straight out of
-the paper's own FROZEN artifact
 
     gt_state_matrix.csv   (default: cache/decomp/gt_state_matrix.csv; override with --gsm PATH)
 
-which was produced by tools/decomp/gt_state_matrix.py, whose moderate-GT filter, |dz|<8 m
-candidate gate and arc.iou3d kernel are (per its own docstring) verbatim copies of the
-frozen tools/decomp/pool_waterfall.py used for the shipped paper.  Columns:
+which is written by tools/decomp/gt_state_matrix.py, whose moderate-GT filter, |dz|<8 m
+candidate gate and arc.iou3d kernel are unchanged copies of tools/decomp/pool_waterfall.py.
+Columns:
     {det}_a = best IoU3D over the COMPLETE native pool
     {det}_c = best IoU3D over the FINAL output pool (native eligibility survivors)
 This script only RE-BINS those floats.  It computes no geometry of its own.
 
 REPRODUCTION GATES (all must PASS, else the script prints FAILED and refuses to report):
-  G1  n_gt == 7874 and distance-bin counts match the frozen validation
+  G1  n_gt == 7874 and distance-bin counts match the validation counts
   G2  per-detector A@0.7 / C@0.7 / face-ii reproduce reports/pool_waterfall.txt to 3 dp
   G3  per-detector A@0.5 reproduces reports/pool_waterfall.txt to 3 dp
   G4  per-detector "30 m+ missed GTs, of which NO pool candidate IoU>=0.5" reproduces
@@ -35,7 +34,7 @@ REPRODUCTION GATES (all must PASS, else the script prints FAILED and refuses to 
   G5  panel union: 1176 GTs with no _a>=0.7 anywhere, 194 with no _a>=0.5 anywhere, and
       2002 with no _a>=0.7 over the eleven non-anchor pools (reports/gt_state_matrix.txt,
       reports/final_run/e2_budget_truncation.txt; modern-environment MonoFlex/MonoGround)
-  G6/G7 the new [0.5,0.7) bin against the frozen panel-union histograms of
+  G6/G7 the new [0.5,0.7) bin against the panel-union histograms of
       reports/gt_state_matrix.txt at IoU 0.7 and 0.5
 
 MonoFlex and MonoGround enter through their MODERN-environment dumps (released as
@@ -43,7 +42,7 @@ monoflex_modern_val.csv / monoground_modern_val.csv, stems monoflex / monoground
 monoflex_val.csv / monoground_val.csv in the report), the same dumps behind
 reports/gt_state_matrix.txt and reports/pool_waterfall.txt.
 
-ZERO-BIN SAFETY:  the frozen kernel only evaluates candidates with |z_pred - z_gt| < 8 m.
+ZERO-BIN SAFETY:  the kernel only evaluates candidates with |z_pred - z_gt| < 8 m.
 A stored 0.0 therefore means "no candidate with IoU3D > 0 *inside that gate*".  Part 0
 checks, from the raw label files and the raw dumps, that no GT/prediction Car box pair can
 overlap at all once |dz| >= 8 m (max half-extent along z of a box is

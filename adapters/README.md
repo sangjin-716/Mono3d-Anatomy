@@ -1,76 +1,156 @@
-# adapters — per-detector dump generators
+# Adapters
 
-Each adapter loads a detector's **released checkpoint** in its **own upstream repository** and
-writes one row per native prediction of the KITTI val split (Chen split, 3769 images). These
-dumps are the inputs of every analysis in this repository (see `data/DUMPS.md`; the released
-files are listed in `tools/_release.py`). Nothing here needs to be re-run to reproduce the
-paper: the reports are recomputed from the released dumps. The adapters are provided so that
-the dumps themselves can be audited or regenerated.
+These scripts produce the per-prediction dumps that every analysis in this repository reads. Each
+one loads a detector's released checkpoint in the detector's own repository, runs it on KITTI val
+(Chen split, 3769 images) and writes one row per native prediction.
 
-**Environment.** The adapters import the upstream packages (`lib.*`, `config`, `model`, ...), so
-each one runs in that detector's own Python/PyTorch environment with its CUDA extensions built
-(DCNv2, MSDeformAttn, ...), with the clone given by `--repo` (default
-`<paths.UPSTREAM_ROOT>/<Repo>`). They were **not re-run for the release** (they need the upstream
-environments and a GPU); every `.py` here is byte-compiled only. Outputs default to
-`<paths.OUT_DIR>/dumps/`, so a re-run never overwrites a downloaded dump.
+You do not need them to reproduce the paper. The reports are computed from the released dumps
+(see [`data/DUMPS.md`](../data/DUMPS.md)). The adapters are here so you can see how the dumps were
+made, or regenerate them.
 
-**Schema.** 23 columns: `sid, pred_idx, cls, sigma, log_sigma_raw, V, z_pred, bbox_h_pix,
-bbox_w_pix, bbox_area_pix, x_3d, y_3d, z_3d, h_3d, w_3d, l_3d, ry, alpha, bbox_x1, bbox_y1,
-bbox_x2, bbox_y2, dup_rank`. `cls` is the detector's thresholding score, `V` its native ranking
-score, `sigma`/`log_sigma_raw` its depth-uncertainty output (constant 1/0 where there is none),
-boxes are in camera coordinates with `y_3d` at the bottom centre, and `dup_rank` counts
-same-image Car predictions with 2D IoU >= 0.5 and a higher `V`. `dgp_val.csv` and
-`official_monocop_val.csv` (written by `dgp_cop_dump.py`) carry 10 further columns from a matching
-against the KITTI Car labels (`max_iou_3d, max_iou_bev, matched_gt_idx, tp_label_iou07, gt_x,
-gt_y, gt_z, depth_err, center_err_bev, dist_bin_4`; defined in `data/DUMPS.md`). No script that
-writes a frozen report reads them.
+## Running an adapter
 
-**Gates** (supplementary, "Validation Gates"; `reports/detector_adapters_gates.md`).
-G1 *reproduction*: the released checkpoint, run through its own repository, reproduces the
-published Car Moderate AP_R40 (val). G2 *tap equivalence*: the dump reconstructs the native
-output box for box (per-image counts, scores, geometry).
+An adapter imports the upstream code (`lib.*`, `config`, `model`, ...), so it has to run in that
+detector's own Python/PyTorch environment with its CUDA extensions built (DCNv2, MSDeformAttn,
+...). Most adapters take `--repo` and `--ckpt`, with defaults under `<paths.UPSTREAM_ROOT>`. The
+header of each script lists its arguments and the exceptions, and says which detector output goes
+into `cls`, `V` and `sigma`.
+
+We used torch 1.10 for M3D-RPN, MonoDLE, DEVIANT, MonoCon and the modern MonoFlex and MonoGround
+builds, torch 1.9 for GUPNet and the MonoDETR family, and torch 1.4 for MonoFlex\* and
+MonoGround\*. Results can shift with the environment, as MonoDLE and the modern MonoFlex and
+MonoGround builds show below.
+
+Most adapters can be started from any directory:
+
+```bash
+python adapters/deviant_dump.py --repo <UPSTREAM_ROOT>/DEVIANT --ckpt <checkpoint>
+```
+
+These have to be run from the root of the upstream repo: `m3drpn_dump_accv.py`,
+`m3drpn_dump_floor0.py`, `test_rpn_3d_accv.py`, `dgp_cop_dump.py`, `detr_preflatten_dump.py` and
+`detr_preflatten_native.py`. The last three also take `--root_dir`, which overrides the dataset
+root in the upstream config.
+
+```bash
+cd <UPSTREAM_ROOT>/M3D-RPN && python <this repo>/adapters/m3drpn_dump_accv.py
+
+cd <UPSTREAM_ROOT>/MonoDGP && python <this repo>/adapters/dgp_cop_dump.py \
+    --repo <UPSTREAM_ROOT>/MonoDGP --cfg <UPSTREAM_ROOT>/MonoDGP/configs/monodgp.yaml \
+    --ckpt <checkpoint> --split val --out <OUT_DIR>/dumps/dgp_val.csv --tag dgp_val
+```
+
+Output goes to `<paths.OUT_DIR>/dumps/` by default, so a re-run never overwrites a downloaded
+dump. A few scripts write names that differ from the released files:
+
+- `monoflex_dump_orig.py` writes `monoflex_val.csv` to `<OUT_DIR>/dumps/orig/`. The released
+  file is `monoflex_orig_val.csv`.
+- `monoflex_dump.py` writes `monoflex_val.csv` to `<OUT_DIR>/dumps/modern/`. The released file
+  is `monoflex_modern_val.csv`.
+- `monoground_dump.py` writes `monoground_val.csv`. The released file is
+  `monoground_modern_val.csv`.
+- `gupnet_dump.py`, `monodetr_dump.py` and the two MonoFlex scripts also write a `*_train.csv`.
+
+These are cleaned-up versions of the scripts we ran, with paths turned into arguments. We have not
+re-run them since, so please open an issue if one fails. `monoclue_dump.py` and `monoia_dump.py`
+were rebuilt from the saved text of one-off scripts. Where we had used an edited copy of an
+upstream config (usually only an absolute dataset root), the adapter makes the same edit in memory
+and says so in its header. `monodle_dump.py` reads its eval config from
+[`adapters/configs/monodle/kitti_accv_eval.yaml`](configs/monodle/kitti_accv_eval.yaml).
+
+## Output format
+
+One row per Car prediction, 23 columns:
+
+```
+sid, pred_idx, cls, sigma, log_sigma_raw, V, z_pred, bbox_h_pix, bbox_w_pix, bbox_area_pix,
+x_3d, y_3d, z_3d, h_3d, w_3d, l_3d, ry, alpha, bbox_x1, bbox_y1, bbox_x2, bbox_y2, dup_rank
+```
+
+`cls` is the score the detector thresholds and `V` is the score it ranks by. `sigma` and
+`log_sigma_raw` are its depth-uncertainty output, constant 1 and 0 for detectors that have none.
+Boxes are in camera coordinates with `y_3d` at the bottom centre. `dup_rank` is the number of Car
+predictions in the same image with 2D IoU >= 0.5 and a higher `V`.
+
+`dgp_val.csv` and `official_monocop_val.csv` (both from `dgp_cop_dump.py`) have 10 more columns
+from a matching against the KITTI Car labels. See [`data/DUMPS.md`](../data/DUMPS.md).
+
+## Checks
+
+Each of the twelve panel dumps passed two checks, called G1 and G2 in the supplementary material and in
+[`reports/detector_adapters_gates.md`](../reports/detector_adapters_gates.md):
+
+1. Reproduction: the released checkpoint, run through its own repository, gives the published Car
+   Moderate AP_R40 on val.
+2. Native match: the dump reconstructs the detector's own output box for box (per-image counts,
+   scores and geometry).
 
 ## Per detector
 
-| Detector | Upstream repo @ commit | Checkpoint | Adapter (dump) | G1 official / ours (Mod AP_R40) | G2 tap equivalence |
+The published/ours AP_R40 values are the ones in the supplementary reproduction table. The
+native-match numbers are from
+[`reports/detector_adapters_gates.md`](../reports/detector_adapters_gates.md). Checkpoints are the
+ones linked from each repo's README unless noted otherwise.
+
+| Detector | Commit | Adapter | Released dump | Mod AP_R40, published / ours | Native match |
 |---|---|---|---|---|---|
-| M3D-RPN | github.com/garrickbrazil/M3D-RPN @ `bf204e3f95f6` | released val1 model (repo README) | `m3drpn_dump_accv.py` -> `m3drpn_val.csv`; `m3drpn_dump_floor0.py` -> complete pre-NMS pool `m3drpn_val_floor0.csv` (2.9 GB, release asset `mono3d_anatomy_m3drpn_complete_pool_v1.zip`); `test_rpn_3d_accv.py` = native run for G1; patch `patches/M3D-RPN_rpn_util_py_cpu_nms.patch` (torch-1.x port, same +1-offset NMS) | 11.07 (R40 re-eval; paper reports R11) / 11.07 | native-NMS reconstruction 14.538/11.099/8.670 vs native 14.531/11.073/8.646 (dump floor 0.05, cap 300/img) |
-| MonoDLE | github.com/xinzhuma/monodle @ `e426aa65fdc7` | released checkpoint (repo README) | `monodle_dump.py` + `configs/monodle/kitti_accv_eval.yaml` | 13.72 / 14.57 (+0.85, inference-environment drift; code, data, evaluator verified identical) | box-level exact (native writer rounds scores to 2 dp) |
-| MonoFlex\* | github.com/zhangyp15/MonoFlex @ `ec6da017c325` | released checkpoint (repo README) | `monoflex_dump_orig.py` (+ `mf_paths_catalog.py`) in the original environment built by `build_monoflex_orig_env.sh` -> `monoflex_orig_val.csv`. Modern-environment dump: `monoflex_dump.py` -> `monoflex_modern_val.csv` | 17.51 / 17.34 (original torch-1.4 env; the modern rebuild gives 15.54) | same decode as the native PostProcessor (top-50, threshold 0), no separate numeric record |
-| GUPNet | github.com/SuperMHP/GUPNet @ `d0e02cad228f` | released checkpoint (repo README) | `gupnet_dump.py`; `gupnet_native_eval.py` = native tester run graded by our evaluator | 16.46 / 16.48 | native tester output vs dump, graded by the same evaluator (`gupnet_native_eval.py`) |
-| DEVIANT | github.com/abhi1kumar/DEVIANT @ `2e6eca6e27d7` | released `run_221` checkpoint (repo README) | `deviant_dump.py` | 16.54 / 16.49 | boxes + scores exact (native writer rounds to 2 dp) |
-| MonoGround\* | github.com/cfzd/MonoGround @ `05b3baf73228` | released checkpoint (repo README) | `monoground_dump_orig.py` in the original environment (`build_monoflex_orig_env.sh`) -> `monoground_orig_val.csv`. Modern-environment dump: `monoground_dump.py` -> `monoground_modern_val.csv` | 18.69 / 18.69 (original torch-1.4 env; the modern rebuild gives 16.79) | same decode as the native PostProcessor, no separate numeric record |
-| MonoCon | github.com/2gunsu/monocon-pytorch @ `908807bdd8d4` | released checkpoint of this re-implementation (repo README) | `monocon_dump.py`; patch `patches/MonoCon_base_engine_map_location.patch` (checkpoint load `map_location`) | 19.02 / 19.02 | 26.031/19.015/15.912 vs native (d <= 0.007); native top-k 30, threshold 0.4 |
-| MonoDETR | github.com/ZrrSkywalker/MonoDETR @ `6994b9f51240` | released checkpoint (repo README) | `monodetr_dump.py`; per-hypothesis pool `monodetr_preflatten_dump.py` -> `monodetr_val_preflatten.csv` | 20.83 / 20.83 | all 50x3 query-class hypotheses reproduce the native top-50 |
-| MonoDGP | github.com/PuFanqi23/MonoDGP @ `aa059a18214a` | released checkpoint (repo README) | `dgp_cop_dump.py` -> `dgp_val.csv` (33 col); per-query pool `detr_preflatten_dump.py` -> `monodgp_val_preflatten.csv` | 22.34 / 22.29 | as MonoDETR |
-| MonoCoP | MonoCoP authors' release (project page alanzhangcs.github.io/monocop-page); our clone has no git metadata, commit not recorded | huggingface.co/zhihao406/MonoCoP | `dgp_cop_dump.py` -> `official_monocop_val.csv` (33 col); per-query pool `detr_preflatten_dump.py` -> `official_monocop_val_preflatten.csv` | 23.89 / 23.84 | as MonoDETR |
-| MonoCLUE | github.com/SungHunYang/MonoCLUE @ `016d3e8d3c99` | released checkpoint (repo README) | `monoclue_dump.py`; per-hypothesis pool `detr_preflatten_native.py` -> `monoclue_val_preflatten.csv` | 24.10 / 24.20 | as MonoDETR (native decode) |
-| MonoIA | github.com/alanzhangcs/MonoIA @ `69d6ee30ca5e` | huggingface.co/zhihao406/MonoIA (`MonoIA_KITTI_Val.pth`) | `monoia_dump.py`; per-hypothesis pool `detr_preflatten_native.py` -> `monoia_val_preflatten.csv` | 24.40 / 24.48 | as MonoDETR (native decode) |
+| [M3D-RPN](https://github.com/garrickbrazil/M3D-RPN) | `bf204e3f95f6` | `m3drpn_dump_accv.py` | `m3drpn_val.csv` | 11.07 / 11.07 | NMS rebuilt from the dump gives 14.538/11.099/8.670 (E/M/H), native 14.531/11.073/8.646 |
+| [MonoDLE](https://github.com/xinzhuma/monodle) | `e426aa65fdc7` | `monodle_dump.py` | `monodle_val.csv` | 13.72 / 14.57 | box for box (native writer rounds scores to 2 decimals) |
+| [MonoFlex](https://github.com/zhangyp15/MonoFlex)\* | `ec6da017c325` | `monoflex_dump_orig.py` | `monoflex_orig_val.csv` | 17.51 / 17.34 | by construction, see below |
+| [GUPNet](https://github.com/SuperMHP/GUPNet) | `d0e02cad228f` | `gupnet_dump.py` | `gupnet_val.csv` | 16.46 / 16.48 | native tester output graded by the same evaluator (`gupnet_native_eval.py`) |
+| [DEVIANT](https://github.com/abhi1kumar/DEVIANT) | `2e6eca6e27d7` | `deviant_dump.py` | `deviant_val.csv` | 16.54 / 16.49 | boxes and scores exact (native writer rounds to 2 decimals) |
+| [MonoGround](https://github.com/cfzd/MonoGround)\* | `05b3baf73228` | `monoground_dump_orig.py` | `monoground_orig_val.csv` | 18.69 / 18.69 | by construction, see below |
+| [MonoCon](https://github.com/2gunsu/monocon-pytorch) | `908807bdd8d4` | `monocon_dump.py` | `monocon_val.csv` | 19.02 / 19.02 | 26.031/19.015/15.912 (E/M/H) vs native, difference <= 0.007 |
+| [MonoDETR](https://github.com/ZrrSkywalker/MonoDETR) | `6994b9f51240` | `monodetr_dump.py` | `monodetr_val.csv` | 20.83 / 20.83 | all 50x3 query-class hypotheses reproduce the native top-50 |
+| [MonoDGP](https://github.com/PuFanqi23/MonoDGP) | `aa059a18214a` | `dgp_cop_dump.py` | `dgp_val.csv` | 22.34 / 22.29 | as MonoDETR |
+| [MonoCoP](https://alanzhangcs.github.io/monocop-page) | not recorded | `dgp_cop_dump.py` | `official_monocop_val.csv` | 23.89 / 23.84 | as MonoDETR |
+| [MonoCLUE](https://github.com/SungHunYang/MonoCLUE) | `016d3e8d3c99` | `monoclue_dump.py` | `monoclue_val.csv` | 24.10 / 24.20 | as MonoDETR, with the repo's own decode |
+| [MonoIA](https://github.com/alanzhangcs/MonoIA) | `69d6ee30ca5e` | `monoia_dump.py` | `monoia_val.csv` | 24.40 / 24.48 | as MonoDETR, with the repo's own decode |
 
-The five `*_val_preflatten.csv` pools are the release asset `mono3d_anatomy_query_complete_pools_v1.zip`
-(`data/DUMPS.md`). G1 values are those of the supplementary reproduction table. Rows marked \* are the panel
-entries built in the authors' original environment (Python 3.7, torch 1.4.0, CUDA 10.1, DCNv2
-compiled against it; `build_monoflex_orig_env.sh`). The modern-environment rebuild of the two
-MonoFlex-codebase repos drifts by about -1.9 AP (`reports/detector_adapters_gates.md`, note 2);
-the `*_modern` dumps are released for the auxiliary checks that used them.
+### Notes
 
-## Honest caveats
+M3D-RPN reports AP_R11 in its paper. The 11.07 is our AP_R40 evaluation of the released val1
+model, and `test_rpn_3d_accv.py` is the native run for check 1. Point `--release_dir` at the
+unzipped `M3D-RPN-Release.zip`, and apply
+[`adapters/patches/M3D-RPN_rpn_util_py_cpu_nms.patch`](patches/M3D-RPN_rpn_util_py_cpu_nms.patch)
+first. It makes the NMS run under torch 1.x and keeps the original +1-offset IoU. The dump keeps Car
+boxes with score >= 0.05, at most 300 per image. `m3drpn_dump_floor0.py` writes the complete
+pre-NMS pool `m3drpn_val_floor0.csv` (2.9 GB, release asset
+`mono3d_anatomy_m3drpn_complete_pool_v1.zip`).
 
-- **Needs the upstream environment.** Every adapter needs its repository,
-  environment, compiled CUDA ops and checkpoint. The original runs used torch 1.10 (DEVIANT,
-  MonoDLE, MonoCon, M3D-RPN, modern MonoFlex/MonoGround), torch 1.9 (GUPNet, MonoDETR family) and
-  torch 1.4 (\* rows). Results can drift across environments (see MonoDLE and the modern
-  MonoFlex/MonoGround rebuilds).
-- **MonoCLUE and MonoIA 23-column dumps** were written by one-off scripts that were not kept as
-  files; `monoclue_dump.py` and `monoia_dump.py` are recovered from the recorded text of those
-  scripts (including the one recorded edit to the MonoIA script) with only the paths turned
-  into arguments. They have not been re-run since recovery.
-- **Configs.** Where the original runs used a copy of an upstream config whose only change was
-  an absolute dataset root (or, for MonoIA, the focal-list entries), the adapter applies that
-  change in memory or documents it in its header; the MonoDLE eval config is shipped in
-  `configs/monodle/`.
-- **MonoCoP commit.** The MonoCoP clone was used without git metadata, so no commit hash can be
-  given.
-- **Tap equivalence for MonoFlex\*/MonoGround\*** is by construction (the adapter calls the
-  repo's own PostProcessor with threshold 0); G1 for these two was established on the repo's own
-  evaluation in the original environment (`build_monoflex_orig_env.sh`, step 4).
+MonoDLE comes out 0.85 higher than published with the same code, data and evaluator. The
+difference comes from the inference environment.
+
+MonoFlex\* and MonoGround\* were dumped in the authors' original environment: Python 3.7, torch
+1.4.0 and CUDA 10.1, with DCNv2 compiled against it. `build_monoflex_orig_env.sh` builds this
+environment, and its step 4 runs each repo's own evaluation of the released checkpoint, which is
+check 1 for these two. In a modern environment both lose about 1.9 AP (MonoFlex 15.54, MonoGround
+16.79, see note 2 in [`reports/detector_adapters_gates.md`](../reports/detector_adapters_gates.md)).
+`monoflex_dump.py` and `monoground_dump.py` make those modern dumps, and
+[`data/DUMPS.md`](../data/DUMPS.md) says which analyses use which version. Check 2 holds by construction, since the adapters call the
+repo's own PostProcessor with threshold 0 (top-50). There is no separate numeric check.
+
+Both codebases read KITTI in the MonoFlex layout (`training/{image_2,calib,label_2,ImageSets}`).
+The MonoFlex adapters take it with `--kitti_dir` through `mf_paths_catalog.py`. For MonoGround, set
+`DATA_DIR` in the repo's `config/paths_catalog.py`. `build_monoflex_orig_env.sh` does this for the
+original-environment copies.
+
+For MonoCon we use the [2gunsu/monocon-pytorch](https://github.com/2gunsu/monocon-pytorch)
+re-implementation and its released checkpoint. Apply
+[`adapters/patches/MonoCon_base_engine_map_location.patch`](patches/MonoCon_base_engine_map_location.patch),
+which adds `map_location` to the checkpoint load. Its native top-k is 30 and its threshold 0.4.
+
+For DEVIANT we used the released `run_221` checkpoint.
+
+The MonoCoP checkpoint is from [huggingface.co/zhihao406/MonoCoP](https://huggingface.co/zhihao406/MonoCoP).
+Our clone had no git metadata, so we cannot give a commit.
+
+The MonoIA checkpoint is `MonoIA_KITTI_Val.pth` from
+[huggingface.co/zhihao406/MonoIA](https://huggingface.co/zhihao406/MonoIA).
+
+For the five query-based detectors we also dumped every query x class hypothesis before the top-50
+cut: `monodetr_preflatten_dump.py` for MonoDETR, `detr_preflatten_dump.py` for MonoDGP and
+MonoCoP, and `detr_preflatten_native.py` for MonoCLUE and MonoIA, which need their repo's own
+decode. They write `monodetr_val_preflatten.csv`, `monodgp_val_preflatten.csv`,
+`official_monocop_val_preflatten.csv`, `monoclue_val_preflatten.csv` and
+`monoia_val_preflatten.csv`, released as `mono3d_anatomy_query_complete_pools_v1.zip`.

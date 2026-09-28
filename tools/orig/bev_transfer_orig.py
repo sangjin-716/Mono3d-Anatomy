@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""Ported from mono3d_crossdataset/tools/bev_transfer_orig.py for the public release.
-Computation unchanged. Produces reports_orig/bev_transfer_orig.txt.
+"""Produces reports_orig/bev_transfer_orig.txt.
 
 Supplementary tab:bev rows (BEV recovery) for the original-environment MonoFlex*/MonoGround*
 dumps: A5 (cls>=0.1) pool, 3D-IoU re-sort evaluated under 3D (metric=2) and BEV (metric=1)

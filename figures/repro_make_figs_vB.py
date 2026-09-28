@@ -1,15 +1,14 @@
-"""Ported from final_camera_ready/tools/figs/repro_make_figs_vB.py for the public release.
-Computation unchanged. Produces the data (and, run standalone, the submitted-layout PDFs in
-reports_rerun/figures/submitted_layout/) of Figures 1-4; the camera-ready layout is make_figs_cr.py.
+"""Data (and, run standalone, the submitted-layout PDFs in reports_rerun/figures/submitted_layout/)
+of Figures 1-4. The camera-ready layout is make_figs_cr.py.
 
-Paper figures 1-4 -- parse frozen report outputs only (no recomputation).
-Inputs (figures/data/vB_reports/ unless noted): the frozen reports with the MonoFlex*/MonoGround*
+Parses report outputs only; nothing is recomputed.
+Inputs (figures/data/vB_reports/ unless noted): the reports with the MonoFlex*/MonoGround*
 rows replaced by their original-environment rows (reports_orig/), i.e. the panel of the paper:
   final_run/probe_official_moderate.txt  Fig.1a recall, official-moderate n=7,874
-  probe_detector_progression.txt         Fig.1b |dz|, Fig.1c rho (vB view of the frozen
+  probe_detector_progression.txt         Fig.1b |dz|, Fig.1c rho (vB view of
                                          reports/probe_detector_progression.txt)
   gap_exact.txt + reports_orig/gap_exact_orig.txt   Fig.2b metric battery
-  (Fig.2a native cells are the literal values of reports/final_run/native_gap_canonical.md)
+  (Fig.2a native cells are typed in from reports/final_run/native_gap_canonical.md)
   oracle_anatomy.txt                     Fig.3
   pool_waterfall.txt                     Fig.4
 Run from the repository root: python figures/repro_make_figs_vB.py"""

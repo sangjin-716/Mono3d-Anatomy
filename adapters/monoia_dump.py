@@ -1,15 +1,13 @@
 """MonoIA val per-detection dump -> shared 23-col schema (matches monodetr_val.csv).
 
-Recovered from the one-off script that wrote the released monoia_val.csv (it lived only in a
-temporary directory; its text and its one recorded edit — mapping 2D boxes and projected 3D
-centres back to the original image with the dataset's trans_inv — are preserved in the session
-record) and ported for the public release. Computation unchanged. Produces
-data/dumps/monoia_val.csv (written to <OUT_DIR>/dumps/monoia_val.csv by default).
-Changes: paths are arguments. The original read a copy of config/monoia_val.yaml with these
-edits, now applied in memory: dataset.root_dir = <KITTI_ROOT>; dataset.target_focal_list =
-[748.8391264865]; dataset.test_focal = 748.8391264865; model.focal_embedding_path =
-<repo>/focal_list_feat.npy; model.target_focal_list = [748.8391]; tester.checkpoint_path = the
-released MonoIA_KITTI_Val.pth (--ckpt).
+Rewritten from the one-off script that wrote the released monoia_val.csv. 2D boxes and
+projected 3D centres are mapped back to the original image with the dataset's trans_inv.
+Produces data/dumps/monoia_val.csv (written to <OUT_DIR>/dumps/monoia_val.csv by default).
+Config: the repo's config/monoia_val.yaml with these edits, applied in memory:
+dataset.root_dir = <KITTI_ROOT>; dataset.target_focal_list = [748.8391264865];
+dataset.test_focal = 748.8391264865; model.focal_embedding_path = <repo>/focal_list_feat.npy;
+model.target_focal_list = [748.8391]; tester.checkpoint_path = the released
+MonoIA_KITTI_Val.pth (--ckpt).
 Same NATIVE decode as MonoDETR/DGP (extract_dets_from_outputs, score=cls*sigma, NMS-free).
 The lib.* imports are the upstream MonoIA packages (--repo). Run in a MonoIA env:
   python adapters/monoia_dump.py --repo <UPSTREAM_ROOT>/MonoIA --ckpt <MonoIA_KITTI_Val.pth>

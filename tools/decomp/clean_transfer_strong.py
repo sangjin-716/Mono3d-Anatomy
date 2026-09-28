@@ -1,5 +1,4 @@
-"""Ported from tools/decomp/clean_transfer_strong.py for the public release. Computation unchanged.
-Produces reports/clean_transfer_strong.txt.
+"""Produces reports/clean_transfer_strong.txt.
 
 Clean drive-disjoint cal->test corrector transfer, NO retraining (val is already out-of-sample
 for every detector). Replicates the clean-transfer result on STRONG detectors + a non-DETR family,

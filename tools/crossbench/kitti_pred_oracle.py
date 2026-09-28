@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 """
-Ported from mono3d_crossdataset/tools/kitti_pred_oracle.py for the public release. Computation
-unchanged. Produces kitti_orig/oracle_<tag>.json in the re-run output directory (stdout carries
-the same cells). Not used by the Waymo/nuScenes audit; it applies the same fixed-pool
-constructs to any directory of KITTI-format predictions on KITTI val.
+Writes kitti_orig/oracle_<tag>.json in the re-run output directory (stdout carries the same
+cells). Not used by the Waymo/nuScenes audit; it applies the same fixed-pool constructs to any
+directory of KITTI-format predictions on KITTI val.
 
 kitti_pred_oracle.py -- fixed-pool oracle diagnostics for KITTI-format predictions vs KITTI val GT.
 Same constructs as the paper/Waymo: base all-point AP (official kernels via exact_ap),

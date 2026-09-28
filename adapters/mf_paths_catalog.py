@@ -2,8 +2,7 @@
 (<DATA_DIR>/training/{image_2,calib,label_2,ImageSets}). Used by setting cfg.PATHS_CATALOG to this
 file (the repo's config/paths_catalog.py stays untouched).
 
-Ported from tools/decomp/adapters/mf_paths_catalog.py for the public release. Only DATA_DIR
-changed: it is read from the environment variable MONOFLEX_KITTI_DIR, which
+DATA_DIR is read from the environment variable MONOFLEX_KITTI_DIR, which
 adapters/monoflex_dump.py and adapters/monoflex_dump_orig.py set from their --kitti_dir argument.
 """
 import os

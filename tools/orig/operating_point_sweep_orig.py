@@ -1,5 +1,4 @@
-"""Ported from mono3d_crossdataset/tools/operating_point_sweep_orig.py for the public release.
-Computation unchanged. Produces reports_orig/operating_point_sweep_orig.txt.
+"""Produces reports_orig/operating_point_sweep_orig.txt.
 
 Operating-point battery (pre-registered: reports/prereg_2b_sweep.md) for the
 original-environment MonoFlex*/MonoGround* dumps (a copy of tools/decomp/operating_point_sweep.py
