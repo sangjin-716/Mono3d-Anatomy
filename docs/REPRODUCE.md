@@ -27,6 +27,29 @@ The figure scripts need a few extra things. No number depends on them.
 - the DejaVu Sans Condensed font (`fonts-dejavu-extra` on Debian/Ubuntu)
 - a LaTeX engine such as [tectonic](https://tectonic-typesetting.github.io) for Fig. 2
 
+## Checking the evaluator
+
+`python evaluator/exact_ap.py` checks two toy cases whose AP can be worked out by hand, then checks
+that its AP_R40 and AP_R11 match the official evaluation on two real dumps (`--full` does all
+twelve). Numba prints many `NumbaPerformanceWarning` messages, and newer versions also warn about
+`parallel=True`. Both can be ignored. The quick run ends with:
+
+```
+toyA perfect-rank: allpoint=100.00 (hand 100.00)  R40 mine/off=2.50/2.50  R11 mine/off=9.09/9.09  [PASS]
+toyB tied-scores : allpoint=66.67 (hand 66.67)  R40 mine/off=1.67/1.67  R11 mine/off=6.06/6.06  [PASS]
+dgp              R40 off/mine= 22.290/ 22.290  R11 off/mine= 26.215/ 26.215  p101=22.763 p401=22.834 allpoint=22.905 [PASS]
+gupnet           R40 off/mine= 16.481/ 16.481  R11 off/mine= 21.865/ 21.865  p101=16.933 p401=17.030 allpoint=17.122 [PASS]
+ALL GATES: PASS
+```
+
+All-point AP uses every distinct score as a threshold and integrates the official interpolated
+precision over recall, instead of sampling 40 or 11 recall points. The matching is the official one.
+
+MonoFlex and MonoGround reproduce their published numbers only in the authors' original torch-1.4
+environment, so the paper uses those outputs (marked with * in the paper). `tools/orig/` and
+`reports_orig/` hold the analyses on them. The Waymo, nuScenes, Pedestrian and Cyclist results are
+a preliminary check.
+
 ## Running the scripts
 
 Run every script from the repository root. The header of each script names the report it

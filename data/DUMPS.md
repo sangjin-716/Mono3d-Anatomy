@@ -19,15 +19,29 @@ The files are too large for git, so they are attached to the GitHub release v1.0
 ## Download
 
 Unpack everything into one folder, `DUMP_DIR` in `paths.py` (default `data/dumps/`). Several
-scripts read the pools and the matched tables from there directly. The commands to download, check
-and unpack the zips are in the [README](../README.md#data). After that, run
+scripts read the pools and the matched tables from there directly.
 
 ```bash
+mkdir -p data/dumps && cd data/dumps
+BASE=https://github.com/sangjin-716/Mono3d-Anatomy/releases/download/v1.0
+wget $BASE/mono3d_anatomy_dumps_v1.zip                 # needed
+wget $BASE/mono3d_anatomy_query_complete_pools_v1.zip  # optional
+wget $BASE/mono3d_anatomy_m3drpn_complete_pool_v1.zip  # optional
+wget $BASE/mono3d_anatomy_matched_tables_v1.zip        # optional
+sha256sum -c --ignore-missing <<'SUMS'
+3eb2d46701f481851b89f6f52c2472805d0467c5b8963fdd8b7d861ab4262edd  mono3d_anatomy_dumps_v1.zip
+0a4696a30a166d4b3a0cbfeab92cbaa09ac91ab6769a15b90e45e90ea462362f  mono3d_anatomy_query_complete_pools_v1.zip
+5e0bbce9d2bd06eaea8a5954ad4202aa7541a862e995f7137986b4625aa77497  mono3d_anatomy_m3drpn_complete_pool_v1.zip
+47d71716b77a7e018bc9ced001c313448ffe3935a1e92c37ea4e7a2609ba8e83  mono3d_anatomy_matched_tables_v1.zip
+SUMS
+for z in mono3d_anatomy_*_v1.zip; do unzip -n "$z" -x 'MD5SUMS*.txt'; done
+md5sum -c --ignore-missing ../MD5SUMS.txt
+cd ../..
 python tools/_release.py
 ```
 
-It tells you, per asset, whether all of its files are in `DUMP_DIR`. Each zip also has its own MD5
-list, which the unzip line in the README skips. `data/MD5SUMS.txt` has the MD5 of all 26 files,
+`tools/_release.py` tells you, per asset, whether all of its files are in `DUMP_DIR`. Each zip also
+has its own MD5 list, which the unzip line skips. `data/MD5SUMS.txt` has the MD5 of all 26 files,
 so `md5sum` prints one OK per file (26 with all four assets).
 
 `reports/gap_exact.txt` and `reports_orig/gap_exact_orig.txt` tag each dump they read as
