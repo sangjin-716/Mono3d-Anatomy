@@ -54,6 +54,20 @@ python tools/decomp/e2_budget_truncation.py   # needs it
 The run order for `tools/orig/` and the drive-cluster bootstrap (`tools/decomp/bootstrap_floor.py`,
 `tools/orig/bootstrap_orig.py`) is in [`tools/orig/README.md`](../tools/orig/README.md).
 
+The twelve cells of Table 3 are the `transfer` rows of `reports_orig/bootstrap_floor_orig.txt`.
+Nine of them (MonoDGP, GUPNet, MonoCoP) come from `tools/decomp/`, the three MonoFlex\* cells from
+`tools/orig/`:
+
+```bash
+python tools/decomp/clean_transfer_save.py          # writes cache/decomp/_bootstrap_preds/
+python tools/decomp/bootstrap_floor.py --transfer dgp 0    # also 1, 2, and official_monocop, gupnet
+python tools/orig/transfer_save_orig.py             # writes cache/orig/_bootstrap_preds_orig/
+python tools/orig/bootstrap_orig.py --transfer monoflex_orig 0   # also 1, 2
+python tools/orig/bootstrap_orig.py --collate       # all transfer rows and the panel floor
+```
+
+Each `--transfer` run takes about 30 minutes and uses one core, so they can run in parallel.
+
 Runtimes on one Quadro RTX 6000: most scripts take a few seconds to about an hour. The long ones
 are `operating_point_sweep.py` (about 3.5 hours), `detr_native_sweep.py` (about 2 hours),
 `diffsweep_anatomy.py` (about 1.8 hours), and the bootstrap at about 30 minutes per comparison.
@@ -128,7 +142,7 @@ the released files.
 | Sec. 5.2, supp. H: accuracy-separation AUROC | `reports/depth_share_bridge.txt`, `reports_orig/depth_share_bridge_orig.txt` | `tools/decomp/depth_share_bridge.py`, `tools/orig/bridge_orig.py` |
 | Sec. 5.2: score x quality product and mean rank | `reports/depth_share_combo.txt` | none |
 | Supp. H: far-field recall beyond 45 m with Wilson CIs | `reports/extensions/starred_panel_summaries.txt` (Part A), `reports/final_run/a3_farfield_integrity.txt` (modern rebuild) | `tools/extensions/starred_panel_summaries.py` |
-| Table 3: drive-disjoint transfer of fitted depth correction | `reports_orig/bootstrap_floor_orig.txt` (the `transfer` rows are the twelve cells and their CIs), `reports/clean_transfer_strong.txt`, `reports_orig/clean_transfer_orig.txt`, `reports/drive_grouped_oof.md` | `tools/orig/transfer_save_orig.py`, `tools/orig/bootstrap_orig.py`, `tools/decomp/clean_transfer_strong.py`, `tools/orig/transfer_orig.py`, `tools/decomp/phase1_drive_oof.py` |
+| Table 3: drive-disjoint transfer of fitted depth correction | `reports_orig/bootstrap_floor_orig.txt` (the `transfer` rows are the twelve cells and their CIs), `reports/clean_transfer_strong.txt`, `reports_orig/clean_transfer_orig.txt`, `reports/drive_grouped_oof.md` | `tools/decomp/clean_transfer_save.py`, `tools/decomp/bootstrap_floor.py`, `tools/orig/transfer_save_orig.py`, `tools/orig/bootstrap_orig.py`, `tools/decomp/clean_transfer_strong.py`, `tools/orig/transfer_orig.py`, `tools/decomp/phase1_drive_oof.py` |
 | Sec. 7, supp. G: drive-cluster bootstrap floors, endpoint bootstrap | `reports_orig/bootstrap_floor_orig.txt`, `reports/final_run/e3_endpoint_gap_boot.txt` | `tools/decomp/bootstrap_floor.py`, `tools/orig/bootstrap_orig.py`, `tools/decomp/e3_endpoint_gap_boot.py` |
 | Supp. F: gap-vs-base Spearman, three bases | `reports_orig/spearman_gap_base_vB.txt` | `tools/orig/spearman_gap_base_vB.py` |
 | Supp. H: cross-detector disagreement | `reports/final_run/c3_conditioned_analysis.md` | `tools/decomp/c3_conditioned.py` |
@@ -149,4 +163,4 @@ Some reports have no script in this release and cannot be regenerated from this 
 `tools/decomp/depth_share_bridge.py`. The same holds for the collations and records listed in
 supplementary section B, such as `reports/final_run/native_gap_canonical.md`,
 `reports/leave_two_out.txt`, `reports/final_run/a4_supremum_lb_SUPPLEMENTARY.md`,
-`reports/final_run/c6_multiplicity_audit.md` and the pre-registrations. The sixteen main-panel comparisons in `reports_orig/bootstrap_floor_orig.txt` cannot be recomputed either, because their inputs come from scripts that are not in this release (see [`tools/orig/README.md`](../tools/orig/README.md)). Supplementary section B lists the remaining reports.
+`reports/final_run/c6_multiplicity_audit.md` and the pre-registrations. The seven main-panel ladder comparisons in `reports_orig/bootstrap_floor_orig.txt` cannot be recomputed either, because their prediction folders come from a script that is not in this release. The twelve transfer comparisons (Table 3) can (see [`tools/orig/README.md`](../tools/orig/README.md)). Supplementary section B lists the remaining reports.

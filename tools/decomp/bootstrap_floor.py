@@ -12,13 +12,16 @@ Modes (CLI):
   --ladder fA fB      one adjacent-ladder comparison (full val, S5 prediction dirs)
   --collate           gather all jsons -> reports_rerun/bootstrap_floor.txt
 Inputs (KITTI-format prediction dirs, under <CACHE_DIR>/decomp):
-  _bootstrap_preds/<f>_s<seed>_{base,corr}/data + <f>_s<seed>_frames.txt  (clean-transfer
-      corrector refit of clean_transfer_strong.py, saved per seed)
-  _ladder_preds/<f>/data                                                   (S5 pool, native V)
-  These were written by helper scripts that are not in this repository.
+  _bootstrap_preds/<f>_s<seed>_{base,corr}/data + <f>_s<seed>_frames.txt  (written by
+      clean_transfer_save.py: the corrector refit of clean_transfer_strong.py, saved per seed)
+  _ladder_preds/<f>/data                                                   (S5 pool, native V;
+      written by a helper script that is not in this repository)
 Outputs: <CACHE_DIR>/decomp/_bootstrap_out/<tag>.json per comparison.
 Drive map: frame_sequence.py (built from the KITTI devkit mapping).
-Run from the repository root: python tools/decomp/bootstrap_floor.py --collate
+Run from the repository root, e.g. for the transfer comparisons:
+  python tools/decomp/clean_transfer_save.py
+  python tools/decomp/bootstrap_floor.py --transfer dgp 0      (and 1, 2; official_monocop, gupnet)
+  python tools/decomp/bootstrap_floor.py --collate
 """
 import os, sys, json, argparse, datetime
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):

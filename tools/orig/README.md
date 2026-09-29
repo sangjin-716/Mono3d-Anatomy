@@ -82,9 +82,21 @@ Some scripts share caches, so run these first:
 
    `--collate` also reads the sixteen main-panel comparison JSONs written by
    `tools/decomp/bootstrap_floor.py`, from `cache/decomp/_bootstrap_out/` or
-   `$MONO3D_MAIN_BOOTSTRAP_OUT`. Those comparisons need prediction folders written by scripts that
-   are not in this release, so `bootstrap_floor.py` can only be run with `--collate` on existing
-   JSONs.
+   `$MONO3D_MAIN_BOOTSTRAP_OUT`. The nine main-panel transfer comparisons (the MonoDGP, GUPNet and
+   MonoCoP cells of Table 3) are recomputed from the released dumps with
+
+   ```bash
+   python tools/decomp/clean_transfer_save.py
+   python tools/decomp/bootstrap_floor.py --transfer dgp 0               # and 1, 2
+   python tools/decomp/bootstrap_floor.py --transfer official_monocop 0  # and 1, 2
+   python tools/decomp/bootstrap_floor.py --transfer gupnet 0            # and 1, 2
+   ```
+
+   before `bootstrap_orig.py --collate`. `clean_transfer_save.py` also writes the folders of the
+   modern-environment MonoFlex dump (`monoflex_s*`), which the collate leaves out. The seven
+   main-panel ladder comparisons need prediction folders written by a script that is not in this
+   release, so their JSONs can only be collated, not recomputed. The transfer rows, the
+   confirmatory-set line and the panel floor do not depend on them.
 5. `make_vB_reports.py` goes last. It reads `reports/probe_detector_progression.txt` for the
    main-panel rows.
 
@@ -114,6 +126,11 @@ the timestamp line, the `# public copy ...` first line of some reports, and thes
   1.24.4, and the 3D IoU used for matching (`ap_corrector_arc.iou3d`, shapely/GEOS polygons) can
   differ in rare degenerate cases across numpy, shapely and GEOS versions.
 - `gt_state_matrix_vB.txt`: only the `[written]` path line differs.
-- `bootstrap_floor_orig.txt`: 4 of the 23 comparisons have been re-run, and all four match.
+- `bootstrap_floor_orig.txt`: all twelve transfer comparisons (the Table 3 cells) have been re-run
+  and match line for line, including the confirmatory-set line and the panel floor (4.021). Their
+  JSONs match the original ones in every field but the timestamp, and the prediction folders
+  written by `clean_transfer_save.py` are byte-identical to the original ones. Of the ladder
+  comparisons, `deviant->monoflex_orig` and `monoflex_orig->monoground_orig` have been re-run and
+  match.
 - `emh_orig.txt`: only the two `[A5]` lines come from the script. The header lines and the READ
   note were added by hand.
