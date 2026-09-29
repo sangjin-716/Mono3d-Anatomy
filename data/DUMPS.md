@@ -1,9 +1,11 @@
 # Data
 
 The analyses run on per-prediction outputs ("dumps") of twelve released monocular 3D detectors on
-KITTI val (Chen split, 3,769 images). Each dump was made from the official checkpoint with the
-detector's own inference code. The twelve panel dumps pass the reproduction and native-match checks listed in
-`adapters/README.md`, which also describes how each one was made.
+KITTI val (Chen split, 3,769 images). Each dump was made from a released checkpoint with the
+inference code of the repository that released it. For MonoCon this is the 2gunsu/monocon-pytorch
+re-implementation and its checkpoint (see `adapters/README.md`). The twelve panel dumps pass the
+reproduction and native-match checks listed in `adapters/README.md`, which also describes how each
+one was made.
 
 The files are too large for git, so they are attached to the GitHub release v1.0 as four zips:
 
@@ -179,4 +181,5 @@ these are the nine ground-truth columns above. In the matched tables they are th
 level and truncation of the matched ground-truth box and the 3D IoU to it. The KITTI label files
 themselves are not included. Get them from the official KITTI website.
 
-Please cite the paper and the original detector papers if you use the files.
+Please cite the paper, KITTI (Geiger et al., CVPR 2012, https://www.cvlibs.net/datasets/kitti/) and the
+original detector papers if you use the files.

@@ -1,5 +1,6 @@
-# Copy of the upstream M3D-RPN scripts/test_rpn_3d.py with only the checkpoint paths and a
-# devkit-eval guard changed (native-run half of the reproduction gate G1 for M3D-RPN).
+# Copy of the upstream M3D-RPN scripts/test_rpn_3d.py (MIT License, Copyright (c) 2020 Garrick
+# Brazil, see adapters/LICENSE-M3D-RPN) with only the checkpoint paths and a devkit-eval guard
+# changed (native-run half of the reproduction gate G1 for M3D-RPN).
 #
 # Produces the repo's native KITTI-format detections in output/tmp_results/data (renumbered split
 # ids). Graded with the official evaluator in evaluator/kitti_eval, they give 14.531/11.073/8.646

@@ -3,9 +3,10 @@
 These scripts produce supplementary Sec. P and the "Other Benchmarks" paragraph in Sec. 5.1. The
 summary with sources is in `reports/extensions/crossbench_audit.md`.
 
-This is a preliminary check, not a replication. We use one released checkpoint per detector and
-report no confidence intervals. Only step 2 has published numbers to compare against, so we do not
-compare the step-4 magnitudes with KITTI or across detectors.
+This is a preliminary check, not a replication. We use one released checkpoint per detector (on
+Waymo, its released predictions) and report no confidence intervals. Only step 2 has published
+numbers to compare against, so we do not compare the step-4 magnitudes with KITTI or across
+detectors.
 
 The scripts need the external data and environments listed at the end. We have not re-run them
 since moving them into this repository, so please open an issue if one fails.
@@ -15,7 +16,8 @@ since moving them into this repository, so please open an issue if one fails.
 ### 1. Predictions
 
 Waymo: we use the released Waymo val predictions of GUPNet and DEVIANT (from the DEVIANT release,
-runs 1050 and 1051) and of MonoRCNN++.
+runs 1050 and 1051) and of MonoRCNN++. We did not re-run these checkpoints, so the Waymo gate in
+step 2 re-evaluates their released outputs and checks our ground-truth conversion and evaluator.
 
 nuScenes:
 

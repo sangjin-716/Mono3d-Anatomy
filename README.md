@@ -140,6 +140,10 @@ A few things to know:
   that gives the SHA-256 of the original and says what changed. Every number that is kept is
   unchanged. A few copies in `reports/extensions/` also leave out some lines, which their second
   header line names.
+- The scripts in `tools/` are the ones we ran, with paths and imports changed for the release.
+  Some printed notes were changed as well, and several public-copy report headers name these
+  changes. The drive table behind the drive-disjoint splits is now built from the KITTI devkit on
+  first use (`tools/decomp/frame_sequence.py`).
 - The Waymo, nuScenes, Pedestrian and Cyclist results are preliminary.
 
 ## Citation
@@ -155,11 +159,14 @@ A few things to know:
 
 ## License
 
-Code is under Apache-2.0 (`LICENSE`). Reports and figure data are under CC BY 4.0
+Our code is under Apache-2.0 (`LICENSE`). Reports and figure data are under CC BY 4.0
 (`reports/LICENSE`, `figures/LICENSE`). The detector outputs in the release are model predictions
-on KITTI images and are shared under CC BY-NC-SA 4.0. The vendored KITTI evaluation code and the
-MonoDGP calibration reader keep their MIT licenses (`evaluator/kitti_eval/LICENSE`,
-`evaluator/LICENSE-MonoDGP`).
+on KITTI images (Geiger et al., CVPR 2012, https://www.cvlibs.net/datasets/kitti/) and are shared
+under CC BY-NC-SA 4.0. The vendored KITTI evaluation code, the MonoDGP calibration reader, the
+M3D-RPN test-script copy `adapters/test_rpn_3d_accv.py` and the two DEVIANT-derived Waymo
+evaluators `tools/crossbench/waymo_eval_patched.py` and `waymo_eval_0_5_patched.py` keep their MIT
+licenses (`evaluator/kitti_eval/LICENSE`, `evaluator/LICENSE-MonoDGP`, `adapters/LICENSE-M3D-RPN`,
+`tools/crossbench/LICENSE-DEVIANT`).
 
 The Waymo check in this repository was made using the Waymo Open Dataset, provided by Waymo LLC
 under the Waymo Dataset License Agreement for Non-Commercial Use, available at
@@ -168,5 +175,5 @@ governed by the terms and conditions therein. The check is the Waymo part of `to
 and the Waymo rows of `reports/extensions/crossbench_audit.md`. The release has no Waymo or
 nuScenes data or predictions, only KITTI outputs (see [`data/DUMPS.md`](data/DUMPS.md)).
 
-We thank the authors of the twelve detectors for releasing their code and checkpoints, and the
-KITTI, Waymo Open Dataset and nuScenes teams.
+We thank the authors of the twelve detectors and of the monocon-pytorch re-implementation for
+releasing their code and checkpoints, and the KITTI, Waymo Open Dataset and nuScenes teams.

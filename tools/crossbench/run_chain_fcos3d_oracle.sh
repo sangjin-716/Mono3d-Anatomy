@@ -1,6 +1,4 @@
 #!/bin/bash
-# Ported from camera-ready checks/xdsfix_fcos3d_oracle/run_chain.sh for the public
-# release (renamed: two run_chain.sh files are merged into this folder).
 # Produces the EPro-PnP-Det and FCOS3D nuScenes oracle cells (chain.log; the [iou07] lines are
 # the paper's base / re-sort cells):
 #   nusc submission json (global) --[xds_nusc_json_to_oracle_pkl_FIXED.py]--> per-camera oracle pkl

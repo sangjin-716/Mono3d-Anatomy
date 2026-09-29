@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Ported from camera-ready checks/xds_repair/run_repair.sh for the public release.
 # PGD reproduction gate, reformat only: re-formats the existing per-image DumpResults pkl through
 # the official mmdet3d NuScenesMetric.format_results path (reformat_official.py), then runs the
 # official devkit eval (eval_official.py). No re-inference.

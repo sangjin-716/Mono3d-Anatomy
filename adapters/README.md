@@ -1,7 +1,7 @@
 # Adapters
 
 These scripts produce the per-prediction dumps that every analysis in this repository reads. Each
-one loads a detector's released checkpoint in the detector's own repository, runs it on KITTI val
+one loads a detector's released checkpoint in the repository that released it, runs it on KITTI val
 (Chen split, 3769 images) and writes one row per native prediction.
 
 You do not need them to reproduce the paper. The reports are computed from the released dumps
@@ -77,8 +77,8 @@ from a matching against the KITTI Car labels. See [`data/DUMPS.md`](../data/DUMP
 
 ## Checks
 
-Each of the twelve panel dumps passed two checks, called G1 and G2 in the supplementary material and in
-[`reports/detector_adapters_gates.md`](../reports/detector_adapters_gates.md):
+Each of the twelve panel dumps passed two checks, called G1 and G2 in the supplementary material
+(checks 1 and 2 in [`reports/detector_adapters_gates.md`](../reports/detector_adapters_gates.md)):
 
 1. Reproduction: the released checkpoint, run through its own repository, gives the published Car
    Moderate AP_R40 on val.
@@ -136,7 +136,8 @@ The MonoFlex adapters take it with `--kitti_dir` through `mf_paths_catalog.py`. 
 original-environment copies.
 
 For MonoCon we use the [2gunsu/monocon-pytorch](https://github.com/2gunsu/monocon-pytorch)
-re-implementation and its released checkpoint. Apply
+re-implementation and its released checkpoint. Its published value in the table above is the one
+that repository's README reports for this checkpoint, not a number from the MonoCon paper. Apply
 [`adapters/patches/MonoCon_base_engine_map_location.patch`](patches/MonoCon_base_engine_map_location.patch),
 which adds `map_location` to the checkpoint load. Its native top-k is 30 and its threshold 0.4.
 

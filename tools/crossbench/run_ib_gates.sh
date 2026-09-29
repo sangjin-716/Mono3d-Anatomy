@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/run_ib_gates.sh for the public release.
 # FCOS3D/PGD: per-camera pkl -> global json (campkl_to_nusc_json.py) -> official devkit eval,
 # run one after the other to bound memory.
 # NOT the source of the paper's FCOS3D/PGD gate values: this hand-written conversion

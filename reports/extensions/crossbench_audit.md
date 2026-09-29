@@ -1,6 +1,6 @@
 # public summary of the camera-ready checks XDSFIX_RESULT.md, sha256 6186c18d470fd7916ccd3a678a6b092691aa5590fbe53d7b4e43fda15d7ae96c, and GATE_CERTIFICATE.md, sha256 10b3fe7ba027401a992432cecae09a6a103a431c999c2a084dc1cd4773de192d, scrubbed: rewritten as a summary that leaves out review-process material; every number is quoted verbatim with a source tag resolved in the appendix
 
-Cross-benchmark preliminary audit behind supplementary Sec. P and the "Other Benchmarks" paragraph of main Sec. 5.1. This is a **preliminary audit, not a replication**: one released checkpoint per detector, no confidence intervals, and only the reproduction step has an external reference. Its magnitudes are not compared with the KITTI band or across detectors. Scripts: `tools/crossbench/` (see its README). Every number below carries a source tag `[Xn]` / `[Gn]` resolved in the appendix (X = XDSFIX_RESULT.md, G = GATE_CERTIFICATE.md, O = other source file, see appendix).
+Cross-benchmark preliminary audit behind supplementary Sec. P and the "Other Benchmarks" paragraph of main Sec. 5.1. This is a **preliminary audit, not a replication**: one released checkpoint per detector (on Waymo, its released predictions), no confidence intervals, and only the reproduction step has an external reference. Its magnitudes are not compared with the KITTI band or across detectors. Scripts: `tools/crossbench/` (see its README). Every number below carries a source tag `[Xn]` / `[Gn]` resolved in the appendix (X = XDSFIX_RESULT.md, G = GATE_CERTIFICATE.md, O = other source file, see appendix).
 
 ## Detectors, checkpoints, splits
 
@@ -29,7 +29,7 @@ FCOS3D and PGD share the mmdet3d FCOS3D lineage [X230].
 | MonoRCNN++ | Waymo AP3D-L1 / L2, IoU 0.7 | 1.70 / 1.59 | 4.28 / 4.05 | fails | [G80][G175] |
 | MonoRCNN++ | Waymo AP3D-L1 / L2, IoU 0.5 | 7.09 / 6.65 | 11.37 / 10.79 | fails (4/4) | [G80][G175] |
 
-Waymo predictions of GUPNet and DEVIANT are byte-identical to the authors' released outputs (39,848/39,848) [G194]; the Waymo gate is |Delta| <= 0.07 [G187-188]. The reference is the authors' own 2022 official-evaluator output shipped in the released archives [G164-166].
+Waymo predictions of GUPNet and DEVIANT are byte-identical to the authors' released outputs (39,848/39,848) [G194]; the Waymo gate is |Delta| <= 0.07 [G187-188]. The reference is the authors' own 2022 official-evaluator output shipped in the released archives [G164-166]. We did not re-run inference on Waymo, so this gate checks our ground-truth conversion and evaluator.
 
 NDS notes. NDS is secondary on nuScenes; the FCOS3D and PGD gates are on mAP, which is inside the metafile's 1-decimal rounding [X75]. PGD's +0.39 NDS exceeds rounding; it is localised to a TP-error budget of +0.039 (a term mAP does not use) and attributed, without proof, to the mmdet3d v1.0.0.dev0 -> 1.4.0 attribute/velocity plumbing [X75][X223]. FCOS3D's NDS residual is +0.18 [X75]. EPro-PnP-Det is gated on NDS against its README value 0.425 [X151][G75].
 

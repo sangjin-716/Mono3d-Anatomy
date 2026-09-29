@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from camera-ready checks/xdsfix_pgd_oracle/run_census.sh for the public release.
 # Produces census.log: height-alignment checks and the car-prediction census (boxes per image,
 # per-depth-bin coverage) of the PGD pool, the raw PGD DumpResults pool, and the EPro-PnP-Det
 # pool. Run after run_chain_pgd_oracle.sh. Set PYTHON to the mmdet3d 1.4.0 interpreter.

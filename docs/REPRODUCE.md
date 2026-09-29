@@ -127,16 +127,16 @@ the released files.
 
 | Paper item | Report | Script |
 |---|---|---|
-| Table 1, supp. C: official vs reproduced numbers | `reports/detector_adapters_gates.md` | `adapters/` |
+| Table 1, supp. C: official vs reproduced numbers | `reports/detector_adapters_gates.md` (M3D-RPN, MonoDLE, GUPNet, DEVIANT, MonoCon) and the Per detector table of `adapters/README.md` (all twelve) | `adapters/` |
 | Table 1: Easy/Moderate/Hard for MonoFlex\*, MonoGround\* | `reports_orig/emh_orig.txt` | `tools/orig/a5_emh_orig.py` |
-| Table 1, supp. D: native ordering gap for MonoFlex\*, MonoGround\* | `reports_orig/a5_regate_orig.txt`, `reports/final_run/a5_regate.txt` (modern rebuild) | `tools/orig/a5_regate_orig.py` |
+| Supp. D (native ordering-gap cells) and the Table 1 Moderate base for MonoFlex\*, MonoGround\* | `reports_orig/a5_regate_orig.txt`, `reports/final_run/a5_regate.txt` (modern rebuild) | `tools/orig/a5_regate_orig.py` |
 | Table 1, Sec. 5.1: matching ceiling AP\* and ordering gap | `reports/exp1_true_ceiling.txt`, `reports_orig/exp1_true_ceiling_orig.txt` | `tools/decomp/exp1_true_ceiling.py`, `tools/orig/exp1_ceiling_orig.py` |
 | Fig. 3b, Sec. 5.1, supp. D: all-point vs AP_R40 vs AP_R11 | `reports/gap_exact.txt`, `reports/gap_metric_robustness.txt`, `reports_orig/gap_exact_orig.txt`, `reports_orig/gap_metric_robustness_orig.txt` | `tools/decomp/gap_exact.py`, `tools/decomp/gap_metric_robustness.py`, `tools/orig/gap_exact_orig.py`, `tools/orig/gap_metric_robustness_orig.py` |
 | Fig. 3a, supp. D: true-IoU re-sort at native operating points | `reports/final_run/native_gap_canonical.md`, `reports/operating_point_sweep.txt`, `reports/detr_native_sweep.txt`, `reports_orig/operating_point_sweep_orig.txt` | `tools/decomp/operating_point_sweep.py`, `tools/decomp/detr_native_sweep.py`, `tools/orig/operating_point_sweep_orig.py` |
 | Supp. D, BEV table: BEV transfer of the 3D-IoU re-sort | `reports/final_run/bev_gap_probe.txt` (ten non-starred rows), `reports_orig/bev_transfer_orig.txt`, `reports/extensions/starred_panel_summaries.txt` (Part D) | `tools/orig/bev_transfer_orig.py`, `tools/extensions/starred_panel_summaries.py` |
 | Supp. D: BEV re-sort oracle O1. Sec. 5.2: geometry oracle O2 | `reports/oracle_ladder_o1.txt`, `reports/oracle_ladder_o2.txt`, `reports_orig/oracle_ladder_o1_orig.txt`, `reports_orig/oracle_ladder_o2_orig.txt`, `reports/extensions/starred_panel_summaries.txt` (Parts B, C) | `tools/extensions/starred_panel_summaries.py` |
 | Sec. 5, supp. E: FP demotion and TP-only re-ordering at IoU 0.7 and 0.5 | `reports/e4_fp_tp_decomp.txt`, `reports/e4_prereg.md` (pre-registration), `reports/final_run/c2_iou05_separation.txt`, `reports_orig/c2_iou05_orig.txt` | `tools/decomp/e4_fp_tp_decomp.py`, `tools/decomp/c2_iou05_separation.py`, `tools/orig/diffsweep_orig.py`, `tools/orig/c2_iou05_orig.py` |
-| Fig. 1, Sec. 4: recall, depth error, score-quality correlation | `reports/final_run/probe_official_moderate.txt`, `reports/probe_detector_progression.txt`, `reports_orig/probe_official_moderate_orig.txt`, `reports_orig/probe_orig.txt` | `tools/decomp/probe_official_moderate.py`, `tools/decomp/probe_detector_progression.py`, `tools/orig/probe_official_orig.py`, `tools/orig/probe_orig.py` |
+| Fig. 1, Sec. 4: recall, depth error, score-quality correlation (the reports' "matched TP" means the paper's matched boxes: best 3D IoU of at least 0.05, uniform pool) | `reports/final_run/probe_official_moderate.txt`, `reports/probe_detector_progression.txt`, `reports_orig/probe_official_moderate_orig.txt`, `reports_orig/probe_orig.txt` | `tools/decomp/probe_official_moderate.py`, `tools/decomp/probe_detector_progression.py`, `tools/orig/probe_official_orig.py`, `tools/orig/probe_orig.py` |
 | Sec. 4, supp. H: paired common-object control of the depth-error trend | `reports/paired_perbin_dz.txt`, `reports/paired_common_object.txt` | `tools/decomp/paired_perbin_dz.py`, `tools/decomp/paired_common_object.py` |
 | Fig. 4, Sec. 5.2: oracle anatomy (pure-z, ray-consistent centre, full centre) | `reports/oracle_anatomy.txt`, `reports_orig/oracle_anatomy_orig.txt` | `tools/decomp/oracle_anatomy.py`, `tools/orig/anatomy_orig.py` |
 | Sec. 5.2, supp. H: accuracy-separation AUROC | `reports/depth_share_bridge.txt`, `reports_orig/depth_share_bridge_orig.txt` | `tools/decomp/depth_share_bridge.py`, `tools/orig/bridge_orig.py` |
@@ -164,3 +164,8 @@ Some reports have no script in this release and cannot be regenerated from this 
 supplementary section B, such as `reports/final_run/native_gap_canonical.md`,
 `reports/leave_two_out.txt`, `reports/final_run/a4_supremum_lb_SUPPLEMENTARY.md`,
 `reports/final_run/c6_multiplicity_audit.md` and the pre-registrations. The seven main-panel ladder comparisons in `reports_orig/bootstrap_floor_orig.txt` cannot be recomputed either, because their prediction folders come from a script that is not in this release. The twelve transfer comparisons (Table 3) can (see [`tools/orig/README.md`](../tools/orig/README.md)). Supplementary section B lists the remaining reports.
+
+`reports/claim_decision_tree.md`, which `reports/prereg_2b_sweep.md` and a few other reports name
+as the rubric for the claim gates, and the gate verdict tables are internal files and are not in
+this release. The history of this repository starts at the release, so it does not show when the
+pre-registrations were written. Their dates are in their headers.

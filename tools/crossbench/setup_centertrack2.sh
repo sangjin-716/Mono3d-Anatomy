@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/setup_centertrack2.sh for the public release.
 # CenterTrack setup, attempt 2: initialise the DCNv2 submodule, build it, convert nuScenes.
 set -e
 eval "$(conda shell.bash hook)"

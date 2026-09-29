@@ -1,4 +1,4 @@
-# public copy of the camera-ready check budget_matched.txt, sha256 7907288ba095ed2c6e699ac701f26a3f71dc1797337382c47ee9f20fbcb6ad05, scrubbed: review-process labels removed from two headings (source lines 2, 44), paths made repo-relative (source lines 4, 6, 27, 223, 238); every kept number verbatim
+# public copy of the camera-ready check budget_matched.txt, sha256 7907288ba095ed2c6e699ac701f26a3f71dc1797337382c47ee9f20fbcb6ad05, scrubbed: review-process labels removed from two headings (source lines 2, 44), paths made repo-relative (source lines 4, 6, 27, 223, 238); every kept number verbatim; the AP* definition wording 'exact max-over-labelings ceiling' is now 'matching ceiling of the fixed pool', also in the scripts
 # Omitted from this copy: the P2 N=5 rank coefficient between pool size and recall* (source line 99) and the parenthetical that repeats it with the N=10 and N=20 values (source lines 232-233; those two stay in their own cells); the re-run prints them.
 ====================================================================================================
 BUDGET-MATCHED COVERAGE-vs-ORDERING SPLIT
@@ -12,7 +12,7 @@ metric  : Car Moderate, IoU3D 0.7, all-point interpolated AP, 3769 KITTI val ima
 DEFINITIONS
   base           = all-point AP of the pool ranked by the detector's native score V
   AP*            = 100*M/n_gt, M = maximum bipartite matching of pool predictions to valid
-                   Moderate GTs at IoU3D>=0.7 (exact max-over-labelings ceiling)
+                   Moderate GTs at IoU3D>=0.7 (matching ceiling of the fixed pool)
   missing AP     = 100 - base
   ordering share = (AP* - base)/(100 - base)     coverage share = (100 - AP*)/(100 - base)
   P1 = complete pre-selection pool -> top-N by V           (budget matched only)

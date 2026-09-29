@@ -17,7 +17,7 @@ Modes (CLI):
 The collate merges the main-panel JSONs written by tools/decomp/bootstrap_floor.py
 (<CACHE_DIR>/decomp/_bootstrap_out, or $MONO3D_MAIN_BOOTSTRAP_OUT), minus the seven
 comparisons that used the modern-environment MonoFlex/MonoGround dumps, with the JSONs of
-this script. The comparisons run for the paper (run_bootstrap_chain.sh):
+this script. The comparisons run for the paper:
   --ladder monodle gupnet ; --ladder deviant monoflex_orig ;
   --ladder monoflex_orig monoground_orig ; --ladder monoground_orig monocon ;
   --transfer monoflex_orig {0,1,2} ; --collate

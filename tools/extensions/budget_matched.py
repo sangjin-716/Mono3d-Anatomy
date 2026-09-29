@@ -11,7 +11,7 @@ Native pools have unequal candidate budgets, so the split could be a budget arti
 This script recomputes, per detector, on pools with an IDENTICAL candidate budget N:
     base    = all-point AP, Car Moderate, IoU3D 0.7, ranked by the detector's native score V
     AP*     = 100 * M / n_gt  (M = maximum bipartite matching of pool predictions to valid
-              Moderate GTs at IoU3D >= 0.7 -- the exact max-over-labelings ceiling)
+              Moderate GTs at IoU3D >= 0.7 -- the matching ceiling of the fixed pool)
     missing AP     = 100 - base
     ordering share = (AP* - base) / (100 - base)
     coverage share = (100 - AP*) / (100 - base)

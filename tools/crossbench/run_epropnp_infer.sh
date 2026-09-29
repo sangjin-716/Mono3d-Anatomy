@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/run_epropnp_infer.sh for the public release.
 # EPro-PnP-Det val inference (format-only) -> submission json <cache>/crossbench/nusc/
 # epropnp_basic/results_nusc.json. That json is scored by xds_nusc_official_eval.py (NDS gate)
 # and converted by xds_nusc_json_to_oracle_pkl_FIXED.py for the oracle cell.

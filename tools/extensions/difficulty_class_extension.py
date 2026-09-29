@@ -334,7 +334,7 @@ for name in MODELS:
     w(f"{name:11s}| " + " | ".join(cells))
 w("")
 w("=" * 118)
-w("TABLE A2 -- matching ceiling AP* = 100*M/n_gt (exact max-over-labelings upper bound) "
+w("TABLE A2 -- matching ceiling AP* = 100*M/n_gt (matching ceiling of the fixed pool) "
   "and matching recall")
 w("=" * 118)
 h2 = (f"{'detector':11s}| {'E AP*':>7}{'E head':>8}{'E M/ngt':>9} | "

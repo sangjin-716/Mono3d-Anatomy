@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/setup_epropnp.sh for the public release.
 # Environment for the EPro-PnP-Det release (torch 1.10 + cu113, mmcv-full 1.4.1, mmdet 2.19.1,
 # pytorch3d 0.6.1). Produces the conda env "epropnp"; prints ENV_OK when the imports succeed.
 set -x

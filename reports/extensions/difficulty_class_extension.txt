@@ -1,4 +1,4 @@
-# public copy of the camera-ready check difficulty_class_extension.txt, sha256 5a003c0c7eca507a452623c04017c93afccb95059e1664555760344f38b3eeab, scrubbed: local paths made repo-relative or written relative to paths.UPSTREAM_ROOT (source lines 2-4, 168-171, 269-270); no line removed, every number verbatim
+# public copy of the camera-ready check difficulty_class_extension.txt, sha256 5a003c0c7eca507a452623c04017c93afccb95059e1664555760344f38b3eeab, scrubbed: local paths made repo-relative or written relative to paths.UPSTREAM_ROOT (source lines 2-4, 168-171, 269-270); no line removed, every number verbatim; the Table A2 title wording 'exact max-over-labelings upper bound' is now 'matching ceiling of the fixed pool', also in the script
 # Note: Sec. O uses the M3D-RPN, MonoFlex and MonoGround rows of Part B (DEVIANT excluded, see class_gate_audit.txt). The companion difficulty_class_extension.csv is byte-identical to its original.
 # difficulty_class_extension  2026-08-28T00:38:30
 # script  tools/extensions/difficulty_class_extension.py
@@ -118,7 +118,7 @@ MonoCLUE   |   34.03    46.62 +12.59 |   24.55    34.28  +9.73 |   21.04    30.1
 MonoIA     |   34.79    51.97 +17.18 |   25.18    36.82 +11.64 |   21.67    31.88 +10.21
 
 ======================================================================================================================
-TABLE A2 -- matching ceiling AP* = 100*M/n_gt (exact max-over-labelings upper bound) and matching recall
+TABLE A2 -- matching ceiling AP* = 100*M/n_gt (matching ceiling of the fixed pool) and matching recall
 ======================================================================================================================
 detector   |   E AP*  E head  E M/ngt |   M AP*  M head  M M/ngt |   H AP*  H head  H M/ngt
 -------------------------------------------------------------------------------------------

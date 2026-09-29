@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/night_queue.sh for the public release.
 # Serialises the memory-heavy jobs: waits for run_ib_gates.sh and run_ct_oracle_chain2.sh, then
 # (1) runs waymo_core_analysis.py on the full Waymo val set -> the Waymo base / re-sort cells
 #     (crossbench/waymo/core_table_full.json), and

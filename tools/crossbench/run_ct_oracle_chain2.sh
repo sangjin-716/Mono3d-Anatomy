@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/run_ct_oracle_chain2.sh for the public release.
 # Produces the CenterNet (CenterTrack e140) nuScenes oracle cell (logs_ct_oracle2.log, the
 # [iou07] line is the paper's base / re-sort cell): ct_to_oracle_pkl.py on CenterTrack's
 # results_nuscenes_det.json, then nusc_oracle.py.

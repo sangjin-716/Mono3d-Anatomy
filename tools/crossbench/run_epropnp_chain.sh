@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/run_epropnp_chain.sh for the public release.
 # EPro-PnP-Det: wait for the environment (setup_epropnp.sh), convert the nuScenes annotations
 # with the release's converter, run val inference in format-only mode (submission json), then
 # convert and score with the oracle.

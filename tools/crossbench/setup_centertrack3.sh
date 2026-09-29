@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/setup_centertrack3.sh for the public release.
 # CenterTrack setup, attempt 3 (the one that completed): clone DCNv2 directly, build and import
 # it, then convert nuScenes to CenterTrack's COCO format (annotations/val.json).
 set -e

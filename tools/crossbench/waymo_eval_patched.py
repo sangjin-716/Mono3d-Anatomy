@@ -2,7 +2,8 @@
     Produces the official Waymo evaluator table (AP_3D / APH_3D / Recall@0.95, LEVEL_1/LEVEL_2,
     All / [0,30) / [30,50) / [50,+inf)) used for the Waymo reproduction gate, VEHICLE IoU 0.7.
 
-    Adapted from DEVIANT data/waymo/waymo_eval.py (MIT License, https://github.com/abhi1kumar/DEVIANT).
+    Adapted from DEVIANT data/waymo/waymo_eval.py (MIT License, Copyright (c) 2021 Yan Lu,
+    https://github.com/abhi1kumar/DEVIANT, see LICENSE-DEVIANT).
     The only change to the DEVIANT file is the path block at the bottom: the hardcoded
     pd_set / gt_set / pd_dir / gt_dir are read from four environment variables instead:
       WEVAL_PD_SET  prediction index list (DEVIANT data/waymo/ImageSets/val.txt)

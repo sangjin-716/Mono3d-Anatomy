@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from camera-ready checks/waymo_gate/run_gate.sh for the public release.
 # run_gate.sh <detname> <preddir> <pdset> <script> <outtag>
 # Runs the OFFICIAL Waymo detection evaluator (waymo_open_dataset metrics ops, TF 2.11 / wod 1.6.1)
 # via DEVIANT's own data/waymo/waymo_eval{,_0_5}.py, path plumbing patched only

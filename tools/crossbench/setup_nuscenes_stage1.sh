@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/setup_nuscenes_stage1.sh for the public release.
 # nuScenes stage 1: environment + mmdet3d + mono3d info generation (CPU/network only).
 # Produces the conda env "nusc_mono" and nuscenes_infos_{train,val}.pkl; the Python scripts in
 # this folder expect nuscenes_infos_val.pkl inside NUSC_ROOT, so the info files are written there

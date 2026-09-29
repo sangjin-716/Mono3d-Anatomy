@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/run_ct_oracle_chain.sh for the public release.
 # CenterNet (CenterTrack e140) oracle chain, first version: wait for the CenterTrack inference
 # output, convert it to a per-camera oracle pkl (ct_to_oracle_pkl.py), run nusc_oracle.py.
 # The paper's CenterNet cell comes from run_ct_oracle_chain2.sh (same two steps).

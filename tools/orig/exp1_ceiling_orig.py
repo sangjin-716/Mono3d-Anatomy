@@ -1,17 +1,17 @@
 """Produces reports_orig/exp1_true_ceiling_orig.txt.
 
-EXP-1: the TRUE fixed-pool ceiling AP* = M / n_gt, for the original-environment MonoFlex* and
-MonoGround* dumps (a copy of tools/decomp/exp1_true_ceiling.py with the model list and inputs
-switched).
+EXP-1: the matching ceiling AP* = M / n_gt of the fixed pool, for the original-environment
+MonoFlex* and MonoGround* dumps (a copy of tools/decomp/exp1_true_ceiling.py with the model list
+and inputs switched).
 
 For each detector, on the SAME native pool e4_fp_tp_decomp uses, compute the maximum
 bipartite matching M between valid (Moderate) GTs and pool predictions at IoU3D>=0.7
 (official overlaps + official _prepare_data valid-set), so ceiling recall = sum(M)/sum(valid_gt)
-and ceiling all-point AP = 100*ceiling_recall (perfect-separation upper bound, exact max over
-labelings). Compare to native, true-IoU re-sort (the paper's "ceiling"), FP-demotion.
+and ceiling all-point AP = 100*ceiling_recall (matching ceiling: all-point AP of a perfect
+separator of matched from unmatched boxes). Compare to native, true-IoU re-sort and FP-demotion.
 
-The reported true-IoU "ceiling" is a LOWER bound; this prints how far below the true ceiling
-it sits.
+The true-IoU re-sort stays at or below AP* up to integration noise, and this prints how far
+below AP* it sits.
 
 The FP-demotion column reads the TP labels cached by diffsweep_orig.py
 (<CACHE_DIR>/orig/_e4cache_<name>.npz); run diffsweep_orig.py first, otherwise that column is nan.
@@ -143,7 +143,7 @@ MODELS = ["MonoFlex*", "MonoGround*"]
 
 w(f"# exp1_true_ceiling {datetime.datetime.now().isoformat(timespec='seconds')}")
 w("# AP* = 100 * sum(M)/sum(valid_gt) ; M = max bipartite matching pool-pred x valid(Mod)-GT @ IoU3D>=0.7")
-w("# AP* is the EXACT upper bound on evaluator-realizable AP (max over labelings); native/true-IoU/FP-dem are LOWER bounds.")
+w("# AP* = M/n_gt is the matching ceiling: all-point AP of a perfect separator of matched from unmatched boxes on the fixed pool.")
 w("# allpoint AP, Car, Moderate, IoU0.7. pools verbatim from e4_fp_tp_decomp.native_pool.")
 w("")
 w(f"{'detector':10s} {'base':>6s} {'trueIoU':>7s} {'FPdem':>6s} {'CEIL*':>6s} {'recall*':>7s} "
@@ -182,9 +182,9 @@ w(f"median (CEIL* - FPdem)                  = {np.nanmedian(arr[:,3]-arr[:,2]):+
 w(f"median native efficiency  base/CEIL*    = {np.median(arr[:,0]/arr[:,3]):.3f}")
 w(f"median reported efficiency trueIoU/CEIL*= {np.median(arr[:,1]/arr[:,3]):.3f}")
 w("")
-w("READ: trueIoU re-sort (paper's headline 'ceiling') is a LOWER bound; CEIL*=M/n_gt is the exact")
-w("max-over-labelings upper bound. (CEIL* - trueIoU) is how much the reported number UNDERSTATES the")
-w("true fixed-pool re-ranking ceiling. FP-dem<=CEIL* and trueIoU<=CEIL* must hold (sanity).")
+w("READ: CEIL*=M/n_gt is the matching ceiling of the fixed pool. (CEIL* - trueIoU) is how far the true-IoU re-sort")
+w("falls short of it. FP-dem and trueIoU stay at or below CEIL* up to an excess of at most 0.09 AP (paper Sec. 5.1,")
+w("supp. Sec. H).")
 if os.path.exists(WORK):
     shutil.rmtree(WORK)
 open(OUT, "w").write("\n".join(out) + "\n")

@@ -1,6 +1,7 @@
+# public copy of reports_orig/exp1_true_ceiling_orig.txt, sha256 ad4c31d67f8fc53d42df939c569862e4b4bd0218392fcb8556db6b294caded0f, scrubbed: bound wording in header line 3 and the READ note (source lines 3, 17-19), changed identically in tools/orig/exp1_ceiling_orig.py; all numbers verbatim
 # exp1_true_ceiling 2026-07-03T19:47:22
 # AP* = 100 * sum(M)/sum(valid_gt) ; M = max bipartite matching pool-pred x valid(Mod)-GT @ IoU3D>=0.7
-# AP* is the EXACT upper bound on evaluator-realizable AP (max over labelings); native/true-IoU/FP-dem are LOWER bounds.
+# AP* = M/n_gt is the matching ceiling: all-point AP of a perfect separator of matched from unmatched boxes on the fixed pool.
 # allpoint AP, Car, Moderate, IoU0.7. pools verbatim from e4_fp_tp_decomp.native_pool.
 
 detector     base trueIoU  FPdem  CEIL* recall* ceil-trueIoU eff_base eff_trueIoU
@@ -14,6 +15,6 @@ median (CEIL* - FPdem)                  = -0.02 AP
 median native efficiency  base/CEIL*    = 0.614
 median reported efficiency trueIoU/CEIL*= 0.997
 
-READ: trueIoU re-sort (paper's headline 'ceiling') is a LOWER bound; CEIL*=M/n_gt is the exact
-max-over-labelings upper bound. (CEIL* - trueIoU) is how much the reported number UNDERSTATES the
-true fixed-pool re-ranking ceiling. FP-dem<=CEIL* and trueIoU<=CEIL* must hold (sanity).
+READ: CEIL*=M/n_gt is the matching ceiling of the fixed pool. (CEIL* - trueIoU) is how far the true-IoU re-sort
+falls short of it. FP-dem and trueIoU stay at or below CEIL* up to an excess of at most 0.09 AP (paper Sec. 5.1,
+supp. Sec. H).

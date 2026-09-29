@@ -1,5 +1,4 @@
 #!/bin/bash
-# Ported from mono3d_crossdataset/tools/setup_centertrack.sh for the public release.
 # CenterTrack (CenterNet e140 nuScenes checkpoint) setup, attempt 1: clone, DCNv2 build,
 # nuScenes -> COCO conversion with CenterTrack's own converter. The DCNv2 build needs the
 # torch-1.4 / CUDA-10 environment used for the original-environment MonoFlex runs

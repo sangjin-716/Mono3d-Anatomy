@@ -71,7 +71,7 @@ def fig1(H=2.20, edge=2.0, clear=(8.0, 8.0), wts=(1.0, 1.0, 1.0), titlepad=5.0,
     axs[0].legend(ncol=2, frameon=False, loc="upper left", handlelength=1.1,
                   columnspacing=0.7, handletextpad=0.35, borderaxespad=0.4, borderpad=0.1,
                   labelspacing=0.35)
-    axs[1].set_ylabel("mean $|\\Delta z|$ on matched TP (m)")
+    axs[1].set_ylabel("mean $|\\Delta z|$ on matched boxes (m)")
     axs[1].set_title("(b) depth error,\nmainly near field", pad=titlepad)
     axs[1].set_ylim(0.12, 1.90)
     axs[1].set_yticks([0.5, 1.0, 1.5])
