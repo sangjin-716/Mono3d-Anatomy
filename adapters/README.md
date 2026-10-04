@@ -40,7 +40,7 @@ Each dump passed a reproduction check (G1) and a match to the detector's native 
 | [MonoCon](https://github.com/2gunsu/monocon-pytorch) | `908807bdd8d4` | `monocon_dump.py` | README | 19.02 / 19.02 |
 | [MonoDETR](https://github.com/ZrrSkywalker/MonoDETR) | `6994b9f51240` | `monodetr_dump.py` | README | 20.83 / 20.83 |
 | [MonoDGP](https://github.com/PuFanqi23/MonoDGP) | `aa059a18214a` | `dgp_cop_dump.py` | README | 22.34 / 22.29 |
-| [MonoCoP](https://alanzhangcs.github.io/monocop-page) | not recorded | `dgp_cop_dump.py` | [HF](https://huggingface.co/zhihao406/MonoCoP) | 23.89 / 23.84 |
+| [MonoCoP](https://alanzhangcs.github.io/monocop-page) | not recorded | `dgp_cop_dump.py` | [HF](https://huggingface.co/zhihao406/MonoCoP) | 23.98 / 23.84 |
 | [MonoCLUE](https://github.com/SungHunYang/MonoCLUE) | `016d3e8d3c99` | `monoclue_dump.py` | README | 24.10 / 24.20 |
 | [MonoIA](https://github.com/alanzhangcs/MonoIA) | `69d6ee30ca5e` | `monoia_dump.py` | [HF](https://huggingface.co/zhihao406/MonoIA) `MonoIA_KITTI_Val.pth` | 24.40 / 24.48 |
 
@@ -48,6 +48,8 @@ Each dump passed a reproduction check (G1) and a match to the detector's native 
   `patches/M3D-RPN_rpn_util_py_cpu_nms.patch`. `test_rpn_3d_accv.py` is the native run.
   `LICENSE-M3D-RPN` covers `test_rpn_3d_accv.py`, a copy of the upstream `test_rpn_3d.py`.
 - MonoDLE is 0.85 above published with the same code and data, due to the environment.
+- MonoCoP's published value is that of its paper. Its README lists 24.05 for the released Car
+  checkpoint, 0.21 above our run.
 - `gupnet_native_eval.py` grades GUPNet's own tester output with the same evaluator.
 - MonoFlex\* and MonoGround\*: `build_monoflex_orig_env.sh` builds the original torch 1.4
   environment. `monoflex_dump.py` and `monoground_dump.py` give the modern builds (15.54, 16.79).
