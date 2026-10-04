@@ -1,8 +1,9 @@
 """Faithfulness cross-check: run GUPNet's OWN tester (native decode + threshold 0.2)
 to write its predictions, then evaluate them with OUR python do_eval (the official KITTI
-evaluator vendored in evaluator/kitti_eval). If this ~= our dump's S2 (16.46), the dump
-reproduces GUPNet's predictions exactly (faithful) and the 16.23-vs-16.46 gap is purely
-C++-devkit vs python-eval.
+evaluator vendored in evaluator/kitti_eval). GUPNet's own output scores 16.23, the value its
+README lists for the released checkpoint. The dump at the same threshold holds the same boxes
+and scores 16.46, because it keeps full precision while GUPNet's writer rounds every field,
+the score included, to two decimals (see docs/ERRATA.md).
 
 It writes no report; the numbers are printed (gate G1/G2 cross-check for GUPNet).
 Run in a GUPNet env (torch 1.9 in our runs): python adapters/gupnet_native_eval.py

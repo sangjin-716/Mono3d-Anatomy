@@ -53,6 +53,12 @@ diff reports/gap_exact.txt reports_rerun/gap_exact.txt
 [`docs/REPRODUCE.md`](docs/REPRODUCE.md) maps every table and figure to its script and report and
 gives the run order and runtimes.
 
+## Known issues
+
+[`docs/ERRATA.md`](docs/ERRATA.md) lists three deviations found after acceptance. The yaw of the
+MonoDGP and MonoCoP dumps differs from the repositories' output, MonoCLUE's dump is a separate
+stochastic run, and six entries of the reproduction column are computed on the dumps.
+
 ## Citation
 
 ```bibtex
